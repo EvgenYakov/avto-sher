@@ -1,0 +1,70 @@
+@import "../../../theme/colors.scss";
+@import "mixins";
+
+.review-wrapper {
+  width: 100%;
+  height: 223px;
+  padding: 1rem;
+  background-color: $light-gray-color;
+  border-radius: 1rem;
+
+  .header {
+    @include flexMix(row, center, space-between);
+
+    margin-bottom: 1rem;
+
+    &__user-info {
+      @include flexMix();
+
+      .avatar {
+        img {
+          width: 110px;
+          height: 110px;
+          @include circle-logo-properties(110)
+        }
+
+      }
+
+      .name-block {
+        @include flexMix(column, start);
+
+        margin-left: 27px;
+
+        &__fio {
+          font-weight: 700;
+          font-size: 22px;
+          color: $blue-color;
+        }
+
+        &__status {
+          margin-top: 0.4rem;
+        }
+      }
+    }
+
+    &__additional-info {
+      @include flexMix();
+      align-self: flex-start;
+
+      .rating {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .main {
+    &__auto {
+      margin-bottom: 0.7rem;
+
+      &-bold {
+        font-weight: 700;
+      }
+    }
+
+    &__comment {
+      &-bold {
+        font-weight: 700;
+      }
+    }
+  }
+}
