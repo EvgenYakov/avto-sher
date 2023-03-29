@@ -1,0 +1,14 @@
+@mixin flexMix($direction: row, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin circle-logo-properties($width) {
+  width: $width;
+  height: $width;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 50%;
+}
