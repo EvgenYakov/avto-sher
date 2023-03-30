@@ -1,0 +1,103 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .p-card {
+    @include media-xl() {
+      max-width: 300px;
+    }
+  }
+
+  .p-card-content {
+    @include flexMix(row, center, space-between);
+
+    padding: 0;
+    gap: 1rem;
+
+    @include media-xl() {
+      flex-direction: column;
+    }
+  }
+
+  .p-button {
+    width: 100%;
+  }
+}
+
+.auto-card {
+  &__img {
+    width: 350px;
+    height: 230px;
+    border-radius: 1rem;
+
+    @include media-xl() {
+      width: 100%;
+      height: 180px;
+    }
+  }
+
+  &__content {
+    @include flexMix(column, stretch, space-between);
+
+    min-height: 230px;
+    flex-grow: 1;
+
+    @include media-xl() {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+  }
+
+  &__link {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+  }
+
+  &__location {
+    @include flexMix(row, center, flex-start);
+
+    gap: 0.5rem;
+  }
+
+  &__characteristics {
+    @include flexMix(column, stretch, space-between);
+
+    gap: 0.5rem;
+  }
+
+  &__additional {
+    @include flexMix(column, stretch, space-between);
+
+    width: 350px;
+    min-height: 230px;
+    padding: 2rem;
+    border: 1px solid var(--primary-color);
+
+    @include media-xl() {
+      width: 100%;
+      row-gap: 1rem;
+    }
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-left: 1rem;
+  }
+}

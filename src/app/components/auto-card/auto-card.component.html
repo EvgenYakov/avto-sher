@@ -1,0 +1,29 @@
+<p-card class="auto-card">
+  <img [src]="autoCard.avatarPath" class="auto-card__img" alt="auto avatar" />
+
+  <div class="auto-card__content">
+    <div class="auto-card__title">{{ autoCard.title }} {{ autoCard.year }}</div>
+    <div class="auto-card__subtitle">
+      Автопарк:
+      <a class="auto-card__link">{{ autoCard.motorPool }}</a>
+    </div>
+    <div class="auto-card__location">
+      <i class="pi pi-map-marker"></i>{{ autoCard.location }}
+    </div>
+    <div class="auto-card__characteristics">
+      <div class="auto-card__subtitle">Характеристики</div>
+      <div>Топливо: {{ autoCard.characteristics.fuelType }}</div>
+      <div>Мощность: {{ autoCard.characteristics.power }} л.с.</div>
+    </div>
+  </div>
+
+  <div class="auto-card__additional">
+    <div class="auto-card__price">{{ autoCard.price }} руб / сут</div>
+    <ul class="auto-card__list">
+      <li *ngFor="let condition of autoCard.conditions | slice : 0 : 2">
+        {{ condition }}
+      </li>
+    </ul>
+    <p-button label="Подробнее"></p-button>
+  </div>
+</p-card>
