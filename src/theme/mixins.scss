@@ -12,3 +12,24 @@
   background-size: cover;
   border-radius: 50%;
 }
+
+// 1200px
+@mixin media-xl {
+  @media (max-width: 1200px) {
+    @content;
+  }
+}
+
+// 768px
+@mixin media-l {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+// 480px
+@mixin media-s {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
