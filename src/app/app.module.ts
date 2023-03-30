@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReviewAutoparkCardModule } from '@components';
+import { ReviewAutoCardModule } from './components/review-auto-card/review-auto-card.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ReviewAutoparkCardModule } from '@components';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReviewAutoparkCardModule
+    ReviewAutoparkCardModule,
+    ReviewAutoCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
