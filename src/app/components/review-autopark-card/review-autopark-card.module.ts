@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReviewCardComponent } from './review-card.component';
+import { ReviewAutoparkCardComponent } from './review-autopark-card.component';
 import { RatingModule } from 'primeng/rating';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardModule } from 'primeng/card';
@@ -8,10 +8,10 @@ import { CardModule } from 'primeng/card';
 
 @NgModule({
   declarations: [
-    ReviewCardComponent
+    ReviewAutoparkCardComponent
   ],
   exports: [
-    ReviewCardComponent
+    ReviewAutoparkCardComponent
   ],
   imports: [
     CommonModule,
@@ -20,4 +20,4 @@ import { CardModule } from 'primeng/card';
     CardModule
   ]
 })
-export class ReviewCardModule { }
+export class ReviewAutoparkCardModule { }
