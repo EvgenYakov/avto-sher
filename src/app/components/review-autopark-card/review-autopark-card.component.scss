@@ -8,11 +8,17 @@
 
   .header {
     @include flexMix(row, center, space-between);
+    @include media-l() {
+      flex-direction: column;
+    }
 
     margin-bottom: 1rem;
 
     &__user-info {
       @include flexMix();
+      @include media-l() {
+        align-self: flex-start;
+      }
 
       .avatar {
         img {
@@ -43,6 +49,18 @@
     &__additional-info {
       @include flexMix();
       align-self: flex-start;
+
+      @include media-s() {
+        display: block;
+
+        .date {
+          margin-left: 0.35rem;
+        }
+
+        .rating {
+          margin-left: 0!important;
+        }
+      }
 
       .rating {
         margin-left: 1rem;
