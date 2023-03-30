@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { ReviewAutoparkCardModule } from '@components';
+import { AutoCardModule, ReviewAutoparkCardModule } from '@components';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { ReviewAutoparkCardModule } from '@components';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReviewAutoparkCardModule
+    ReviewAutoparkCardModule,
+    AutoCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
