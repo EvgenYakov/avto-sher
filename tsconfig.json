@@ -20,23 +20,17 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
-      "@components": [
-        "./src/app/components/index",
-      ],
-      "@models": [
-        "./src/app/models/index",
-      ]
+      "@components": ["./src/app/components/index"],
+      "@models": ["./src/app/models/index"],
+      "@constants": ["./src/app/constants/index"]
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
+    "strictTemplates": true
   }
 }
