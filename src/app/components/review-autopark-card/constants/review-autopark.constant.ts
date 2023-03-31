@@ -1,6 +1,6 @@
-import { ReviewInterface } from '@models';
+import { ReviewAutoparkInterface } from '@models';
 
-export const reviewConstant: ReviewInterface = {
+export const reviewAutoConstant: ReviewAutoparkInterface = {
   autoMark: 'BMV',
   avatarPath: 'assets/test-img.jpg',
   userFio: 'Николай Нагорных',
