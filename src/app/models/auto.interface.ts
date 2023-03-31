@@ -1,3 +1,5 @@
+import { FuelType, GearboxType, Fare } from '@constants';
+
 export interface AutoCard {
   id: string;
   title: string;
@@ -7,10 +9,16 @@ export interface AutoCard {
   location: string;
   price: number;
   conditions: string[];
+  additional: string[];
+  viewsCounter: number;
+  pathsOfImages: string[];
+  daysOfWork: string[];
   characteristics: AutoCharacteristics;
 }
 
 export interface AutoCharacteristics {
   power: number;
-  fuelType: string;
+  fuelType: FuelType;
+  gearboxType: GearboxType;
+  fare: Fare;
 }
