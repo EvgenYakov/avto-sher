@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { ReviewInterface } from '@models';
-import { reviewConstant } from '../review-autopark-card/constants/review-autopark.constant';
 import { FormControl, FormGroup } from '@angular/forms';
-import { RatingForm } from '../review-autopark-card/interfaces/rating-form.interface';
+import { RatingForm } from '@components';
+import { ReviewAutoInterface } from '@models';
+import { reviewAutoConstant } from './constants/review-auto.constant';
 
 @Component({
   selector: 'app-review-auto-card',
@@ -11,7 +11,7 @@ import { RatingForm } from '../review-autopark-card/interfaces/rating-form.inter
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReviewAutoCardComponent implements OnInit{
-  @Input() reviewModel: ReviewInterface = reviewConstant;
+  @Input() reviewModel: ReviewAutoInterface = reviewAutoConstant;
 
   public formGroup: FormGroup<RatingForm>;
 
