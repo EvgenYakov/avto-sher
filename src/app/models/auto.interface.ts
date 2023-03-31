@@ -1,4 +1,4 @@
-export interface AutoCardInterface {
+export interface AutoCard {
   id: string;
   title: string;
   avatarPath: string;
@@ -7,10 +7,10 @@ export interface AutoCardInterface {
   location: string;
   price: number;
   conditions: string[];
-  characteristics: AutoCharacteristicsInterface;
+  characteristics: AutoCharacteristics;
 }
 
-export interface AutoCharacteristicsInterface {
+export interface AutoCharacteristics {
   power: number;
   fuelType: string;
 }
