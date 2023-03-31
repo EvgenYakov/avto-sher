@@ -3,72 +3,89 @@
 
 .review-wrapper {
   width: 100%;
-  height: 223px;
-  background-color: $light-gray-color;
+  height: 298px;
 
-  .header {
-    @include flexMix(row, center, space-between);
+  .content {
+    @include flexMix(row, start, space-between);
 
-    margin-bottom: 1rem;
+    @include media-xl() {
+      flex-direction:column;
+    }
 
-    &__user-info {
+    .main-data-block {
       @include flexMix();
 
-      .avatar {
-        img {
-          width: 110px;
-          height: 110px;
-          @include circle-logo-properties(110)
+      &__avatar {
+        position: relative;
+        width: 347px;
+        height: 221px;
+        margin-right: 26px;
+
+        @include media-s() {
+          width: 200px;
+          height: 100px;
         }
 
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
       }
 
-      .name-block {
+      &__auto-data {
         @include flexMix(column, start);
 
-        margin-left: 27px;
+        .auto-info {
 
-        &__fio {
-          font-weight: 700;
-          font-size: 22px;
+          margin-bottom: 17px;
           color: $blue-color;
+
+          &__name {
+            font-weight: 700;
+          }
         }
 
-        &__status {
-          margin-top: 0.4rem;
+        .autopark {
+          &__title {
+            font-weight: 700;
+          }
+
+          &__name {
+            color: $blue-color;
+            font-weight: 700;
+          }
+        }
+
+        .price {
+          @include media-s() {
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+          }
+
+          font-weight: 700;
+          margin: 2rem 0 2rem 0;
+        }
+
+        .comment {
+          &-bold {
+            font-weight: 700;
+          }
         }
       }
     }
 
-    &__additional-info {
+    .rating-block {
       @include flexMix();
-      align-self: flex-start;
 
-      .rating {
-        margin-left: 1rem;
+      &__date {
+        margin-right: 0.5rem;
       }
     }
   }
 
-  .main {
-    &__auto {
-      margin-bottom: 0.7rem;
 
-      &-bold {
-        font-weight: 700;
-      }
-    }
-
-    &__comment {
-      &-bold {
-        font-weight: 700;
-      }
-    }
-  }
-}
-
-:host {
-  ::ng-deep .p-card {
-    border-radius: 1rem;
-  }
 }

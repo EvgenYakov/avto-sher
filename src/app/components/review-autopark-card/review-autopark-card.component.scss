@@ -3,22 +3,36 @@
 
 .review-wrapper {
   width: 100%;
-  height: 223px;
-  background-color: $light-gray-color;
+  height: 23.2vh;
 
   .header {
     @include flexMix(row, center, space-between);
+    @include media-l() {
+      flex-direction: column;
+    }
 
     margin-bottom: 1rem;
 
     &__user-info {
       @include flexMix();
+      @include media-l() {
+        align-self: flex-start;
+      }
 
       .avatar {
+        position: relative;
+        width: 6.875rem;
+        height: 6.875rem;
+
         img {
-          width: 110px;
-          height: 110px;
-          @include circle-logo-properties(110)
+          @include circle-logo-properties(110);
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
       }
@@ -26,11 +40,11 @@
       .name-block {
         @include flexMix(column, start);
 
-        margin-left: 27px;
+        margin-left: 1.688rem;
 
         &__fio {
           font-weight: 700;
-          font-size: 22px;
+          font-size: 1.375rem;
           color: $blue-color;
         }
 
@@ -43,6 +57,18 @@
     &__additional-info {
       @include flexMix();
       align-self: flex-start;
+
+      @include media-s() {
+        display: block;
+
+        .date {
+          margin-left: 0.35rem;
+        }
+
+        .rating {
+          margin-left: 0 !important;
+        }
+      }
 
       .rating {
         margin-left: 1rem;

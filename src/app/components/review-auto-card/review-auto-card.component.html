@@ -1,35 +1,44 @@
 <p-card class="review-wrapper">
-  <div class="header">
-    <div class="header__user-info">
-      <div class="avatar">
-        <img [src]="reviewModel.avatarPath" alt="user avatar">
+  <div class="content">
+    <div class="main-data-block">
+      <div class="main-data-block__avatar">
+        <img [src]="reviewModel.avatarPath" alt="auto image">
       </div>
-      <div class="name-block">
-        <div class="name-block__fio">
-          {{reviewModel.userFio}}
+      <div class="main-data-block__auto-data">
+        <div class="auto-info">
+        <span class="auto-info__name">
+        {{reviewModel.autoModel}}
+        </span>
+          <span class="auto-info__date">
+        {{reviewModel.autoDateCreate}}
+        </span>
         </div>
-        <div class="name-block__status">
-          {{reviewModel.userStatus}}
+        <div class="autopark">
+          <span class="autopark__title">Автопарк: </span>
+          <span class="autopark__name">
+          {{reviewModel.autoparkName}}
+        </span>
+        </div>
+
+        <div class="price">
+          {{reviewModel.price}} Руб/сут
+        </div>
+
+        <div class="comment">
+          <span class="comment-bold">Комментарий:</span> {{reviewModel.commentText}}
         </div>
       </div>
     </div>
-    <div class="header__additional-info">
-      <div class="date">
+    <div class="rating-block">
+      <div class="rating-block__date">
         {{reviewModel.date}}
       </div>
-      <div class="rating">
+
+      <div class="rating-block__rating">
         <form [formGroup]="formGroup">
           <p-rating formControlName="defaultValue" [cancel]="false"></p-rating>
         </form>
       </div>
-    </div>
-  </div>
-  <div class="main">
-    <div class="main__auto">
-      <span class="main__auto-bold">Автомобиль:</span> {{reviewModel.autoMark}}
-    </div>
-    <div class="main__comment">
-      <span class="main__comment-bold">Комментарий:</span> {{reviewModel.commentText}}
     </div>
   </div>
 </p-card>
