@@ -1,6 +1,6 @@
-import { ReviewAutoInterface } from '@models';
+import { ReviewAuto } from '@models';
 
-export const reviewAutoConstant: ReviewAutoInterface = {
+export const reviewAutoConstant: ReviewAuto = {
   avatarPath: 'assets/test-img.jpg',
   ratingValue: 2.1,
   commentText: 'Хорошая машина',

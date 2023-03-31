@@ -1,4 +1,4 @@
-export interface ReviewAutoparkInterface {
+export interface ReviewAutopark {
   avatarPath: string;
   date: string;
   ratingValue: number;
@@ -8,7 +8,7 @@ export interface ReviewAutoparkInterface {
   commentText: string;
 }
 
-export interface ReviewAutoInterface {
+export interface ReviewAuto {
   avatarPath: string;
   date: string;
   ratingValue: number;

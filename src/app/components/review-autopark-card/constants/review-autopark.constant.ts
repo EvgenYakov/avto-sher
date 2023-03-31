@@ -1,11 +1,11 @@
-import { ReviewAutoparkInterface } from '@models';
+import { ReviewAutopark } from '@models';
 
-export const reviewAutoConstant: ReviewAutoparkInterface = {
-  autoMark: 'BMV',
+export const reviewAutoConstant: ReviewAutopark = {
+  autoMark: 'BMW',
   avatarPath: 'assets/test-img.jpg',
   userFio: 'Николай Нагорных',
   userStatus: 'Водитель',
   ratingValue: 2.1,
   commentText: 'Хорошая машина',
-  date: '2 ноября 2022'
-}
+  date: '2 ноября 2022',
+};
