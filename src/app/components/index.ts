@@ -6,3 +6,6 @@ export * from './review-autopark-card/review-autopark-card.module';
 
 export * from './review-auto-card/review-auto-card.component';
 export * from './review-auto-card/review-auto-card.module';
+
+export * from './auto-card-detailed/auto-card-detailed.component';
+export * from './auto-card-detailed/auto-card-detailed.module';

@@ -3,7 +3,6 @@
 @import "primeicons/primeicons.css";
 @import "../theme/colors.scss";
 
-
 * {
   font-family: "Roboto", sans-serif;
   font-size: 16px;
@@ -12,6 +11,10 @@
   box-sizing: border-box;
 }
 
+body {
+  color: var(--text-color);
+}
+
 .p-rating .p-rating-icon {
-  color: $gold-color!important;
+  color: $gold-color !important;
 }
