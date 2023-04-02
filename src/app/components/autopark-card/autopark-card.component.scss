@@ -1,0 +1,85 @@
+@import "../../../theme/colors.scss";
+@import "mixins";
+
+:host ::ng-deep {
+  .p-card .p-card-body {
+    padding: 0;
+  }
+
+  .p-card .p-card-content {
+    padding: 0;
+  }
+
+  .p-card {
+    border-radius: 1rem;
+  }
+}
+
+.autopark-card-wrapper {
+  width: 100%;
+  height: 100%;
+
+  .content {
+    &__avatar {
+      position: relative;
+      width: 100%;
+      height: 27vh;
+      margin-bottom: 0.5rem;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1rem 1rem 0 0;
+      }
+
+
+      .premium-star {
+        background-color: $white-color;
+        position: relative;
+        float: right;
+        margin: 0.3rem 0.3rem 0 0;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+
+        p-rating {
+          position:absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    &__data {
+      .name {
+        font-weight: 700;
+        color: $blue-color;
+      }
+
+      .count {
+        @include flexMix(row, center, space-between);
+
+        font-size: 10px;
+
+        &__auto {
+          font-size: inherit;
+          font-weight: 700;
+        }
+
+        &__rating-premium {
+          font-size: inherit;
+        }
+
+        &__rating {
+          @include flexMix();
+          color: $light-gray-color;
+        }
+      }
+    }
+  }
+}
