@@ -1,0 +1,32 @@
+<header class="header">
+  <div class="header__first-level">
+    <div class="logo-search">
+      <div class="logo-search__logo">
+        Логотип
+      </div>
+      <div class="logo-search__search">
+        <form [formGroup]="form">
+        <span class="p-input-icon-right">
+          <i class="pi pi-search"></i>
+          <input type="text"
+                 class="search-input"
+                 pInputText
+                 formControlName="search"
+                 placeholder="Поиск..."
+          />
+        </span>
+        </form>
+      </div>
+    </div>
+
+    <div class="login-label" *ngIf="!isAuthorized">
+      Войти
+    </div>
+  </div>
+  <div class="header__second-level">
+
+  </div>
+  <div class="header__third-level">
+
+  </div>
+</header>
