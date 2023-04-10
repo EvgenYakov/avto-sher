@@ -1,6 +1,6 @@
 import { AppRoutes } from '@constants';
 
-export interface HeaderNavigation {
+export interface Navigation {
   label: string;
   routerLink: AppRoutes;
 }

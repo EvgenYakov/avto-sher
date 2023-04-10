@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { AutoCardModule } from '@components';
 import { AutoparkCardModule } from './components/autopark-card/autopark-card.module';
 import { HeaderModule } from './layout/header/header.module';
+import { FooterModule } from './layout/footer/footer.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, AutoCardModule, AutoparkCardModule, HeaderModule],
+  imports: [BrowserModule, AppRoutingModule, AutoCardModule, AutoparkCardModule, HeaderModule, FooterModule],
   providers: [],
   bootstrap: [AppComponent],
 })

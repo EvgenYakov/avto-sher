@@ -1,8 +1,7 @@
-import { HeaderNavigation } from '../interfaces/header-navigation.interface';
 import { AppRoutes } from '@constants';
 import { MenuItem } from 'primeng/api';
 
-export const SECOND_LEVEL: HeaderNavigation[] = [
+export const HEADER_SECOND_LEVEL: MenuItem[] = [
   {
     label: 'Автопарки',
     routerLink: AppRoutes.AUTOPARK
@@ -29,7 +28,7 @@ export const SECOND_LEVEL: HeaderNavigation[] = [
   },
 ];
 
-export const THIRD_LEVEL: MenuItem[] = [
+export const HEADER_THIRD_LEVEL: MenuItem[] = [
   {
     label: 'Для таксопарков',
     routerLink: AppRoutes.FOR_TAXI_COMPANIES
