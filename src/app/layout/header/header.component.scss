@@ -1,34 +1,157 @@
 @import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-toolbar {
+    width: 100%;
+  }
+}
 
 .header {
-  height: 31vh;
-  width: 70%;
-  padding-top: 2rem;
-  margin: 0 auto;
+  width: 100%;
+  height: 152.5px;
+  overflow: auto;
+  border-bottom: 1px solid #AEAEAE;
+
   &__first-level {
-    background-color: #1e7fdf;
     @include flexMix(row, center, space-between);
 
-    .logo-search {
-      @include flexMix(row, center, space-between);
+    width: 80%;
+    height: 40%;
+    margin: 0 auto;
 
-      &__logo {
-        margin-right: 5rem;
-      }
-
-      &__search {
-        .search-input {
-          width: 36.5rem;
+    .logo {
+      img {
+        margin-top: 8px;
+        @include media-xl() {
+          width: 100px;
         }
       }
     }
 
-    .login-label {
-      font-weight: 500;
+    .search {
+      .search-input {
+        width: 36.5rem;
+        @include media-xl() {
+          height: 2rem;
+          width: 25rem;
+        }
+        @include media-l() {
+          width: 11rem;
+        }
+        @include media-s() {
+          width: 7rem;
+        }
+      }
     }
 
-    .icons {
+    .login {
+      font-weight: bold;
+    }
 
+    .icons > i {
+      font-size: 1.4rem;
+      margin-left: 1.5rem;
+    }
+  }
+
+  &__second-level {
+    @include flexMix(row, center, start);
+
+    width: 100%;
+    height: 35%;
+    color: #FFFFFF;
+    background-color: $black-color;
+    font-weight: 600;
+
+    .nav {
+      @include media-l() {
+        margin-left: 5%;
+      }
+
+      margin-left: 10%;
+      display: flex;
+      list-style: none;
+
+      .link {
+        @include media-xl() {
+          margin-right: 1.25rem;
+          font-size: 12px;
+        }
+        @include media-l() {
+          margin-right: 1rem;
+          font-size: 10px;
+        }
+
+        margin-right: 3.125rem;
+      }
+    }
+
+    .btn {
+      @include media-xl() {
+        width: 6.875rem;
+      }
+      @include media-l() {
+        width: 5.3rem;
+        height: 1.4rem;
+        padding: 0 0 4px 3px;
+      }
+
+      width: 8.75rem;
+      height: 1.75rem;
+      padding: 4px 7px 5px 8px;
+      border-radius: 4px;
+      background-color: $white-color;
+      color: $black-color;
+
+      span {
+        @include media-xl() {
+          font-size: 12px;
+        }
+        @include media-l() {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  &__third-level {
+    @include flexMix(row, center, start);
+    @include media-l() {
+      width: 85%;
+      margin: 0 auto 0 5%;
+    }
+
+    height: 25%;
+    width: 80%;
+    margin: 0 auto;
+
+    .nav {
+      display: flex;
+      list-style: none;
+
+      .link {
+        @include media-xl() {
+          margin-right: 1.25rem;
+          font-size: 12px;
+        }
+        @include media-l() {
+          margin-right: 1rem;
+          font-size: 10px;
+        }
+
+        margin-right: 3.125rem;
+      }
+    }
+
+    .location {
+      margin-left: auto;
+
+      .label {
+        @include media-xl() {
+          font-size: 12px;
+        }
+      }
     }
   }
 }

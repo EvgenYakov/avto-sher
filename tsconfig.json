@@ -26,7 +26,8 @@
       "@models": ["./src/app/models/index"],
       "@constants": ["./src/app/constants/index"],
       "@enums": ["./src/app/enums/index"],
-      "@layout": ["./src/app/layout/index"]
+      "@layout": ["./src/app/layout/index"],
+      "@services": ["./src/app/services/index"],
     }
   },
   "angularCompilerOptions": {
