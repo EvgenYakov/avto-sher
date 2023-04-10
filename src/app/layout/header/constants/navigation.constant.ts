@@ -1,33 +1,49 @@
-import { Navigation } from '../interfaces/navigation.interface';
+import { HeaderNavigation } from '../interfaces/header-navigation.interface';
 import { AppRoutes } from '@constants';
+import { MenuItem } from 'primeng/api';
 
-export const SECOND_LEVEL: Navigation[] = [
+export const SECOND_LEVEL: HeaderNavigation[] = [
   {
-    name: 'Автопарки',
-    link: AppRoutes.AUTOPARK
+    label: 'Автопарки',
+    routerLink: AppRoutes.AUTOPARK
   },
   {
-    name: 'Автомобили',
-    link: AppRoutes.AUTO
+    label: 'Автомобили',
+    routerLink: AppRoutes.AUTO
   },
   {
-    name: 'Правила',
-    link: AppRoutes.RULES
+    label: 'Правила',
+    routerLink: AppRoutes.RULES
   },
   {
-    name: 'Оплата',
-    link: AppRoutes.PAYMENT
+    label: 'Оплата',
+    routerLink: AppRoutes.PAYMENT
   },
   {
-    name: 'Партнеры',
-    link: AppRoutes.PARTNERS
+    label: 'Партнеры',
+    routerLink: AppRoutes.PARTNERS
   },
   {
-    name: 'Обратная связь',
-    link: AppRoutes.FEEDBACK
+    label: 'Обратная связь',
+    routerLink: AppRoutes.FEEDBACK
   },
 ];
 
-export const THIRD_LEVEL:Navigation[] = [
-
+export const THIRD_LEVEL: MenuItem[] = [
+  {
+    label: 'Для таксопарков',
+    routerLink: AppRoutes.FOR_TAXI_COMPANIES
+  },
+  {
+    label: 'Для реферальных партнеров',
+    routerLink: AppRoutes.FOR_REFERRAL_PARTNERS
+  },
+  {
+    label: 'Для партнеров',
+    routerLink: AppRoutes.FOR_PARTNERS
+  },
+  {
+    label: 'О нас',
+    routerLink: AppRoutes.ABOUT_US
+  },
 ]
