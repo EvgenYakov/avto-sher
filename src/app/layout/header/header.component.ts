@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchForm } from './interfaces/search-form.interface';
 import { LocalStorageService } from '@services';
-import { SECOND_LEVEL, THIRD_LEVEL } from './constants/navigation.constant';
+import { HEADER_SECOND_LEVEL, HEADER_THIRD_LEVEL } from '../constants/navigation.constant';
 
 @Component({
   selector: 'app-header',
@@ -14,8 +14,8 @@ export class HeaderComponent implements OnInit {
   public form: FormGroup<SearchForm>;
   public isAuthorized: boolean = true;
 
-  public secondLevelMenu = SECOND_LEVEL;
-  public thirdLevelMenu = THIRD_LEVEL;
+  public secondLevelMenu = HEADER_SECOND_LEVEL;
+  public thirdLevelMenu = HEADER_THIRD_LEVEL;
 
   constructor(private localStorageService: LocalStorageService) {
   }
