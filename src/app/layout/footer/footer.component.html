@@ -4,38 +4,30 @@
       <div class="column">
         <h4>Водителям</h4>
         <ul>
-          <li><a href="#">Как сделать заказ?</a></li>
-          <li><a href="#">Оплата</a></li>
-          <li><a href="#">Полное руководство</a></li>
+          <li *ngFor="let driverItem of driver"><a>{{driverItem.label}}</a></li>
         </ul>
       </div>
       <div class="column">
         <h4>Автопаркам</h4>
         <ul>
-          <li><a href="#">Как добавить свой автопарк</a></li>
-          <li><a href="#">Полное руководство</a></li>
-          <li><a href="#">Условия размещения</a></li>
-          <li><a href="#">Добавить свой автопарк</a></li>
+          <li *ngFor="let autoparkItem of driver"><a>{{autoparkItem.label}}</a></li>
         </ul>
       </div>
       <div class="column">
         <h4>Информация</h4>
         <ul>
-          <li><a href="#">Обратная связь</a></li>
-          <li><a href="#">Правила</a></li>
-          <li><a href="#">Команда сайта</a></li>
-          <li><a href="#">Вакансии</a></li>
+          <li *ngFor="let infoItem of driver"><a>{{infoItem.label}}</a></li>
         </ul>
       </div>
       <div class="column">
         <h4>ЮРИДИЧЕСКАЯ СЛУЖБА</h4>
         <ul>
-          <li><a href="#">Получить консультацию</a></li>
+          <li *ngFor="let autoparkItem of driver"><a>{{autoparkItem.label}}</a></li>
         </ul>
       </div>
     </div>
   </div>
   <div class="footer-copyright">
-    <span class="text">Copyright © 2023 ЯАВТОРФ. Все права защищены </span>
+    <span class="text">{{copyrightText}}</span>
   </div>
 </footer>
