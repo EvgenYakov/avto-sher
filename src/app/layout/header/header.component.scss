@@ -1,14 +1,36 @@
 @import "mixins";
 @import "colors";
 
+:host ::ng-deep {
+  .p-inputtext {
+    @include media-l() {
+      padding: 0.7rem 0.7rem;
+    }
+
+  }
+}
+
 .header {
+  @include media-xl() {
+    height: 8rem;
+  }
+
+  @include media-l() {
+    height: 7rem;
+  }
+
   width: 100%;
-  height: 152.5px;
-  overflow: auto;
+  height: 10.1rem;
+  overflow-x: hidden;
+  overflow-y: hidden;
   border-bottom: 1px solid #AEAEAE;
 
   &__first-level {
     @include flexMix(row, center, space-between);
+    @include media-l() {
+      width: 85%;
+      margin: 0 10% 0 5%;
+    }
 
     width: 80%;
     height: 40%;
@@ -16,10 +38,16 @@
 
     .logo {
       img {
-        margin-top: 8px;
         @include media-xl() {
           width: 100px;
+          margin-top: 1px;
         }
+        @include media-l() {
+          width: 70px;
+          margin-top: 2px;
+        }
+
+        margin-top: 8px;
       }
     }
 
@@ -30,18 +58,24 @@
           width: 25rem;
         }
         @include media-l() {
-          width: 11rem;
+          height: 0.7rem;
+          width: 15rem;
         }
         @include media-s() {
-          width: 7rem;
+          width: 10rem;
         }
 
         width: 36.5rem;
         height: 2.5rem;
+
       }
     }
 
     .login {
+      @include media-l() {
+        font-size: 12px;
+      }
+
       font-weight: bold;
     }
 
@@ -53,37 +87,17 @@
 
   &__second-level {
     @include flexMix(row, center, start);
-
-    width: 100%;
-    height: 35%;
-    color: #FFFFFF;
-    background-color: $black-color;
-    font-weight: 600;
-
-    .nav {
-      @include media-l() {
-        margin-left: 5%;
-      }
-
-      margin-left: 10%;
-      display: flex;
-      list-style: none;
-
-      .link {
-        @include media-xl() {
-          margin-right: 1.25rem;
-          font-size: 12px;
-        }
-        @include media-l() {
-          margin-right: 1rem;
-          font-size: 10px;
-        }
-
-        margin-right: 3.125rem;
-      }
+    @include media-l() {
+      padding-left: 5%;
     }
 
-    .btn {
+    position: relative;
+    padding-left: 10%;
+    width: 100%;
+    height: 35%;
+    font-weight: 600;
+
+    .marketplace-btn {
       @include media-xl() {
         width: 6.875rem;
       }
@@ -109,6 +123,7 @@
         }
       }
     }
+
   }
 
   &__third-level {
@@ -122,24 +137,6 @@
     width: 80%;
     margin: 0 auto;
 
-    .nav {
-      display: flex;
-      list-style: none;
-
-      .link {
-        @include media-xl() {
-          margin-right: 1.25rem;
-          font-size: 12px;
-        }
-        @include media-l() {
-          margin-right: 1rem;
-          font-size: 10px;
-        }
-
-        margin-right: 3.125rem;
-      }
-    }
-
     .location {
       margin-left: auto;
 
@@ -150,4 +147,9 @@
       }
     }
   }
+}
+
+.black {
+  background-color: $black-color;
+  color: $white-color
 }
