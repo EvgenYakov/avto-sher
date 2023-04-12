@@ -21,8 +21,7 @@
 
   width: 100%;
   height: 10.1rem;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   border-bottom: 1px solid #AEAEAE;
 
   &__first-level {
@@ -55,7 +54,7 @@
       .search-input {
         @include media-xl() {
           height: 2rem;
-          width: 25rem;
+          width: 23rem;
         }
         @include media-l() {
           height: 0.7rem;
@@ -80,9 +79,29 @@
     }
 
     .icons > i {
+      @include media-xl() {
+        font-size: 1.2rem;
+      }
+      @include media-l() {
+        font-size: 0.9rem;
+      }
+
       font-size: 1.4rem;
-      margin-left: 1.5rem;
+      cursor: pointer;
     }
+
+    .icons i:not(:last-child) {
+      @include media-xl() {
+        margin-right: 0.8rem;
+      }
+      @include media-l() {
+        margin-right: 0.5rem;
+      }
+
+      margin-right: 1.5rem;
+    }
+
+
   }
 
   &__second-level {
