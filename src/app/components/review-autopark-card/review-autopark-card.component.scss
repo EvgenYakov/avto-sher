@@ -38,7 +38,7 @@
       }
 
       .name-block {
-        @include flexMix(column, start);
+        @include flexMix(column, flex-start);
 
         margin-left: 1.688rem;
 
