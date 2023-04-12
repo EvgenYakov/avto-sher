@@ -13,6 +13,7 @@ import { HEADER_SECOND_LEVEL, HEADER_THIRD_LEVEL } from './constants/header-navi
 export class HeaderComponent implements OnInit {
   public form: FormGroup<SearchForm>;
   public isAuthorized: boolean = true;
+  public isDark: boolean = false;
 
   public secondLevelMenu = HEADER_SECOND_LEVEL;
   public thirdLevelMenu = HEADER_THIRD_LEVEL;
@@ -26,7 +27,7 @@ export class HeaderComponent implements OnInit {
     // this.isAuthorized = !!this.localStorageService.getItemFromStorage(LocalStorageKeys.IS_AUTHORIZED);
   }
 
-  public toggleMenu() {
+  public toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
