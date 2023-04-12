@@ -1,17 +1,42 @@
-@import "primeng/resources/themes/md-light-indigo/theme.css";
+@import "primeng/resources/themes/md-light-deeppurple/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 @import "../theme/colors.scss";
 
-* {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
+//minimal zeroing of styles
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
+  border: 0;
   box-sizing: border-box;
 }
 
-body {
+a {
+  text-decoration: none;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+html, body {
+  height: 100%;
+  line-height: 1;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
   color: var(--text-color);
 }
 
