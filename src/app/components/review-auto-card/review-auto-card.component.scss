@@ -6,7 +6,7 @@
   height: 31vh;
 
   .content {
-    @include flexMix(row, start, space-between);
+    @include flexMix(row, flex-start, space-between);
 
     @include media-xl() {
       flex-direction:column;
@@ -37,7 +37,7 @@
       }
 
       &__auto-data {
-        @include flexMix(column, start);
+        @include flexMix(column, flex-start);
 
         .auto-info {
 
