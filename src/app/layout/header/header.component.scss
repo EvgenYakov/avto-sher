@@ -1,0 +1,174 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-inputtext {
+    @include media-l() {
+      padding: 0.7rem 0.7rem;
+    }
+
+  }
+}
+
+.header {
+  @include media-xl() {
+    height: 8rem;
+  }
+
+  @include media-l() {
+    height: 7rem;
+  }
+
+  width: 100%;
+  height: 10.1rem;
+  overflow: hidden;
+  border-bottom: 1px solid #AEAEAE;
+
+  &__first-level {
+    @include flexMix(row, center, space-between);
+    @include media-l() {
+      width: 85%;
+      margin: 0 10% 0 5%;
+    }
+
+    width: 80%;
+    height: 40%;
+    margin: 0 auto;
+
+    .logo {
+      img {
+        @include media-xl() {
+          width: 100px;
+          margin-top: 1px;
+        }
+        @include media-l() {
+          width: 70px;
+          margin-top: 2px;
+        }
+
+        margin-top: 8px;
+      }
+    }
+
+    .search {
+      .search-input {
+        @include media-xl() {
+          height: 2rem;
+          width: 23rem;
+        }
+        @include media-l() {
+          height: 0.7rem;
+          width: 15rem;
+        }
+        @include media-s() {
+          width: 10rem;
+        }
+
+        width: 36.5rem;
+        height: 2.5rem;
+
+      }
+    }
+
+    .login {
+      @include media-l() {
+        font-size: 12px;
+      }
+
+      font-weight: bold;
+    }
+
+    .icons > i {
+      @include media-xl() {
+        font-size: 1.2rem;
+      }
+      @include media-l() {
+        font-size: 0.9rem;
+      }
+
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .icons i:not(:last-child) {
+      @include media-xl() {
+        margin-right: 0.8rem;
+      }
+      @include media-l() {
+        margin-right: 0.5rem;
+      }
+
+      margin-right: 1.5rem;
+    }
+
+
+  }
+
+  &__second-level {
+    @include flexMix(row, center, start);
+    @include media-l() {
+      padding-left: 5%;
+    }
+
+    position: relative;
+    padding-left: 10%;
+    width: 100%;
+    height: 35%;
+    font-weight: 600;
+
+    .marketplace-btn {
+      @include media-xl() {
+        width: 6.875rem;
+      }
+      @include media-l() {
+        width: 5.3rem;
+        height: 1.4rem;
+        padding: 0 0 4px 3px;
+      }
+
+      width: 8.75rem;
+      height: 1.75rem;
+      padding: 4px 7px 5px 8px;
+      border-radius: 4px;
+      background-color: $white-color;
+      color: $black-color;
+
+      span {
+        @include media-xl() {
+          font-size: 12px;
+        }
+        @include media-l() {
+          font-size: 10px;
+        }
+      }
+    }
+
+  }
+
+  &__third-level {
+    @include flexMix(row, center, start);
+    @include media-l() {
+      width: 85%;
+      margin: 0 auto 0 5%;
+    }
+
+    height: 25%;
+    width: 80%;
+    margin: 0 auto;
+
+    .location {
+      margin-left: auto;
+
+      .label {
+        @include media-xl() {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+.black {
+  background-color: $black-color;
+  color: $white-color
+}
