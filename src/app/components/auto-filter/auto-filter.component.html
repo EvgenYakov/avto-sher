@@ -1,0 +1,60 @@
+<div class="filter">
+  <div class="filter__title">Поиск автомобилей</div>
+  <div class="filter__subtitle">Более 10 800 проверенных автомобилей</div>
+
+  <form [formGroup]="filterForm" class="filter__form">
+    <p-selectButton
+      [formControlName]="'fare'"
+      [options]="fareOptions"
+      [optionLabel]="'label'"
+      [optionValue]="'value'"
+    ></p-selectButton>
+
+    <div class="filter__dropdowns">
+      <p-dropdown
+        *ngFor="let dropdown of dropdowns"
+        [formControlName]="dropdown.formControlName"
+        [options]="dropdown.options"
+        [placeholder]="dropdown.placeholder"
+        [optionLabel]="'label'"
+        [optionValue]="'value'"
+      ></p-dropdown>
+    </div>
+
+    <div class="filter__row">
+      <div class="filter__price">
+        Цена
+        <p-inputNumber
+          [formControlName]="'minPrice'"
+          [mode]="'currency'"
+          [currency]="'RUB'"
+          [locale]="'ru-RU'"
+          [placeholder]="'Минимум'"
+        ></p-inputNumber>
+        <span class="filter__price-dash"></span>
+        <p-inputNumber
+          [formControlName]="'maxPrice'"
+          [mode]="'currency'"
+          [currency]="'RUB'"
+          [locale]="'ru-RU'"
+          [placeholder]="'Максимум'"
+        ></p-inputNumber>
+      </div>
+
+      <div class="filter__additional-options">
+        <p-checkbox
+          *ngFor="let option of additionalOptions"
+          [formControl]="filterForm.controls.additionalOptions"
+          [label]="option.label"
+          [value]="option.value"
+        ></p-checkbox>
+      </div>
+    </div>
+
+    <p-button
+      class="filter__button"
+      label="Поиск по параметрам"
+      (click)="onSubmit()"
+    ></p-button>
+  </form>
+</div>
