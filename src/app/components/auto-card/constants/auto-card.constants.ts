@@ -1,4 +1,3 @@
-import { Fare, FuelType, GearboxType } from '@constants';
 import { AutoCard } from '@models';
 
 export const AUTO_CARD: AutoCard = {
@@ -32,8 +31,8 @@ export const AUTO_CARD: AutoCard = {
   ],
   characteristics: {
     power: 300,
-    fuelType: FuelType.DIESEL,
-    gearboxType: GearboxType.AUTOMATIC,
-    fare: Fare.BUSINESS,
+    fuelType: 'Дизель',
+    gearboxType: 'Автоматическая',
+    fare: 'Бизнес',
   },
 };
