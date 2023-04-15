@@ -1,1 +1,1 @@
-export * from './helpers/local-storage.service'
+export * from './helpers'

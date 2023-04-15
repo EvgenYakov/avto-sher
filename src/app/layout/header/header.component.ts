@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SearchForm } from './interfaces/search-form.interface';
 import { LocalStorageService } from '@services';
@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit {
 
   public secondLevelMenu = HEADER_SECOND_LEVEL;
   public thirdLevelMenu = HEADER_THIRD_LEVEL;
-  public isMenuOpen: boolean = false;
 
   constructor(private localStorageService: LocalStorageService) {
   }
@@ -25,10 +24,6 @@ export class HeaderComponent implements OnInit {
   public ngOnInit(): void {
     this.form = this.initializeForm();
     // this.isAuthorized = !!this.localStorageService.getItemFromStorage(LocalStorageKeys.IS_AUTHORIZED);
-  }
-
-  public toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
   }
 
   private initializeForm(): FormGroup<SearchForm> {
