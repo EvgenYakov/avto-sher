@@ -5,11 +5,12 @@
         [isRequired]="isRequired"
         [isTouched]="control.touched"
 >
-  <input
+  <p-inputMask
           [formControl]="control"
           [required]="isRequired"
           [placeholder]="placeholder"
           [ngClass]="{'ng-invalid ng-dirty':control.errors && control.touched}"
-          pInputText
+          [mask]="'+7 999 999-99-99'"
   >
+  </p-inputMask>
 </app-control-wrapper>

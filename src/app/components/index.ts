@@ -12,3 +12,5 @@ export * from './auto-card-detailed/auto-card-detailed.module';
 
 export * from './auto-filter/auto-filter.component';
 export * from './auto-filter/auto-filter.module';
+
+export * from './controls'
