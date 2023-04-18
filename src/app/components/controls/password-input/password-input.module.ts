@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TextInputComponent } from './text-input.component';
+import { PasswordInputComponent } from './password-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InputTextModule } from 'primeng/inputtext';
-import { BaseControl } from '@models';
+import { PasswordModule } from 'primeng/password';
 import { ControlWrapperModule } from '../control-wrapper/control-wrapper.module';
 
 @NgModule({
+  declarations: [
+    PasswordInputComponent
+  ],
+  exports: [
+    PasswordInputComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    InputTextModule,
+    PasswordModule,
     ControlWrapperModule,
-  ],
-  declarations: [
-    TextInputComponent,
-    BaseControl
-  ],
-  exports: [
-    TextInputComponent
   ]
 })
-export class TextInputModule {
+export class PasswordInputModule {
 }
