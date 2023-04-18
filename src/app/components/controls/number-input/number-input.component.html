@@ -1,0 +1,16 @@
+<app-control-wrapper
+        [control]="control"
+        [label]="label"
+        [error]="error"
+        [isRequired]="isRequired"
+        [isTouched]="control.touched"
+>
+  <div>
+    <p-inputNumber
+            [formControl]="control"
+            [required]="isRequired"
+            [placeholder]="placeholder"
+            [ngClass]="{'ng-invalid ng-dirty':control.errors && control.touched}"
+    ></p-inputNumber>
+  </div>
+</app-control-wrapper>
