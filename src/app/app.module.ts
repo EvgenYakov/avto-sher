@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { EffectsModule } from '@ngrx/effects';
@@ -9,9 +9,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterModule, HeaderModule } from '@layout';
-import { appReducers } from '@store';
-import { AuthEffects } from '@store';
+import { appReducers, AuthEffects } from '@store';
 import { environment } from '@environments/environment';
+import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
+import { ErrorInterceptor } from './services/interceptors/error.interceptor';
+import { AuthGuard } from './services/guards/auth.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +38,19 @@ import { environment } from '@environments/environment';
     EffectsModule.forRoot([
       AuthEffects,
     ]),
+  ],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })
