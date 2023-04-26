@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { Store } from '@ngrx/store';
+
 import { LoginDto, LoginForm } from '../../models/login-form.interface';
 import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
+import { AuthState, loginRequest } from '@store';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +18,9 @@ export class LoginComponent implements OnInit {
   public readonly passwordMsg = PASSWORD_FIELD;
 
   public loginForm: FormGroup<LoginForm>;
+
+  constructor(private store: Store<AuthState>) {
+  }
 
   public ngOnInit(): void {
     this.loginForm = this.initializeForm();
@@ -41,5 +47,6 @@ export class LoginComponent implements OnInit {
 
   public onSubmit(): void {
     const formValues = this.loginForm.value as LoginDto;
+    this.store.dispatch(loginRequest({ loginDto: formValues }));
   }
 }
