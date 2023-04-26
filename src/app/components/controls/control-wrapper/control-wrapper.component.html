@@ -1,5 +1,5 @@
 <div class="control-wrapper">
-  <label [ngClass]="{'required': isRequired}"> {{label}}</label>
+  <label [ngClass]="{'required': isRequired}" *ngIf="label"> {{label}}</label>
 
   <ng-content></ng-content>
 
