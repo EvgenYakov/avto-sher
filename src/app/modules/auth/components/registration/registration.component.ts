@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RegisterDto, RegistrationForm } from '../../models/registration-form.interface';
 import { RegisterType } from '../../constants/register-type.enum';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthState, registerRequest } from '@store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-registration',
@@ -27,6 +29,7 @@ export class RegistrationComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private store: Store<AuthState>
   ) {
   }
 
@@ -49,6 +52,8 @@ export class RegistrationComponent implements OnInit {
       ...this.registerForm.value,
       type: this.registerType
     } as RegisterDto;
+
+    this.store.dispatch(registerRequest({ registerDto: formValues }));
 
   }
 
