@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RegisterDto, RegistrationForm } from '../../models/registration-form.interface';
-import { RegisterType } from '../../constants/register-type.enum';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthState, registerRequest } from '@store';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+
+import { EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
+import { AuthState, registerRequest } from '@store';
+import { RegisterDto, RegistrationForm } from '../../models';
+import { RegisterType } from '../../constants';
 
 @Component({
   selector: 'app-registration',

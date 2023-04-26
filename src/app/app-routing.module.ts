@@ -15,7 +15,10 @@ const routes: Routes = [
       import('./modules/auth/auth.module').then(
         (m) => m.AuthModule
       ),
-  },
+    data: {
+      userType: 'not-logged-in'
+    }
+  }
 ];
 
 @NgModule({
