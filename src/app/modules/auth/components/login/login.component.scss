@@ -1,0 +1,53 @@
+@import "colors";
+@import "mixins";
+
+:host ::ng-deep p-button .p-component {
+  width: 100%;
+  background-color: #F20519;
+}
+
+:host ::ng-deep {
+  .control-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+.content {
+  @include flexMix(column, none, none);
+  height: 100%;
+
+  .header {
+    margin-bottom: 35px;
+
+    &__label {
+      font-weight: 600;
+      font-size: 24px;
+    }
+  }
+
+  .main {
+    flex: 1 1 auto;
+
+    .login-form > * {
+      margin-bottom: 20px;
+    }
+
+    &__forget-psw {
+      color: $blue-color;
+      cursor: pointer;
+    }
+  }
+
+  .footer {
+    font-size: 14px;
+
+    &__register {
+      margin-bottom: 18px;
+
+      .redirect {
+        color: $blue-color;
+        cursor: pointer;
+      }
+    }
+  }
+}
