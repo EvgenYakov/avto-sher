@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { SearchForm } from './interfaces/search-form.interface';
 import { LocalStorageService } from '@services';
 import { HEADER_SECOND_LEVEL, HEADER_THIRD_LEVEL } from './constants/header-navigation.constant';
 
@@ -11,9 +9,7 @@ import { HEADER_SECOND_LEVEL, HEADER_THIRD_LEVEL } from './constants/header-navi
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
-  public form: FormGroup<SearchForm>;
-  public isAuthorized: boolean = true;
-  public isDark: boolean = false;
+  public isAuthorized: boolean = false;
 
   public secondLevelMenu = HEADER_SECOND_LEVEL;
   public thirdLevelMenu = HEADER_THIRD_LEVEL;
@@ -22,14 +18,6 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.form = this.initializeForm();
     // this.isAuthorized = !!this.localStorageService.getItemFromStorage(LocalStorageKeys.IS_AUTHORIZED);
-  }
-
-  private initializeForm(): FormGroup<SearchForm> {
-    const searchForm = new FormGroup<SearchForm>({
-      search: new FormControl('', [])
-    });
-    return searchForm;
   }
 }

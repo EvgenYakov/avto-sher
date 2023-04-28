@@ -1,18 +1,9 @@
 @import "mixins";
 @import "colors";
 
-:host ::ng-deep {
-  .p-inputtext {
-    @include media-l() {
-      padding: 0.7rem 0.7rem;
-    }
-
-  }
-}
-
 .header {
-  @include media-xl() {
-    height: 8rem;
+  @include media-laptop() {
+    height: 8.2rem;
   }
 
   @include media-l() {
@@ -20,150 +11,107 @@
   }
 
   width: 100%;
-  height: 10.1rem;
+  height: 9.6rem;
   overflow: hidden;
   border-bottom: 1px solid #AEAEAE;
 
   &__first-level {
     @include flexMix(row, center, space-between);
-    @include media-l() {
-      width: 85%;
-      margin: 0 10% 0 5%;
-    }
 
-    width: 80%;
-    height: 40%;
-    margin: 0 auto;
+    @include media-laptop() {
+      height: 50px;
 
-    .logo {
-      img {
-        @include media-xl() {
-          width: 100px;
-          margin-top: 1px;
-        }
-        @include media-l() {
-          width: 70px;
-          margin-top: 2px;
-        }
-
-        margin-top: 8px;
+      .logo img {
+        width: 120px;
       }
     }
 
-    .search {
-      .search-input {
-        @include media-xl() {
-          height: 2rem;
-          width: 23rem;
-        }
-        @include media-l() {
-          height: 0.7rem;
-          width: 15rem;
-        }
-        @include media-s() {
-          width: 10rem;
-        }
+    @include media-l() {
+      height: 40px;
 
-        width: 36.5rem;
-        height: 2.5rem;
+      .logo img {
+        width: 100px;
+        margin-left: -0.6rem;
+      }
 
+      .login {
+        font-size: 13px;
+      }
+    }
+
+    max-width: 80%;
+    height: 66px;
+    margin: 0 auto;
+
+    .logo {
+      margin-left: 0.6rem;
+
+      &:hover {
+        cursor: pointer;
       }
     }
 
     .login {
-      @include media-l() {
-        font-size: 12px;
-      }
-
       font-weight: bold;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     .icons > i {
-      @include media-xl() {
-        font-size: 1.2rem;
-      }
-      @include media-l() {
-        font-size: 0.9rem;
-      }
-
       font-size: 1.4rem;
       cursor: pointer;
     }
 
     .icons i:not(:last-child) {
-      @include media-xl() {
-        margin-right: 0.8rem;
-      }
-      @include media-l() {
-        margin-right: 0.5rem;
-      }
-
       margin-right: 1.5rem;
     }
-
-
   }
 
   &__second-level {
-    @include flexMix(row, center, start);
-    @include media-l() {
-      padding-left: 5%;
+    @include flexMix(row, center, flex-start);
+    @include media-laptop() {
+      font-size: 14px;
+      height: 3rem;
     }
 
-    position: relative;
-    padding-left: 10%;
-    width: 100%;
-    height: 35%;
+    @include media-l() {
+      font-size: 11px;
+      height: 2.5rem;
+    }
+
+    padding: 0 10%;
+    height: 3.125rem;
     font-weight: 600;
 
-    .marketplace-btn {
-      @include media-xl() {
-        width: 6.875rem;
-      }
-      @include media-l() {
-        width: 5.3rem;
-        height: 1.4rem;
-        padding: 0 0 4px 3px;
-      }
-
-      width: 8.75rem;
-      height: 1.75rem;
-      padding: 4px 7px 5px 8px;
-      border-radius: 4px;
-      background-color: $white-color;
-      color: $black-color;
-
-      span {
-        @include media-xl() {
-          font-size: 12px;
-        }
-        @include media-l() {
-          font-size: 10px;
-        }
-      }
+    .bg-gray {
+      height: 100%;
     }
-
   }
 
   &__third-level {
-    @include flexMix(row, center, start);
+    @include media-laptop() {
+      font-size: 14px;
+    }
     @include media-l() {
-      width: 85%;
-      margin: 0 auto 0 5%;
+      font-size: 12px;
     }
 
-    height: 25%;
-    width: 80%;
+    display: flex;
+    align-items: center;
+
+    max-width: 80%;
     margin: 0 auto;
 
-    .location {
-      margin-left: auto;
+    height: 35px;
 
-      .label {
-        @include media-xl() {
-          font-size: 12px;
-        }
+    .location {
+      @include media-l() {
+        font-size: 12px;
+        margin-bottom: 6px;
       }
+      margin-left: auto;
     }
   }
 }

@@ -20,6 +20,13 @@
   }
 }
 
+// 1024p
+@mixin media-laptop {
+  @media (max-width: 1024px) {
+    @content;
+  }
+}
+
 // 768px
 @mixin media-l {
   @media (max-width: 768px) {

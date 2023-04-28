@@ -34,10 +34,6 @@ export const HEADER_THIRD_LEVEL: MenuItem[] = [
     routerLink: AppRoutes.FOR_TAXI_COMPANIES
   },
   {
-    label: 'Для реферальных партнеров',
-    routerLink: AppRoutes.FOR_REFERRAL_PARTNERS
-  },
-  {
     label: 'Для партнеров',
     routerLink: AppRoutes.FOR_PARTNERS
   },
