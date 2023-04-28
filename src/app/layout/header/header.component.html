@@ -1,45 +1,30 @@
 <header class="header">
   <div class="header__first-level">
     <div class="logo">
-      <img src="../../../assets/images/logo.png" alt="logo">
-    </div>
-    <div class="search">
-      <form [formGroup]="form">
-          <span class="p-input-icon-right">
-            <i class="pi pi-search"></i>
-            <input type="text"
-                   class="search-input"
-                   pInputText
-                   formControlName="search"
-                   placeholder="Поиск..."
-            />
-        </span>
-      </form>
+      <img src="../../../assets/images/logo-light.svg" alt="logo">
     </div>
 
-    <div class="login" *ngIf="!isAuthorized">
-      Войти
-    </div>
+    <ng-container *ngIf="!isAuthorized; else icons">
+      <div class="login">
+        Войти
+      </div>
+    </ng-container>
 
-    <div class="icons" *ngIf="isAuthorized">
-      <i class="pi pi-sun" *ngIf="!isDark"></i>
-      <i class="pi pi-moon" *ngIf="isDark"></i>
-      <i class="pi pi-comment"></i>
-      <i class="pi pi-heart"></i>
-      <i class="pi pi-user"></i>
-    </div>
+    <ng-template #icons>
+      <div class="icons">
+        <i class="pi pi-comment"></i>
+        <i class="pi pi-heart"></i>
+        <i class="pi pi-user"></i>
+      </div>
+    </ng-template>
+
   </div>
   <div class="header__second-level black">
-    <app-custom-navbar [menuItems]="secondLevelMenu">
-      <div class="marketplace-btn">
-        <span style="color: red">Я</span>
-        <span>автомаркет.рф</span>
-      </div>
-    </app-custom-navbar>
+    <app-custom-navbar [menuItems]="secondLevelMenu" class="bg-gray"></app-custom-navbar>
   </div>
 
   <div class="header__third-level white">
-    <app-custom-navbar [menuItems]="thirdLevelMenu"></app-custom-navbar>
+    <app-custom-navbar [menuItems]="thirdLevelMenu" class="color-red"></app-custom-navbar>
     <div class="location">
       <i class="pi pi-map-marker"></i>
       <span class="label">

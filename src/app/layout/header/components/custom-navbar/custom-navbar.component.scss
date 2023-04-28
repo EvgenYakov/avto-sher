@@ -12,6 +12,7 @@
   background-color: transparent;
 
   :host-context(.black) {
+    margin-top: 20px;
     .burger__line {
       background-color: white;
     }
@@ -46,6 +47,20 @@
   }
 }
 
+:host-context(.bg-gray) {
+  .nav__item:hover {
+    cursor: pointer;
+    background-color: #333333;
+  }
+}
+
+:host-context(.color-red) {
+  .nav__item:hover {
+    cursor: pointer;
+    color: #F20519;
+  }
+}
+
 .burger::before, .burger::after {
   content: "";
   position: absolute;
@@ -63,38 +78,40 @@
   bottom: 0;
 }
 
-.nav {
 
-  &__list {
-    display: flex;
-    align-items: center;
+.nav-wrapper {
+  height: 100%;
 
-    .nav__item {
-      @include media-xl() {
-        margin-right: 1.25rem;
-        font-size: 12px;
+  .nav {
+    height: 100%;
+
+    &__list {
+      height: 100%;
+      display: flex;
+      align-items: center;
+
+      .nav__item {
+        @include media-laptop() {
+          padding: 10px 20px;
+        }
+
+        @include media-l() {
+          padding: 10px 10px;
+        }
+
+        padding: 15px 24px;
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        &:last-child {
+          margin-right: 0;
+        }
       }
-      @include media-l() {
-        margin-right: 1rem;
-        font-size: 10px;
-      }
-
-      margin-right: 3.125rem;
     }
   }
-
-  &__link {
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      padding: 5px;
-      cursor: pointer;
-      background-color: #D3D3D3;
-      color:black;
-    }
-  }
-
 }
+
 
 //burger styles
 @media (max-width: 536px) {

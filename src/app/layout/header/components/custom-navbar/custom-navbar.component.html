@@ -1,17 +1,19 @@
-<button class="burger"
-        aria-label="Открыть меню"
-        aria-expanded="false"
-        [ngClass]="{'active' : isMenuOpen}"
-        (click)="toggleMenu()"
->
-  <span class="burger__line"></span>
-</button>
+  <button class="burger"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          [ngClass]="{'active' : isMenuOpen}"
+          (click)="toggleMenu()"
+  >
+    <span class="burger__line"></span>
+  </button>
 
-<nav class="nav" [ngClass]="{'visible' : isMenuOpen}">
-  <ul class="nav__list">
-    <li *ngFor="let item of menuItems" class="nav__item">
-      <a class="nav__link">{{item.label}}</a>
-    </li>
-   <ng-content></ng-content>
-  </ul>
-</nav>
+  <div class="nav-wrapper">
+    <nav class="nav" [ngClass]="{'visible' : isMenuOpen}">
+      <ul class="nav__list">
+        <li *ngFor="let item of menuItems" class="nav__item">
+          <a class="nav__link">{{item.label}}</a>
+        </li>
+        <ng-content></ng-content>
+      </ul>
+    </nav>
+  </div>
