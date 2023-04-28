@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="header">
+    <span class="header__label">Регистрация</span>
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <form [formGroup]="registerForm">
+        <p-tabView [activeIndex]="activeIndex" (onChange)="onTabChanged($event)">
+
+          <app-text-input
+                  class="field"
+                  placeholder="Фамилия Имя Отчество"
+                  [errorsMap]="requiredField"
+                  [formControl]="registerForm.controls.fio"
+          ></app-text-input>
+
+          <p-tabPanel header="Водитель">
+
+            <app-phone-input
+                    class="field"
+                    placeholder="Номер телефона"
+                    [errorsMap]="phoneField"
+                    [formControl]="registerForm.controls.phone"
+            ></app-phone-input>
+          </p-tabPanel>
+
+          <p-tabPanel header="Автопарк">
+
+          </p-tabPanel>
+
+          <app-text-input
+                  class="field"
+                  placeholder="Email"
+                  [errorsMap]="emailField"
+                  [formControl]="registerForm.controls.email"
+          ></app-text-input>
+
+          <app-password-input
+                  class="field"
+                  placeholder="Пароль"
+                  [errorsMap]="passwordField"
+                  [formControl]="registerForm.controls.password"
+          ></app-password-input>
+        </p-tabView>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer__approval">
+
+      <p-checkbox [(ngModel)]="checkbox"
+                  [binary]="true"
+      ></p-checkbox>
+
+      <div class="text-block">
+        <span class="text">Я даю согласие на обработку моих <br> персональных данных <br></span>
+        <span class="confidentiality" (click)="openConfidentiality()">Политика конфиденциальности</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer__btns">
+    <div class="back-link" (click)="navigateBack()">
+      Вернуться к входу
+    </div>
+
+    <p-button
+            label="Зарегистрироваться"
+            (click)="onSubmit()"
+            [disabled]="!registerForm.valid && (checkbox || !checkbox) || registerForm.valid && !checkbox"
+    ></p-button>
+  </div>
+</div>
