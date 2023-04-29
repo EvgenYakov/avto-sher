@@ -48,6 +48,10 @@ body {
   @extend %transition;
 }
 
+.small-text {
+  font-size: 0.9rem;
+}
+
 // .p-rating .p-rating-icon {
 //   color: $gold-color !important;
 // }
