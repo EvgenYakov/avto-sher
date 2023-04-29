@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { LocalStorageService } from '@services';
 import {
-  HEADER_SECOND_LEVEL,
-  HEADER_THIRD_LEVEL,
-} from './constants/header-navigation.constant';
+  MAIN_NAV,
+  SECONDARY_NAV,
+} from './constants/header-navigation.constants';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +11,8 @@ import {
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
-  public isAuthorized: boolean = false;
-
-  public secondLevelMenu = HEADER_SECOND_LEVEL;
-  public thirdLevelMenu = HEADER_THIRD_LEVEL;
-
-  constructor(private localStorageService: LocalStorageService) {}
-
-  public ngOnInit(): void {
-    // this.isAuthorized = !!this.localStorageService.getItemFromStorage(LocalStorageKeys.IS_AUTHORIZED);
-  }
+export class HeaderComponent {
+  public isOpen: boolean = false;
+  public mainNav = MAIN_NAV;
+  public secondNav = SECONDARY_NAV;
 }

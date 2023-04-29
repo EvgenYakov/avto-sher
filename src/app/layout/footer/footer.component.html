@@ -1,10 +1,10 @@
 <footer class="footer">
-  <div class="footer__menu container">
+  <nav class="footer__menu container">
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Водителям</div>
       <ul class="footer__list">
-        <li *ngFor="let driverItem of driver">
-          <a class="link">{{ driverItem.label }}</a>
+        <li *ngFor="let driverItem of driverNav">
+          <a class="footer__link link">{{ driverItem.label }}</a>
         </li>
       </ul>
     </div>
@@ -12,8 +12,8 @@
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Автопаркам</div>
       <ul class="footer__list">
-        <li *ngFor="let autoparkItem of autopark">
-          <a class="link">{{ autoparkItem.label }}</a>
+        <li *ngFor="let autoparkItem of autoparkNav">
+          <a class="footer__link link">{{ autoparkItem.label }}</a>
         </li>
       </ul>
     </div>
@@ -21,12 +21,12 @@
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Информация</div>
       <ul class="footer__list">
-        <li *ngFor="let infoItem of info">
-          <a class="link">{{ infoItem.label }}</a>
+        <li *ngFor="let infoItem of infoNav">
+          <a class="footer__link link">{{ infoItem.label }}</a>
         </li>
       </ul>
     </div>
-  </div>
+  </nav>
 
   <div class="footer__divider"></div>
 

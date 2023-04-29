@@ -37,29 +37,11 @@ body {
 
 .link {
   font-size: 1rem;
-  color: $light-text-color;
+  cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
-    color: $primary-color;
-
-    @extend %transition;
-  }
+  @extend %transition;
 }
 
-// a {
-//   text-decoration: none;
+// .p-rating .p-rating-icon {
+//   color: $gold-color !important;
 // }
-
-// img {
-//   vertical-align: top;
-// }
-
-// h1, h2, h3, h4, h5, h6 {
-//   font-weight: inherit;
-//   font-size: inherit;
-// }
-
-.p-rating .p-rating-icon {
-  color: $gold-color !important;
-}
