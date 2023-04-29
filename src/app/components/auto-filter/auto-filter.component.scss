@@ -1,4 +1,5 @@
 @import "mixins";
+@import "colors";
 
 :host ::ng-deep {
   .p-inputnumber-input {
@@ -14,18 +15,23 @@
 }
 
 .filter {
-  @include flexMix(column, flex-start, space-between);
+  padding: 3rem 0;
+  background-color: $dark-bg-color;
+  color: $light-text-color;
 
-  gap: 2rem;
+  &__container {
+    @include flexMix(column, flex-start, space-between);
 
-  @include media-l() {
-    align-items: center;
-    text-align: center;
+    gap: 2rem;
+
+    @include media-l() {
+      align-items: center;
+      text-align: center;
+    }
   }
 
   &__title {
-    font-size: 2rem;
-    font-weight: bold;
+    color: var(--primary-color-text);
   }
 
   &__form {
@@ -65,7 +71,6 @@
 
     gap: 1rem;
     flex-wrap: wrap;
-    font-weight: bold;
 
     @include media-s() {
       @include flexMix(column, center, space-between);
@@ -75,7 +80,7 @@
   &__price-dash {
     width: 1rem;
     height: 2px;
-    background-color: var(--text-color);
+    background-color: $light-text-color;
   }
 
   &__additional-options {
