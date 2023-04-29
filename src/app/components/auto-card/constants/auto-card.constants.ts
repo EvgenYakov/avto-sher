@@ -5,7 +5,7 @@ export const AUTO_CARD: AutoCard = {
   title: 'BMW 5er',
   avatarPath: 'https://i.imgur.com/qFCyShm.jpeg',
   year: 2022,
-  motorPool: 'Быстрые ветра',
+  autopark: 'Быстрые ветра',
   location: 'Москва',
   price: 5800,
   conditions: ['Залог 15000 руб', 'С договором', 'Аренда от 2 дней'],
