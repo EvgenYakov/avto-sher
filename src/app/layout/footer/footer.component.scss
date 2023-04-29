@@ -35,6 +35,14 @@
     row-gap: 1rem;
   }
 
+  &__link {
+    color: $light-text-color;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
   &__divider {
     width: 100%;
     height: 1px;

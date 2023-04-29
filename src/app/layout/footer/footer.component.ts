@@ -4,7 +4,7 @@ import {
   AUTOPARK_COLUMN,
   DRIVER_COLUMN,
   INFO_COLUMN,
-} from './constants/footer.constant';
+} from './constants/footer-navigation.constants';
 
 @Component({
   selector: 'app-footer',
@@ -13,7 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FooterComponent {
-  public driver = DRIVER_COLUMN;
-  public autopark = AUTOPARK_COLUMN;
-  public info = INFO_COLUMN;
+  public driverNav = DRIVER_COLUMN;
+  public autoparkNav = AUTOPARK_COLUMN;
+  public infoNav = INFO_COLUMN;
 }
