@@ -62,6 +62,10 @@
     color: $light-text-color;
   }
 
+  &__autopark {
+    color: $secondary-light-text-color;
+  }
+
   &__location {
     @include flexMix(row, center, flex-start);
 

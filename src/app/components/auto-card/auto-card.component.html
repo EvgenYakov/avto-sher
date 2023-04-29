@@ -8,7 +8,7 @@
           {{ autoCard.title }}
           <span class="auto-card__year">{{ autoCard.year }}</span>
         </div>
-        <div>Автопарк: {{ autoCard.autopark }}</div>
+        <div class="auto-card__autopark">Автопарк: {{ autoCard.autopark }}</div>
         <div class="auto-card__location small-text">
           <i class="auto-card__location-icon pi pi-map-marker"></i
           >{{ autoCard.location }}
@@ -36,7 +36,9 @@
         {{ autoCard.price }} руб / сут
       </div>
       <ul class="auto-card__list">
-        <li *ngFor="let condition of autoCard.conditions">{{ condition }}</li>
+        <li *ngFor="let condition of autoCard.conditions" class="small-text">
+          {{ condition }}
+        </li>
       </ul>
       <p-button label="Подробнее"></p-button>
     </div>

@@ -50,8 +50,9 @@ body {
 
 .small-text {
   font-size: 0.9rem;
+  color: $secondary-light-text-color;
 }
 
-// .p-rating .p-rating-icon {
-//   color: $gold-color !important;
-// }
+.p-rating .p-rating-icon {
+  color: $gold-color !important;
+}
