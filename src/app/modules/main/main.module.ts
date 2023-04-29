@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FooterModule, HeaderModule } from '@layout';
-import { AutoCardModule, AutoFilterModule } from '@components';
+import {
+  AutoCardModule,
+  AutoFilterModule,
+  ReviewAutoparkCardModule,
+} from '@components';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
 import { StartPageComponent } from './components/start-page/start-page.component';
@@ -16,6 +20,7 @@ import { StartPageComponent } from './components/start-page/start-page.component
     HeaderModule,
     AutoFilterModule,
     AutoCardModule,
+    ReviewAutoparkCardModule,
   ],
 })
 export class MainModule {}
