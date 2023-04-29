@@ -14,6 +14,7 @@ const routes: Routes = [
         component: StartPageComponent,
       },
       {
+        //for test
         path: 'auto-detailed',
         loadChildren: () =>
           import('../../modules/auto-detailed/auto-detailed.module').then(
