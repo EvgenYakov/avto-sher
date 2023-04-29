@@ -39,7 +39,7 @@
     color: $light-text-color;
 
     &:hover {
-      color: $primary-color;
+      color: var(--primary-color);
     }
   }
 
@@ -51,7 +51,7 @@
 
   &__copyright {
     padding: 1rem 0;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: $light-text-color;
 
     @include media-l() {

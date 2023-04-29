@@ -3,7 +3,7 @@
     <img src="assets/icons/logo.png" alt="logo" />
     <div class="header__user-panel">
       <app-user-panel></app-user-panel>
-      <i class="header__humburger pi pi-bars" (click)="isOpen = true"></i>
+      <i class="header__hamburger pi pi-bars" (click)="isOpen = true"></i>
     </div>
   </div>
 
@@ -38,12 +38,12 @@
   <nav class="secondary-nav container">
     <ul class="secondary-nav__list">
       <li *ngFor="let link of secondNav">
-        <a class="secondary-nav__link link">{{ link.label }}</a>
+        <a class="secondary-nav__link link small-text">{{ link.label }}</a>
       </li>
     </ul>
 
     <a class="secondary-nav__location link">
-      <i class="pi pi-map-marker"></i><span>Москва</span></a
+      <i class="pi pi-map-marker"></i><span class="small-text">Москва</span></a
     >
   </nav>
 </header>
