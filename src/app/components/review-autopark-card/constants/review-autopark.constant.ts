@@ -2,7 +2,7 @@ import { ReviewAutopark } from '@models';
 
 export const reviewAutoConstant: ReviewAutopark = {
   autoMark: 'BMW',
-  avatarPath: 'assets/test-img.jpg',
+  avatarPath: 'https://i.imgur.com/4paxKUC.jpeg',
   userFio: 'Николай Нагорных',
   userStatus: 'Водитель',
   ratingValue: 2.1,

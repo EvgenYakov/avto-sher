@@ -1,0 +1,122 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .p-button {
+    width: 100%;
+  }
+}
+
+.gallery {
+  max-width: 640px;
+
+  @include media-l() {
+    width: 480px;
+  }
+
+  @include media-s() {
+    width: 300px;
+  }
+
+  &__img {
+    width: 100%;
+    height: 350px;
+
+    @include media-l() {
+      height: 260px;
+    }
+
+    @include media-s() {
+      height: 160px;
+    }
+  }
+
+  &__thumbnail {
+    width: 80px;
+    height: 40px;
+  }
+}
+
+.auto-card {
+  @include flexMix(row, stretch, center);
+
+  @include media-xl() {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  gap: 3rem;
+
+  &__content {
+    @include flexMix(column, stretch, space-between);
+  }
+
+  &__header {
+    @include flexMix(row, center, space-between);
+
+    margin-bottom: 3rem;
+    gap: 1rem;
+
+    @include media-s() {
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  &__title {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  &__views-counter {
+    @include flexMix();
+
+    gap: 0.5rem;
+  }
+
+  &__info {
+    @include flexMix(row, flex-start, space-between);
+
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    @include media-s() {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__subtitle {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__list-item {
+    margin-top: 0.1rem;
+  }
+
+  &__footer {
+    @include flexMix(row, center, space-between);
+
+    margin-top: 5rem;
+    gap: 1rem;
+
+    @include media-s() {
+      margin-top: 2rem;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+  }
+
+  &__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  &__button {
+    flex-grow: 1;
+  }
+}

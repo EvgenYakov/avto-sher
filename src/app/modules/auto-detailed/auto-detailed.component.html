@@ -1,1 +1,70 @@
-<app-auto-card-detailed></app-auto-card-detailed>
+<div class="auto-card">
+  <div class="auto-card__gallery gallery">
+    <p-galleria
+      [value]="images"
+      [numVisible]="5"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item" class="gallery__img" />
+      </ng-template>
+      <ng-template pTemplate="thumbnail" let-item>
+        <img [src]="item" class="gallery__thumbnail" />
+      </ng-template>
+    </p-galleria>
+  </div>
+
+  <div class="auto-card__content">
+    <div class="auto-card__header">
+      <div class="auto-card__title">
+        {{ autoCard.title }} {{ autoCard.year }}
+      </div>
+      <div class="auto-card__views-counter">
+        <i class="pi pi-eye"></i>{{ autoCard.viewsCounter }}
+      </div>
+    </div>
+
+    <div class="auto-card__info">
+      <div class="auto-card__list">
+        <div class="auto-card__subtitle">Характеристики</div>
+        <div class="auto-card__list-item">
+          Топливо: {{ autoCard.characteristics.fuelType }}
+        </div>
+        <div class="auto-card__list-item">
+          Мощность: {{ autoCard.characteristics.power }} л.с.
+        </div>
+        <div class="auto-card__list-item">
+          Коробка: {{ autoCard.characteristics.gearboxType }}
+        </div>
+        <div class="auto-card__list-item">
+          Тариф: {{ autoCard.characteristics.fare }}
+        </div>
+      </div>
+
+      <div class="auto-card__list">
+        <div class="auto-card__subtitle">Условия аренды</div>
+        <div
+          *ngFor="let condition of autoCard.conditions"
+          class="auto-card__list-item"
+        >
+          {{ condition }}
+        </div>
+      </div>
+
+      <div class="auto-card__list">
+        <div class="auto-card__subtitle">График работы</div>
+        <div
+          *ngFor="let day of autoCard.daysOfWork"
+          class="auto-card__list-item"
+        >
+          {{ day }}
+        </div>
+      </div>
+    </div>
+
+    <div class="auto-card__footer">
+      <div class="auto-card__price">{{ autoCard.price }} руб / сут</div>
+      <p-button label="Арендовать" class="auto-card__button"></p-button>
+    </div>
+  </div>
+</div>

@@ -35,24 +35,21 @@ import { AuthGuard } from './services/guards/auth.guard';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([
-      AuthEffects,
-    ]),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}
