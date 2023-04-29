@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -8,7 +9,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterModule, HeaderModule } from '@layout';
 import { appReducers, AuthEffects } from '@store';
 import { environment } from '@environments/environment';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
@@ -19,9 +19,8 @@ import { AuthGuard } from './services/guards/auth.guard';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    HeaderModule,
-    FooterModule,
     HttpClientModule,
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
@@ -35,24 +34,21 @@ import { AuthGuard } from './services/guards/auth.guard';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([
-      AuthEffects,
-    ]),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

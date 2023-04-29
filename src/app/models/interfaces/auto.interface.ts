@@ -3,7 +3,7 @@ export interface AutoCard {
   title: string;
   avatarPath: string;
   year: number;
-  motorPool: string;
+  autopark: string;
   location: string;
   price: number;
   conditions: string[];

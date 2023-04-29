@@ -1,33 +1,36 @@
 <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-container--padding">
-      <div class="column">
-        <h4>Водителям</h4>
-        <ul>
-          <li *ngFor="let driverItem of driver"><a>{{driverItem.label}}</a></li>
-        </ul>
-      </div>
-      <div class="column">
-        <h4>Автопаркам</h4>
-        <ul>
-          <li *ngFor="let autoparkItem of autopark"><a>{{autoparkItem.label}}</a></li>
-        </ul>
-      </div>
-      <div class="column">
-        <h4>Информация</h4>
-        <ul>
-          <li *ngFor="let infoItem of info"><a>{{infoItem.label}}</a></li>
-        </ul>
-      </div>
-      <div class="column">
-        <h4>ЮРИДИЧЕСКАЯ СЛУЖБА</h4>
-        <ul>
-          <li *ngFor="let autoparkItem of legalService"><a>{{autoparkItem.label}}</a></li>
-        </ul>
-      </div>
+  <nav class="footer__menu container">
+    <div class="footer__column">
+      <div class="footer__subtitle subtitle">Водителям</div>
+      <ul class="footer__list">
+        <li *ngFor="let driverItem of driverNav">
+          <a class="footer__link link">{{ driverItem.label }}</a>
+        </li>
+      </ul>
     </div>
-  </div>
-  <div class="footer-copyright">
-    <span class="text">{{copyrightText}}</span>
+
+    <div class="footer__column">
+      <div class="footer__subtitle subtitle">Автопаркам</div>
+      <ul class="footer__list">
+        <li *ngFor="let autoparkItem of autoparkNav">
+          <a class="footer__link link">{{ autoparkItem.label }}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer__column">
+      <div class="footer__subtitle subtitle">Информация</div>
+      <ul class="footer__list">
+        <li *ngFor="let infoItem of infoNav">
+          <a class="footer__link link">{{ infoItem.label }}</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="footer__divider"></div>
+
+  <div class="footer__copyright container">
+    Copyright © 2023 ЯАВТОРФ. Все права защищены
   </div>
 </footer>

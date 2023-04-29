@@ -1,29 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
-import { InputTextModule } from 'primeng/inputtext';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToolbarModule } from 'primeng/toolbar';
-import { CustomNavbarComponent } from './components/custom-navbar/custom-navbar.component';
+import { RouterModule } from '@angular/router';
 
+import { SidebarModule } from 'primeng/sidebar';
+
+import { HeaderComponent } from './header.component';
+import { UserPanelComponent } from './components/user-panel/user-panel.component';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    CustomNavbarComponent,
-  ],
-  exports: [
-    HeaderComponent
-  ],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    RouterLink,
-    BrowserAnimationsModule,
-    ToolbarModule
-  ]
+  declarations: [HeaderComponent, UserPanelComponent],
+  exports: [HeaderComponent],
+  imports: [CommonModule, RouterModule, SidebarModule],
 })
-export class HeaderModule { }
+export class HeaderModule {}

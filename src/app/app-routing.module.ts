@@ -3,27 +3,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'auto-detailed',
+    path: 'main',
     loadChildren: () =>
-      import('./modules/auto-detailed/auto-detailed.module').then(
-        (m) => m.AutoDetailedModule
-      ),
+      import('./modules/main/main.module').then((m) => m.MainModule),
   },
   {
     path: 'auth',
     loadChildren: () =>
-      import('./modules/auth/auth.module').then(
-        (m) => m.AuthModule
-      ),
+      import('./modules/auth/auth.module').then((m) => m.AuthModule),
     data: {
-      userType: 'not-logged-in'
-    }
-  }
+      userType: 'not-logged-in',
+    },
+  },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule {}
