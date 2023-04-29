@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterModule, HeaderModule } from '@layout';
 import { appReducers, AuthEffects } from '@store';
 import { environment } from '@environments/environment';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
@@ -20,8 +19,6 @@ import { AuthGuard } from './services/guards/auth.guard';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HeaderModule,
-    FooterModule,
     HttpClientModule,
     StoreModule.forRoot(appReducers, {
       runtimeChecks: {
