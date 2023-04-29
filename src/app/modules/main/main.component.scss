@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 3rem 1rem;
+}
+
+.footer {
+  flex-shrink: 0;
+}
