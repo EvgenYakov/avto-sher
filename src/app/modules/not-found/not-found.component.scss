@@ -1,0 +1,26 @@
+@import "mixins";
+@import "colors";
+
+.container {
+  @include flexMix(column);
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+img {
+  max-width: 50%;
+  margin-bottom: 2rem;
+}
+
+p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+a {
+  font-size: 1.5rem;
+  color: $link-color;
+}
