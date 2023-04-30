@@ -10,17 +10,17 @@ export const selectIsLoading = createSelector(
 
 export const selectCarProfile = createSelector(
   carProfileFeatureSelector,
-  (state) => state.profileCar
+  (state) => state.autoProfile
 );
 
 export const selectPhotos = createSelector(
   carProfileFeatureSelector,
-  (state) => state.photos
+  (state) => state.pathsOfImages
 );
 
 export const selectFeatures = createSelector(
   carProfileFeatureSelector,
-  (state) => state.features
+  (state) => state.additional
 );
 
 export const selectError = createSelector(

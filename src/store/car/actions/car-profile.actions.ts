@@ -1,17 +1,14 @@
 import { createAction, props } from '@ngrx/store';
-import { CarCard } from '../interfaces/car.interface';
-import { CarProfile } from '../interfaces/car-profile.interface';
+import { AutoCard, AutoProfile } from '@models';
 
 export enum CarProfileActions {
   LOAD_CAR = '[CAR] Get car profile',
   LOAD_CAR_SUCCESS = '[CAR] Get car profile success',
   LOAD_CAR_FAILURE = '[CAR] Get car profile failure',
 
-
   ADD_PHOTO = '[CAR] Add photo car',
   ADD_PHOTO_SUCCESS = '[CAR] Add photo car success',
   ADD_PHOTO_FAILURE = '[CAR] Add photo car failure',
-
 
   DELETE_PHOTOS = '[CAR] Delete photos car',
   DELETE_PHOTOS_SUCCESS = '[CAR] Delete photos car success',
@@ -29,14 +26,13 @@ export const loadCar = createAction(
 
 export const loadCarSuccess = createAction(
   CarProfileActions.LOAD_CAR_SUCCESS,
-  props<{ car: CarProfile }>()
+  props<{ car: AutoProfile }>()
 );
 
 export const loadCarFailure = createAction(
   CarProfileActions.LOAD_CAR_FAILURE,
   props<{ errors: any }>()
 );
-
 
 export const addPhoto = createAction(
   CarProfileActions.ADD_PHOTO,
@@ -52,7 +48,6 @@ export const addPhotoFailure = createAction(
   CarProfileActions.ADD_PHOTO_FAILURE,
   props<{ errors: any }>()
 );
-
 
 export const deletePhotos = createAction(
   CarProfileActions.DELETE_PHOTOS,
@@ -76,7 +71,7 @@ export const changeCarStatus = createAction(
 
 export const changeCarStatusSuccess = createAction(
   CarProfileActions.CHANGE_STATUS_SUCCESS,
-  props<{ newCar: CarCard }>()
+  props<{ newCar: AutoCard }>()
 );
 
 export const changeCarStatusFailure = createAction(

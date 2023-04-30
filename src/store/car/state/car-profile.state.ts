@@ -1,10 +1,9 @@
-import { BackendError } from '@models';
-import { CarProfile } from '../interfaces/car-profile.interface';
+import { AutoProfile, BackendError } from '@models';
 
 export interface CarProfileState {
   isLoading: boolean;
-  profileCar: CarProfile;
-  photos: string[];
-  features: string[];
+  autoProfile: AutoProfile;
+  pathsOfImages: string[];
+  additional: string[];
   error: BackendError | null;
 }
