@@ -3,7 +3,7 @@ import { Observable, of } from 'rxjs';
 
 import { BaseService } from './base.service';
 import { carData, carsData } from '@test-data';
-import { AutoCard, AutoProfile } from '@models';
+import { AutoCard, AutoProfile, FilterParams } from '@models';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,10 @@ import { AutoCard, AutoProfile } from '@models';
 export class CarService extends BaseService {
 
   public getCars(autoparkId: number): Observable<AutoCard[]> {
+    return of(carsData);
+  }
+
+  public filteredCars(filterParams: FilterParams): Observable<AutoCard[]> {
     return of(carsData);
   }
 

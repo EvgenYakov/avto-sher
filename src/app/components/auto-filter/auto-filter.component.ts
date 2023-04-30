@@ -25,14 +25,7 @@ export class AutoFilterComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log(this.filterForm.controls.fare.value);
-    console.log(this.filterForm.controls.brand.value);
-    console.log(this.filterForm.controls.model.value);
-    console.log(this.filterForm.controls.fuel.value);
-    console.log(this.filterForm.controls.gearbox.value);
-    console.log(this.filterForm.controls.minPrice.value);
-    console.log(this.filterForm.controls.maxPrice.value);
-    console.log(this.filterForm.controls.additionalOptions.value);
+    console.log(this.filterForm.value)
   }
 
   private initializeForm(): FormGroup<FilterForm> {

@@ -11,6 +11,9 @@ import {
   deleteCar,
   deleteCarFailure,
   deleteCarSuccess,
+  filterCar,
+  filterCarFailure,
+  filterCarSuccess,
   loadCars,
   loadCarsFailure,
   loadCarsSuccess
@@ -30,6 +33,15 @@ export class CarListEffects {
     map((cars) => loadCarsSuccess({ cars })),
     catchError((error: HttpErrorResponse) =>
       of(loadCarsFailure({ errors: error }))
+    )
+  ));
+
+  public filteredCars$ = createEffect(() => this.actions$.pipe(
+    ofType(filterCar),
+    switchMap(({ filterParams }) => this.carService.filteredCars(filterParams)),
+    map((filteredCars) => filterCarSuccess({ filteredCars })),
+    catchError((error: HttpErrorResponse) =>
+      of(filterCarFailure({ errors: error }))
     )
   ));
 
