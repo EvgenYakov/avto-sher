@@ -2,10 +2,10 @@
 @import "mixins";
 
 :host ::ng-deep p-button .p-component {
-  background-color: #F20519;
+  background-color: #f20519;
 }
 
-:host  ::ng-deep .field {
+:host ::ng-deep .field {
   .control-wrapper {
     margin-bottom: 20px;
   }
@@ -16,7 +16,6 @@
   height: 100%;
 
   .header {
-
     &__label {
       font-weight: 600;
       font-size: 24px;
@@ -42,7 +41,7 @@
       }
 
       .confidentiality {
-        color: $blue-color;
+        color: $link-color;
         cursor: pointer;
       }
     }
@@ -52,11 +51,10 @@
       margin-top: 58.5px;
 
       .back-link {
-        color: $blue-color;
+        color: $link-color;
         cursor: pointer;
-        font-size: 14px
+        font-size: 14px;
       }
     }
   }
-
 }

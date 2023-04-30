@@ -53,6 +53,7 @@ export const deleteCar = createAction(
 
 export const deleteCarSuccess = createAction(
   CarsListActions.DELETE_CAR_SUCCESS,
+  props<{ carId: number }>()
 );
 
 export const deleteCarFailure = createAction(

@@ -43,6 +43,6 @@ export const carsListReducer = createReducer(
     adapter.addOne(action.car, { ...state, isLoading: false })
   )),
   on(deleteCarSuccess, (state, action) => (
-    adapter.removeOne(action.id, { ...state, isLoading: false })
+    adapter.removeOne(action.carId, { ...state, isLoading: false })
   )),
 )

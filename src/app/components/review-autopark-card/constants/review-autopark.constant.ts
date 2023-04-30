@@ -2,10 +2,11 @@ import { ReviewAutopark } from '@models';
 
 export const reviewAutoConstant: ReviewAutopark = {
   autoMark: 'BMW',
-  avatarPath: 'assets/test-img.jpg',
-  userFio: 'Николай Нагорных',
+  avatarPath: 'https://i.imgur.com/4paxKUC.jpeg',
+  userFio: 'Виктор Иванов',
   userStatus: 'Водитель',
   ratingValue: 2.1,
-  commentText: 'Хорошая машина',
+  commentText:
+    'Хороший автомобиль, арендовал его, все понравилось! Хороший автомобиль, арендовал его, все понравилось! Хороший автомобиль, арендовал его, все понравилось! Хороший автомобиль, арендовал его, все понравилось!',
   date: '2 ноября 2022',
 };

@@ -2,121 +2,106 @@
 @import "colors";
 
 .header {
-  @include media-laptop() {
-    height: 8.2rem;
-  }
-
-  @include media-l() {
-    height: 7rem;
-  }
-
-  width: 100%;
-  height: 9.6rem;
-  overflow: hidden;
-  border-bottom: 1px solid #AEAEAE;
+  border-bottom: 1px solid $light-text-color;
 
   &__first-level {
     @include flexMix(row, center, space-between);
 
-    @include media-laptop() {
-      height: 50px;
+    padding: 1.5rem 0;
+  }
 
-      .logo img {
-        width: 120px;
-      }
-    }
+  &__user-panel {
+    @include flexMix(row, center, space-between);
+
+    gap: 1rem;
+  }
+
+  &__hamburger {
+    display: none;
 
     @include media-l() {
-      height: 40px;
-
-      .logo img {
-        width: 100px;
-        margin-left: -0.6rem;
-      }
-
-      .login {
-        font-size: 13px;
-      }
-    }
-
-    max-width: 80%;
-    height: 66px;
-    margin: 0 auto;
-
-    .logo {
-      margin-left: 0.6rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .login {
-      font-weight: bold;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .icons > i {
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .icons i:not(:last-child) {
-      margin-right: 1.5rem;
+      display: block;
     }
   }
 
-  &__second-level {
+  &__nav-wrapper {
+    width: 100%;
+    background-color: $dark-bg-color;
+  }
+}
+
+.main-nav {
+  position: relative;
+  left: -2rem;
+  padding: 1rem 0;
+
+  @include media-xl() {
+    left: -1rem;
+  }
+
+  @include media-l() {
+    display: none;
+  }
+
+  &__list {
     @include flexMix(row, center, flex-start);
-    @include media-laptop() {
-      font-size: 14px;
-      height: 3rem;
-    }
-
-    @include media-l() {
-      font-size: 11px;
-      height: 2.5rem;
-    }
-
-    padding: 0 10%;
-    height: 3.125rem;
-    font-weight: 600;
-
-    .bg-gray {
-      height: 100%;
-    }
   }
 
-  &__third-level {
-    @include media-laptop() {
-      font-size: 14px;
+  &__link {
+    color: var(--primary-color-text);
+    padding: 1rem 2rem;
+
+    @include media-xl() {
+      padding: 1rem;
     }
-    @include media-l() {
-      font-size: 12px;
-    }
 
-    display: flex;
-    align-items: center;
-
-    max-width: 80%;
-    margin: 0 auto;
-
-    height: 35px;
-
-    .location {
-      @include media-l() {
-        font-size: 12px;
-        margin-bottom: 6px;
-      }
-      margin-left: auto;
+    &:hover {
+      background-color: $dark-active-color;
     }
   }
 }
 
-.black {
-  background-color: $black-color;
-  color: $white-color
+.secondary-nav {
+  @include flexMix(row, center, space-between);
+
+  padding: 1rem 0;
+
+  @include media-l() {
+    display: none;
+  }
+
+  &__list {
+    @include flexMix(row, center, flex-start);
+
+    gap: 3rem;
+  }
+
+  &__link:hover {
+    color: var(--primary-color);
+  }
+
+  &__location {
+    @include flexMix(row, center, flex-start);
+
+    gap: 0.5rem;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.mobile-nav {
+  &__list {
+    @include flexMix(column, center, flex-start);
+
+    gap: 1rem;
+  }
+
+  &__location {
+    @include flexMix(row, center, flex-start);
+
+    gap: 0.5rem;
+    color: var(--primary-color);
+  }
 }
