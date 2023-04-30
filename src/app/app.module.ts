@@ -9,13 +9,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { appReducers, AuthEffects } from '@store';
+import { appReducers, AuthEffects, CarListEffects, CarProfileEffects } from '@store';
 import { environment } from '@environments/environment';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
-import { CarListEffects } from '../store/car';
-import { CarProfileEffects } from '../store/car/effects/car-profile.effects';
+import { SpinnerModule } from './components/spinner/spinner.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,6 +40,7 @@ import { CarProfileEffects } from '../store/car/effects/car-profile.effects';
       CarListEffects,
       CarProfileEffects
     ]),
+    SpinnerModule
   ],
   providers: [
     AuthGuard,
@@ -57,4 +57,5 @@ import { CarProfileEffects } from '../store/car/effects/car-profile.effects';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
