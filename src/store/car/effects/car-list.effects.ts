@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CarService } from '../../../app/services/http/car.service';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+
+import { CarService } from '@services';
 import {
   createCar,
   createCarFailure,

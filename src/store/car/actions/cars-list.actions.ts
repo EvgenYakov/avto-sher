@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CarCard } from '../interfaces/car.interface';
-import { CarProfile } from '../interfaces/car-profile.interface';
+import { AutoCard, AutoProfile } from '@models';
 
 export enum CarsListActions {
   LOAD_CARS = '[CAR] Get autopark`s cars',
@@ -23,7 +22,7 @@ export const loadCars = createAction(
 
 export const loadCarsSuccess = createAction(
   CarsListActions.LOAD_CARS_SUCCESS,
-  props<{ cars: CarCard[] }>()
+  props<{ cars: AutoCard[] }>()
 );
 
 export const loadCarsFailure = createAction(
@@ -33,12 +32,12 @@ export const loadCarsFailure = createAction(
 
 export const createCar = createAction(
   CarsListActions.CREATE_CAR,
-  props<{ newCar: CarProfile }>()
+  props<{ newCar: AutoProfile }>()
 );
 
 export const createCarSuccess = createAction(
   CarsListActions.CREATE_CAR_SUCCESS,
-  props<{ car: CarProfile }>()
+  props<{ car: AutoProfile }>()
 );
 
 export const createCarFailure = createAction(

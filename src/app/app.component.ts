@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { loadCars } from '../store/car';
-import { loadCar } from '../store/car/actions/car-profile.actions';
+import { loadCars } from '@store';
+import { loadCar } from '@store';
 
 @Component({
   selector: 'app-root',

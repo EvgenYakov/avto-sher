@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { AutoCard } from '@models';
+import { AutoProfile } from '@models';
 import { AUTO_CARD } from '../../components/auto-card/constants/auto-card.constants';
 import { RESPONSIVE_OPTIONS } from './constants/responsive-options.constants';
 import { ResponsiveOption } from './interfaces/responsive-option.interface';
@@ -12,7 +12,7 @@ import { ResponsiveOption } from './interfaces/responsive-option.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoDetailedComponent {
-  @Input() public autoCard: AutoCard = AUTO_CARD;
+  @Input() public autoCard: AutoProfile = AUTO_CARD;
 
   public images: string[] = AUTO_CARD.pathsOfImages;
   public responsiveOptions: ResponsiveOption[] = RESPONSIVE_OPTIONS;

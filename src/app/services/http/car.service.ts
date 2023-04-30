@@ -1,21 +1,20 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '@services';
 import { Observable, of } from 'rxjs';
-import { CarCard } from '../../../store/car/interfaces/car.interface';
+
+import { BaseService } from './base.service';
 import { carData, carsData } from '@test-data';
-import { CarProfile } from '../../../store/car/interfaces/car-profile.interface';
-import { HttpStatusCode } from '@angular/common/http';
+import { AutoCard, AutoProfile } from '@models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService extends BaseService {
 
-  public getCars(autoparkId: number): Observable<CarCard[]> {
+  public getCars(autoparkId: number): Observable<AutoCard[]> {
     return of(carsData);
   }
 
-  public createCar(carNew: CarProfile, autoparkId: number): Observable<CarProfile> {
+  public createCar(carNew: AutoProfile, autoparkId: number): Observable<AutoProfile> {
     return of(carData);
   }
 
@@ -23,7 +22,7 @@ export class CarService extends BaseService {
     return of(1);
   }
 
-  public getCarProfile(carId: number): Observable<CarProfile> {
+  public getCarProfile(carId: number): Observable<AutoProfile> {
     return of(carData);
   }
 

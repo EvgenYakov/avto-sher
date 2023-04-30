@@ -1,17 +1,8 @@
-export interface AutoCard {
-  id: string;
-  title: string;
-  avatarPath: string;
-  year: number;
-  autopark: string;
-  location: string;
-  price: number;
-  conditions: string[];
+export interface AutoProfile extends AutoCard {
   additional: string[];
   viewsCounter: number;
   pathsOfImages: string[];
   daysOfWork: string[];
-  characteristics: AutoCharacteristics;
 }
 
 export interface AutoCharacteristics {
@@ -21,4 +12,14 @@ export interface AutoCharacteristics {
   fare: string;
 }
 
-
+export interface AutoCard {
+  id: string;
+  title: string;
+  avatarPath: string;
+  year: number;
+  autopark: string;
+  location: string;
+  price: number;
+  conditions: string[];
+  characteristics: AutoCharacteristics;
+}

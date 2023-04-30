@@ -1,7 +1,7 @@
 import { EntityState } from '@ngrx/entity';
-import { CarCard } from '../interfaces/car.interface';
+import { AutoCard } from '@models';
 
-export interface CarsListState extends EntityState<CarCard> {
+export interface CarsListState extends EntityState<AutoCard> {
   isLoading: boolean;
   error: string | null;
 }

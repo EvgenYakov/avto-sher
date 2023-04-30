@@ -1,7 +1,7 @@
-import { CarsListState } from '../state/cars-list.state';
+import { CarsListState } from '@store';
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
-import { CarCard } from '../interfaces/car.interface';
+
 import {
   createCar,
   createCarFailure,
@@ -12,9 +12,10 @@ import {
   loadCars,
   loadCarsFailure,
   loadCarsSuccess
-} from '../actions/cars-list.actions';
+} from '@store';
+import { AutoCard } from '@models';
 
-export const adapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>({});
+export const adapter: EntityAdapter<AutoCard> = createEntityAdapter<AutoCard>({});
 
 export const initialState: CarsListState = adapter.getInitialState({
   isLoading: false,
