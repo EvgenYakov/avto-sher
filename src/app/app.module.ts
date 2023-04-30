@@ -14,6 +14,8 @@ import { environment } from '@environments/environment';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
+import { CarListEffects } from '../store/car';
+import { CarProfileEffects } from '../store/car/effects/car-profile.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +36,11 @@ import { AuthGuard } from './services/guards/auth.guard';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([
+      AuthEffects,
+      CarListEffects,
+      CarProfileEffects
+    ]),
   ],
   providers: [
     AuthGuard,

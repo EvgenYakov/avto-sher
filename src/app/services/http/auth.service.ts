@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { AuthResponse } from '@models';
 import { BaseService } from './base.service';
-import { LoginDto } from '../../modules/auth/models/login-form.interface';
-import { RegisterDto } from '../../modules/auth/models/registration-form.interface';
+import { LoginDto } from '../../modules';
+import { RegisterDto } from '../../modules';
 
 @Injectable({
   providedIn: 'root'
