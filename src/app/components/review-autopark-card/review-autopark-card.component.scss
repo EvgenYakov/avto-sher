@@ -68,6 +68,6 @@
   }
 
   &__text {
-    color: $secondary-light-text-color;
+    color: var(--text-color-secondary);
   }
 }

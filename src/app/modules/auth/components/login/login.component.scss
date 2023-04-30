@@ -3,7 +3,7 @@
 
 :host ::ng-deep p-button .p-component {
   width: 100%;
-  background-color: #F20519;
+  background-color: #f20519;
 }
 
 :host ::ng-deep {
@@ -33,7 +33,7 @@
     }
 
     &__forget-psw {
-      color: $blue-color;
+      color: $link-color;
       cursor: pointer;
     }
   }
@@ -45,7 +45,7 @@
       margin-bottom: 18px;
 
       .redirect {
-        color: $blue-color;
+        color: $link-color;
         cursor: pointer;
       }
     }
