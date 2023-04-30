@@ -14,6 +14,7 @@ import { environment } from '@environments/environment';
 import { JwtInterceptor } from './services/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './services/interceptors/error.interceptor';
 import { AuthGuard } from './services/guards/auth.guard';
+import { CarListEffects } from '../store/car';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { AuthGuard } from './services/guards/auth.guard';
     }),
     EffectsModule.forRoot([
       AuthEffects,
+      CarListEffects
     ]),
   ],
   providers: [
