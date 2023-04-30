@@ -10,3 +10,14 @@ export interface FilterForm {
   maxPrice: FormControl<number | null>;
   additionalOptions: FormControl<string[] | null>;
 }
+
+export interface FilterParams {
+  fare: string;
+  brand: string;
+  model: string;
+  fuel: string;
+  gearbox: string;
+  minPrice: number;
+  maxPrice: number;
+  additionalOptions: string[];
+}

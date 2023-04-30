@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AutoCard, AutoProfile } from '@models';
+import { AutoCard, AutoProfile, FilterParams } from '@models';
 
 export enum CarsListActions {
   LOAD_CARS = '[CAR] Get autopark`s cars',
@@ -13,6 +13,10 @@ export enum CarsListActions {
   DELETE_CAR = '[CAR] Add new car in autopark',
   DELETE_CAR_SUCCESS = '[CAR] Add new car in autopark success',
   DELETE_CAR_FAILURE = '[CAR] Add new car in autopark failure',
+
+  FILTER_CAR_REQUEST = '[CAR] Add new car in autopark',
+  FILTER_CAR_REQUEST_SUCCESS = '[CAR] Add new car in autopark success',
+  FILTER_CAR_REQUEST_FAILURE = '[CAR] Add new car in autopark failure',
 }
 
 export const loadCars = createAction(
@@ -57,5 +61,20 @@ export const deleteCarSuccess = createAction(
 
 export const deleteCarFailure = createAction(
   CarsListActions.DELETE_CAR_FAILURE,
+  props<{ errors: any }>()
+);
+
+export const filterCar = createAction(
+  CarsListActions.FILTER_CAR_REQUEST,
+  props<{ filterParams: FilterParams }>()
+);
+
+export const filterCarSuccess = createAction(
+  CarsListActions.FILTER_CAR_REQUEST_SUCCESS,
+  props<{ filteredCars: AutoCard[] }>()
+);
+
+export const filterCarFailure = createAction(
+  CarsListActions.FILTER_CAR_REQUEST_FAILURE,
   props<{ errors: any }>()
 );
