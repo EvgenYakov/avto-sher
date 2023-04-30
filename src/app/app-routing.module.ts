@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   {
     path: 'main',
     loadChildren: () =>
@@ -15,7 +16,12 @@ const routes: Routes = [
       userType: 'not-logged-in',
     },
   },
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  {path: '**', redirectTo: '/not-found'},
+  {
+    path: 'not-found',
+    loadChildren: () =>
+      import('./modules/not-found/not-found.module').then((m) => m.NotFoundModule),
+  },
 ];
 
 @NgModule({
