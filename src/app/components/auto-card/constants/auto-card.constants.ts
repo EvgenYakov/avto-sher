@@ -1,6 +1,6 @@
-import { AutoCard } from '@models';
+import { AutoProfile } from '@models';
 
-export const AUTO_CARD: AutoCard = {
+export const AUTO_CARD: AutoProfile = {
   id: '1',
   title: 'BMW 5er',
   avatarPath: 'https://i.imgur.com/qFCyShm.jpeg',

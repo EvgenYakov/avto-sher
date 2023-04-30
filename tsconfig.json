@@ -28,7 +28,8 @@
       "@layout": ["./src/app/layout/index"],
       "@services": ["./src/app/services/index"],
       "@store": ["./src/store/index"],
-      "@environments/*": ["./src/environments/*"]
+      "@test-data": ["./src/test-data/index"],
+      "@environments/*": ["./src/environments/*"],
     }
   },
   "angularCompilerOptions": {
