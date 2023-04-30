@@ -1,22 +1,19 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+
 import {
-  AUTOPARK_COLUMN, COPYRIGHT_TEXT,
+  AUTOPARK_COLUMN,
   DRIVER_COLUMN,
   INFO_COLUMN,
-  LEGAL_SERVICE_COLUMN
-} from './constants/footer.constant';
+} from './constants/footer-navigation.constants';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FooterComponent{
-
-  public driver = DRIVER_COLUMN;
-  public autopark = AUTOPARK_COLUMN;
-  public info = INFO_COLUMN;
-  public legalService = LEGAL_SERVICE_COLUMN;
-  public copyrightText = COPYRIGHT_TEXT;
+export class FooterComponent {
+  public driverNav = DRIVER_COLUMN;
+  public autoparkNav = AUTOPARK_COLUMN;
+  public infoNav = INFO_COLUMN;
 }

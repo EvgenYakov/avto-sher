@@ -1,0 +1,11 @@
+<ng-container *ngIf="!isAuthorized; else userPanel">
+  <div [routerLink]="authLink" class="link">Войти</div>
+</ng-container>
+
+<ng-template #userPanel>
+  <div class="icons">
+    <i class="pi pi-heart icons__icon link"></i>
+    <i class="pi pi-comment icons__icon link"></i>
+    <i class="pi pi-user icons__icon link"></i>
+  </div>
+</ng-template>

@@ -45,7 +45,7 @@ export class CarListEffects {
   public deleteCar$ = createEffect(() => this.actions$.pipe(
     ofType(deleteCar),
     switchMap(({ carId }) => this.carService.deleteCar(carId)),
-    map(() => deleteCarSuccess()),
+    map((carId) => deleteCarSuccess({ carId })),
     catchError((error: HttpErrorResponse) =>
       of(deleteCarFailure({ errors: error }))
     )

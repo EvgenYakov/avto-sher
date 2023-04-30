@@ -19,10 +19,8 @@ export class AutoFilterComponent implements OnInit {
   public fareOptions: DropdownOption[] = FARE_OPTIONS;
   public additionalOptions: DropdownOption[] = ADDITIONAL_OPTIONS;
   public filterForm: FormGroup<FilterForm>;
-  public defaultFareOption: DropdownOption;
 
   ngOnInit(): void {
-    this.defaultFareOption = this.fareOptions[0];
     this.filterForm = this.initializeForm();
   }
 
@@ -39,7 +37,7 @@ export class AutoFilterComponent implements OnInit {
 
   private initializeForm(): FormGroup<FilterForm> {
     return new FormGroup({
-      fare: new FormControl(this.defaultFareOption.value),
+      fare: new FormControl(),
       brand: new FormControl(),
       model: new FormControl(),
       fuel: new FormControl(),

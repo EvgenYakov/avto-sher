@@ -21,7 +21,8 @@ const carBlueprintFactory: BlueprintFactory<CarProfile> = () => ({
   location: (): string => faker.datatype.string(),
   price: (): number => faker.datatype.number(),
   year: (): number => faker.datatype.number(),
-  features: (): string[] => Array.from({ length: 4 }, () => faker.lorem.word())
+  features: (): string[] => Array.from({ length: 4 }, () => faker.lorem.word()),
+  photos: (): string[] => Array.from({ length: 4 }, () => faker.image.image())
 });
 
 export const carsBuilder = createBlueprintBuilder(carsBlueprintFactory());

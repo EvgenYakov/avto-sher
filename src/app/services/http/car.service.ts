@@ -19,8 +19,8 @@ export class CarService extends BaseService {
     return of(carData);
   }
 
-  public deleteCar(carId: number): Observable<HttpStatusCode> {
-    return of(HttpStatusCode.Ok);
+  public deleteCar(carId: number): Observable<number> {
+    return of(1);
   }
 
   public getCarProfile(carId: number): Observable<CarProfile> {
