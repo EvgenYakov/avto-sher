@@ -10,7 +10,7 @@ import { AutoparkCard, RatingForm } from '@models';
 import { autoparkCard } from './constants/autopar.constant';
 
 @Component({
-  selector: 'app-autopark-card',
+  selector: 'app-autopark-profile-card',
   templateUrl: './autopark-card.component.html',
   styleUrls: ['./autopark-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -12,7 +12,7 @@ export enum AppRoutes {
   DRIVER_FULL_DOCUMENTATION = '/driver-full-documentation',
   AUTOPARK_FULL_DOCUMENTATION = '/autopark-full-documentation',
   HOW_ADD_AUTOPARK = '/how-add-autopark',
-  ADD_AUTOPARK = '', // registration or autopark account
+  ADD_AUTOPARK = '', // registration or autopark-profile account
   CONDITIONS = '/conditions',
   TEAM = '/team',
 }

@@ -10,7 +10,7 @@ import { reviewAutoConstant } from './constants/review-autopark.constant';
 import { ReviewAutopark, RatingForm } from '@models';
 
 @Component({
-  selector: 'app-review-autopark-card',
+  selector: 'app-review-autopark-profile-card',
   templateUrl: './review-autopark-card.component.html',
   styleUrls: ['./review-autopark-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
