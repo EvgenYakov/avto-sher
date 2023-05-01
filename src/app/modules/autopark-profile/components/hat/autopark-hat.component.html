@@ -1,0 +1,35 @@
+<div class="hat-wrapper">
+  <div class="block1">
+    <div class="logo-wrapper">
+      <img [src]="hatData.logo" alt="автопарк logo">
+    </div>
+    <div class="info">
+      <div class="info__status" [ngStyle]="{'color':hatData.status.color}">
+        <div class="icon">
+          <img [src]="hatData.status.icon" alt="кионка статуса автопарка">
+        </div>
+        <div class="status-label">
+          <span>{{hatData.status.label | titlecase}}</span>
+        </div>
+      </div>
+      <div class="info__name title">
+        {{hatData.autoparkName}}
+      </div>
+
+      <div class="info__auto-count">
+        {{hatData.autoCount}} автомобилей
+      </div>
+    </div>
+  </div>
+  <div class="block2">
+    <div class="sub-panels">
+      <div>
+        <app-sub-info-panel [title]="hatData.rating + '/5'" subtitle="Рейтинг автопарка"></app-sub-info-panel>
+      </div>
+      <app-sub-info-panel [title]="hatData.ordersCount+''" subtitle="Выполненных заказов"></app-sub-info-panel>
+    </div>
+    <div class="favorite">
+      <i class="pi" [ngClass]="{'pi-heart': !hatData.isFavorite, 'pi-heart-fill': hatData.isFavorite}"></i>
+    </div>
+  </div>
+</div>

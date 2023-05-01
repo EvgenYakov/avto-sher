@@ -1,4 +1,7 @@
 export enum AutoparkStatus {
-  PREMIUM = 'Premium',
-  DEFAULT = 'Default'
+  TOP = 'топ',
+  CHECKED = 'проверенные',
+  PREMIUM = 'премиум',
+  DEFAULT = 'обычный',
+  NEW = 'новый',
 }

@@ -14,11 +14,17 @@ const routes: Routes = [
         component: StartPageComponent,
       },
       {
-        //for test
         path: 'auto-detailed',
         loadChildren: () =>
           import('../../modules/auto-detailed/auto-detailed.module').then(
             (m) => m.AutoDetailedModule
+          ),
+      },
+      {
+        path: 'autopark/:id',
+        loadChildren: () =>
+          import('../../modules/autopark-profile/autopark-profile.module').then(
+            (m) => m.AutoparkProfileModule
           ),
       },
     ],

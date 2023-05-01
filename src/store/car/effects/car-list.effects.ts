@@ -45,7 +45,7 @@ export class CarListEffects {
     )
   ));
 
-  //instead of 1 need to get current autopark from store and put id from this autopark
+  //instead of 1 need to get current autopark-profile from store and put id from this autopark-profile
   public createCar$ = createEffect(() => this.actions$.pipe(
     ofType(createCar),
     switchMap(({ newCar }) => this.carService.createCar(newCar, 1)),
