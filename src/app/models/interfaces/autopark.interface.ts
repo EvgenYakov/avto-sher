@@ -1,7 +1,14 @@
+import { AutoCard } from './auto.interface';
+
 export interface AutoparkCard {
-  avatarPath: string;
+  logo: string;
   autoparkName: string;
   autoCount: number;
   ratingCount: number;
   isPremium: boolean
+}
+
+export interface AutoparkProfile extends AutoparkCard{
+  cars: AutoCard[];
+
 }

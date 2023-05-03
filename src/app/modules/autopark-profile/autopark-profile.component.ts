@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { autoparkHatData } from '@test-data';
+import { autoparkHatData, carsData } from '@test-data';
 
 @Component({
   selector: 'app-autopark-profile',
@@ -10,6 +10,7 @@ import { autoparkHatData } from '@test-data';
 export class AutoparkProfileComponent implements OnInit {
 
   public mockAutoparkHat = autoparkHatData;
+  public mockCardsCar = carsData;
 
   constructor() {
   }
