@@ -2,60 +2,80 @@
 @import "colors";
 
 :host ::ng-deep {
-  .p-card {
-    @include media-xl() {
-      max-width: 300px;
-    }
-  }
 
   .p-card-content {
     @include flexMix(row, stretch, space-between);
 
-    padding: 1rem;
-    gap: 2rem;
-
     @include media-xl() {
+      padding: 0.5rem;
+      gap: 1.5rem;
+    }
+
+    @include media-l() {
       flex-direction: column;
     }
+
+    padding: 1rem;
+    gap: 2rem;
   }
 
   .p-button {
+    @include media-xl() {
+      width: 100%;
+      height: 1.25rem;
+      font-size: 12px;
+    }
     width: 100%;
   }
 }
 
 .auto-card {
   &__img {
+    @include media-xl() {
+      height: 200px;
+      width: 200px;
+    }
+
+    @include media-l() {
+      width: 100%;
+      height: 200px;
+    }
+
     width: 320px;
     height: 230px;
+    object-fit: cover;
     border-radius: 1rem;
-
-    @include media-xl() {
-      width: 100%;
-      height: 180px;
-    }
   }
 
   &__content {
     @include flexMix(column, stretch, space-between);
 
-    flex-grow: 1;
-
     @include media-xl() {
-      align-items: center;
-      text-align: center;
-      gap: 2rem;
+      font-size: 14px;
     }
+
+    flex-grow: 1;
   }
 
   &__row {
     @include flexMix(column, stretch, space-between);
 
-    gap: 1rem;
-
     @include media-xl() {
-      align-items: center;
+      gap: 0.7rem;
+
+      &:last-child {
+        gap: 0.2rem;
+      }
     }
+
+    @include media-l() {
+
+      &:last-child {
+        margin-top: 1rem;
+      }
+    }
+
+    gap: 1rem;
   }
 
   &__year {
@@ -77,24 +97,38 @@
   }
 
   &__characteristics {
-    @include flexMix(column, stretch, space-between);
+    @include flexMix(сolumn, stretch, space-between);
 
-    gap: 0.2rem;
+    width: 12.5rem;
+
+    .block > * {
+      margin-top: 0.625rem;
+    }
   }
 
   &__additional {
     @include flexMix(column, stretch, space-between);
 
-    width: 350px;
+    @include media-xl() {
+      height: 12.5rem;
+      font-size: 14px;
+      padding: 1rem;
+      width: 12.5rem;
+    }
+
+    @include media-l() {
+      width: 100%;
+    }
+
+    width: 21.875rem;
     padding: 2rem;
     border: 1px solid $light-text-color;
     border-radius: 1rem;
+  }
 
+  &__price {
     @include media-xl() {
-      width: 100%;
-      row-gap: 1rem;
-      padding: 0;
-      border: none;
+      font-size: 18px;
     }
   }
 

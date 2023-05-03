@@ -6,7 +6,9 @@
   <div class="tabs">
     <p-tabView>
       <p-tabPanel header="Автомобили">
-        авто
+        <app-load-more>
+          <app-auto-card *ngFor="let auto of mockCardsCar" [autoCard]="auto"></app-auto-card>
+        </app-load-more>
       </p-tabPanel>
       <p-tabPanel header="Профиль">
         авто

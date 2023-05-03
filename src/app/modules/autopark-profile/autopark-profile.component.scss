@@ -1,5 +1,15 @@
-:host ::ng-deep .p-tabview .p-tabview-nav {
-  width: fit-content;
+:host ::ng-deep {
+  .p-tabview .p-tabview-nav {
+    width: fit-content;
+  }
+
+  .p-tabview .p-tabview-panels {
+    padding: 1.25rem 0;
+  }
+
+  .p-tabview-nav-content {
+    margin-bottom: 60px;
+  }
 }
 
 .container {
