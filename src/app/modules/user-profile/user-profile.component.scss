@@ -119,11 +119,7 @@
     }
   }
 
-  &__img {
-    width: 200px;
-    height: 200px;
-    border-radius: 1rem;
-
+  &__avatar {
     @include media-s() {
       align-self: center;
     }
