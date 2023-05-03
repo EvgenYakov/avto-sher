@@ -32,11 +32,29 @@
           <div class="card__header">
             <div class="card__header-wrapper">
               <div class="subtitle">Информация о себе</div>
-              <i class="pi pi-user-edit card__icon-link link"></i>
+              <i
+                *ngIf="!isEditMode"
+                class="pi pi-user-edit card__icon-link link"
+                (click)="isEditMode = true"
+              ></i>
             </div>
-            <div class="small-text">
+            <div *ngIf="!isEditMode" class="card__user-description small-text">
               {{ userProfileInfo.description || "Заполните информацию о себе" }}
             </div>
+
+            <form
+              *ngIf="isEditMode"
+              [formGroup]="userProfileInfoForm"
+              class="card__user-description-form"
+            >
+              <textarea
+                [formControlName]="'description'"
+                pInputTextarea
+              ></textarea>
+              <a class="card__link link" (click)="saveDescriptionInfo()">
+                Сохранить
+              </a>
+            </form>
           </div>
           <a class="card__link link">Верификация</a>
         </div>
