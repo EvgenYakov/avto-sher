@@ -14,6 +14,13 @@ const routes: Routes = [
         component: StartPageComponent,
       },
       {
+        path: 'user-profile',
+        loadChildren: () =>
+          import('../../modules/user-profile/user-profile.module').then(
+            (m) => m.UserProfileModule
+          ),
+      },
+      {
         //for test
         path: 'auto-detailed',
         loadChildren: () =>
