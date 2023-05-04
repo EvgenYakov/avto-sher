@@ -89,6 +89,10 @@
   }
 
   .favorite {
+    @include media-l() {
+      order: -1;
+    }
+
     margin-left: auto;
     color: var(--surface-50);
 
