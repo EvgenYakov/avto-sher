@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { AutoCard, AutoProfile } from '@models';
+import { AutoCard } from '@models';
 import { AUTO_CARD } from './constants/auto-card.constants';
 
 @Component({
