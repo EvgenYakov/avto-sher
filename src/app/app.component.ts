@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { loadCars } from '@store';
-import { loadCar } from '@store';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +6,6 @@ import { loadCar } from '@store';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AppComponent implements OnInit {
-  constructor(
-    private store: Store
-  ) {
-  }
-
-  public ngOnInit(): void {
-    this.store.dispatch(loadCars({ autoparkId: 1 }));
-    this.store.dispatch(loadCar({ carId: 1 }));
-  }
+export class AppComponent  {
 
 }

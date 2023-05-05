@@ -10,7 +10,7 @@ import { AutoCard, AutoProfile, FilterParams } from '@models';
 })
 export class CarService extends BaseService {
 
-  public getCars(autoparkId: number): Observable<AutoCard[]> {
+  public getListCars(): Observable<AutoCard[]> {
     return of(carsData);
   }
 

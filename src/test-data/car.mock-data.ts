@@ -3,7 +3,7 @@ import { BlueprintFactory, createBlueprintBuilder } from '@ngxp/builder';
 import { AutoCard, AutoCharacteristics, AutoProfile } from '@models';
 
 const carsBlueprintFactory: BlueprintFactory<AutoCard> = () => ({
-  id: (): string => faker.datatype.string(),
+  id: (): number => faker.datatype.number(),
   title: (): string => faker.lorem.word(),
   avatarPath: (): string => faker.image.image(),
   year: (): number => faker.datatype.number(),
@@ -21,7 +21,7 @@ const carsBlueprintFactory: BlueprintFactory<AutoCard> = () => ({
 });
 
 const carBlueprintFactory: BlueprintFactory<AutoProfile> = () => ({
-  id: (): string => faker.datatype.string(),
+  id: (): number => faker.datatype.number(),
   title: (): string => faker.lorem.word(),
   avatarPath: (): string => faker.image.image(),
   year: (): number => faker.datatype.number(),
