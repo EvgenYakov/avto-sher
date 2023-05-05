@@ -1,57 +1,42 @@
 import {
   CarsListState,
-  createCar,
   createCarFailure,
   createCarSuccess,
-  deleteCar,
   deleteCarFailure,
   deleteCarSuccess,
-  filterCar,
   filterCarFailure,
   filterCarSuccess,
-  loadCars,
-  loadCarsFailure,
-  loadCarsSuccess
+  loadAllCarsSuccess,
 } from '@store';
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { AutoCard, FilterParams } from '@models';
 
-export const adapter: EntityAdapter<AutoCard> = createEntityAdapter<AutoCard>({});
+export const autoCardAdapter: EntityAdapter<AutoCard> = createEntityAdapter<AutoCard>({});
 
-export const initialState: CarsListState = adapter.getInitialState({
-  isLoading: false,
+export const initialState: CarsListState = autoCardAdapter.getInitialState({
   filters: {} as FilterParams,
   error: null
 });
 
 export const carsListReducer = createReducer(
   initialState,
-  on(loadCars,
-    createCar,
-    deleteCar,
-    filterCar, (state) => ({
-      ...state,
-      isLoading: true
-    })),
-  on(loadCarsFailure,
-    createCarFailure,
+  on(createCarFailure,
     deleteCarFailure,
     filterCarFailure, (state, action) => ({
       ...state,
-      isLoading: false,
       error: action.errors
     })),
-  on(loadCarsSuccess, (state, action) => (
-    adapter.addMany(action.cars, { ...state, isLoading: false })
+  on(loadAllCarsSuccess, (state, action) => (
+    autoCardAdapter.addMany(action.cars, { ...state })
   )),
   on(createCarSuccess, (state, action) => (
-    adapter.addOne(action.car, { ...state, isLoading: false })
+    autoCardAdapter.addOne(action.car, { ...state })
   )),
   on(deleteCarSuccess, (state, action) => (
-    adapter.removeOne(action.carId, { ...state, isLoading: false })
+    autoCardAdapter.removeOne(action.carId, { ...state })
   )),
   on(filterCarSuccess, (state, action) => (
-    adapter.upsertMany(action.filteredCars, { ...state, isLoading: false })
+    autoCardAdapter.upsertMany(action.filteredCars, { ...state })
   )),
 )

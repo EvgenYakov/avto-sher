@@ -1,0 +1,23 @@
+@import "src/theme/mixins";
+
+:host ::ng-deep {
+  .p-tabview .p-tabview-nav {
+    width: fit-content;
+  }
+
+  .p-tabview .p-tabview-panels {
+    padding: 3.75rem 0;
+  }
+
+  .p-tabview-panels {
+    background-color: #F9F9F9;
+  }
+
+  .p-tabview-nav-content {
+    @include combinedMedia();
+  }
+}
+
+.tabs {
+  margin-top: 5.625rem
+}

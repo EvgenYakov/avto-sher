@@ -1,20 +1,17 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { CarsListState } from '../state/cars-list.state';
-import { adapter } from '../reducers/cars-list.reducer';
+import { CarsListState } from '@store';
+import { autoCardAdapter } from '../reducers/cars-list.reducer';
 
-const getCarsState = createFeatureSelector<CarsListState>('cars');
+const carsListFeatureSelector = createFeatureSelector<CarsListState>('carListState');
 
 export const {
-  selectAll: getAllCars,
-} = adapter.getSelectors(getCarsState);
+  selectEntities: selectCarsEntities,
+  selectAll: selectCars,
+} = autoCardAdapter.getSelectors();
 
-export const selectCarsLoading = createSelector(
-  getCarsState,
-  (state: CarsListState) => state.isLoading
-);
+export const getCarsEntities = createSelector(
+  carsListFeatureSelector,
+  selectCars
+)
 
-export const selectCarsError = createSelector(
-  getCarsState,
-  (state: CarsListState) => state.error
-);

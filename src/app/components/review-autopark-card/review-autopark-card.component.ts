@@ -1,27 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { reviewAutoConstant } from './constants/review-autopark.constant';
-import { ReviewAutopark, RatingForm } from '@models';
+import { RatingForm, ReviewAutopark } from '@models';
+import { reviewData } from '@test-data';
 
 @Component({
-  selector: 'app-review-autopark-profile-card',
+  selector: 'app-review-autopark',
   templateUrl: './review-autopark-card.component.html',
   styleUrls: ['./review-autopark-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ReviewAutoparkCardComponent implements OnInit {
-  @Input() reviewModel: ReviewAutopark = reviewAutoConstant;
+  @Input() review: ReviewAutopark = reviewData;
 
   public formGroup: FormGroup<RatingForm>;
 
   public ngOnInit(): void {
-    this.formGroup = this.initializeForm(this.reviewModel.ratingValue);
+    this.formGroup = this.initializeForm(this.review.ratingValue);
   }
 
   private initializeForm(value: number): FormGroup<RatingForm> {

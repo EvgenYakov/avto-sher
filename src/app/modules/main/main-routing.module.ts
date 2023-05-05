@@ -23,8 +23,8 @@ const routes: Routes = [
       {
         path: 'autopark/:id',
         loadChildren: () =>
-          import('../../modules/autopark-profile/autopark-profile.module').then(
-            (m) => m.AutoparkProfileModule
+          import('../autopark-detailed/autopark-detailed.module').then(
+            (m) => m.AutoparkDetailedModule
           ),
       },
     ],

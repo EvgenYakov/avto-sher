@@ -1,0 +1,26 @@
+<div class="hat-wrapper" *ngIf="hatData">
+  <div class="logo-wrapper">
+    <img [src]="hatData.logo" alt="автопарк logo">
+  </div>
+  <div class="info">
+    <div class="info__status" [ngStyle]="{'color':hatData.status.color}">
+      <div class="icon">
+        <img [src]="hatData.status.icon" alt="кионка статуса автопарка">
+      </div>
+      <div class="status-label">
+        <span>{{hatData.status.label | titlecase}} автопарк</span>
+      </div>
+    </div>
+    <div class="info__name title">
+      {{hatData.autoparkName}}
+    </div>
+    <div class="info__sub-panel">
+      <app-sub-info-panel class="panel" [title]="hatData.autoCount+''" subtitle="Автомобилей"></app-sub-info-panel>
+      <app-sub-info-panel class="panel" [title]="hatData.rating + ' / 5'" subtitle="Рейтинг автопарка"></app-sub-info-panel>
+      <app-sub-info-panel class="panel" [title]="hatData.ordersCount+''" subtitle="Выполненных заказов"></app-sub-info-panel>
+    </div>
+  </div>
+  <div class="favorite">
+    <i class="pi" [ngClass]="{'pi-heart': !hatData.isFavorite, 'pi-heart-fill': hatData.isFavorite}"></i>
+  </div>
+</div>

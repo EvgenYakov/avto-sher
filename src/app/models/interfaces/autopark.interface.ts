@@ -1,14 +1,27 @@
+import { AutoparkStatusData } from '../../modules/autopark-detailed/interfaces/autopark-status-data.interface';
 import { AutoCard } from './auto.interface';
+import { ReviewAutopark } from './review.interface';
 
 export interface AutoparkCard {
+  id: number;
   logo: string;
   autoparkName: string;
   autoCount: number;
-  ratingCount: number;
-  isPremium: boolean
+  rating: number;
+  isFavorite: boolean;
 }
 
-export interface AutoparkProfile extends AutoparkCard{
-  cars: AutoCard[];
+export interface AutoparkDetailed extends AutoparkCard {
+  ordersCount: number;
+  status: AutoparkStatusData;
+  address: string;
+  features: string[];
+  bonuses: AutoparkBonus[];
+}
 
+export interface AutoparkBonus {
+  id: number;
+  title: string;
+  icon: string;
+  description: string;
 }
