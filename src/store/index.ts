@@ -1,5 +1,5 @@
 export * from './auth'
 export * from './car'
-export * from './loading'
 export * from './autopark'
+export * from './shared'
 export * from './app-state'

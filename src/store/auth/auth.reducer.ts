@@ -1,8 +1,6 @@
 import {
-  loginRequest,
   loginRequestFailure,
   loginRequestSuccess,
-  registerRequest,
   registerRequestFailure,
   registerRequestSuccess
 } from './auth.actions';
