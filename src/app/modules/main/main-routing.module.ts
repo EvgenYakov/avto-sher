@@ -14,10 +14,10 @@ const routes: Routes = [
         component: StartPageComponent,
       },
       {
-        path: 'auto-detailed',
+        path: 'user-profile',
         loadChildren: () =>
-          import('../../modules/auto-detailed/auto-detailed.module').then(
-            (m) => m.AutoDetailedModule
+          import('../../modules/user-profile/user-profile.module').then(
+            (m) => m.UserProfileModule
           ),
       },
       {
@@ -35,4 +35,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class MainRoutingModule {
+}
