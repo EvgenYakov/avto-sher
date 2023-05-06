@@ -1,31 +1,44 @@
 <div class="container">
   <p-card class="auto-card">
-    <img [src]="autoCard.avatarPath" class="auto-card__img" alt="auto avatar" />
+    <img [src]="autoCard.avatarPath" class="auto-card__img" alt="auto avatar"/>
 
     <div class="auto-card__content">
       <div class="auto-card__row">
         <div class="subtitle">
-          {{ autoCard.title }}
-          <span class="auto-card__year">{{ autoCard.year }}</span>
+          {{ autoCard.title }} <span class="auto-card__year">{{ autoCard.year }}</span>
         </div>
         <div class="auto-card__autopark">Автопарк: {{ autoCard.autopark }}</div>
         <div class="auto-card__location small-text">
-          <i class="auto-card__location-icon pi pi-map-marker"></i
-          >{{ autoCard.location }}
+          <i class="auto-card__location-icon pi pi-map-marker"></i>
+          {{ autoCard.location }}
         </div>
       </div>
 
       <div class="auto-card__row">
         <div>Характеристики</div>
         <div class="auto-card__characteristics">
-          <div class="small-text">
-            Топливо: {{ autoCard.characteristics.fuelType }}
+          <div class="block">
+            <div class="small-text">
+              Топливо:
+            </div>
+            <div class="small-text">
+              Мощность:
+            </div>
+            <div class="small-text">
+              Коробка:
+            </div>
           </div>
-          <div class="small-text">
-            Мощность: {{ autoCard.characteristics.power }} л.с.
-          </div>
-          <div class="small-text">
-            Коробка: {{ autoCard.characteristics.gearboxType }}
+
+          <div class="block">
+            <div class="small-text">
+              {{ autoCard.characteristics.fuelType }}
+            </div>
+            <div class="small-text">
+              {{ autoCard.characteristics.power }} л.с.
+            </div>
+            <div class="small-text">
+              {{ autoCard.characteristics.gearboxType }}
+            </div>
           </div>
         </div>
       </div>

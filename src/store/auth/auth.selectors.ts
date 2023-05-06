@@ -8,11 +8,6 @@ export const selectAuthErrors = createSelector(
   (state) => state.backendErrors
 );
 
-export const selectAuthLoading = createSelector(
-  authFeatureSelector,
-  (state) => state.isLoading
-);
-
 export const selectIsLoggedIn = createSelector(
   authFeatureSelector,
   (state) => state.isAuth

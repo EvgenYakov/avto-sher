@@ -3,23 +3,23 @@
     <div class="review__header">
       <div class="review__user-info">
         <img
-          [src]="reviewModel.avatarPath"
+          [src]="review.avatarPath"
           class="review__avatar"
           alt="user avatar"
         />
 
         <div class="review__header-wrapper">
           <div class="subtitle">
-            {{ reviewModel.userFio }}
+            {{ review.userFio }}
           </div>
           <div class="small-text">
-            {{ reviewModel.userStatus }}
+            {{ review.userStatus }}
           </div>
         </div>
       </div>
 
       <div class="review__header-wrapper review__rating">
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup" class="rating-form">
           <p-rating
             formControlName="defaultValue"
             [cancel]="false"
@@ -27,18 +27,18 @@
           ></p-rating>
         </form>
 
-        <div class="review__date small-text">{{ reviewModel.date }}</div>
+        <div class="review__date small-text">{{ review.date }}</div>
       </div>
     </div>
 
     <div>
       Автомобиль:
-      <span class="review__text"> {{ reviewModel.autoMark }}</span>
+      <span class="review__text"> {{ review.autoMark }}</span>
     </div>
 
     <div>
       Комментарий:
-      <span class="review__text">{{ reviewModel.commentText }}</span>
+      <span class="review__text">{{ review.commentText }}</span>
     </div>
   </p-card>
 </div>

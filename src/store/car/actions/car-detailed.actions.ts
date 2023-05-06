@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { AutoCard, AutoProfile } from '@models';
 
-export enum CarProfileActions {
+export enum CarDetailedActions {
   LOAD_CAR = '[CAR] Get car profile',
   LOAD_CAR_SUCCESS = '[CAR] Get car profile success',
   LOAD_CAR_FAILURE = '[CAR] Get car profile failure',
@@ -20,61 +20,61 @@ export enum CarProfileActions {
 }
 
 export const loadCar = createAction(
-  CarProfileActions.LOAD_CAR,
+  CarDetailedActions.LOAD_CAR,
   props<{ carId: number }>()
 );
 
 export const loadCarSuccess = createAction(
-  CarProfileActions.LOAD_CAR_SUCCESS,
+  CarDetailedActions.LOAD_CAR_SUCCESS,
   props<{ car: AutoProfile }>()
 );
 
 export const loadCarFailure = createAction(
-  CarProfileActions.LOAD_CAR_FAILURE,
+  CarDetailedActions.LOAD_CAR_FAILURE,
   props<{ errors: any }>()
 );
 
 export const addPhoto = createAction(
-  CarProfileActions.ADD_PHOTO,
+  CarDetailedActions.ADD_PHOTO,
   props<{ newPhoto: string }>()
 );
 
 export const addPhotoSuccess = createAction(
-  CarProfileActions.ADD_PHOTO_SUCCESS,
+  CarDetailedActions.ADD_PHOTO_SUCCESS,
   props<{ photo: string }>()
 );
 
 export const addPhotoFailure = createAction(
-  CarProfileActions.ADD_PHOTO_FAILURE,
+  CarDetailedActions.ADD_PHOTO_FAILURE,
   props<{ errors: any }>()
 );
 
 export const deletePhotos = createAction(
-  CarProfileActions.DELETE_PHOTOS,
+  CarDetailedActions.DELETE_PHOTOS,
   props<{ deletedPhotos: string[] }>()
 );
 
 export const deletePhotosSuccess = createAction(
-  CarProfileActions.DELETE_PHOTOS_SUCCESS,
+  CarDetailedActions.DELETE_PHOTOS_SUCCESS,
   props<{ photos: string[] }>()
 );
 
 export const deletePhotosFailure = createAction(
-  CarProfileActions.DELETE_PHOTOS_FAILURE,
+  CarDetailedActions.DELETE_PHOTOS_FAILURE,
   props<{ errors: any }>()
 );
 
 export const changeCarStatus = createAction(
-  CarProfileActions.CHANGE_STATUS_CAR,
+  CarDetailedActions.CHANGE_STATUS_CAR,
   props<{ carId: number; status: string }>()
 );
 
 export const changeCarStatusSuccess = createAction(
-  CarProfileActions.CHANGE_STATUS_SUCCESS,
+  CarDetailedActions.CHANGE_STATUS_SUCCESS,
   props<{ newCar: AutoCard }>()
 );
 
 export const changeCarStatusFailure = createAction(
-  CarProfileActions.CHANGE_STATUS_FAILURE,
+  CarDetailedActions.CHANGE_STATUS_FAILURE,
   props<{ errors: any }>()
 );

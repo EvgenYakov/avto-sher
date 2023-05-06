@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { AutoProfile } from '@models';
-import { AUTO_CARD } from './constants/auto-card.constants';
+import { AutoCard } from '@models';
 
 @Component({
   selector: 'app-auto-card',
@@ -10,5 +9,5 @@ import { AUTO_CARD } from './constants/auto-card.constants';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoCardComponent {
-  @Input() public autoCard: AutoProfile = AUTO_CARD;
+  @Input() public autoCard: AutoCard;
 }
