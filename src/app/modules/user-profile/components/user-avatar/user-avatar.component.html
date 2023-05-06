@@ -1,0 +1,14 @@
+<div class="avatar">
+  <div *ngIf="avatarPath">
+    <img [src]="avatarPath" class="avatar__img" alt="user avatar" />
+    <div class="avatar__controls">
+      <span *ngIf="avatarPath" class="avatar__control link">Изменить</span>
+      <span *ngIf="avatarPath" class="avatar__control link">Удалить</span>
+    </div>
+  </div>
+
+  <div *ngIf="!avatarPath" class="avatar__upload link">
+    <i class="pi pi-camera avatar__upload-icon"></i>
+    <span class="avatar__upload-text">Добавить</span>
+  </div>
+</div>

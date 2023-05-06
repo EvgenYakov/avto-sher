@@ -1,0 +1,203 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-card,
+  .p-card-body,
+  .p-card-content {
+    height: 100%;
+  }
+
+  .p-card-content {
+    padding: 0;
+  }
+
+  .p-inputtextarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
+  }
+}
+
+.profile {
+  &__title {
+    margin-bottom: 2rem;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(2, 112px) repeat(2, 150px);
+    grid-template-areas:
+      "user-card user-card user-card user-card user-card user-card user-info user-info user-info user-info user-info user-info"
+      "user-card user-card user-card user-card user-card user-card user-info user-info user-info user-info user-info user-info"
+      "reviews-about-me reviews-about-me reviews-about-me requests  requests requests favorite-cars favorite-cars favorite-cars favorite-cars settings settings"
+      "orders orders orders my-reviews my-reviews my-reviews favorite-motorpools favorite-motorpools favorite-motorpools favorite-motorpools support support";
+    gap: 1rem;
+
+    @include media-xl() {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: repeat(4, 112px) repeat(4, 150px);
+      grid-template-areas:
+        "user-card user-card user-card user-card user-card user-card"
+        "user-card user-card user-card user-card user-card user-card"
+        "user-info user-info user-info user-info user-info user-info"
+        "user-info user-info user-info user-info user-info user-info"
+        "reviews-about-me reviews-about-me reviews-about-me requests requests requests"
+        "orders orders orders my-reviews my-reviews my-reviews"
+        "favorite-cars favorite-cars favorite-cars favorite-cars settings settings"
+        "favorite-motorpools favorite-motorpools favorite-motorpools favorite-motorpools support support";
+    }
+
+    @include media-l() {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(4, 112px) repeat(7, 150px);
+      grid-template-areas:
+        "user-card user-card"
+        "user-card user-card"
+        "user-info user-info"
+        "user-info user-info"
+        "reviews-about-me reviews-about-me"
+        "requests requests"
+        "orders orders"
+        "my-reviews my-reviews"
+        "favorite-cars favorite-cars"
+        "favorite-motorpools favorite-motorpools"
+        "settings support";
+    }
+
+    @include media-s() {
+      grid-template-rows: repeat(5, 112px) repeat(7, 150px);
+      grid-template-areas:
+        "user-card user-card"
+        "user-card user-card"
+        "user-card user-card"
+        "user-info user-info"
+        "user-info user-info"
+        "reviews-about-me reviews-about-me"
+        "requests requests"
+        "orders orders"
+        "my-reviews my-reviews"
+        "favorite-cars favorite-cars"
+        "favorite-motorpools favorite-motorpools"
+        "settings support";
+    }
+  }
+
+  &__user-card {
+    @include flexMix(row, stretch, stretch);
+
+    @include media-s() {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    gap: 2rem;
+  }
+}
+
+.card {
+  height: 100%;
+
+  &__info {
+    @include flexMix(column, stretch, space-between);
+
+    height: 100%;
+  }
+
+  &__header {
+    @include flexMix(column, stretch, space-between);
+
+    gap: 1rem;
+  }
+
+  &__subtitle-wrapper {
+    @include flexMix(column, stretch, space-between);
+
+    gap: 0.5rem;
+  }
+
+  &__header-wrapper {
+    @include flexMix(row, center, space-between);
+
+    @include media-s() {
+      align-items: flex-start;
+    }
+  }
+
+  &__user-description {
+    height: 130px;
+    overflow-y: auto;
+  }
+
+  &__user-description-form {
+    height: 130px;
+
+    @include flexMix(column, flex-end, space-between);
+    gap: 0.5rem;
+  }
+
+  &__avatar {
+    @include media-s() {
+      align-self: center;
+    }
+  }
+
+  &__icon-link {
+    font-size: 1.5rem;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
+  &__link {
+    color: $link-color;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.user-card {
+  grid-area: user-card;
+}
+
+.info-card {
+  grid-area: user-info;
+}
+
+.reviews-about-me {
+  grid-area: reviews-about-me;
+}
+
+.requests {
+  grid-area: requests;
+}
+
+.my-reviews {
+  grid-area: my-reviews;
+}
+
+.orders {
+  grid-area: orders;
+}
+
+.favorite-cars {
+  grid-area: favorite-cars;
+}
+
+.favorite-autoparks {
+  grid-area: favorite-motorpools;
+}
+
+.settings {
+  grid-area: settings;
+}
+
+.support {
+  grid-area: support;
+}
