@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { CarService } from '../../../app/services/http/car.service';
+import { CarService } from '@services';
 import {
   addPhoto,
   addPhotoFailure,
@@ -8,12 +8,12 @@ import {
   loadCar,
   loadCarFailure,
   loadCarSuccess
-} from '../actions/car-profile.actions';
+} from '../actions/car-detailed.actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class CarProfileEffects {
+export class CarDetailedEffects {
   constructor(
     private actions$: Actions,
     private carService: CarService,

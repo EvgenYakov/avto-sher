@@ -5,8 +5,18 @@
   .p-card-content {
     @include flexMix(column, stretch, space-between);
 
+    @include media-s() {
+      padding: 0.5rem;
+    }
+
     padding: 1rem;
     gap: 1rem;
+  }
+
+  .p-card .p-card-body {
+    @include media-s() {
+      padding: 0.8rem;
+    }
   }
 
   .p-rating-icon {
@@ -47,24 +57,30 @@
   }
 
   &__header-wrapper {
-    @include flexMix(column, stretch, flex-start);
+    @include flexMix(column, flex-start, flex-start);
 
-    gap: 0.5rem;
-  }
-
-  &__rating {
     @include media-l() {
-      flex-direction: row;
-      justify-content: space-between;
+      .rating-form {
+        margin-left: -8px;
+      }
     }
+    @include media-s() {
+      align-items: center;
+    }
+    gap: 0.5rem;
+
   }
 
   &__date {
-    align-self: flex-end;
-
     @include media-l() {
+      align-self: flex-start;
+    }
+
+    @include media-s() {
       align-self: center;
     }
+
+    align-self: flex-end;
   }
 
   &__text {

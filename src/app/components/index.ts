@@ -10,4 +10,7 @@ export * from './auto-filter/auto-filter.module';
 export * from './autopark-card/autopark-card.component';
 export * from './autopark-card/autopark-card.module';
 
+export * from './spinner/spinner.component'
+export * from './spinner/spinner.module'
+
 export * from './controls';

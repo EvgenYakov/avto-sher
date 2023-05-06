@@ -1,12 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CarProfileState } from '../state/car-profile.state';
 
-const carProfileFeatureSelector = createFeatureSelector<CarProfileState>('carProfile');
+import { CarDetailedState } from '@store';
 
-export const selectIsLoading = createSelector(
-  carProfileFeatureSelector,
-  (state) => state.isLoading
-);
+const carProfileFeatureSelector = createFeatureSelector<CarDetailedState>('carDetailed');
 
 export const selectCarProfile = createSelector(
   carProfileFeatureSelector,
@@ -21,9 +17,4 @@ export const selectPhotos = createSelector(
 export const selectFeatures = createSelector(
   carProfileFeatureSelector,
   (state) => state.additional
-);
-
-export const selectError = createSelector(
-  carProfileFeatureSelector,
-  (state) => state.error
 );

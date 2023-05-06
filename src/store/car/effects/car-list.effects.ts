@@ -14,9 +14,9 @@ import {
   filterCar,
   filterCarFailure,
   filterCarSuccess,
-  loadCars,
-  loadCarsFailure,
-  loadCarsSuccess
+  loadAllCars,
+  loadAllCarsFailure,
+  loadAllCarsSuccess
 } from '../actions/cars-list.actions';
 
 @Injectable()
@@ -27,12 +27,12 @@ export class CarListEffects {
   ) {
   }
 
-  public loadCars$ = createEffect(() => this.actions$.pipe(
-    ofType(loadCars),
-    switchMap(({ autoparkId }) => this.carService.getCars(autoparkId)),
-    map((cars) => loadCarsSuccess({ cars })),
+  public loadAllCars$ = createEffect(() => this.actions$.pipe(
+    ofType(loadAllCars),
+    switchMap(() => this.carService.getListCars()),
+    map((cars) => loadAllCarsSuccess({ cars })),
     catchError((error: HttpErrorResponse) =>
-      of(loadCarsFailure({ errors: error }))
+      of(loadAllCarsFailure())
     )
   ));
 
@@ -45,7 +45,7 @@ export class CarListEffects {
     )
   ));
 
-  //instead of 1 need to get current autopark from store and put id from this autopark
+  //instead of 1 need to get current autopark-profile from store and put id from this autopark-profile
   public createCar$ = createEffect(() => this.actions$.pipe(
     ofType(createCar),
     switchMap(({ newCar }) => this.carService.createCar(newCar, 1)),

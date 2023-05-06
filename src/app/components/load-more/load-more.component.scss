@@ -1,0 +1,16 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .p-card .p-card-body {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.card-list {
+
+  &__btn {
+    @include flexMix(row, center, center);
+
+    margin-top: 3.75rem
+  }
+}

@@ -21,11 +21,10 @@ const routes: Routes = [
           ),
       },
       {
-        //for test
-        path: 'auto-detailed',
+        path: 'autopark/:id',
         loadChildren: () =>
-          import('../../modules/auto-detailed/auto-detailed.module').then(
-            (m) => m.AutoDetailedModule
+          import('../autopark-detailed/autopark-detailed.module').then(
+            (m) => m.AutoparkDetailedModule
           ),
       },
     ],
@@ -36,4 +35,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MainRoutingModule {}
+export class MainRoutingModule {
+}

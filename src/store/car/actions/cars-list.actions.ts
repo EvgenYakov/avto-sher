@@ -2,9 +2,9 @@ import { createAction, props } from '@ngrx/store';
 import { AutoCard, AutoProfile, FilterParams } from '@models';
 
 export enum CarsListActions {
-  LOAD_CARS = '[CAR] Get autopark`s cars',
-  LOAD_CARS_SUCCESS = '[CAR] Get autopark`s cars success',
-  LOAD_CARS_FAILURE = '[CAR] Get autopark`s cars failure',
+  LOAD_ALL_CARS = '[CAR] Get all cars',
+  LOAD_ALL_CARS_SUCCESS = '[CAR] Get all cars success',
+  LOAD_ALL_CARS_FAILURE = '[CAR] Get all cars failure',
 
   CREATE_CAR = '[CAR] Add new car in autopark',
   CREATE_CAR_SUCCESS = '[CAR] Add new car in autopark success',
@@ -19,19 +19,17 @@ export enum CarsListActions {
   FILTER_CAR_REQUEST_FAILURE = '[CAR] Add new car in autopark failure',
 }
 
-export const loadCars = createAction(
-  CarsListActions.LOAD_CARS,
-  props<{ autoparkId: number }>()
+export const loadAllCars = createAction(
+  CarsListActions.LOAD_ALL_CARS,
 );
 
-export const loadCarsSuccess = createAction(
-  CarsListActions.LOAD_CARS_SUCCESS,
+export const loadAllCarsSuccess = createAction(
+  CarsListActions.LOAD_ALL_CARS_SUCCESS,
   props<{ cars: AutoCard[] }>()
 );
 
-export const loadCarsFailure = createAction(
-  CarsListActions.LOAD_CARS_FAILURE,
-  props<{ errors: any }>()
+export const loadAllCarsFailure = createAction(
+  CarsListActions.LOAD_ALL_CARS_FAILURE,
 );
 
 export const createCar = createAction(

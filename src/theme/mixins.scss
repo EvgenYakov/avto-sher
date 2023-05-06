@@ -13,7 +13,24 @@
   border-radius: 50%;
 }
 
-// 1200px
+@mixin combinedMedia() {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @include media-xl() {
+    max-width: 740px;
+  }
+
+  @include media-l() {
+    max-width: 460px;
+  }
+
+  @include media-s() {
+    max-width: 300px;
+  }
+}
+
+// 1280px
 @mixin media-xl {
   @media (max-width: 1280px) {
     @content;

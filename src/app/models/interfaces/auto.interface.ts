@@ -13,7 +13,7 @@ export interface AutoCharacteristics {
 }
 
 export interface AutoCard {
-  id: string;
+  id: number;
   title: string;
   avatarPath: string;
   year: number;
