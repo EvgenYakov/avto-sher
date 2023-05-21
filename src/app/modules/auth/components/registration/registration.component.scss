@@ -2,6 +2,11 @@
 @import "mixins";
 
 :host ::ng-deep p-button .p-component {
+  @include media-s() {
+    font-size: 12px;
+    padding: 10px;
+  }
+
   background-color: #f20519;
 }
 
@@ -24,11 +29,15 @@
 
   .main {
     flex: 1 1 auto;
-    margin-top: 35px;
+    margin-top: 1.25rem;
   }
 
   .footer {
-    margin-top: 35px;
+    @include media-s() {
+      margin-top: 0;
+    }
+
+    margin-top: 2.188rem;
 
     &__approval {
       @include flexMix(row, center, flex-start);
@@ -37,7 +46,7 @@
       line-height: 16px;
 
       .text-block {
-        margin-left: 25px;
+        margin-left: 1.563rem;
       }
 
       .confidentiality {
@@ -47,10 +56,17 @@
     }
 
     &__btns {
+      @include media-s() {
+        margin-top: 1.5rem;
+      }
       @include flexMix(row, center, space-between);
-      margin-top: 58.5px;
+      margin-top: 3.625rem;
 
       .back-link {
+        @include media-s() {
+          font-size: 12px;
+        }
+
         color: $link-color;
         cursor: pointer;
         font-size: 14px;

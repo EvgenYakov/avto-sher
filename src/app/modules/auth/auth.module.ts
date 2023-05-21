@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './components/auth/auth.component';
@@ -18,17 +18,18 @@ import { TabViewModule } from 'primeng/tabview';
     LoginComponent,
     RegistrationComponent
   ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    ButtonModule,
-    TextInputModule,
-    PasswordInputModule,
-    ReactiveFormsModule,
-    CheckboxModule,
-    PhoneInputModule,
-    TabViewModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        ButtonModule,
+        TextInputModule,
+        PasswordInputModule,
+        ReactiveFormsModule,
+        CheckboxModule,
+        PhoneInputModule,
+        TabViewModule,
+        FormsModule,
+        NgOptimizedImage
+    ]
 })
 export class AuthModule { }
