@@ -8,7 +8,7 @@
 
 :host ::ng-deep {
   .control-wrapper {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
   }
 }
 
@@ -17,9 +17,13 @@
   height: 100%;
 
   .header {
-    margin-bottom: 35px;
+    margin-bottom: 1.5rem;
 
     &__label {
+      @include media-s() {
+        font-size: 16px;
+      }
+
       font-weight: 600;
       font-size: 24px;
     }
@@ -29,10 +33,11 @@
     flex: 1 1 auto;
 
     .login-form > * {
-      margin-bottom: 20px;
+      margin-bottom: 1.25rem;
     }
 
     &__forget-psw {
+      width: fit-content;
       color: $link-color;
       cursor: pointer;
     }
@@ -40,9 +45,10 @@
 
   .footer {
     font-size: 14px;
+    margin-top: 4.5rem;
 
     &__register {
-      margin-bottom: 18px;
+      margin-bottom: 1.125rem;
 
       .redirect {
         color: $link-color;
