@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { AutoCard, AutoparkDetailed, ReviewAutopark } from '@models';
+import { AutoCard, AutoparkDetailed, ReviewUser } from '@models';
 import { LoadingTypes } from '@constants';
 import {
   loadAutoparkDetailed,
@@ -23,7 +23,7 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   public isLoading: Observable<boolean>;
   public autoparkDetailed$: Observable<AutoparkDetailed>;
   public cars: Observable<AutoCard[]>;
-  public reviews: Observable<ReviewAutopark[]>;
+  public reviews: Observable<ReviewUser[]>;
 
   private destroy$ = new Subject<void>();
 

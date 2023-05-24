@@ -2,11 +2,11 @@ import { BlueprintFactory, createBlueprintBuilder } from '@ngxp/builder';
 import { faker } from '@faker-js/faker';
 
 import { AutoparkStatus } from '@constants';
-import { AutoCard, AutoparkBonus, AutoparkCard, AutoparkDetailed, ReviewAutopark } from '@models';
+import { AutoCard, AutoparkBonus, AutoparkCard, AutoparkDetailed, ReviewUser } from '@models';
 import { getAutoparkStatusData } from '../app/modules/autopark-detailed/helpers/get-data-by-status.helper';
 import { AutoparkStatusData } from '../app/modules/autopark-detailed/interfaces/autopark-status-data.interface';
 import { carsData } from './car.mock-data';
-import { reviewsData } from './review.mock-data';
+import { reviewsUserData } from './review.mock-data';
 
 const generateStatus = (): AutoparkStatus => {
   const values = Object.values(AutoparkStatus);

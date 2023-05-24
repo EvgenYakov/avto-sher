@@ -1,0 +1,21 @@
+@import "mixins";
+
+.review {
+  @include flexMix(column, flex-end, unset);
+  gap: 12px;
+
+  @include media-l() {
+    align-items: flex-start;
+  }
+
+  @include media-s() {
+    align-items: center;
+  }
+
+  .date {
+    @include media-l() {
+      margin-left: 0.5rem;
+    }
+  }
+
+}
