@@ -1,0 +1,11 @@
+<div class="review">
+  <form [formGroup]="formGroup" class="rating-form">
+    <p-rating
+            formControlName="defaultValue"
+            [cancel]="false"
+            [readonly]="true"
+    ></p-rating>
+  </form>
+
+  <div class="date small-text">{{ rating.date }}</div>
+</div>

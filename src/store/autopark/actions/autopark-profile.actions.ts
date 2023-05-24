@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { AutoCard, AutoparkDetailed, ReviewAutopark } from '@models';
+import { AutoCard, AutoparkDetailed, ReviewUser } from '@models';
 import { AutoparkDetailedResponse } from '@services';
 
 export enum AutoparkDetailedActions {

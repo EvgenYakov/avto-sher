@@ -1,7 +1,7 @@
-import { AutoCard, AutoparkDetailed, ReviewAutopark } from '@models';
+import { AutoCard, AutoparkDetailed, ReviewUser } from '@models';
 
 export interface AutoparkDetailedState {
   autoparkDetailed: AutoparkDetailed;
   cars: AutoCard[];
-  reviews: ReviewAutopark[]
+  reviews: ReviewUser[]
 }

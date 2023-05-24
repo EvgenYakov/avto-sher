@@ -3,9 +3,9 @@
     <div class="review__header">
       <div class="review__user-info">
         <img
-          [src]="review.avatarPath"
-          class="review__avatar"
-          alt="user avatar"
+                [src]="review.avatarPath"
+                class="review__avatar"
+                alt="user avatar"
         />
 
         <div class="review__header-wrapper">
@@ -18,26 +18,16 @@
         </div>
       </div>
 
-      <div class="review__header-wrapper review__rating">
-        <form [formGroup]="formGroup" class="rating-form">
-          <p-rating
-            formControlName="defaultValue"
-            [cancel]="false"
-            [readonly]="true"
-          ></p-rating>
-        </form>
-
-        <div class="review__date small-text">{{ review.date }}</div>
-      </div>
+      <app-rating-date [rating]="review"></app-rating-date>
     </div>
 
     <div>
-      Автомобиль:
+      <span style="font-weight: bold">Автомобиль: </span>
       <span class="review__text"> {{ review.autoMark }}</span>
     </div>
 
     <div>
-      Комментарий:
+      <span style="font-weight: bold">Комментарий: </span>
       <span class="review__text">{{ review.commentText }}</span>
     </div>
   </p-card>
