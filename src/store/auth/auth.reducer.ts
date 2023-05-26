@@ -1,16 +1,17 @@
+import { createReducer, on } from '@ngrx/store';
+
 import {
   loginRequestFailure,
   loginRequestSuccess,
   registerRequestFailure,
   registerRequestSuccess
 } from './auth.actions';
-import { createReducer, on } from '@ngrx/store';
 import { AuthState } from './auth.state';
 
 const initialState: AuthState = {
   authResponse: null,
   isAuth: false,
-  backendErrors: null,
+  backendErrors: '',
 };
 
 export const authReducer = createReducer(
@@ -22,7 +23,7 @@ export const authReducer = createReducer(
   })),
   on(loginRequestFailure, registerRequestFailure, (state, action) => ({
     ...state,
-    backendError: action.backendError
+    backendErrors: action.backendError
   })),
 );
 

@@ -20,6 +20,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AutoparkDetailedComponent implements OnInit, OnDestroy {
+
   public isLoading: Observable<boolean>;
   public autoparkDetailed$: Observable<AutoparkDetailed>;
   public cars: Observable<AutoCard[]>;

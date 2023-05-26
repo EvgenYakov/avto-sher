@@ -8,7 +8,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { SubInfoPanelComponent } from './components/sub-info-panel/sub-info-panel.component';
 import { LoadMoreModule } from '../../components/load-more/load-more.module';
 import { AutoCardModule, ReviewAutoparkCardModule } from '@components';
-import { SpinnerModule } from '../../components/spinner/spinner.module';
+import { SpinnerModule } from '@components';
 
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AuthResponse, BackendError } from '@models';
+
 import { LoginDto, RegisterDto } from '../../app/modules';
 
 export enum AuthActions {
@@ -30,7 +31,7 @@ export const loginRequestSuccess = createAction(
 
 export const loginRequestFailure = createAction(
   AuthActions.LOGIN_FAILURE,
-  props<{ backendError: BackendError }>()
+  props<{ backendError: string }>()
 );
 
 export const registerRequest = createAction(
@@ -45,7 +46,7 @@ export const registerRequestSuccess = createAction(
 
 export const registerRequestFailure = createAction(
   AuthActions.REGISTER_FAILURE,
-  props<{ backendError: BackendError }>()
+  props<{ backendError: string }>()
 );
 
 export const refreshTokenRequest = createAction(
@@ -54,7 +55,7 @@ export const refreshTokenRequest = createAction(
 
 export const refreshTokenRequestSuccess = createAction(
   AuthActions.REFRESH_TOKEN_REQUEST_SUCCESS,
-  props<{ newAccessToken: string }>()
+  props<{ newAccessToken: AuthResponse }>()
 );
 
 export const refreshTokenRequestFailure = createAction(
