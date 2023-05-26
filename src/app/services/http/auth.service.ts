@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
+
 import { AuthResponse } from '@models';
 import { BaseService } from './base.service';
-import { LoginDto } from '../../modules';
-import { RegisterDto } from '../../modules';
+import { LoginDto, RegisterDto } from '../../modules';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,6 @@ export class AuthService extends BaseService {
   }
 
   public registration(registerDto: RegisterDto): Observable<AuthResponse> {
-    console.log(registerDto)
     return this.httpService.post<AuthResponse>(`${ environment.apiUrl }/auth/signUp`, registerDto, { withCredentials: true });
   }
 
@@ -26,7 +25,7 @@ export class AuthService extends BaseService {
     this.httpService.post(`${ environment.apiUrl }/auth/logout`, {}, { withCredentials: true });
   }
 
-  public refreshToken(): Observable<string> {
-    return this.httpService.post<any>(`${ environment.apiUrl }/auth/refresh-token`, {}, { withCredentials: true });
+  public refreshToken(): Observable<AuthResponse> {
+    return this.httpService.post<any>(`${ environment.apiUrl }/auth/refresh`, {}, { withCredentials: true });
   }
 }

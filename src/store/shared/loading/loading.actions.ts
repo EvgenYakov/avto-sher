@@ -1,4 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { LoadingTypes } from '@constants';
 
 export enum LoadingActions {

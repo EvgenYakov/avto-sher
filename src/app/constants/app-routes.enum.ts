@@ -1,5 +1,6 @@
 export enum AppRoutes {
-  AUTH = '/auth',
+  MAIN = 'main',
+  AUTH = 'auth',
   AUTOPARKS = '/autoparks',
   AUTO = '/auto',
   RULES = '/rules',

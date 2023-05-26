@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BaseControl } from '@models';
 
 @Component({
@@ -8,5 +8,5 @@ import { BaseControl } from '@models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PasswordInputComponent extends BaseControl {
-
+  @Input() isFeedback = false;
 }

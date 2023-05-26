@@ -3,9 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import { LoginDto, LoginForm } from '../../models/login-form.interface';
+import { Observable } from 'rxjs';
+
+import { LoginDto, LoginForm } from '../../models';
 import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
-import { AuthState, loginRequest } from '@store';
+import { AuthState, loginRequest, selectAuthErrors } from '@store';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,9 @@ import { AuthState, loginRequest } from '@store';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
+
+  public backendError: Observable<string>
+
   public readonly requiredMsg = EMAIL_FIELD;
   public readonly passwordMsg = PASSWORD_FIELD;
 
@@ -24,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   public ngOnInit(): void {
     this.loginForm = this.initializeForm();
+    this.getDataFromStore();
   }
 
   private initializeForm(): FormGroup<LoginForm> {
@@ -46,7 +52,12 @@ export class LoginComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    const formValues = this.loginForm.value as LoginDto;
-    this.store.dispatch(loginRequest({ loginDto: formValues }));
+    const formValues = <LoginDto>this.loginForm.value;
+    console.log(formValues)
+    this.store.dispatch(loginRequest({loginDto: formValues}));
+  }
+
+  private getDataFromStore(): void {
+    this.backendError = this.store.select(selectAuthErrors);
   }
 }
