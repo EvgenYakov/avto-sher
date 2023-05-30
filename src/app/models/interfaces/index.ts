@@ -6,3 +6,4 @@ export * from './filter-form.interface';
 export * from './dropdown.interface';
 export * from './user-profile.interface';
 export * from './user-profile-info-form.interface';
+export * from './rating.interface'

@@ -1,0 +1,27 @@
+<div class="container">
+  <p-card class="card">
+    <div class="card__image grid1">
+      <img [src]="autoReview.avatarPath" alt="car image">
+    </div>
+    <div class="card__content grid2">
+      <div class="model">
+        <span>{{autoReview.autoMark}} &nbsp;</span>
+        <span>{{autoReview.autoDate}}</span>
+      </div>
+      <div class="autopark-name">
+        {{autoReview.autoparkName}}
+      </div>
+      <div class="price">
+        {{autoReview.orderPrice}} руб / сут
+      </div>
+    </div>
+    <div class="card__description grid3" (click)="toggleExpand()" [class.expanded]="expanded">
+      <p class="comment-text" [innerHTML]="getDisplayText()"></p>
+
+      <!--      {{autoReview.comment}}-->
+    </div>
+    <div class="card__rating grid4">
+      <app-rating-date [rating]="autoReview.rating"></app-rating-date>
+    </div>
+  </p-card>
+</div>

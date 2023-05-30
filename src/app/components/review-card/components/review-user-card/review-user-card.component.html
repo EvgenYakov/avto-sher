@@ -1,0 +1,34 @@
+<div class="container">
+  <p-card class="review">
+    <div class="review__header">
+      <div class="review__user-info">
+        <img
+                [src]="review.avatarPath"
+                class="review__avatar"
+                alt="user avatar"
+        />
+
+        <div class="review__header-wrapper">
+          <div class="subtitle">
+            {{ review.userFio }}
+          </div>
+          <div class="small-text">
+            {{ review.userStatus }}
+          </div>
+        </div>
+      </div>
+
+      <app-rating-date [rating]="review.rating"></app-rating-date>
+    </div>
+
+    <div>
+      <span style="font-weight: bold">Автомобиль: </span>
+      <span class="review__text"> {{ review.autoMark }}</span>
+    </div>
+
+    <div>
+      <span style="font-weight: bold">Комментарий: </span>
+      <span class="review__text">{{ review.comment }}</span>
+    </div>
+  </p-card>
+</div>
