@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MainComponent } from './main.component';
-import { StartPageComponent } from './components/start-page/start-page.component';
+import { AppRoutes } from '@constants';
 
 const routes: Routes = [
   {
@@ -11,12 +11,29 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: StartPageComponent,
+        loadChildren: () =>
+          import('../start-page/start-page.module').then(
+            (m) => m.StartPageModule
+          ),
+      },
+      {
+        path: AppRoutes.AUTOPARKS,
+        loadChildren: () =>
+          import('../autoparks/autoparks.module').then(
+            (m) => m.AutoparksModule
+          ),
+      },
+      {
+        path: AppRoutes.CARS,
+        loadChildren: () =>
+          import('../cars/cars.module').then(
+            (m) => m.CarsModule
+          ),
       },
       {
         path: 'user-profile',
         loadChildren: () =>
-          import('../../modules/user-profile/user-profile.module').then(
+          import('../user-profile/user-profile.module').then(
             (m) => m.UserProfileModule
           ),
       },

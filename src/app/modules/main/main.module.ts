@@ -5,10 +5,9 @@ import { FooterModule, HeaderModule } from '@layout';
 import { AutoCardModule, AutoFilterModule, } from '@components';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
-import { StartPageComponent } from './components/start-page/start-page.component';
 
 @NgModule({
-    declarations: [MainComponent, StartPageComponent],
+    declarations: [MainComponent],
     imports: [
         CommonModule,
         MainRoutingModule,
