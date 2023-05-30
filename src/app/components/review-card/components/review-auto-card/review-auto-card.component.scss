@@ -1,0 +1,134 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-card-content {
+    @include media-l() {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto auto;
+    }
+
+    @include media-s() {
+      justify-items: center;
+    }
+
+    display: grid;
+    gap: 32px;
+  }
+}
+
+
+.card {
+
+  &__image {
+    height: 27.5vh;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+    }
+  }
+
+  &__content {
+    .model {
+      @include media-xl() {
+        font-size: 1.2rem;
+      }
+
+      margin-bottom: 1rem;
+      font-size: 24px;
+
+      :first-child {
+        font-weight: bold;
+      }
+
+      :last-child {
+        color: $pale-color;
+      }
+    }
+
+    .autopark-name {
+      color: var(--text-color-secondary);
+
+    }
+
+    .price {
+      margin-top: 29px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  &__description {
+    font-size: 14px;
+    color: var(--text-color-secondary);
+  }
+}
+
+.grid1 {
+  grid-column: 1;
+  grid-row: span 2;
+}
+
+.grid2 {
+  grid-column: 2;
+  grid-row: 1;
+  height: fit-content;
+}
+
+.grid3 {
+  grid-column: 2;
+  grid-row: 2;
+  height: fit-content;
+}
+
+.grid4 {
+  grid-column: 2;
+  grid-row: 1;
+  height: fit-content;
+  justify-self: end;
+}
+
+@include media-l() {
+  .grid1 {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+  }
+
+  .grid2 {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .grid3 {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .grid4 {
+    @include media-s() {
+      justify-self: center;
+    }
+
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: self-start;
+  }
+}
+
+.comment-text {
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.expanded {
+  white-space: normal;
+  cursor: auto;
+}

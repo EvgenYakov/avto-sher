@@ -7,8 +7,8 @@ import { AutoparkHatComponent } from './components/hat/autopark-hat.component';
 import { TabViewModule } from 'primeng/tabview';
 import { SubInfoPanelComponent } from './components/sub-info-panel/sub-info-panel.component';
 import { LoadMoreModule } from '../../components/load-more/load-more.module';
-import { AutoCardModule, ReviewAutoparkCardModule } from '@components';
-import { SpinnerModule } from '../../components/spinner/spinner.module';
+import { ReviewCardModule } from '../../components/review-card/review-card.module';
+import { AutoCardModule, SpinnerModule } from '@components';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { SpinnerModule } from '../../components/spinner/spinner.module';
     LoadMoreModule,
     AutoCardModule,
     SpinnerModule,
-    ReviewAutoparkCardModule
+    ReviewCardModule
   ]
 })
-export class AutoparkDetailedModule { }
+export class AutoparkDetailedModule {
+}
