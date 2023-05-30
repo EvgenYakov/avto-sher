@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { RatingForm } from '@models';
+import { Rating, RatingForm } from '@models';
 
 @Component({
   selector: 'app-rating-date',
@@ -10,12 +10,12 @@ import { RatingForm } from '@models';
 })
 export class RatingDateComponent implements OnInit {
 
-  @Input() rating: { ratingValue: number, date: string };
+  @Input() rating: Rating;
 
   public formGroup: FormGroup<RatingForm>;
 
   public ngOnInit(): void {
-    this.formGroup = this.initializeForm(this.rating.ratingValue);
+    this.formGroup = this.initializeForm(this.rating.value);
   }
 
   private initializeForm(value: number): FormGroup<RatingForm> {

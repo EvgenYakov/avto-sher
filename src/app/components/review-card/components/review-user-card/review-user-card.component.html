@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <app-rating-date [rating]="review"></app-rating-date>
+      <app-rating-date [rating]="review.rating"></app-rating-date>
     </div>
 
     <div>
@@ -28,7 +28,7 @@
 
     <div>
       <span style="font-weight: bold">Комментарий: </span>
-      <span class="review__text">{{ review.commentText }}</span>
+      <span class="review__text">{{ review.comment }}</span>
     </div>
   </p-card>
 </div>
