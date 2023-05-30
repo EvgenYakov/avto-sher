@@ -1,12 +1,12 @@
 import { UserStatus } from '@constants';
+import { Rating } from './rating.interface';
 
 export interface Review {
   id: number;
   avatarPath: string;
-  date: string;
-  ratingValue: number;
+  rating: Rating;
   autoMark: string;
-  commentText: string;
+  comment: string;
 }
 
 export interface ReviewUser extends Review {
@@ -15,6 +15,7 @@ export interface ReviewUser extends Review {
 }
 
 export interface ReviewAuto extends Review {
+  autoparkName: string;
   autoDate: string;
   orderPrice: number;
 }

@@ -1,27 +1,27 @@
 <div class="container">
   <p-card class="card">
-    <div class="card__image">
-      <img src="assets/images/robot.jpg" alt="car image">
+    <div class="card__image grid1">
+      <img [src]="autoReview.avatarPath" alt="car image">
     </div>
-    <div class="card__content">
+    <div class="card__content grid2">
       <div class="model">
-        <span>Kia Cerato </span>
-        <span>2010</span>
+        <span>{{autoReview.autoMark}} &nbsp;</span>
+        <span>{{autoReview.autoDate}}</span>
       </div>
       <div class="autopark-name">
-        Автопарк: Быстрые ветра
+        {{autoReview.autoparkName}}
       </div>
       <div class="price">
-        1500 руб / сут
-      </div>
-      <div class="description">
-        Просто шикарный Авто для большой семьи и кампании, очень вместительный на раз можно перевести диван
-        и ещё останется место)) даже при своих размерах не очень большой расход есть конечно и нюансы это коробка...
+        {{autoReview.orderPrice}} руб / сут
       </div>
     </div>
-    <div class="card__rating">
-      <app-rating-date [rating]="{ratingValue: 3, date: '2020-03-12'}"></app-rating-date>
+    <div class="card__description grid3" (click)="toggleExpand()" [class.expanded]="expanded">
+      <p class="comment-text" [innerHTML]="getDisplayText()"></p>
+
+      <!--      {{autoReview.comment}}-->
+    </div>
+    <div class="card__rating grid4">
+      <app-rating-date [rating]="autoReview.rating"></app-rating-date>
     </div>
   </p-card>
-
 </div>
