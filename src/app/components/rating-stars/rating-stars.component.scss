@@ -1,8 +1,13 @@
 @import "mixins";
 
-.review {
+:host ::ng-deep {
+  .p-rating .p-rating-icon {
+    font-size: inherit;
+  }
+}
+
+.rating {
   @include flexMix(column, flex-end, unset);
-  gap: 12px;
 
   @include media-l() {
     align-items: flex-start;
@@ -16,6 +21,8 @@
     @include media-l() {
       margin-left: 0.5rem;
     }
+
+    margin-top: 12px;
   }
 
 }

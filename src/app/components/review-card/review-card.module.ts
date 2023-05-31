@@ -6,23 +6,23 @@ import { CardModule } from 'primeng/card';
 import { RatingModule } from 'primeng/rating';
 import { ReviewAutoCardComponent } from './components/review-auto-card/review-auto-card.component';
 import { ReviewUserCardComponent } from './components/review-user-card/review-user-card.component';
-import { RatingDateComponent } from './components/rating-date/rating-date.component';
+import { RatingStarsModule } from '../rating-stars/rating-stars.module';
 
 @NgModule({
   declarations: [
     ReviewAutoCardComponent,
     ReviewUserCardComponent,
-    RatingDateComponent
   ],
   exports: [
     ReviewUserCardComponent,
-    ReviewAutoCardComponent
+    ReviewAutoCardComponent,
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RatingModule,
-    CardModule
+    CardModule,
+    RatingStarsModule
   ]
 })
 export class ReviewCardModule {

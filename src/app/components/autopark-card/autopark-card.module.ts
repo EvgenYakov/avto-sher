@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { CardModule } from 'primeng/card';
-import { RatingModule } from 'primeng/rating';
-
 import { AutoparkCardComponent } from './autopark-card.component';
+import { RatingStarsModule } from '../rating-stars/rating-stars.module';
+
+
+
 
 @NgModule({
-  declarations: [AutoparkCardComponent],
-  exports: [AutoparkCardComponent],
-  imports: [CommonModule, CardModule, RatingModule, ReactiveFormsModule],
+  declarations: [
+    AutoparkCardComponent
+  ],
+  exports: [
+    AutoparkCardComponent
+  ],
+  imports: [
+    CommonModule,
+    RatingStarsModule,
+  ]
 })
-export class AutoparkCardModule {}
+export class AutoparkCardModule { }

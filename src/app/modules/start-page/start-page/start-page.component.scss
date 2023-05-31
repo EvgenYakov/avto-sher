@@ -1,0 +1,59 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .checked .item {
+    .card__logo {
+      height: 193px;
+    }
+
+    .card__content .additional {
+      font-size: 12px;
+    }
+  }
+}
+
+.wrapper {
+  @include flexMix(column, unset, space-between, 110px);
+
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  @include media-l() {
+    font-size: 2rem;
+  }
+
+  font-size: 2.875rem;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  @include media-xl() {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include media-l() {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.checked {
+  &__grid-list {
+    @include media-xl() {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include media-l() {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-s() {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
+  }
+}
