@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 import { AutoparkStatus } from '@constants';
 import { AutoCard, AutoparkBonus, AutoparkCard, AutoparkDetailed, ReviewUser } from '@models';
 import { getAutoparkStatusData } from '../app/modules/autopark-detailed/helpers/get-data-by-status.helper';
-import { AutoparkStatusData } from '../app/modules/autopark-detailed/interfaces/autopark-status-data.interface';
+import { AutoparkStatusData } from '../app/models/interfaces/autopark-status-data.interface';
 import { carsData } from './car.mock-data';
 import { reviewsUserData } from './review.mock-data';
 
@@ -28,13 +28,15 @@ const autoparkCardBlueprintFactory: BlueprintFactory<AutoparkCard> = () => ({
   id: (): number => faker.datatype.number(),
   logo: (): string => faker.image.image(),
   autoparkName: (): string => faker.lorem.word(),
-  autoCount: (): number => faker.datatype.number(),
+  autoCount: (): number => faker.datatype.number({max: 400}),
   rating: (): number => faker.datatype.number(),
   isFavorite: (): boolean => faker.datatype.boolean(),
 });
 
 export const autoparkCardBuilder = createBlueprintBuilder(autoparkCardBlueprintFactory());
-export const autoparkCardData = autoparkCardBuilder().freeze().buildMany(20);
+export const topAutoparksCards = autoparkCardBuilder().freeze().buildMany(8);
+export const checkedAutoparksCards = autoparkCardBuilder().freeze().buildMany(20);
+export const newAutoparksCards = autoparkCardBuilder().freeze().buildMany(4);
 
 const autoparkDetailedBlueprintFactory: BlueprintFactory<AutoparkDetailed> = () => ({
   id: (): number => faker.datatype.number(),

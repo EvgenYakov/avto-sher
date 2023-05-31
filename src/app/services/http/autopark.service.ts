@@ -3,7 +3,7 @@ import { BaseService } from './base.service';
 import { map, Observable, timer } from 'rxjs';
 
 import { AutoCard, AutoparkCard, AutoparkDetailed, AutoProfile, ReviewUser } from '@models';
-import { autoparkCardData, autoparkDetailedData, carsData, reviewsUserData } from '@test-data';
+import { autoparkDetailedData, carsData, reviewsUserData, topAutoparksCards } from '@test-data';
 
 export interface AutoparkDetailedResponse {
   autoparkDetailed: AutoparkDetailed,
@@ -17,7 +17,7 @@ export interface AutoparkDetailedResponse {
 export class AutoparkService extends BaseService {
   public getAutoparks(): Observable<AutoparkCard[]> {
     return timer(1000).pipe(
-      map(() => autoparkCardData)
+      map(() => topAutoparksCards)
     )
   }
 

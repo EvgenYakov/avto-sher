@@ -56,7 +56,25 @@
     border-radius: 1rem;
   }
 
+  &__header-wrapper {
+    @include flexMix(column, flex-start, flex-start);
+
+    @include media-l() {
+      .rating-form {
+        margin-left: -8px;
+      }
+    }
+    @include media-s() {
+      align-items: center;
+    }
+    gap: 0.5rem;
+
+  }
+
+
   &__text {
     color: var(--text-color-secondary);
   }
 }
+
+

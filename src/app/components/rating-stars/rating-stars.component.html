@@ -1,11 +1,12 @@
-<div class="review">
+<div class="rating">
   <form [formGroup]="formGroup" class="rating-form">
     <p-rating
             formControlName="defaultValue"
             [cancel]="false"
             [readonly]="true"
+            [stars]="rating.value"
     ></p-rating>
   </form>
 
-  <div class="date small-text">{{ rating.date }}</div>
+  <div class="date small-text" *ngIf="rating.date">{{ rating.date }}</div>
 </div>

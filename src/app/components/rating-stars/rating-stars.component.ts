@@ -1,15 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Rating, RatingForm } from '@models';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-rating-date',
-  templateUrl: './rating-date.component.html',
-  styleUrls: ['./rating-date.component.scss'],
+  selector: 'app-rating-stars',
+  templateUrl: './rating-stars.component.html',
+  styleUrls: ['./rating-stars.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingDateComponent implements OnInit {
-
+export class RatingStarsComponent implements OnInit {
   @Input() rating: Rating;
 
   public formGroup: FormGroup<RatingForm>;
@@ -25,4 +24,5 @@ export class RatingDateComponent implements OnInit {
 
     return ratingForm;
   }
+
 }
