@@ -12,4 +12,10 @@ export * from './autopark-card/autopark-card.module';
 export * from './spinner/spinner.component'
 export * from './spinner/spinner.module'
 
+export * from './rating-stars/rating-stars.component'
+export * from './rating-stars/rating-stars.module'
+
+export * from './load-more/load-more.component'
+export * from './load-more/load-more.module'
+
 export * from './controls';
