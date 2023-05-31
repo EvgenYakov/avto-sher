@@ -38,7 +38,7 @@ const routes: Routes = [
           ),
       },
       {
-        path: AppRoutes.AUTOPARK_DETAILED+'/:id',
+        path: AppRoutes.AUTOPARK_DETAILED + '/:id',
         loadChildren: () =>
           import('../autopark-detailed/autopark-detailed.module').then(
             (m) => m.AutoparkDetailedModule
