@@ -1,5 +1,5 @@
 import { AutoparkStatus } from '@constants';
-import { AutoparkStatusData } from '../interfaces/autopark-status-data.interface';
+import { AutoparkStatusData } from '../../../models/interfaces/autopark-status-data.interface';
 
 const autoparkStatusDataMap: Record<AutoparkStatus, AutoparkStatusData> = {
   [AutoparkStatus.TOP]: {

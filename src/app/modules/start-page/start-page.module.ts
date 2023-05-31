@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { StartPageRoutingModule } from './start-page-routing.module';
 import { StartPageComponent } from './start-page/start-page.component';
-import { AutoFilterModule } from '@components';
+import { AutoFilterModule, AutoparkCardModule } from '@components';
 
 
 @NgModule({
@@ -13,7 +13,8 @@ import { AutoFilterModule } from '@components';
   imports: [
     CommonModule,
     StartPageRoutingModule,
-    AutoFilterModule
+    AutoFilterModule,
+    AutoparkCardModule
   ]
 })
 export class StartPageModule { }
