@@ -8,24 +8,18 @@ import { AutoparkDetailedComponent } from './autopark-detailed.component';
 import { AutoparkHatComponent } from './components/hat/autopark-hat.component';
 import { SubInfoPanelComponent } from './components/sub-info-panel/sub-info-panel.component';
 
-import { AutoCardModule, LoadMoreModule, ReviewCardModule, SpinnerModule } from '@components';
+
 
 
 @NgModule({
-  declarations: [
-    AutoparkDetailedComponent,
-    AutoparkHatComponent,
-    SubInfoPanelComponent
-  ],
-  imports: [
+    imports: [
     CommonModule,
     AutoparkDetailedRoutingModule,
     TabViewModule,
-    LoadMoreModule,
-    AutoCardModule,
-    SpinnerModule,
-    ReviewCardModule
-  ]
+    AutoparkDetailedComponent,
+    AutoparkHatComponent,
+    SubInfoPanelComponent
+]
 })
 export class AutoparkDetailedModule {
 }

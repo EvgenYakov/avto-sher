@@ -6,12 +6,10 @@ import { AutoparksComponent } from './autoparks/autoparks.component';
 
 
 @NgModule({
-  declarations: [
-    AutoparksComponent
-  ],
-  imports: [
-    CommonModule,
-    AutoparksRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        AutoparksRoutingModule,
+        AutoparksComponent
+    ]
 })
 export class AutoparksModule { }

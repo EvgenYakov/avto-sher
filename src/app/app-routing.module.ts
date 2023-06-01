@@ -10,18 +10,14 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () =>
-      import('./modules/auth/auth.module').then((m) => m.AuthModule),
-    data: {
-      userType: 'not-logged-in',
-    },
+    loadChildren:() => import('./layouts/auth')
   },
-  {path: '**', redirectTo: '/not-found'},
-  {
-    path: 'not-found',
-    loadChildren: () =>
-      import('./modules/not-found/not-found.module').then((m) => m.NotFoundModule),
-  },
+  // {path: '**', redirectTo: '/not-found'},
+  // {
+  //   path: 'not-found',
+  //   loadChildren: () =>
+  //     import('./modules/not-found/not-found.module').then((m) => m.NotFoundModule),
+  // },
 ];
 
 @NgModule({
