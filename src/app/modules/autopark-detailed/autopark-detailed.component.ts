@@ -12,12 +12,21 @@ import {
   selectAutoparkReviews,
   selectLoading
 } from '@store';
+import { SpinnerComponent } from '../../components/spinner/spinner.component';
+import { ReviewUserCardComponent } from '../../components/review-user-card/review-user-card.component';
+import { AutoCardComponent } from '../../components/auto-card/auto-card.component';
+import { LoadMoreComponent } from '../../components/load-more/load-more.component';
+import { TabViewModule } from 'primeng/tabview';
+import { AutoparkHatComponent } from './components/hat/autopark-hat.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'app-autopark-profile',
-  templateUrl: './autopark-detailed.component.html',
-  styleUrls: ['./autopark-detailed.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-autopark-profile',
+    templateUrl: './autopark-detailed.component.html',
+    styleUrls: ['./autopark-detailed.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgIf, AutoparkHatComponent, TabViewModule, LoadMoreComponent, NgFor, AutoCardComponent, ReviewUserCardComponent, SpinnerComponent, AsyncPipe]
 })
 export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   public isLoading: Observable<boolean>;

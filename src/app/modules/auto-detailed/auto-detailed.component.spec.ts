@@ -8,8 +8,8 @@ describe('AutoDetailedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AutoDetailedComponent],
-    }).compileComponents();
+    declarations: [AutoDetailedComponent]
+}).compileComponents();
 
     fixture = TestBed.createComponent(AutoDetailedComponent);
     component = fixture.componentInstance;

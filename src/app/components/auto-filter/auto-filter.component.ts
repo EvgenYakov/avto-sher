@@ -1,18 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import {
-  ADDITIONAL_OPTIONS,
-  DROPDOWNS,
-  FARE_OPTIONS,
-} from './constants/characteristics.constants';
-import { DropdownOption, FilterForm, Dropdown } from '@models';
+import { ADDITIONAL_OPTIONS, DROPDOWNS, FARE_OPTIONS, } from './constants/characteristics.constants';
+import { AUTO_FILTER_DEPS } from './auto-filter.dependencies';
+import { Dropdown, DropdownOption, FilterForm } from '@models';
 
 @Component({
-  selector: 'app-auto-filter',
-  templateUrl: './auto-filter.component.html',
-  styleUrls: ['./auto-filter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-auto-filter',
+    templateUrl: './auto-filter.component.html',
+    styleUrls: ['./auto-filter.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [AUTO_FILTER_DEPS]
 })
 export class AutoFilterComponent implements OnInit {
   public dropdowns: Dropdown[] = DROPDOWNS;

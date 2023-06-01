@@ -1,0 +1,1 @@
+export { AutoparkCardComponent } from './autopark-card.component'

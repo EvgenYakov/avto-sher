@@ -8,8 +8,8 @@ describe('CardLinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardLinkComponent ]
-    })
+    imports: [CardLinkComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(CardLinkComponent);

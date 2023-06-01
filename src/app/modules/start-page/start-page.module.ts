@@ -3,18 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { StartPageRoutingModule } from './start-page-routing.module';
 import { StartPageComponent } from './start-page/start-page.component';
-import { AutoFilterModule, AutoparkCardModule } from '@components';
+
 
 
 @NgModule({
-  declarations: [
-    StartPageComponent
-  ],
-  imports: [
+    imports: [
     CommonModule,
     StartPageRoutingModule,
-    AutoFilterModule,
-    AutoparkCardModule
-  ]
+    StartPageComponent
+]
 })
 export class StartPageModule { }

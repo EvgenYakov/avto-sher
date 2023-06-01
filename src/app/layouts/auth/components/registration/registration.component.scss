@@ -1,0 +1,60 @@
+@import "../../../../../theme/colors";
+@import "../../../../../theme/mixins";
+
+:host ::ng-deep p-button .p-component {
+  background-color: #f20519;
+}
+
+:host ::ng-deep .field {
+  .control-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+.container {
+  @include flexMix(column, none, none);
+  height: 100%;
+
+  .header {
+    &__label {
+      font-weight: 600;
+      font-size: 24px;
+    }
+  }
+
+  .main {
+    flex: 1 1 auto;
+    margin-top: 35px;
+  }
+
+  .footer {
+    margin-top: 35px;
+
+    &__approval {
+      @include flexMix(row, center, flex-start);
+
+      font-size: 14px;
+      line-height: 16px;
+
+      .text-block {
+        margin-left: 25px;
+      }
+
+      .confidentiality {
+        color: $link-color;
+        cursor: pointer;
+      }
+    }
+
+    &__btns {
+      @include flexMix(row, center, space-between);
+      margin-top: 58.5px;
+
+      .back-link {
+        color: $link-color;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+  }
+}
