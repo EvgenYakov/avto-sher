@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { BaseService } from '@services';
 
-import { AuthResponse, LoginDto, RegisterDto } from '../models';
+import { AuthResponse, LoginDto, RegisterDto } from '../../pages/auth/models';
 
 @Injectable({
   providedIn: 'root'

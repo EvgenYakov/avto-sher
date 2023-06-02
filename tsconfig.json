@@ -24,7 +24,7 @@
     "paths": {
       "@components": ["./src/app/components/index"],
       "@constants": ["./src/app/constants/index"],
-      "@layouts": ["./src/app/layouts/index"],
+      "@pages": ["./src/app/layouts/index"],
       "@models": ["./src/app/models/index"],
       "@modules": ["./src/app/models/index"],
       "@services": ["./src/app/services/index"],

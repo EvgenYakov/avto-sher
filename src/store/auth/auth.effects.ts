@@ -21,9 +21,8 @@ import {
 } from './auth.actions';
 
 import { LocalStorageKeys } from '@constants';
-import { LocalStorageService } from '@services';
+import { AuthService, LocalStorageService } from '@services';
 
-import { AuthService } from '../../app/layouts/auth';
 
 @Injectable()
 export class AuthEffects {
