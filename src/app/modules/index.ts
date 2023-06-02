@@ -1,1 +1,1 @@
-export * from '../layouts/auth'
+export * from '../pages/auth'

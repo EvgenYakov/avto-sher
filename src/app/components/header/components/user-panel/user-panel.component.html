@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isAuthorized; else userPanel">
-  <div [routerLink]="authLink" class="link">Войти</div>
+  <div (click)="navigateToAuth()" class="link">Войти</div>
 </ng-container>
 
 <ng-template #userPanel>

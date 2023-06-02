@@ -1,5 +1,5 @@
-@import "../../../../../theme/colors";
-@import "../../../../../theme/mixins";
+@import "colors";
+@import "mixins";
 
 :host ::ng-deep p-button .p-component {
   width: 100%;

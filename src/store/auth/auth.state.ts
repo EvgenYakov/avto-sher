@@ -1,5 +1,5 @@
 import { BackendError } from '@models';
-import { AuthResponse } from '../../app/layouts/auth';
+import { AuthResponse } from '../../app/pages/auth';
 
 
 export interface AuthState {
