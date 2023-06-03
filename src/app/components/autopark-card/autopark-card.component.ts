@@ -1,29 +1,26 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { AutoparkCard, RatingForm } from '@models';
+import { AutoparkCard } from '@models';
+import { AppRoutes } from '@constants';
+import { AUTOPARK_CARD_DEPS } from './autopark-card.dependencies';
+import { MainRoutes } from '../../pages/main';
 
 @Component({
-  selector: 'app-autopark-profile-card',
-  templateUrl: './autopark-card.component.html',
-  styleUrls: ['./autopark-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-autopark-card',
+    templateUrl: './autopark-card.component.html',
+    styleUrls: ['./autopark-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [AUTOPARK_CARD_DEPS]
 })
-export class AutoparkCardComponent implements OnInit {
-  @Input() autoparkCard: AutoparkCard;
+export class AutoparkCardComponent {
 
-  public formGroup: FormGroup<RatingForm>;
+  @Input() public card: AutoparkCard;
 
-  public ngOnInit(): void {
-    this.formGroup = this.initializeForm(this.autoparkCard.rating);
-  }
+  constructor(private router: Router) {}
 
-  private initializeForm(value: number): FormGroup<RatingForm> {
-    const ratingForm = new FormGroup<RatingForm>({
-      defaultValue: new FormControl(value, []),
-      lonelyStarFill: new FormControl(1, []),
-    });
-
-    return ratingForm;
+  public navigate(id: number) {
+    this.router.navigate([`${AppRoutes.MAIN}/${MainRoutes.AUTOPARK_DETAILED}`, id])
   }
 }

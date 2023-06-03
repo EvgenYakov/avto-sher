@@ -1,0 +1,30 @@
+<ng-template #autoparkDetailed>
+  <div class="wrapper" *ngIf="autoparkDetailed$ | async as autopark">
+    <div class="hat container">
+      <app-autopark-hat [hatData]="autopark"></app-autopark-hat>
+    </div>
+
+    <div class="tabs">
+      <p-tabView>
+        <p-tabPanel header="Автомобили">
+          <app-load-more>
+            <app-auto-card *ngFor="let auto of cars|async" [autoCard]="auto"></app-auto-card>
+          </app-load-more>
+        </p-tabPanel>
+        <p-tabPanel header="Профиль">
+          авто
+        </p-tabPanel>
+        <p-tabPanel header="Отзывы">
+          <app-load-more btnLabel="Другие отзывы">
+            <app-review-user-card *ngFor="let review of reviews|async" [review]="review"></app-review-user-card>
+          </app-load-more>
+        </p-tabPanel>
+        <p-tabPanel header="Связаться с автопарком">
+          авто
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+  </div>
+</ng-template>
+
+<app-spinner *ngIf="isLoading | async; else autoparkDetailed"></app-spinner>

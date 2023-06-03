@@ -1,44 +1,18 @@
-<p-card class="autopark-card-wrapper">
-  need refactor
-<!--  <div class="content">-->
-<!--    <div class="content__avatar">-->
-<!--      <img [src]="autoparkCard.logo" alt="autopark image">-->
-<!--      <div class="premium-star" *ngIf="autoparkCard.isFavorite">-->
-<!--        <form [formGroup]="formGroup">-->
-<!--          <p-rating-->
-<!--                  [cancel]="false"-->
-<!--                  [readonly]="true"-->
-<!--                  [stars]="1"-->
-<!--                  formControlName="lonelyStarFill"-->
-<!--          ></p-rating>-->
-<!--        </form>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="content__data">-->
-<!--      <div class="name">-->
-<!--        {{autoparkCard.autoparkName}}-->
-<!--      </div>-->
-<!--      <div class="count">-->
-<!--        <div class="count__auto">-->
-<!--          {{autoparkCard.autoCount}} автомобилей-->
-<!--        </div>-->
-<!--        <div class="count__rating-premium" *ngIf="autoparkCard.isFavorite">-->
-<!--          <form [formGroup]="formGroup">-->
-<!--            <p-rating formControlName="defaultValue" [cancel]="false" [readonly]="true"></p-rating>-->
-<!--          </form>-->
-<!--        </div>-->
-<!--        <div class="count__rating" *ngIf="!autoparkCard.isFavorite">-->
-<!--          {{autoparkCard.rating}}-->
-<!--          <form [formGroup]="formGroup">-->
-<!--            <p-rating-->
-<!--                    [cancel]="false"-->
-<!--                    [readonly]="true"-->
-<!--                    [stars]="1"-->
-<!--                    formControlName="lonelyStarFill"-->
-<!--            ></p-rating>-->
-<!--          </form>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-</p-card>
+<div class="card" (click)="navigate(card.id)">
+  <div class="card__logo">
+    <img [src]="card.logo" alt="autopark logo">
+  </div>
+  <div class="card__content">
+    <div class="title">
+      {{card.autoparkName}}
+    </div>
+    <div class="additional">
+      <div class="additional__auto-count">
+        {{card.autoCount}} автомобилей
+      </div>
+      <div class="additional__rating">
+        <app-rating-stars [rating]="{value: card.rating, date:''}"></app-rating-stars>
+      </div>
+    </div>
+  </div>
+</div>

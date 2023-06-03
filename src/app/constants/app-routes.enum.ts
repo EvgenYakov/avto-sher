@@ -1,8 +1,7 @@
 export enum AppRoutes {
   MAIN = 'main',
   AUTH = 'auth',
-  AUTOPARKS = '/autoparks',
-  AUTO = '/auto',
+  NOT_FOUND_PAGE = 'not_found',
   RULES = '/rules',
   PARTNERS = '/partners',
   FEEDBACK = '/feedback',
@@ -13,7 +12,7 @@ export enum AppRoutes {
   DRIVER_FULL_DOCUMENTATION = '/driver-full-documentation',
   AUTOPARK_FULL_DOCUMENTATION = '/autopark-full-documentation',
   HOW_ADD_AUTOPARK = '/how-add-autopark',
-  ADD_AUTOPARK = '', // registration or autopark-profile account
+  ADD_AUTOPARK = '',
   CONDITIONS = '/conditions',
   TEAM = '/team',
 }

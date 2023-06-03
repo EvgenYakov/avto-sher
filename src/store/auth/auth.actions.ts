@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthResponse, BackendError } from '@models';
 
-import { LoginDto, RegisterDto } from '../../app/modules';
+import { BackendError } from '@models';
+import { AuthResponse, LoginDto, RegisterDto } from '../../app/pages/auth';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',

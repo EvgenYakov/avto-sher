@@ -1,0 +1,29 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .p-rating .p-rating-icon {
+    font-size: inherit;
+    margin-left: 3px;
+  }
+}
+
+.rating {
+  @include flexMix(column, flex-end, unset);
+
+  @include media-l() {
+    align-items: flex-start;
+  }
+
+  @include media-s() {
+    align-items: center;
+  }
+
+  .date {
+    @include media-l() {
+      margin-left: 0.5rem;
+    }
+
+    margin-top: 12px;
+  }
+
+}

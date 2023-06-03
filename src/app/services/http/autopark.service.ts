@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
+import { BaseService } from '../helpers/base.service';
 import { map, Observable, timer } from 'rxjs';
 
-import { AutoCard, AutoparkCard, AutoparkDetailed, AutoProfile, ReviewAutopark } from '@models';
-import { autoparkCardData, autoparkDetailedData, carsData, reviewsData } from '@test-data';
+import { AutoCard, AutoparkCard, AutoparkDetailed, AutoProfile, ReviewUser } from '@models';
+import { autoparkDetailedData, carsData, reviewsUserData, topAutoparksCards } from '@test-data';
 
 export interface AutoparkDetailedResponse {
   autoparkDetailed: AutoparkDetailed,
   cars: AutoCard[],
-  reviews: ReviewAutopark[]
+  reviews: ReviewUser[]
 }
 
 @Injectable({
@@ -17,7 +17,7 @@ export interface AutoparkDetailedResponse {
 export class AutoparkService extends BaseService {
   public getAutoparks(): Observable<AutoparkCard[]> {
     return timer(1000).pipe(
-      map(() => autoparkCardData)
+      map(() => topAutoparksCards)
     )
   }
 
@@ -27,7 +27,7 @@ export class AutoparkService extends BaseService {
         return {
           autoparkDetailed: autoparkDetailedData,
           cars: carsData,
-          reviews: reviewsData
+          reviews: reviewsUserData
         };
       })
     );
