@@ -1,0 +1,1 @@
+export { AutoDetailedComponent } from './auto-detailed.component'

@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, ValidationErrors } from '@angular/forms';
+
 import { startWith, Subject, takeUntil } from 'rxjs';
 
 @Directive({
-  selector: 'app-base-control',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: BaseControl,
-    multi: true
-  }]
+    selector: 'app-base-control',
+    providers: [{
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: BaseControl,
+            multi: true
+        }],
+    standalone: true
 })
 export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() public errorsMap: { [key: string]: string } | null = null;

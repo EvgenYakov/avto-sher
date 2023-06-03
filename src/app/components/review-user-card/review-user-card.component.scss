@@ -1,0 +1,80 @@
+@import "../../../theme/colors";
+@import "../../../theme/mixins";
+
+:host ::ng-deep {
+  .p-card-content {
+    @include flexMix(column, stretch, space-between);
+
+    @include media-s() {
+      padding: 0.5rem;
+    }
+
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .p-card .p-card-body {
+    @include media-s() {
+      padding: 0.8rem;
+    }
+  }
+
+  .p-rating-icon {
+    width: 1.5rem;
+    justify-content: flex-end;
+    cursor: default;
+  }
+}
+
+.review {
+  &__header {
+    @include flexMix(row, stretch, space-between);
+
+    @include media-l() {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+  &__user-info {
+    @include flexMix(row, stretch, flex-start);
+
+    gap: 1rem;
+
+    @include media-s() {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      gap: 1rem;
+    }
+  }
+
+  &__avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 1rem;
+  }
+
+  &__header-wrapper {
+    @include flexMix(column, flex-start, flex-start);
+
+    @include media-l() {
+      .rating-form {
+        margin-left: -8px;
+      }
+    }
+    @include media-s() {
+      align-items: center;
+    }
+    gap: 0.5rem;
+
+  }
+
+
+  &__text {
+    color: var(--text-color-secondary);
+  }
+}
+
+

@@ -1,0 +1,32 @@
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
+
+import { environment } from '@environments/environment';
+import { BaseService } from '@services';
+
+import { AuthResponse, LoginDto, RegisterDto } from '../../pages/auth/models';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService extends BaseService {
+
+  public login(loginDto: LoginDto): Observable<AuthResponse> {
+    console.log(loginDto)
+    return this.httpService.post<AuthResponse>(`${ environment.apiUrl }/auth/signIn`, loginDto, { withCredentials: true });
+  }
+
+  public registration(registerDto: RegisterDto): Observable<AuthResponse> {
+    console.log(registerDto)
+    return this.httpService.post<AuthResponse>(`${ environment.apiUrl }/auth/signUp`, registerDto, { withCredentials: true });
+  }
+
+  public logout(): void {
+    this.httpService.post(`${ environment.apiUrl }/auth/logout`, {}, { withCredentials: true });
+  }
+
+  public refreshToken(): Observable<string> {
+    return this.httpService.post<any>(`${ environment.apiUrl }/auth/refresh-token`, {}, { withCredentials: true });
+  }
+}
