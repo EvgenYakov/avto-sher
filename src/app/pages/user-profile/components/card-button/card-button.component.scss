@@ -1,0 +1,31 @@
+@import "../../../../../theme/mixins";
+@import "../../../../../theme/colors";
+
+:host ::ng-deep {
+  .p-card,
+  .p-card-body,
+  .p-card-content {
+    height: 100%;
+  }
+
+  .p-card-content {
+    padding: 0;
+  }
+
+  .p-card {
+    background-color: $link-color;
+  }
+}
+
+.card {
+  @include flexMix(column, center, space-between);
+  text-align: center;
+
+  height: 100%;
+  color: var(--primary-color-text);
+
+  &__icon {
+    margin-top: 1rem;
+    font-size: 3rem;
+  }
+}

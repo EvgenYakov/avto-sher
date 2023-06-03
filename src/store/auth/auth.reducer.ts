@@ -6,6 +6,7 @@ import {
   registerRequestFailure,
   registerRequestSuccess
 } from './auth.actions';
+
 import { AuthState } from './auth.state';
 
 const initialState: AuthState = {
@@ -16,14 +17,18 @@ const initialState: AuthState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(loginRequestSuccess, registerRequestSuccess, (state, action) => ({
-    ...state,
-    authResponse: action.authResponse,
-    isAuth: true
-  })),
-  on(loginRequestFailure, registerRequestFailure, (state, action) => ({
-    ...state,
-    backendErrors: action.backendError
-  })),
+  on( loginRequestSuccess, registerRequestSuccess, (state, action) => (
+    {
+      ...state,
+      authResponse: action.authResponse,
+      isAuth: true
+    }
+  ) ),
+  on( loginRequestFailure, registerRequestFailure, (state, action) => (
+    {
+      ...state,
+      backendError: action.backendError
+    }
+  ) ),
 );
 

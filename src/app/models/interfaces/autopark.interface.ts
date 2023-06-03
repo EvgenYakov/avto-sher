@@ -1,6 +1,4 @@
-import { AutoparkStatusData } from '../../modules/autopark-detailed/interfaces/autopark-status-data.interface';
-import { AutoCard } from './auto.interface';
-import { ReviewAutopark } from './review.interface';
+import { AutoparkStatusData } from './autopark-status-data.interface';
 
 export interface AutoparkCard {
   id: number;

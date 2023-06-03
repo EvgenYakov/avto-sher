@@ -1,16 +1,12 @@
-export * from './auto-card/auto-card.component';
-export * from './auto-card/auto-card.module';
+export * from './rating-stars'
 
-export * from './review-autopark-card/review-autopark-card.component';
-export * from './review-autopark-card/review-autopark-card.module';
-
-export * from './auto-filter/auto-filter.component';
-export * from './auto-filter/auto-filter.module';
-
-export * from './autopark-card/autopark-card.component';
-export * from './autopark-card/autopark-card.module';
-
-export * from './spinner/spinner.component'
-export * from './spinner/spinner.module'
-
-export * from './controls';
+export * from './auto-card'
+export * from './auto-filter'
+export * from './autopark-card'
+export * from './controls'
+export * from './footer'
+export * from './header'
+export * from './load-more'
+export * from './review-user-card'
+export * from './review-auto-card'
+export * from './spinner'
