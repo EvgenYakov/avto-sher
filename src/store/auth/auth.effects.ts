@@ -8,6 +8,7 @@ import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 
 import {
+  accessTokenStatus,
   loginRequest,
   loginRequestFailure,
   loginRequestSuccess,
@@ -40,6 +41,7 @@ export class AuthEffects {
     ofType( loginRequest ),
     switchMap( ({ loginDto }) => this.authService.login( loginDto ) ),
     map( (authResponse) => {
+      console.log( authResponse )
       this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
       return loginRequestSuccess( { authResponse } );
     } ),
@@ -66,12 +68,13 @@ export class AuthEffects {
     ofType( refreshTokenRequest ),
     switchMap( () => this.authService.refreshToken() ),
     map( (newAccessToken) => {
+      console.log('newAccess: ',newAccessToken)
       console.log( 'need to check HttpErrorResponse' )
       this.localStorageService.setItemFromStorage( LocalStorageKeys.ACCESS_TOKEN, newAccessToken );
       return refreshTokenRequestSuccess( { newAccessToken } );
     } ),
     catchError( (error: HttpErrorResponse) => {
-      if ( error.status === 401 ) {
+      if(error.status === 401) {
         return of( unauthorized() );
       }
       return of( refreshTokenRequestFailure( { backendError: error.error } ) );
@@ -88,6 +91,12 @@ export class AuthEffects {
     ),
     { dispatch: false }
   );
+
+  public accessTokenStatus$ = createEffect( () => this.actions$.pipe(
+    ofType( accessTokenStatus ),
+    switchMap( () => this.authService.accessTokenStatus() ),
+    tap( (response) => console.log( response ) )
+  ) );
 
   public navigate$ = createEffect( () => this.actions$.pipe(
       ofType( loginRequestSuccess, registerRequestSuccess ),

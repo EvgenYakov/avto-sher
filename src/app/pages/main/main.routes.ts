@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 
 import { MainComponent } from './main.component';
-import { MainRoutes } from './enums/main-routes.enum';
+import { MainRoutes } from '@pages';
 
 export default [
   {
@@ -17,11 +17,11 @@ export default [
         loadChildren: () => import('../user-profile/user-profile.routes')
       },
       {
-        path: MainRoutes.AUTOPARK_DETAILED,
+        path: MainRoutes.AUTOPARK_DETAILED + '/:id',
         loadChildren: () => import('../autopark-detailed/autopark-detailed.routes')
       },
       {
-        path: MainRoutes.AUTO_DETAILED,
+        path: MainRoutes.AUTO_DETAILED + '/:id',
         loadChildren: () => import('../auto-detailed/auto-detailed.routes')
       },
     ]

@@ -31,12 +31,14 @@
     padding: 3.438rem;
     background-color: var(--primary-color-text);
     border-radius: 16px;
+
+    &__logo {
+      text-align: center;
+      margin-bottom: 1.563rem;
+    }
   }
 
-  .logo {
-    text-align: center;
-    margin-bottom: 1.563rem;
-  }
+
 
   .form {
     height: 85%;
