@@ -1,0 +1,16 @@
+@import "../../../../../theme/colors";
+@import "../../../../../theme/mixins";
+
+.link:hover {
+  color: var(--primary-color);
+}
+
+.icons {
+  @include flexMix(row, center, space-between);
+
+  gap: 1rem;
+
+  &__icon {
+    font-size: 1.3rem;
+  }
+}

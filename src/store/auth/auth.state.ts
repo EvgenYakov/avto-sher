@@ -1,4 +1,6 @@
-import { AuthResponse, BackendError } from '@models';
+import { BackendError } from '@models';
+import { AuthResponse } from '../../app/pages/auth';
+
 
 export interface AuthState {
   isAuth: boolean;

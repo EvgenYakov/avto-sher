@@ -1,0 +1,23 @@
+@import "../../../../../theme/mixins";
+
+:host ::ng-deep {
+  .p-card,
+  .p-card-body,
+  .p-card-content {
+    height: 100%;
+  }
+
+  .p-card-content {
+    padding: 0;
+  }
+}
+
+.card {
+  @include flexMix(column, stretch, space-between);
+
+  height: 100%;
+
+  &__subtitle {
+    color: var(--text-color-secondary);
+  }
+}

@@ -1,13 +1,17 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AutoparkCard } from '@models';
 import { Router } from '@angular/router';
+
+import { AutoparkCard } from '@models';
 import { AppRoutes } from '@constants';
+import { AUTOPARK_CARD_DEPS } from './autopark-card.dependencies';
 
 @Component({
-  selector: 'app-autopark-card',
-  templateUrl: './autopark-card.component.html',
-  styleUrls: ['./autopark-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-autopark-card',
+    templateUrl: './autopark-card.component.html',
+    styleUrls: ['./autopark-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [AUTOPARK_CARD_DEPS]
 })
 export class AutoparkCardComponent {
 

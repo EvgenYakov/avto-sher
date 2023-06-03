@@ -3,7 +3,7 @@ import { faker } from '@faker-js/faker';
 
 import { AutoparkStatus } from '@constants';
 import { AutoparkBonus, AutoparkCard, AutoparkDetailed } from '@models';
-import { getAutoparkStatusData } from '../app/modules/autopark-detailed/helpers/get-data-by-status.helper';
+import { getAutoparkStatusData } from '../app/pages/autopark-detailed/helpers/get-data-by-status.helper';
 import { AutoparkStatusData } from '../app/models/interfaces/autopark-status-data.interface';
 
 const generateStatus = (): AutoparkStatus => {
