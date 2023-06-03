@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { BackendError } from '@models';
-import { AuthResponse, LoginDto, RegisterDto } from '../../app/pages/auth';
+import { AuthResponse, LoginDto, RegisterDto } from '@pages';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',
@@ -17,6 +17,10 @@ export enum AuthActions {
   REFRESH_TOKEN_REQUEST_FAILURE = '[AUTH] Send refresh token request for getting new tokens failure',
 
   UNAUTHORIZED = '[AUTH] Unauthorized',
+
+  ACCESS_TOKEN_STATUS = '[AUTH] Get access token status',
+  ACCESS_TOKEN_STATUS_SUCCESS = '[AUTH] Token is valid',
+  // ACCESS_TOKEN_STATUS_FAILURE = '[AUTH] Token is invalid',
 }
 
 export const loginRequest = createAction(
@@ -65,4 +69,12 @@ export const refreshTokenRequestFailure = createAction(
 
 export const unauthorized = createAction(
   AuthActions.UNAUTHORIZED
+);
+
+export const accessTokenStatus = createAction(
+  AuthActions.ACCESS_TOKEN_STATUS
+);
+
+export const accessTokenStatusSuccess = createAction(
+  AuthActions.ACCESS_TOKEN_STATUS_SUCCESS
 );

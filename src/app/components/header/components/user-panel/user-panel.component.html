@@ -1,4 +1,4 @@
-<ng-container *ngIf="!isAuthorized; else userPanel">
+<ng-container *ngIf="!(isAuthorized | async); else userPanel">
   <div (click)="navigateToAuth()" class="link">Войти</div>
 </ng-container>
 
@@ -6,6 +6,6 @@
   <div class="icons">
     <i class="pi pi-heart icons__icon link"></i>
     <i class="pi pi-comment icons__icon link"></i>
-    <i class="pi pi-user icons__icon link"></i>
+    <i class="pi pi-user icons__icon link" [routerLink]="[MainRoutes.USER_PROFILE]"></i>
   </div>
 </ng-template>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -27,18 +27,15 @@ import { AUTOPARK_DETAILED_DEPS } from './autopark-detailed.dependencies';
 } )
 export class AutoparkDetailedComponent implements OnInit, OnDestroy {
 
-  public isLoading: Observable<boolean>;
-  public autoparkDetailed$: Observable<AutoparkDetailed>;
-  public cars: Observable<AutoCard[]>;
-  public reviews: Observable<ReviewUser[]>;
+  private store = inject( Store );
+  private activatedRoute = inject( ActivatedRoute );
+
+  public isLoading: Observable<boolean> = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARK_DETAILED } );
+  public autoparkDetailed$: Observable<AutoparkDetailed> = this.store.select( selectAutoparkDetailed );
+  public cars: Observable<AutoCard[]> = this.store.select( selectAutoparkCars );
+  public reviews: Observable<ReviewUser[]> = this.store.select( selectAutoparkReviews );
 
   private destroy$ = new Subject<void>();
-
-  constructor(
-    private store: Store,
-    private activatedRoute: ActivatedRoute
-  ) {
-  }
 
   public ngOnInit(): void {
     this.activatedRoute.params.pipe(
@@ -46,19 +43,10 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     ).subscribe( (params) => {
       this.store.dispatch( loadAutoparkDetailed( { autoparkId: params['id'] } ) );
     } )
-    this.getDataFromStore();
-  }
-
-  private getDataFromStore(): void {
-    this.isLoading = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARK_DETAILED } );
-    this.autoparkDetailed$ = this.store.select( selectAutoparkDetailed );
-    this.cars = this.store.select( selectAutoparkCars );
-    this.reviews = this.store.select( selectAutoparkReviews );
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

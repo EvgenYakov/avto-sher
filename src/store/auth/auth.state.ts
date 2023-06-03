@@ -1,8 +1,7 @@
-import { AuthResponse } from '../../app/pages/auth';
-
+import { AuthResponse } from '@pages';
 
 export interface AuthState {
-  isAuth: boolean;
+  isLoggedIn: boolean;
   authResponse: AuthResponse | null;
   backendErrors: string;
 }
