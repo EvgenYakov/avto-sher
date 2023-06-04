@@ -1,12 +1,11 @@
-import { CardLink } from '../interfaces/card-link.interface';
-import { AppRoutes } from "@constants";
+import { CardLink } from '../interfaces';
 
 export const CARD_LINKS: CardLink[] = [
   {
     title: 'Мои заказы',
     counterProperty: 'ordersCounter',
     counterText: 'завершенных заказов',
-    routerLink: AppRoutes.ORDERS,
+    routerLink: '',
     cssClass: 'orders',
   },
   {
@@ -27,7 +26,7 @@ export const CARD_LINKS: CardLink[] = [
     title: 'Мои отзывы',
     counterProperty: 'reviewsByUserCounter',
     counterText: 'отзывов',
-    routerLink: AppRoutes.REVIEWS,
+    routerLink: '',
     cssClass: 'my-reviews',
   },
   {

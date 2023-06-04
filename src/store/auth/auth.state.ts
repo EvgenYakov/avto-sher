@@ -1,9 +1,7 @@
-import { BackendError } from '@models';
-import { AuthResponse } from '../../app/pages/auth';
-
+import { AuthResponse } from '@pages';
 
 export interface AuthState {
-  isAuth: boolean;
+  isLoggedIn: boolean;
   authResponse: AuthResponse | null;
-  backendErrors: BackendError | null;
+  backendErrors: string;
 }

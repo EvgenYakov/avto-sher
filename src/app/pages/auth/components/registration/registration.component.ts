@@ -5,7 +5,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AuthState, registerRequest } from '@store';
-
 import { EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
 
 import { RegisterDto, RegistrationForm } from '../../models';
@@ -50,9 +49,7 @@ export class RegistrationComponent implements OnInit {
     this.router.navigate( ['../'], { relativeTo: this.route } );
   }
 
-  public openConfidentiality() {
-
-  }
+  public openConfidentiality() {}
 
   public onSubmit(): void {
 
@@ -62,7 +59,6 @@ export class RegistrationComponent implements OnInit {
     } as RegisterDto;
 
     this.store.dispatch( registerRequest( { registerDto: formValues } ) );
-
   }
 
   public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
@@ -94,9 +90,5 @@ export class RegistrationComponent implements OnInit {
     } );
 
     return registerFormGroup;
-  }
-
-  public confirm1() {
-
   }
 }

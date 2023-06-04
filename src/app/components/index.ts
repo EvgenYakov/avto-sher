@@ -1,4 +1,5 @@
 export * from './rating-stars'
+export * from './spinner'
 
 export * from './auto-card'
 export * from './auto-filter'
@@ -9,4 +10,3 @@ export * from './header'
 export * from './load-more'
 export * from './review-user-card'
 export * from './review-auto-card'
-export * from './spinner'

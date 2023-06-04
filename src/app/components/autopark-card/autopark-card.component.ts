@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AutoparkCard } from '@models';
 import { AppRoutes } from '@constants';
 import { AUTOPARK_CARD_DEPS } from './autopark-card.dependencies';
+import { MainRoutes } from '../../pages/main';
 
 @Component({
     selector: 'app-autopark-card',
@@ -20,6 +21,6 @@ export class AutoparkCardComponent {
   constructor(private router: Router) {}
 
   public navigate(id: number) {
-    this.router.navigate([`${AppRoutes.MAIN}/${AppRoutes.AUTOPARK_DETAILED}`, id])
+    this.router.navigate([`${AppRoutes.MAIN}/${MainRoutes.AUTOPARK_DETAILED}`, id])
   }
 }

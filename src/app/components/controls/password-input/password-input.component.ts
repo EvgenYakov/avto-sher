@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BaseControl } from '@models';
 import { NgClass } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,5 +14,5 @@ import { ControlWrapperComponent } from '../control-wrapper/control-wrapper.comp
     imports: [ControlWrapperComponent, PasswordModule, FormsModule, ReactiveFormsModule, NgClass]
 })
 export class PasswordInputComponent extends BaseControl {
-
+  @Input() isFeedback = false;
 }

@@ -11,7 +11,7 @@ export const selectAuthErrors = createSelector(
 
 export const selectIsLoggedIn = createSelector(
   authFeatureSelector,
-  (state) => state.isAuth
+  (state) => state.isLoggedIn
 );
 
 export const selectAuthResponse = createSelector(
