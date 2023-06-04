@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { appReducers, AuthEffects, AutoparkDetailedEffects, CarDetailedEffects, CarListEffects } from '@store';
 import { environment } from '@environments/environment';
-import { ApplyTokenInterceptor, AuthGuard, RefreshTokenInterceptor } from '@services';
+import { ApplyTokenInterceptor, AuthGuard } from '@services';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
 
@@ -43,11 +43,11 @@ bootstrapApplication( AppComponent, {
       useClass: ApplyTokenInterceptor,
       multi: true,
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RefreshTokenInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: RefreshTokenInterceptor,
+    //   multi: true,
+    // },
     provideAnimations(),
     provideHttpClient( withInterceptorsFromDi() )
   ]

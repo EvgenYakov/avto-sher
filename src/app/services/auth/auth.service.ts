@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
