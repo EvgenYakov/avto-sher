@@ -68,7 +68,12 @@ export class AuthEffects {
     ofType( accessTokenStatus ),
     switchMap( () => this.authService.accessTokenStatus() ),
     map( () => accessTokenStatusSuccess() ),
-    catchError( () => of( accessTokenStatusFailure() ) )
+    catchError( (error: HttpErrorResponse) => {
+      if(error.status === 401) {
+        this.store.dispatch( refreshTokenRequest() );
+      }
+      return of( accessTokenStatusFailure() );
+    } )
   ) );
 
   public refreshToken$ = createEffect( () => this.actions$.pipe(
@@ -91,7 +96,7 @@ export class AuthEffects {
       tap( () => {
         this.authService.logout();
         this.localStorageService.removeItemFromStorage( LocalStorageKeys.ACCESS_TOKEN );
-        this.router.navigate( ['/login'] );
+        this.router.navigate( [AppRoutes.AUTH] );
       } )
     ),
     { dispatch: false }
