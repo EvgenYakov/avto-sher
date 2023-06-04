@@ -1,14 +1,14 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import { AuthState, loginRequest } from '@store';
-
+import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
+import { loginRequest, selectAuthErrors } from '@store';
 import { LoginDto, LoginForm } from '../../models';
+
 import { LOGIN_DEPS } from './login.dependencies';
 
-import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
 
 @Component( {
   selector: 'app-login',
@@ -19,13 +19,15 @@ import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
   imports: [LOGIN_DEPS]
 } )
 export class LoginComponent implements OnInit {
+
+  private store = inject( Store );
+
+  public backendError = this.store.select( selectAuthErrors )
+
   public readonly requiredMsg = EMAIL_FIELD;
   public readonly passwordMsg = PASSWORD_FIELD;
 
   public loginForm: FormGroup<LoginForm>;
-
-  constructor(private store: Store<AuthState>) {
-  }
 
   public ngOnInit(): void {
     this.loginForm = this.initializeForm();
@@ -46,12 +48,11 @@ export class LoginComponent implements OnInit {
     return formGroup;
   }
 
-  public forgetPassword(): void {
-
-  }
+  /*TODO: add logic for forget password*/
+  public forgetPassword(): void {}
 
   public onSubmit(): void {
-    const formValues = this.loginForm.value as LoginDto;
+    const formValues = <LoginDto>this.loginForm.value;
     this.store.dispatch( loginRequest( { loginDto: formValues } ) );
   }
 }

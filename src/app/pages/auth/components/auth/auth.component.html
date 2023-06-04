@@ -1,15 +1,14 @@
 <div class="auth-wrapper">
-  <div class="container">
-
+  <ng-template #authForm>
     <div class="content">
       <div class="content__logo">
         <img src="/assets/icons/logo.png" alt="logo">
       </div>
-
-      <div class="content__form">
+      <div class="form">
         <router-outlet></router-outlet>
       </div>
     </div>
+  </ng-template>
 
-  </div>
+  <app-spinner *ngIf="isLoading$ | async; else authForm"></app-spinner>
 </div>

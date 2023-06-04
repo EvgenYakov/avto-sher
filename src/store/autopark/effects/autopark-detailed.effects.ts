@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import {
@@ -16,33 +17,32 @@ import { LoadingTypes } from '@constants';
 
 @Injectable()
 export class AutoparkDetailedEffects {
-  constructor(
-    private actions$: Actions,
-    private autoparkService: AutoparkService,
-  ) {
-  }
 
-  public loadAutoparkDetailed$ = createEffect(() => this.actions$.pipe(
-    ofType(loadAutoparkDetailed),
-    switchMap(({ autoparkId }) => this.autoparkService.getAutoparkById(autoparkId)),
-    map((autoparkDetailedResponse) => loadAutoparkDetailedSuccess({ autoparkDetailedResponse })),
-    catchError((error: HttpErrorResponse) => of(loadAutoparkDetailedFailure({ errors: error }))),
-  ));
+  private actions$ = inject( Actions );
+  private autoparkService = inject( AutoparkService );
 
-  addLoading$ = createEffect(() =>
+
+  public loadAutoparkDetailed$ = createEffect( () => this.actions$.pipe(
+    ofType( loadAutoparkDetailed ),
+    switchMap( ({ autoparkId }) => this.autoparkService.getAutoparkById( autoparkId ) ),
+    map( (autoparkDetailedResponse) => loadAutoparkDetailedSuccess( { autoparkDetailedResponse } ) ),
+    catchError( (error: HttpErrorResponse) => of( loadAutoparkDetailedFailure( { errors: error } ) ) ),
+  ) );
+
+  addLoading$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(loadAutoparkDetailed),
-      map(() => addLoading({ addLoading: LoadingTypes.AUTOPARK_DETAILED }))
+      ofType( loadAutoparkDetailed ),
+      map( () => addLoading( { addLoading: LoadingTypes.AUTOPARK_DETAILED } ) )
     )
   );
 
-  removeLoading$ = createEffect(() =>
+  removeLoading$ = createEffect( () =>
     this.actions$.pipe(
       ofType(
         loadAutoparkDetailedSuccess,
         loadAutoparkDetailedFailure
       ),
-      map(() => removeLoading({ removeLoading: LoadingTypes.AUTOPARK_DETAILED }))
+      map( () => removeLoading( { removeLoading: LoadingTypes.AUTOPARK_DETAILED } ) )
     )
   );
 }

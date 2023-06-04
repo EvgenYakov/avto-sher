@@ -10,10 +10,10 @@
   <p-sidebar [(visible)]="isOpen" position="right">
     <nav class="mobile-nav">
       <ul class="mobile-nav__list">
-        <li *ngFor="let link of mainNav" [routerLink]="link.routerLink">
+        <li *ngFor="let link of MAIN_NAV" [routerLink]="link.routerLink">
           <a class="mobile-nav__link">{{ link.label }}</a>
         </li>
-        <li *ngFor="let link of secondNav" [routerLink]="link.routerLink">
+        <li *ngFor="let link of SECONDARY_NAV" [routerLink]="link.routerLink">
           <a class="mobile-nav__link">{{ link.label }}</a>
         </li>
         <li>
@@ -28,7 +28,7 @@
   <div class="header__nav-wrapper">
     <nav class="main-nav container">
       <ul class="main-nav__list">
-        <li *ngFor="let link of mainNav" class="main-nav__list-item" [routerLink]="link.routerLink">
+        <li *ngFor="let link of MAIN_NAV" class="main-nav__list-item" [routerLink]="link.routerLink">
           <a class="main-nav__link link">{{ link.label }}</a>
         </li>
       </ul>
@@ -37,7 +37,7 @@
 
   <nav class="secondary-nav container">
     <ul class="secondary-nav__list">
-      <li *ngFor="let link of secondNav" [routerLink]="link.routerLink">
+      <li *ngFor="let link of SECONDARY_NAV" [routerLink]="link.routerLink">
         <a class="secondary-nav__link link small-text">{{ link.label }}</a>
       </li>
     </ul>

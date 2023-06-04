@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-
-import { BackendError } from '@models';
-import { AuthResponse, LoginDto, RegisterDto } from '../../app/pages/auth';
+import { AuthResponse, LoginDto, RegisterDto } from '@pages';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',
@@ -17,6 +15,10 @@ export enum AuthActions {
   REFRESH_TOKEN_REQUEST_FAILURE = '[AUTH] Send refresh token request for getting new tokens failure',
 
   UNAUTHORIZED = '[AUTH] Unauthorized',
+
+  ACCESS_TOKEN_STATUS = '[AUTH] Get access token status',
+  ACCESS_TOKEN_STATUS_SUCCESS = '[AUTH] Token is valid',
+  ACCESS_TOKEN_STATUS_FAILURE = '[AUTH] Token is invalid',
 }
 
 export const loginRequest = createAction(
@@ -31,7 +33,7 @@ export const loginRequestSuccess = createAction(
 
 export const loginRequestFailure = createAction(
   AuthActions.LOGIN_FAILURE,
-  props<{ backendError: BackendError }>()
+  props<{ backendError: string }>()
 );
 
 export const registerRequest = createAction(
@@ -46,7 +48,7 @@ export const registerRequestSuccess = createAction(
 
 export const registerRequestFailure = createAction(
   AuthActions.REGISTER_FAILURE,
-  props<{ backendError: BackendError }>()
+  props<{ backendError: string }>()
 );
 
 export const refreshTokenRequest = createAction(
@@ -55,14 +57,24 @@ export const refreshTokenRequest = createAction(
 
 export const refreshTokenRequestSuccess = createAction(
   AuthActions.REFRESH_TOKEN_REQUEST_SUCCESS,
-  props<{ newAccessToken: string }>()
 );
 
 export const refreshTokenRequestFailure = createAction(
   AuthActions.REFRESH_TOKEN_REQUEST_FAILURE,
-  props<{ backendError: BackendError }>()
 );
 
 export const unauthorized = createAction(
   AuthActions.UNAUTHORIZED
+);
+
+export const accessTokenStatus = createAction(
+  AuthActions.ACCESS_TOKEN_STATUS
+);
+
+export const accessTokenStatusSuccess = createAction(
+  AuthActions.ACCESS_TOKEN_STATUS_SUCCESS
+);
+
+export const accessTokenStatusFailure = createAction(
+  AuthActions.ACCESS_TOKEN_STATUS_FAILURE
 );

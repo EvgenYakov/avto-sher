@@ -2,9 +2,8 @@ import { BlueprintFactory, createBlueprintBuilder } from '@ngxp/builder';
 import { faker } from '@faker-js/faker';
 
 import { AutoparkStatus } from '@constants';
-import { AutoparkBonus, AutoparkCard, AutoparkDetailed } from '@models';
-import { getAutoparkStatusData } from '../app/pages/autopark-detailed/helpers/get-data-by-status.helper';
-import { AutoparkStatusData } from '../app/models/interfaces/autopark-status-data.interface';
+import { AutoparkBonus, AutoparkCard, AutoparkDetailed, AutoparkStatusData } from '@models';
+import { getAutoparkStatusData } from '../app/pages/autopark-detailed';
 
 const generateStatus = (): AutoparkStatus => {
   const values = Object.values( AutoparkStatus );

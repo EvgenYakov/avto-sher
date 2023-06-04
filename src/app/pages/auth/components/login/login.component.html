@@ -1,10 +1,13 @@
 <div class="content">
   <div class="header">
     <span class="header__label">Вход в существующий аккаунт</span>
+<!--    <app-backend-errors *ngIf="(backendError | async) as message"-->
+<!--                        [message]="message"-->
+<!--    ></app-backend-errors>-->
   </div>
 
   <div class="main">
-    <form class="login-form" [formGroup]="loginForm">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <app-text-input
               placeholder="Ваш email"
               [errorsMap]="requiredMsg"
@@ -37,6 +40,4 @@
     ></p-button>
 
   </div>
-
-
 </div>

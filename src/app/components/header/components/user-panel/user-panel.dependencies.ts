@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
-export const USER_PANEL_DEPS = [NgIf, RouterLink];
+export const USER_PANEL_DEPS = [NgIf, RouterLink, AsyncPipe];
