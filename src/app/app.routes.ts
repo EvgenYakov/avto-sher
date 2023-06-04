@@ -12,9 +12,9 @@ export const appRoutes: Routes = [
     path: AppRoutes.AUTH,
     loadChildren: () => import('./pages/auth/auth.routes')
   },
-  // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
-  // {
-  //   path: AppRoutes.NOT_FOUND_PAGE,
-  //   loadChildren: () => import('./pages/not-found/not-found.routes')
-  // },
+  { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
+  {
+    path: AppRoutes.NOT_FOUND_PAGE,
+    loadChildren: () => import('./pages/not-found/not-found.routes')
+  },
 ];

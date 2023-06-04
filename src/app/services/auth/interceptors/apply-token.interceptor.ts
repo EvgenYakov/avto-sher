@@ -7,7 +7,7 @@ import { LocalStorageKeys } from '@constants';
 import { LocalStorageService } from '@services';
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+export class ApplyTokenInterceptor implements HttpInterceptor {
 
   constructor(private localStorageService: LocalStorageService) {}
 

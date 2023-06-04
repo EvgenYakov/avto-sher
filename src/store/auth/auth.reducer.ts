@@ -1,9 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
+  accessTokenStatusFailure,
   accessTokenStatusSuccess,
   loginRequestFailure,
   loginRequestSuccess,
+  refreshTokenRequestFailure,
   refreshTokenRequestSuccess,
   registerRequestFailure,
   registerRequestSuccess
@@ -30,6 +32,12 @@ export const authReducer = createReducer(
       ...state,
       authResponse: action.authResponse,
       isLoggedIn: true
+    }
+  ) ),
+  on( refreshTokenRequestFailure, accessTokenStatusFailure, (state) => (
+    {
+      ...state,
+      isLoggedIn: false
     }
   ) ),
   on( loginRequestFailure, registerRequestFailure, (state, action) => (
