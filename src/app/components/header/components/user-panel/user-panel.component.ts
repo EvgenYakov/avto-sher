@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppRoutes } from '@constants';
+import { AppRoutes, LoadingTypes } from '@constants';
 import { USER_PANEL_DEPS } from './user-panel.dependencies';
 
 import { MainRoutes } from '@pages';
-import { selectIsLoggedIn } from '@store';
+import { selectIsLoggedIn, selectLoading } from '@store';
 import { Store } from '@ngrx/store';
 
 @Component( {
@@ -21,6 +21,7 @@ export class UserPanelComponent {
   private router = inject( Router );
   private store = inject( Store );
 
+  public isLoading = this.store.select( selectLoading, { type: LoadingTypes.AUTH } );
   public isAuthorized = this.store.select( selectIsLoggedIn );
 
   protected readonly MainRoutes = MainRoutes;
