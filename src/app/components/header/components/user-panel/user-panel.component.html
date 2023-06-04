@@ -1,8 +1,8 @@
-<ng-container *ngIf="!(isAuthorized | async); else userPanel">
+<ng-container *ngIf="!(isAuthorized | async); else authorized">
   <div (click)="navigateToAuth()" class="link">Войти</div>
 </ng-container>
 
-<ng-template #userPanel>
+<ng-template #authorized>
   <div class="icons">
     <i class="pi pi-heart icons__icon link"></i>
     <i class="pi pi-comment icons__icon link"></i>

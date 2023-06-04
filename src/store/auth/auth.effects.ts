@@ -9,6 +9,8 @@ import { catchError, map, of, switchMap, tap } from 'rxjs';
 
 import {
   accessTokenStatus,
+  accessTokenStatusFailure,
+  accessTokenStatusSuccess,
   loginRequest,
   loginRequestFailure,
   loginRequestSuccess,
@@ -29,19 +31,18 @@ import { addLoading, removeLoading } from '../shared';
 @Injectable()
 export class AuthEffects {
 
-  constructor(private actions$: Actions,
+  constructor(
+    private actions$: Actions,
     private authService: AuthService,
     private router: Router,
     private store: Store,
     private localStorageService: LocalStorageService
-  ) {
-  }
+  ) {}
 
   public loginRequest$ = createEffect( () => this.actions$.pipe(
     ofType( loginRequest ),
     switchMap( ({ loginDto }) => this.authService.login( loginDto ) ),
     map( (authResponse) => {
-      console.log( authResponse )
       this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
       return loginRequestSuccess( { authResponse } );
     } ),
@@ -63,21 +64,29 @@ export class AuthEffects {
     )
   ) );
 
+  public getAccessTokenStatus$ = createEffect( () => this.actions$.pipe(
+    ofType( accessTokenStatus ),
+    switchMap( () => this.authService.accessTokenStatus() ),
+    map( () => accessTokenStatusSuccess() ),
+    catchError( (error: HttpErrorResponse) => {
+        // console.log( error )
+        return of( accessTokenStatusFailure() );
+      }
+    )
+  ) );
 
   public refreshToken$ = createEffect( () => this.actions$.pipe(
     ofType( refreshTokenRequest ),
     switchMap( () => this.authService.refreshToken() ),
-    map( (newAccessToken) => {
-      console.log('newAccess: ',newAccessToken)
-      console.log( 'need to check HttpErrorResponse' )
-      this.localStorageService.setItemFromStorage( LocalStorageKeys.ACCESS_TOKEN, newAccessToken );
-      return refreshTokenRequestSuccess( { newAccessToken } );
+    map( (authResponse) => {
+      this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
+      return refreshTokenRequestSuccess();
     } ),
     catchError( (error: HttpErrorResponse) => {
       if(error.status === 401) {
         return of( unauthorized() );
       }
-      return of( refreshTokenRequestFailure( { backendError: error.error } ) );
+      return of( refreshTokenRequestFailure() );
     } )
   ) );
 
@@ -92,12 +101,6 @@ export class AuthEffects {
     { dispatch: false }
   );
 
-  public accessTokenStatus$ = createEffect( () => this.actions$.pipe(
-    ofType( accessTokenStatus ),
-    switchMap( () => this.authService.accessTokenStatus() ),
-    tap( (response) => console.log( response ) )
-  ) );
-
   public navigate$ = createEffect( () => this.actions$.pipe(
       ofType( loginRequestSuccess, registerRequestSuccess ),
       tap( () => this.router.navigate( [AppRoutes.MAIN] ) )
@@ -109,7 +112,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(
         loginRequest,
-        registerRequest
+        registerRequest,
       ),
       map( () => addLoading( { addLoading: LoadingTypes.AUTH } ) )
     )
@@ -121,7 +124,7 @@ export class AuthEffects {
         loginRequestSuccess,
         loginRequestFailure,
         registerRequestSuccess,
-        registerRequestFailure
+        registerRequestFailure,
       ),
       map( () => removeLoading( { removeLoading: LoadingTypes.AUTH } ) )
     )

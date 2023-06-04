@@ -30,10 +30,10 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   private store = inject( Store );
   private activatedRoute = inject( ActivatedRoute );
 
-  public isLoading: Observable<boolean> = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARK_DETAILED } );
-  public autoparkDetailed$: Observable<AutoparkDetailed> = this.store.select( selectAutoparkDetailed );
-  public cars: Observable<AutoCard[]> = this.store.select( selectAutoparkCars );
-  public reviews: Observable<ReviewUser[]> = this.store.select( selectAutoparkReviews );
+  public isLoading = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARK_DETAILED } );
+  public autoparkDetailed$ = this.store.select( selectAutoparkDetailed );
+  public cars = this.store.select( selectAutoparkCars );
+  public reviews = this.store.select( selectAutoparkReviews );
 
   private destroy$ = new Subject<void>();
 

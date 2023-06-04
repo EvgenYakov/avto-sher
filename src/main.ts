@@ -2,7 +2,7 @@ import { importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideRouter, withDebugTracing, withRouterConfig } from '@angular/router';
+import { provideRouter, withRouterConfig } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { appReducers, AuthEffects, AutoparkDetailedEffects, CarDetailedEffects, CarListEffects } from '@store';
 import { environment } from '@environments/environment';
-import { AuthGuard, ErrorInterceptor, JwtInterceptor } from '@services';
+import { ApplyTokenInterceptor, AuthGuard, RefreshTokenInterceptor } from '@services';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
 
@@ -40,12 +40,12 @@ bootstrapApplication( AppComponent, {
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: JwtInterceptor,
+      useClass: ApplyTokenInterceptor,
       multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterceptor,
+      useClass: RefreshTokenInterceptor,
       multi: true,
     },
     provideAnimations(),
