@@ -1,10 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { AutoparksState } from '../states';
-import { loadAutoparkRegionsSuccess } from '../actions';
+import { loadAuctionAutoparksByRegionSuccess, loadAutoparkRegionsSuccess } from '../actions';
+
+import { Auction } from '@models';
 
 const initialState: AutoparksState = {
-  regions: []
+  regions: [],
+  auctionAutoparksCard: {} as Auction
 }
 
 export const autoparksReducer = createReducer(
@@ -12,5 +15,9 @@ export const autoparksReducer = createReducer(
   on( loadAutoparkRegionsSuccess, (state, action) => ({
     ...state,
     regions: action.regions
+  }) ),
+  on( loadAuctionAutoparksByRegionSuccess, (state, action) => ({
+    ...state,
+    auctionAutoparksCard: action.auctionAutoparks
   }) ),
 )

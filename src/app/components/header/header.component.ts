@@ -9,9 +9,6 @@ import { selectAutoparksRegions } from '@store';
 import { MAIN_NAV, SECONDARY_NAV, } from './constants';
 
 import { HEADER_CARD_DEPS } from './header.dependencies';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule } from '@angular/forms';
 
 @Component( {
   selector: 'app-header',
@@ -19,7 +16,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [HEADER_CARD_DEPS, AsyncPipe, DropdownModule, FormsModule, NgIf]
+  imports: [HEADER_CARD_DEPS]
 } )
 export class HeaderComponent {
 

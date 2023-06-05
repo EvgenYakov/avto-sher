@@ -4,8 +4,9 @@ import { map, Observable, of, timer } from 'rxjs';
 
 import { BaseService } from '../helpers';
 
-import { AutoCard, AutoparkCard, AutoparkDetailed, AutoparkRegion, AutoProfile, ReviewUser } from '@models';
+import { Auction, AutoCard, AutoparkCard, AutoparkDetailed, AutoparkRegion, ReviewUser } from '@models';
 import { autoparkDetailedData, carsData, reviewsUserData, topAutoparksCards } from '@test-data';
+import { environment } from '@environments/environment';
 
 export interface AutoparkDetailedResponse {
   autoparkDetailed: AutoparkDetailed,
@@ -21,6 +22,33 @@ export class AutoparkService extends BaseService {
     return timer( 1000 ).pipe(
       map( () => topAutoparksCards )
     )
+  }
+
+  public getAuctionAutoparksByRegion(regionName: string): Observable<Auction> {
+    console.log( 'selected region:', regionName );
+    return this.httpService.get<Auction>( `${ environment.apiUrl }/autoparks/main-page` ).pipe(
+      map( (auctionObject) => {
+        const updatedAuctionObject: Auction = {
+          top: auctionObject.top.map( (cards) => ({
+            ...cards,
+            rating: Math.random() * 5,
+            carsQuantity: Math.floor( (Math.random() * 100) + 1 )
+          }) ),
+          checked: auctionObject.checked.map( (cards) => ({
+            ...cards,
+            rating: Math.random() * 5,
+            carsQuantity: Math.floor( (Math.random() * 100) + 1 )
+          }) ),
+          new: auctionObject.new.map( (cards) => ({
+            ...cards,
+            rating: Math.random() * 5,
+            carsQuantity: Math.floor( (Math.random() * 100) + 1 )
+          }) ),
+        };
+
+        return updatedAuctionObject;
+      } )
+    );
   }
 
   public getAutoparksRegions(): Observable<AutoparkRegion[]> {

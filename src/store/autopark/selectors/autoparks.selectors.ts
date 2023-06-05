@@ -8,3 +8,8 @@ export const selectAutoparksRegions = createSelector(
   autoparksFeatureSelector,
   (state) => state.regions
 );
+
+export const selectAuctionAutoparks = createSelector(
+  autoparksFeatureSelector,
+  (state) => state.auctionAutoparksCard
+);

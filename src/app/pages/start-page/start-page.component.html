@@ -1,40 +1,44 @@
-<div class="wrapper">
-  <div class="top container">
-    <div class="top__title title">
-      ТОП автопарки
-    </div>
-    <div class="top__grid-list grid">
-      <app-autopark-card
-              class="item"
-              *ngFor="let card of topAutoparksCard"
-              [card]="card"
-      ></app-autopark-card>
-    </div>
-  </div>
-  <app-auto-filter></app-auto-filter>
-  <div class="checked container">
-    <div class="checked__title title">
-      Проверенные автопарки
-    </div>
-    <div class="checked__grid-list grid">
-      <app-autopark-card
-              class="item"
-              *ngFor="let card of checkedAutoparksCard"
-              [card]="card"
-      ></app-autopark-card>
-    </div>
-  </div>
+<app-spinner *ngIf="isLoading$ | async; else auctionCards"></app-spinner>
 
-  <div class="new container">
-    <div class="new__title title">
-      Новые автопарки
+<ng-template #auctionCards>
+  <div class="wrapper" *ngIf="(auctionAutoparks|async) as cards">
+    <div class="top container">
+      <div class="top__title title">
+        ТОП автопарки
+      </div>
+      <div class="top__grid-list grid">
+        <app-auction-autopark-card
+                class="item"
+                *ngFor="let card of cards.top"
+                [card]="card"
+        ></app-auction-autopark-card>
+      </div>
     </div>
-    <div class="new__grid-list grid">
-      <app-autopark-card
-              class="item"
-              *ngFor="let card of newAutoparksCard"
-              [card]="card"
-      ></app-autopark-card>
+    <app-auto-filter></app-auto-filter>
+    <div class="checked container">
+      <div class="checked__title title">
+        Проверенные автопарки
+      </div>
+      <div class="checked__grid-list grid">
+        <app-auction-autopark-card
+                class="item"
+                *ngFor="let card of cards.checked"
+                [card]="card"
+        ></app-auction-autopark-card>
+      </div>
+    </div>
+
+    <div class="new container">
+      <div class="new__title title">
+        Новые автопарки
+      </div>
+      <div class="new__grid-list grid">
+        <app-auction-autopark-card
+                class="item"
+                *ngFor="let card of cards.new"
+                [card]="card"
+        ></app-auction-autopark-card>
+      </div>
     </div>
   </div>
-</div>
+</ng-template>
