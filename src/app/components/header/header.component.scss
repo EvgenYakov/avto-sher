@@ -1,5 +1,9 @@
-@import "../../../theme/mixins";
-@import "../../../theme/colors";
+@import "mixins";
+@import "colors";
+
+.pi-map-marker {
+  font-size: 1.4rem;
+}
 
 .header {
   border-bottom: 1px solid $light-text-color;
@@ -68,7 +72,7 @@
 .secondary-nav {
   @include flexMix(row, center, space-between);
 
-  padding: 1rem 0;
+  padding: 0.5rem 0;
 
   @include media-l() {
     display: none;
