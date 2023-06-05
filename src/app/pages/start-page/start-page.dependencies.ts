@@ -1,7 +1,7 @@
-import { NgFor } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
-import { AutoFilterComponent, AutoparkCardComponent } from '@components';
+import { AuctionAutoparkCardComponent, AutoFilterComponent } from '@components';
 
 export const START_PAGE_DEPS = [
-  NgFor, AutoparkCardComponent, AutoFilterComponent
+  NgFor, AuctionAutoparkCardComponent, AutoFilterComponent, NgIf, AsyncPipe
 ];

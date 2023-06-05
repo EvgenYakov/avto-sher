@@ -3,7 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 
-import { PasswordInputComponent, TextInputComponent } from '@components';
+import { TextInputComponent } from '../../../../components/controls/text-input/text-input.component';
+import { PasswordInputComponent } from '../../../../components/controls/password-input/password-input.component';
+
 
 export const LOGIN_DEPS = [
   FormsModule, ReactiveFormsModule, TextInputComponent, PasswordInputComponent, RouterLink, ButtonModule
