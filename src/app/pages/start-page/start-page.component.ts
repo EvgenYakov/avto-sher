@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { Store } from '@ngrx/store';
 
-import { loadAuctionAutoparksByRegion, loadAutoparkRegions, selectAuctionAutoparks, selectLoading } from '@store';
+import { selectAuctionAutoparks, selectLoading } from '@store';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
-import { LoadingTypes } from '@constants';
+import { AppRoutes, LoadingTypes } from '@constants';
 import { SpinnerComponent } from '@components';
+import { Router } from '@angular/router';
+import { MainRoutes } from '@pages';
 
 @Component( {
   selector: 'app-start-page',
@@ -16,20 +18,15 @@ import { SpinnerComponent } from '@components';
   imports: [START_PAGE_DEPS, SpinnerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class StartPageComponent implements OnInit {
+export class StartPageComponent {
 
   private store = inject( Store );
-
-  //public topAutoparksCard = topAutoparksCards;
-  //public checkedAutoparksCard = checkedAutoparksCards;
-  //public newAutoparksCard = newAutoparksCards;
+  private router = inject( Router );
 
   public auctionAutoparks = this.store.select( selectAuctionAutoparks );
-  public isLoading$ = this.store.select(selectLoading, {type: LoadingTypes.AUTOPARKS})
+  public isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARKS } )
 
-  ngOnInit(): void {
-    this.store.dispatch( loadAutoparkRegions() );
-    this.store.dispatch( loadAuctionAutoparksByRegion( { regionName: 'Москва' } ) )
+  public navigateToDetailed(autoparkId: number): void {
+    this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, autoparkId] );
   }
-
 }
