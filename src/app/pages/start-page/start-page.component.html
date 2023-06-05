@@ -11,6 +11,7 @@
                 class="item"
                 *ngFor="let card of cards.top"
                 [card]="card"
+                (click)="navigateToDetailed(card.id)"
         ></app-auction-autopark-card>
       </div>
     </div>
@@ -24,6 +25,7 @@
                 class="item"
                 *ngFor="let card of cards.checked"
                 [card]="card"
+                (click)="navigateToDetailed(card.id)"
         ></app-auction-autopark-card>
       </div>
     </div>
@@ -37,6 +39,7 @@
                 class="item"
                 *ngFor="let card of cards.new"
                 [card]="card"
+                (click)="navigateToDetailed(card.id)"
         ></app-auction-autopark-card>
       </div>
     </div>
