@@ -39,7 +39,7 @@ export class AutoparksEffects {
 
   public loadAuctionAutoparksByRegion = createEffect( () => this.actions$.pipe(
     ofType( loadAuctionAutoparksByRegion ),
-    switchMap( ({ regionName }) => this.autoparkService.getAuctionAutoparksByRegion( regionName ) ),
+    switchMap( ({ regionId }) => this.autoparkService.getAuctionAutoparksByRegion( regionId ) ),
     map( (auctionAutoparks) => loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } ) ),
     catchError( () => of( loadAuctionAutoparksByRegionFailure() ) ),
   ) );

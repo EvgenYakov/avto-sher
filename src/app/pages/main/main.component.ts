@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 
-import { MAIN_DEPS } from './main.dependencies';
 import { Store } from '@ngrx/store';
+
 import { loadAuctionAutoparksByRegion, loadAutoparkRegions } from '@store';
+
+import { MAIN_DEPS } from './main.dependencies';
 
 @Component( {
   selector: 'app-main',
@@ -17,7 +19,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch( loadAutoparkRegions() );
-    this.store.dispatch( loadAuctionAutoparksByRegion( { regionName: 'Москва' } ) )
+    this.store.dispatch( loadAuctionAutoparksByRegion( { regionId: 1 } ) )
   }
 
 }

@@ -27,7 +27,7 @@ export const loadAutoparkRegionsFailure = createAction(
 
 export const loadAuctionAutoparksByRegion = createAction(
   AutoparksActions.LOAD_AUCTION_AUTOPARKS_BY_REGION,
-  props<{ regionName: string }>()
+  props<{ regionId: number }>()
 );
 
 export const loadAuctionAutoparksByRegionSuccess = createAction(
