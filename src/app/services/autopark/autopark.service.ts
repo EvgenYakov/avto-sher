@@ -24,8 +24,7 @@ export class AutoparkService extends BaseService {
     )
   }
 
-  public getAuctionAutoparksByRegion(regionName: string): Observable<Auction> {
-    console.log( 'selected region:', regionName );
+  public getAuctionAutoparksByRegion(regionId: number): Observable<Auction> {
     return this.httpService.get<Auction>( `${ environment.apiUrl }/autoparks/main-page` ).pipe(
       map( (auctionObject) => {
         const updatedAuctionObject: Auction = {
