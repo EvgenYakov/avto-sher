@@ -1,6 +1,5 @@
 export * from './rating-stars'
-export * from './spinner'
-
+export * from './ui'
 export * from './auto-card'
 export * from './auto-filter'
 export * from './autopark-card'
