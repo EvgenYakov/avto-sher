@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppRoutes, LoadingTypes } from '@constants';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { USER_PANEL_DEPS } from './user-panel.dependencies';
 
-import { MainRoutes } from '@pages';
 import { selectIsLoggedIn, selectLoading } from '@store';
 import { Store } from '@ngrx/store';
 
