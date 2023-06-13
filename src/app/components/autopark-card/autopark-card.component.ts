@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AutoparkCard } from '@models';
-import { AppRoutes } from '@constants';
+import { AppRoutes, MainRoutes } from '@constants';
+
 import { AUTOPARK_CARD_DEPS } from './autopark-card.dependencies';
-import { MainRoutes } from '../../pages/main';
 
 @Component({
     selector: 'app-autopark-card',
