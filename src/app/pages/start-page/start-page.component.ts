@@ -1,21 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { selectAuctionAutoparks, selectLoading } from '@store';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
-import { AppRoutes, LoadingTypes } from '@constants';
-import { SpinnerComponent } from '@components';
-import { Router } from '@angular/router';
-import { MainRoutes } from '@pages';
 
 @Component( {
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.scss'],
   standalone: true,
-  imports: [START_PAGE_DEPS, SpinnerComponent],
+  imports: [START_PAGE_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class StartPageComponent {
