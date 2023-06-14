@@ -5,7 +5,7 @@ import { CarDetailedState, CarsListState } from './car';
 import { carDetailedReducer } from './car/reducers/car-detailed.reducer';
 import { carsListReducer } from './car/reducers/cars-list.reducer';
 import { autoparkDetailedReducer, AutoparkDetailedState, autoparksReducer, AutoparksState } from './autopark';
-import { loadingReducer, LoadingState } from './shared';
+import { breadcrumbsReducer, BreadcrumbsState, loadingReducer, LoadingState } from './shared';
 
 export interface AppState {
   auth: AuthState,
@@ -14,6 +14,7 @@ export interface AppState {
   autoparkDetailed: AutoparkDetailedState,
   autoparks: AutoparksState,
   loading: LoadingState,
+  breadcrumbs: BreadcrumbsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -22,5 +23,6 @@ export const appReducers: ActionReducerMap<AppState> = {
   carDetailed: carDetailedReducer,
   autoparkDetailed: autoparkDetailedReducer,
   loading: loadingReducer,
-  autoparks: autoparksReducer
+  autoparks: autoparksReducer,
+  breadcrumbs: breadcrumbsReducer
 };

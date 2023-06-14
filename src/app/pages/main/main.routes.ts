@@ -1,7 +1,8 @@
 import { Route } from '@angular/router';
 
+import { MainRoutes } from '@constants';
+
 import { MainComponent } from './main.component';
-import { MainRoutes } from '@pages';
 
 export default [
   {
