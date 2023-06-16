@@ -5,8 +5,8 @@ import { Store } from '@ngrx/store';
 
 import { EMAIL_FIELD, PASSWORD_FIELD } from '@constants';
 import { loginRequest, selectAuthErrors } from '@store';
-import { LoginDto, LoginForm } from '../../models';
 
+import { LoginDto, LoginForm } from '../../models';
 import { LOGIN_DEPS } from './login.dependencies';
 
 
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   private store = inject( Store );
 
-  public backendError = this.store.select( selectAuthErrors )
+  public backendError$ = this.store.select( selectAuthErrors )
 
   public readonly requiredMsg = EMAIL_FIELD;
   public readonly passwordMsg = PASSWORD_FIELD;
