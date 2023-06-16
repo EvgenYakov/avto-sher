@@ -5,7 +5,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 import {
   accessTokenStatus,
@@ -25,8 +26,8 @@ import {
 
 import { AuthService, LocalStorageService } from '@services';
 import { AppRoutes, LoadingTypes, LocalStorageKeys } from '@constants';
-import { addLoading, removeLoading } from '../shared';
 
+import { addLoading, removeLoading } from '../shared';
 
 @Injectable()
 export class AuthEffects {
@@ -39,18 +40,21 @@ export class AuthEffects {
     private localStorageService: LocalStorageService
   ) {}
 
-  public loginRequest$ = createEffect( () => this.actions$.pipe(
-    ofType( loginRequest ),
-    switchMap( ({ loginDto }) => this.authService.login( loginDto ) ),
-    map( (authResponse) => {
-      this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
-      return loginRequestSuccess( { authResponse } );
-    } ),
-    catchError( (error: string) => {
-        return of( loginRequestFailure( { backendError: error } ) )
-      }
+  public loginRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loginRequest),
+      switchMap(({ loginDto }) => this.authService.login(loginDto).pipe(
+        map((authResponse) => {
+          this.localStorageService.addItemToStorage(LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken);
+          return loginRequestSuccess({ authResponse });
+        }),
+        catchError((error: HttpErrorResponse) => {
+          console.log(error);
+          return of(loginRequestFailure({ backendErrors: error.error.message }));
+        })
+      ))
     )
-  ) );
+  );
 
   public registerRequest$ = createEffect( () => this.actions$.pipe(
     ofType( registerRequest ),
@@ -60,7 +64,7 @@ export class AuthEffects {
       return registerRequestSuccess( { authResponse } )
     } ),
     catchError( (error: HttpErrorResponse) =>
-      of( registerRequestFailure( { backendError: error.error } ) )
+      of( registerRequestFailure( { backendErrors: error.error.message } ) )
     )
   ) );
 

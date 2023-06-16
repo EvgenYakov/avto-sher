@@ -43,7 +43,8 @@ export const authReducer = createReducer(
   on( loginRequestFailure, registerRequestFailure, (state, action) => (
     {
       ...state,
-      backendError: action.backendError
+      isLoggedIn: false,
+      backendErrors: action.backendErrors
     }
   ) ),
 );

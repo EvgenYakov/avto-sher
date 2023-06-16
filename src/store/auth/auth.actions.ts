@@ -33,7 +33,7 @@ export const loginRequestSuccess = createAction(
 
 export const loginRequestFailure = createAction(
   AuthActions.LOGIN_FAILURE,
-  props<{ backendError: string }>()
+  props<{ backendErrors: string }>()
 );
 
 export const registerRequest = createAction(
@@ -48,7 +48,7 @@ export const registerRequestSuccess = createAction(
 
 export const registerRequestFailure = createAction(
   AuthActions.REGISTER_FAILURE,
-  props<{ backendError: string }>()
+  props<{ backendErrors: string }>()
 );
 
 export const refreshTokenRequest = createAction(
