@@ -9,9 +9,9 @@ import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import {
-  accessTokenStatus,
-  accessTokenStatusFailure,
-  accessTokenStatusSuccess,
+  getMe,
+  getMeFailure,
+  getMeSuccess,
   loginRequest,
   loginRequestFailure,
   loginRequestSuccess,
@@ -40,19 +40,19 @@ export class AuthEffects {
     private localStorageService: LocalStorageService
   ) {}
 
-  public loginRequest$ = createEffect(() =>
+  public loginRequest$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(loginRequest),
-      switchMap(({ loginDto }) => this.authService.login(loginDto).pipe(
-        map((authResponse) => {
-          this.localStorageService.addItemToStorage(LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken);
-          return loginRequestSuccess({ authResponse });
-        }),
-        catchError((error: HttpErrorResponse) => {
-          console.log(error);
-          return of(loginRequestFailure({ backendErrors: error.error.message }));
-        })
-      ))
+      ofType( loginRequest ),
+      switchMap( ({ loginDto }) => this.authService.login( loginDto ).pipe(
+        map( (authResponse) => {
+          this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
+          return loginRequestSuccess( { authResponse } );
+        } ),
+        catchError( (error: HttpErrorResponse) => {
+          console.log( error );
+          return of( loginRequestFailure( { backendErrors: error.error.message } ) );
+        } )
+      ) )
     )
   );
 
@@ -68,23 +68,25 @@ export class AuthEffects {
     )
   ) );
 
-  public getAccessTokenStatus$ = createEffect( () => this.actions$.pipe(
-    ofType( accessTokenStatus ),
-    switchMap( () => this.authService.accessTokenStatus() ),
-    map( () => accessTokenStatusSuccess() ),
-    catchError( (error: HttpErrorResponse) => {
-      if(error.status === 401) {
-        this.store.dispatch( refreshTokenRequest() );
-      }
-      return of( accessTokenStatusFailure() );
-    } )
+  public getMe = createEffect( () => this.actions$.pipe(
+    ofType( getMe ),
+    concatMap( () => this.authService.getMe().pipe(
+      map( (user) => getMeSuccess( { user } ) ),
+      catchError( (error: HttpErrorResponse) => {
+        if(error.status === 401) {
+          this.store.dispatch( refreshTokenRequest() );
+        }
+        return of( getMeFailure() );
+      } )
+    ) ),
   ) );
 
   public refreshToken$ = createEffect( () => this.actions$.pipe(
     ofType( refreshTokenRequest ),
-    switchMap( () => this.authService.refreshToken() ),
+    concatMap( () => this.authService.refreshToken() ),
     map( (authResponse) => {
       this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
+      this.store.dispatch( getMe() );
       return refreshTokenRequestSuccess();
     } ),
     catchError( (error: HttpErrorResponse) => {
@@ -118,7 +120,7 @@ export class AuthEffects {
       ofType(
         loginRequest,
         registerRequest,
-        accessTokenStatus
+        getMe
       ),
       map( () => addLoading( { addLoading: LoadingTypes.AUTH } ) )
     )
@@ -131,8 +133,8 @@ export class AuthEffects {
         loginRequestFailure,
         registerRequestSuccess,
         registerRequestFailure,
-        accessTokenStatusSuccess,
-        accessTokenStatusFailure
+        getMeSuccess,
+        getMeFailure
       ),
       map( () => removeLoading( { removeLoading: LoadingTypes.AUTH } ) )
     )

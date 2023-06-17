@@ -13,6 +13,7 @@ import { environment } from '@environments/environment';
 import { ApplyTokenInterceptor, AuthGuard } from '@services';
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
+import { UserEffects } from './store/user';
 
 bootstrapApplication( AppComponent, {
   providers: [
@@ -36,6 +37,7 @@ bootstrapApplication( AppComponent, {
       CarListEffects,
       CarDetailedEffects,
       AutoparkDetailedEffects,
+      UserEffects
     ] ) ),
     AuthGuard,
     {

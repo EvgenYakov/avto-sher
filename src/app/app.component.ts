@@ -3,9 +3,9 @@ import { RouterOutlet } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { LocalStorageService } from '@services';
+import { LocalStorageService, UserService } from '@services';
 import { LocalStorageKeys } from '@constants';
-import { accessTokenStatus } from '@store';
+import { getMe } from '@store';
 
 @Component( {
   selector: 'app-root',
@@ -20,9 +20,13 @@ export class AppComponent implements OnInit {
   private localStorage = inject( LocalStorageService );
   private store = inject( Store );
 
+  constructor(
+    private service: UserService
+  ) {}
+
   ngOnInit(): void {
     if(this.localStorage.getItemFromStorage( LocalStorageKeys.ACCESS_TOKEN )) {
-      this.store.dispatch( accessTokenStatus() );
+      this.store.dispatch( getMe() );
     }
   }
 
