@@ -1,4 +1,4 @@
-import { CardButton } from '../interfaces/card-button.interface';
+import { CardButton } from '../interfaces';
 
 export const CARD_BUTTONS: CardButton[] = [
   {

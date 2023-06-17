@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
 import { BaseService } from '../helpers';
+import { UserProfile } from '@models';
+import { map } from 'rxjs/operators';
 
 @Injectable( {
   providedIn: 'root'
@@ -23,11 +25,24 @@ export class AuthService extends BaseService {
     this.httpService.post( `${ environment.apiUrl }/auth/logout`, {}, { withCredentials: true } );
   }
 
-  public accessTokenStatus(): Observable<any> {
-    return this.httpService.get( `${ environment.apiUrl }/auth/access-status` );
-  }
-
   public refreshToken(): Observable<AuthResponse> {
     return this.httpService.post<any>( `${ environment.apiUrl }/auth/refresh`, {}, { withCredentials: true } );
+  }
+
+  public getMe(): Observable<UserProfile> {
+    return this.httpService.get<UserProfile>( `${ environment.apiUrl }/users/me` ).pipe(
+      map((obj) => {
+        const resp: UserProfile = {
+          ...obj,
+          requestsCounter: 4,
+          ordersCounter: 10,
+          reviewsAboutUserCounter: 7,
+          reviewsByUserCounter: 10,
+          favoriteCarsCounter: 5,
+          favoriteAutoparksCounter: 2,
+        }
+        return resp;
+      })
+    );
   }
 }

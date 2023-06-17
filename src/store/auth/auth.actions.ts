@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
+import { UserProfile } from '@models';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',
@@ -16,9 +17,9 @@ export enum AuthActions {
 
   UNAUTHORIZED = '[AUTH] Unauthorized',
 
-  ACCESS_TOKEN_STATUS = '[AUTH] Get access token status',
-  ACCESS_TOKEN_STATUS_SUCCESS = '[AUTH] Token is valid',
-  ACCESS_TOKEN_STATUS_FAILURE = '[AUTH] Token is invalid',
+  GET_ME = '[AUTH] Get user information',
+  GET_ME_SUCCESS = '[AUTH] Get user information success',
+  GET_ME_FAILURE = '[AUTH] Get user information failure',
 }
 
 export const loginRequest = createAction(
@@ -67,14 +68,15 @@ export const unauthorized = createAction(
   AuthActions.UNAUTHORIZED
 );
 
-export const accessTokenStatus = createAction(
-  AuthActions.ACCESS_TOKEN_STATUS
+export const getMe = createAction(
+  AuthActions.GET_ME,
 );
 
-export const accessTokenStatusSuccess = createAction(
-  AuthActions.ACCESS_TOKEN_STATUS_SUCCESS
+export const getMeSuccess = createAction(
+  AuthActions.GET_ME_SUCCESS,
+  props<{ user: UserProfile }>()
 );
 
-export const accessTokenStatusFailure = createAction(
-  AuthActions.ACCESS_TOKEN_STATUS_FAILURE
+export const getMeFailure = createAction(
+  AuthActions.GET_ME_FAILURE,
 );
