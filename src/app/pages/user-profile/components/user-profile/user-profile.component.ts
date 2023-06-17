@@ -1,33 +1,32 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { AsyncPipe } from '@angular/common';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
 import { Subject, takeUntil } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
-import { AppRoutes, MainRoutes } from '@constants';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
-import { changeProfileDescription, getMe, selectUserProfile, UserState } from '@store';
+import { changeProfileDescription, selectLoading, selectUserProfile, UserState } from '@store';
 import { UserProfile } from '@models';
 
 import { CardButton, CardLink, UserProfileInfoForm } from '../../interfaces';
 import { CARD_BUTTONS, CARD_LINKS } from '../../constants';
 import { USER_PROFILE_DEPS } from './user-profile.dependencies';
-import { ButtonModule } from 'primeng/button';
 
 @Component( {
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss'],
   standalone: true,
-  imports: [USER_PROFILE_DEPS, AsyncPipe, ButtonModule],
+  imports: [USER_PROFILE_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class UserProfileComponent implements OnInit, OnDestroy {
 
   public userProfile$ = this.store.select( selectUserProfile );
+  public isLoading = this.store.select( selectLoading, { type: LoadingTypes.PROFILE } );
 
   protected readonly cardLinks: CardLink[] = CARD_LINKS;
   protected readonly cardButtons: CardButton[] = CARD_BUTTONS;
@@ -73,7 +72,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private initializeForm(userProfile: UserProfile): FormGroup<UserProfileInfoForm> {
     return new FormGroup( {
-      description: new FormControl( userProfile.info ),
+      description: new FormControl( userProfile.info, [
+        Validators.maxLength( 500 )
+      ] ),
     } );
   }
 
