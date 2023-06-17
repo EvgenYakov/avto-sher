@@ -11,6 +11,10 @@ import {
   changeProfileDescriptionSuccess
 } from './user.actions';
 import { UserService } from '@services';
+import { loadAutoparkDetailed, loadAutoparkDetailedFailure, loadAutoparkDetailedSuccess } from '../autopark';
+import { addLoading, removeLoading } from '../shared';
+import { LoadingTypes } from '@constants';
+import { getMe, getMeFailure, getMeSuccess } from '../auth';
 
 @Injectable()
 export class UserEffects {
@@ -30,4 +34,20 @@ export class UserEffects {
     )
   ) );
 
+  addLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( getMe ),
+      map( () => addLoading( { addLoading: LoadingTypes.PROFILE } ) )
+    )
+  );
+
+  removeLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        getMeSuccess,
+        getMeFailure,
+      ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.PROFILE } ) )
+    )
+  );
 }
