@@ -19,4 +19,17 @@ export class UserService extends BaseService {
       map( (response) => response.info )
     )
   }
+
+  public changeUserAvatar(newAvatar: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('image', newAvatar);
+
+    return this.httpService.put<FormData>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } ).pipe(
+      map(() => 'https://storage.yandexcloud.net/yaavto/user-avatars/49.jpg')
+    )
+  }
+
+  public deleteUserAvatar(): Observable<any> {
+     return this.httpService.delete( `${ environment.apiUrl }/users/avatar`, { withCredentials: true } )
+  }
 }
