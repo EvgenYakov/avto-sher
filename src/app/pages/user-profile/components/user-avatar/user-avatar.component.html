@@ -1,14 +1,18 @@
 <div class="avatar">
-  <div *ngIf="avatarPath">
-    <img [src]="avatarPath" class="avatar__img" alt="user avatar" />
+  <div *ngIf="avatarPath; else addPhoto">
+    <img [src]="avatarPath" class="avatar__img" alt="user avatar"/>
     <div class="avatar__controls">
-      <span *ngIf="avatarPath" class="avatar__control link">Изменить</span>
-      <span *ngIf="avatarPath" class="avatar__control link">Удалить</span>
+      <span *ngIf="avatarPath" class="avatar__control link" (click)="fileInput.click()">Изменить</span>
+      <span *ngIf="avatarPath" class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
     </div>
   </div>
 
-  <div *ngIf="!avatarPath" class="avatar__upload link">
-    <i class="pi pi-camera avatar__upload-icon"></i>
-    <span class="avatar__upload-text">Добавить</span>
-  </div>
+  <ng-template #addPhoto>
+    <div class="avatar__upload link" (click)="fileInput.click()">
+      <i class="pi pi-camera avatar__upload-icon"></i>
+      <span class="avatar__upload-text">Добавить</span>
+    </div>
+  </ng-template>
+
+  <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)">
 </div>

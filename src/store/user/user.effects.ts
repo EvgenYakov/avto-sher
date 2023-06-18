@@ -6,12 +6,17 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
 import {
+  changeProfileAvatar,
+  changeProfileAvatarFailure,
+  changeProfileAvatarSuccess,
   changeProfileDescription,
   changeProfileDescriptionFailure,
-  changeProfileDescriptionSuccess
+  changeProfileDescriptionSuccess,
+  deleteProfileAvatar,
+  deleteProfileAvatarFailure,
+  deleteProfileAvatarSuccess
 } from './user.actions';
 import { UserService } from '@services';
-import { loadAutoparkDetailed, loadAutoparkDetailedFailure, loadAutoparkDetailedSuccess } from '../autopark';
 import { addLoading, removeLoading } from '../shared';
 import { LoadingTypes } from '@constants';
 import { getMe, getMeFailure, getMeSuccess } from '../auth';
@@ -31,6 +36,27 @@ export class UserEffects {
     map( (description) => changeProfileDescriptionSuccess( { info: description } ) ),
     catchError( (error: HttpErrorResponse) =>
       of( changeProfileDescriptionFailure( { errors: error.error.message } ) )
+    )
+  ) );
+
+  public changeProfileAvatar$ = createEffect( () => this.actions$.pipe(
+    ofType( changeProfileAvatar ),
+    switchMap( ({ newAvatar }) => this.userService.changeUserAvatar( newAvatar ) ),
+    map( (response) => {
+      console.log( response )
+      return changeProfileAvatarSuccess( { avatarPath: response } )
+    } ),
+    catchError( (error: HttpErrorResponse) =>
+      of( changeProfileAvatarFailure( { errors: error.error.message } ) )
+    )
+  ) );
+
+  public deleteProfileAvatar$ = createEffect( () => this.actions$.pipe(
+    ofType( deleteProfileAvatar ),
+    map( () => this.userService.deleteUserAvatar() ),
+    map( () => deleteProfileAvatarSuccess() ),
+    catchError( (error: HttpErrorResponse) =>
+      of( deleteProfileAvatarFailure( { errors: error.error.message } ) )
     )
   ) );
 

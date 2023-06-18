@@ -1,10 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { UserProfile } from '@models';
-import { getMeSuccess } from '@store';
 
 import { UserState } from './user.state';
-import { changeProfileDescriptionFailure, changeProfileDescriptionSuccess } from './user.actions';
+import {
+  changeProfileAvatarFailure,
+  changeProfileAvatarSuccess,
+  changeProfileDescriptionFailure,
+  changeProfileDescriptionSuccess, deleteProfileAvatarFailure, deleteProfileAvatarSuccess
+} from './user.actions';
+import { getMeSuccess } from '../auth';
 
 const initialState: UserState = {
   userProfile: {} as UserProfile,
@@ -26,7 +31,23 @@ export const userReducer = createReducer(
       }
     })
   ),
-  on( changeProfileDescriptionFailure, (state, { errors }) => ({
+  on( changeProfileAvatarSuccess, (state, { avatarPath }) => ({
+      ...state,
+      userProfile: {
+        ...state.userProfile,
+        avatarPath
+      }
+    })
+  ),
+  on( deleteProfileAvatarSuccess, (state) => ({
+      ...state,
+      userProfile: {
+        ...state.userProfile,
+        avatar: ''
+      }
+    })
+  ),
+  on( changeProfileDescriptionFailure, changeProfileAvatarFailure, deleteProfileAvatarFailure, (state, { errors }) => ({
       ...state,
       backendErrors: errors
     })
