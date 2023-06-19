@@ -7,6 +7,9 @@
         <div class="card profile__user-card">
           <app-user-avatar
                   [avatarPath]="userProfile.avatar"
+                  (fileValidationErrors)="handleFileValidationErrors($event)"
+                  (avatarSelected)="handleAvatarSelected($event)"
+                  (avatarDeleted)="handleAvatarDeleted()"
                   class="card__avatar"
           ></app-user-avatar>
 
@@ -20,8 +23,10 @@
                   {{ userProfile.phoneNumber }}
                 </div>
                 <div class="small-text">{{ userProfile.email }}</div>
+
               </div>
             </div>
+            <div class="p-error">{{fileValidationsMsg}}</div>
             <a class="card__link link">Выйти</a>
           </div>
         </div>
@@ -85,6 +90,6 @@
     </div>
   </ng-template>
 
-  <app-spinner *ngIf="isLoading | async; else profileGrid"></app-spinner>
+  <app-spinner *ngIf="isLoading$ | async; else profileGrid"></app-spinner>
 
 </div>

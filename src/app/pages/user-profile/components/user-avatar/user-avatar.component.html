@@ -1,7 +1,8 @@
-<div class="avatar">
+<div class="avatar" (mouseenter)="showControls = true" (mouseleave)="showControls = false">
+  <img src="assets/icons/camera.png" *ngIf="showControls" class="avatar__change" alt="camera icon">
   <div *ngIf="avatarPath; else addPhoto">
     <img [src]="avatarPath" class="avatar__img" alt="user avatar"/>
-    <div class="avatar__controls">
+    <div class="avatar__controls" *ngIf="showControls">
       <span *ngIf="avatarPath" class="avatar__control link" (click)="fileInput.click()">Изменить</span>
       <span *ngIf="avatarPath" class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
     </div>
@@ -14,5 +15,5 @@
     </div>
   </ng-template>
 
-  <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)">
+  <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)" [accept]="'image/*'">
 </div>

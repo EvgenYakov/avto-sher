@@ -37,7 +37,7 @@ export const changeProfileAvatar = createAction(
 
 export const changeProfileAvatarSuccess = createAction(
   UserActions.CHANGE_PROFILE_AVATAR_SUCCESS,
-  props<{ avatarPath: string }>()
+  props<{ avatar: string }>()
 );
 
 export const changeProfileAvatarFailure = createAction(

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
-import { BaseService } from '../helpers';
 import { UserProfile } from '@models';
-import { map } from 'rxjs/operators';
+
+import { BaseService } from '../helpers';
 
 @Injectable( {
   providedIn: 'root'
@@ -30,10 +31,11 @@ export class AuthService extends BaseService {
   }
 
   public getMe(): Observable<UserProfile> {
-    return this.httpService.get<UserProfile>( `${ environment.apiUrl }/users/me` ).pipe(
+    return this.httpService.get<any>( `${ environment.apiUrl }/users/me` ).pipe(
       map((obj) => {
         const resp: UserProfile = {
           ...obj,
+          phoneNumber: '+7 (XXX) XXX XX XX',
           requestsCounter: 4,
           ordersCounter: 10,
           reviewsAboutUserCounter: 7,
