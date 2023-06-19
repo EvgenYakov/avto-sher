@@ -1,8 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
 import {
-  accessTokenStatusFailure,
-  accessTokenStatusSuccess,
   loginRequestFailure,
   loginRequestSuccess,
   refreshTokenRequestFailure,
@@ -12,29 +10,26 @@ import {
 } from './auth.actions';
 
 import { AuthState } from './auth.state';
+import { getMeSuccess } from '../user';
 
 const initialState: AuthState = {
-  authResponse: null,
   isLoggedIn: false,
   backendErrors: '',
 };
 
 export const authReducer = createReducer(
   initialState,
-  on( accessTokenStatusSuccess, refreshTokenRequestSuccess, (state) => (
-    {
-      ...state,
-      isLoggedIn: true
-    }
-  ) ),
-  on( loginRequestSuccess, registerRequestSuccess, (state, action) => (
-    {
-      ...state,
-      authResponse: action.authResponse,
-      isLoggedIn: true
-    }
-  ) ),
-  on( refreshTokenRequestFailure, accessTokenStatusFailure, (state) => (
+  on( getMeSuccess,
+    refreshTokenRequestSuccess,
+    loginRequestSuccess,
+    registerRequestSuccess,
+    (state) => (
+      {
+        ...state,
+        isLoggedIn: true
+      }
+    ) ),
+  on( refreshTokenRequestFailure, (state) => (
     {
       ...state,
       isLoggedIn: false
@@ -43,7 +38,8 @@ export const authReducer = createReducer(
   on( loginRequestFailure, registerRequestFailure, (state, action) => (
     {
       ...state,
-      backendError: action.backendError
+      isLoggedIn: false,
+      backendErrors: action.backendErrors
     }
   ) ),
 );

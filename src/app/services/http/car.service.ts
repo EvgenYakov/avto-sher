@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { BaseService } from '../helpers/base.service';
 import { carData, carsData } from '@test-data';
 import { AutoCard, AutoProfile, FilterParams } from '@models';
+
+import { BaseService } from '../helpers';
 
 @Injectable({
   providedIn: 'root'

@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { LocalStorageService } from '@services';
 import { LocalStorageKeys } from '@constants';
-import { accessTokenStatus } from '@store';
+import { getMe } from '@store';
 
 @Component( {
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.localStorage.getItemFromStorage( LocalStorageKeys.ACCESS_TOKEN )) {
-      this.store.dispatch( accessTokenStatus() );
+      this.store.dispatch( getMe() );
     }
   }
 

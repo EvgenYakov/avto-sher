@@ -7,6 +7,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'завершенных заказов',
     routerLink: '',
     cssClass: 'orders',
+    isDisabled: false
   },
   {
     title: 'Мои заявки',
@@ -14,6 +15,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'завершенных заказов',
     routerLink: '',
     cssClass: 'requests',
+    isDisabled: false
   },
   {
     title: 'Избранное: Автомобили',
@@ -21,6 +23,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'автомобилей',
     routerLink: '',
     cssClass: 'favorite-cars',
+    isDisabled: true
   },
   {
     title: 'Мои отзывы',
@@ -28,6 +31,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'отзывов',
     routerLink: '',
     cssClass: 'my-reviews',
+    isDisabled: true
   },
   {
     title: 'Отзывы обо мне',
@@ -35,6 +39,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'отзывов',
     routerLink: '',
     cssClass: 'reviews-about-me',
+    isDisabled: true
   },
   {
     title: 'Избранное: Автопарки',
@@ -42,5 +47,6 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'автопарков',
     routerLink: '',
     cssClass: 'favorite-autoparks',
+    isDisabled: true
   },
 ];

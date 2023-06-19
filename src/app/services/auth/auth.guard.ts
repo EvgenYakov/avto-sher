@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
-import { select, Store } from '@ngrx/store';
-import { map, Observable, take } from 'rxjs';
+import { AppRoutes, LocalStorageKeys } from '@constants';
 
-import { AppState, selectIsLoggedIn } from '@store';
+import { LocalStorageService } from '../helpers';
 
-import { AuthService } from './auth.service';
-
-@Injectable({
+@Injectable( {
   providedIn: 'root'
-})
+} )
 export class AuthGuard implements CanActivate {
   constructor(
     private router: Router,
-    private authenticationService: AuthService,
-    private store: Store<AppState>
+    private localStorageService: LocalStorageService
   ) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.store.pipe(
-      select(selectIsLoggedIn),
-      map((isLoggedIn: boolean) => isLoggedIn ? true : (this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } }), false)),
-      take(1)
-    );
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
+    const token = this.localStorageService.getItemFromStorage( LocalStorageKeys.ACCESS_TOKEN );
+
+    return token ? true : (this.router.navigate( [AppRoutes.AUTH], { queryParams: { returnUrl: state.url } } ), false);
   }
 
 }

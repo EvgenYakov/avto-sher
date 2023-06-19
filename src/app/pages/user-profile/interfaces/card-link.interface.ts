@@ -6,4 +6,5 @@ export interface CardLink {
   counterText: string;
   routerLink: string;
   cssClass: string;
+  isDisabled: boolean;
 }

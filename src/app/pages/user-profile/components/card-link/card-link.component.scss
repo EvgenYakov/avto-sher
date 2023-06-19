@@ -1,4 +1,4 @@
-@import "../../../../../theme/mixins";
+@import "mixins";
 
 :host ::ng-deep {
   .p-card,
@@ -10,6 +10,11 @@
   .p-card-content {
     padding: 0;
   }
+}
+
+.disabled-card {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 .card {
