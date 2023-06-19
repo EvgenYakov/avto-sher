@@ -1,16 +1,16 @@
 import { FormControl } from '@angular/forms';
 
 export interface RegistrationForm {
-  fio: FormControl<string>;
-  phone: FormControl<string>;
+  fullName: FormControl<string>;
+  phoneNumber: FormControl<string>;
   email: FormControl<string>;
   password: FormControl<string>;
 }
 
 export interface RegisterDto {
-  fio: string;
-  phone: string;
+  fullName: string;
   email: string;
+  phoneNumber: string;
   password: string;
-  type: string;
+  role: string;
 }

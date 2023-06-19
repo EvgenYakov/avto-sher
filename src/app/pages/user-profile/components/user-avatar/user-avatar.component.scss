@@ -1,5 +1,16 @@
-@import "../../../../../theme/mixins";
-@import "../../../../../theme/colors";
+@import "mixins";
+@import "colors";
+
+.avatar__controls, .avatar__change {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar:hover {
+  .avatar__controls, .avatar__change {
+    opacity: 1;
+  }
+}
 
 .avatar {
   position: relative;
@@ -9,9 +20,19 @@
   background-color: $light-text-color;
 
   &__img {
+    border-radius: 1rem;
     width: 200px;
     height: 200px;
-    border-radius: 1rem;
+    object-fit: cover;
+  }
+
+  &__change {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 5rem;
   }
 
   &__controls {

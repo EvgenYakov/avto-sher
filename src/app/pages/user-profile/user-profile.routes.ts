@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserProfileComponent } from './components/user-profile';
 
 export default [
   {
