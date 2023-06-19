@@ -1,10 +1,10 @@
-<div class="avatar" (mouseenter)="showControls = true" (mouseleave)="showControls = false">
-  <img src="assets/icons/camera.png" *ngIf="showControls" class="avatar__change" alt="camera icon">
+<div class="avatar">
   <div *ngIf="avatarPath; else addPhoto">
     <img [src]="avatarPath" class="avatar__img" alt="user avatar"/>
-    <div class="avatar__controls" *ngIf="showControls">
-      <span *ngIf="avatarPath" class="avatar__control link" (click)="fileInput.click()">Изменить</span>
-      <span *ngIf="avatarPath" class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
+    <img src="assets/icons/camera.png" class="avatar__change" alt="camera icon">
+    <div class="avatar__controls">
+      <span class="avatar__control link" (click)="fileInput.click()">Изменить</span>
+      <span class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
     </div>
   </div>
 

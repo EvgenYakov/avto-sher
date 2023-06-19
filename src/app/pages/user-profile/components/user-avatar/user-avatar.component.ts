@@ -39,15 +39,12 @@ export class UserAvatarComponent {
   }
 
   private validateFile(file: File): string {
+    const maxSize = this.maxFileSize;
+    const allowedExtensions = this.allowedExtensions;
 
-    if(!this.isFileSizeValid( file, this.maxFileSize )) {
-      return 'maxSize';
-    }
-
-    if(!this.isFileExtensionValid( file, this.allowedExtensions )) {
-      return 'extension';
-    }
-    return '';
+    return !this.isFileSizeValid(file, maxSize) ? 'maxSize' :
+      !this.isFileExtensionValid(file, allowedExtensions) ? 'extension' :
+        '';
   }
 
   private isFileSizeValid(file: File, maxSize: number): boolean {

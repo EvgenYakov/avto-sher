@@ -1,12 +1,15 @@
 @import "mixins";
 @import "colors";
 
-.avatar__controls {
+.avatar__controls, .avatar__change {
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.avatar:hover .avatar__controls {
-  opacity: 1;
+.avatar:hover {
+  .avatar__controls, .avatar__change {
+    opacity: 1;
+  }
 }
 
 .avatar {
