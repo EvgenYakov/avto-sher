@@ -7,7 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
-import { BreadcrumbService, UserService } from '@services';
+import { BreadcrumbService } from '@services';
 import {
   changeProfileAvatar,
   changeProfileDescription,

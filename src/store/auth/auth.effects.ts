@@ -49,7 +49,6 @@ export class AuthEffects {
           return loginRequestSuccess( { authResponse } );
         } ),
         catchError( (error: HttpErrorResponse) => {
-          console.log( error );
           return of( loginRequestFailure( { backendErrors: error.error.message } ) );
         } )
       ) )

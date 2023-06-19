@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 
 import { BaseService } from '../helpers';
-import { map } from 'rxjs/operators';
 
 @Injectable( {
   providedIn: 'root'
@@ -28,7 +28,6 @@ export class UserService extends BaseService {
   }
 
   public deleteUserAvatar(): Observable<any> {
-    console.log( 'here' )
     return this.httpService.delete<any>( `${ environment.apiUrl }/users/avatar`, {} )
   }
 }

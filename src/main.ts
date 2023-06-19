@@ -22,14 +22,7 @@ bootstrapApplication( AppComponent, {
       // withDebugTracing(),
       withRouterConfig( { paramsInheritanceStrategy: 'always' } )
     ),
-    importProvidersFrom( BrowserModule, StoreModule.forRoot( appReducers, {
-      runtimeChecks: {
-        strictActionImmutability: true,
-        strictActionSerializability: true,
-        strictStateImmutability: true,
-        strictStateSerializability: true,
-      },
-    } ), StoreDevtoolsModule.instrument( {
+    importProvidersFrom( BrowserModule, StoreModule.forRoot( appReducers ), StoreDevtoolsModule.instrument( {
       maxAge: 25,
       logOnly: environment.production,
     } ), EffectsModule.forRoot( [

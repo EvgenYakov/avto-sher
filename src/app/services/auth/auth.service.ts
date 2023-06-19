@@ -32,19 +32,19 @@ export class AuthService extends BaseService {
 
   public getMe(): Observable<UserProfile> {
     return this.httpService.get<any>( `${ environment.apiUrl }/users/me` ).pipe(
-      map((obj) => {
-        const resp: UserProfile = {
-          ...obj,
+      map( (response: UserProfile) => {
+        return <UserProfile>{
+          ...response,
           phoneNumber: '+7 (XXX) XXX XX XX',
+          avatar: response.avatar + '?' + new Date().getTime(),
           requestsCounter: 4,
           ordersCounter: 10,
           reviewsAboutUserCounter: 7,
           reviewsByUserCounter: 10,
           favoriteCarsCounter: 5,
           favoriteAutoparksCounter: 2,
-        }
-        return resp;
-      })
+        };
+      } )
     );
   }
 }
