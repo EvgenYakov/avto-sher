@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
 import { of } from 'rxjs';
+
+import { LoadingTypes } from '@constants';
+import { UserService } from '@services';
+
 import {
   changeProfileAvatar,
   changeProfileAvatarFailure,
@@ -16,9 +21,7 @@ import {
   deleteProfileAvatarFailure,
   deleteProfileAvatarSuccess
 } from './user.actions';
-import { UserService } from '@services';
 import { addLoading, removeLoading } from '../shared';
-import { LoadingTypes } from '@constants';
 import { getMe, getMeFailure, getMeSuccess } from '../auth';
 
 @Injectable()
