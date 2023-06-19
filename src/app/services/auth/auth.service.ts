@@ -35,7 +35,6 @@ export class AuthService extends BaseService {
       map( (response: UserProfile) => {
         return <UserProfile>{
           ...response,
-          phoneNumber: '+7 (XXX) XXX XX XX',
           avatar: response.avatar + '?' + new Date().getTime(),
           requestsCounter: 4,
           ordersCounter: 10,

@@ -20,11 +20,15 @@ export class UserService extends BaseService {
     )
   }
 
-  public changeUserAvatar(newAvatar: File): Observable<any> {
+  public changeUserAvatar(newAvatar: File): Observable<string> {
     const formData = new FormData();
     formData.append( 'image', newAvatar );
 
-    return this.httpService.put<string>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } );
+    return this.httpService.put<{
+      url: string
+    }>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } ).pipe(
+      map( (response) => response.url + '?' + new Date().getTime() )
+    )
   }
 
   public deleteUserAvatar(): Observable<any> {

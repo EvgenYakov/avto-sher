@@ -45,10 +45,7 @@ export class UserEffects {
   public changeProfileAvatar$ = createEffect( () => this.actions$.pipe(
     ofType( changeProfileAvatar ),
     switchMap( ({ newAvatar }) => this.userService.changeUserAvatar( newAvatar ) ),
-    map( (response) => {
-      console.log( response )
-      return changeProfileAvatarSuccess( { avatar: response } )
-    } ),
+    map( (response) => changeProfileAvatarSuccess( { avatar: response } ) ),
     catchError( (error: HttpErrorResponse) =>
       of( changeProfileAvatarFailure( { errors: error.error.message } ) )
     )
