@@ -22,14 +22,13 @@ export class UserService extends BaseService {
 
   public changeUserAvatar(newAvatar: File): Observable<any> {
     const formData = new FormData();
-    formData.append('image', newAvatar);
+    formData.append( 'image', newAvatar );
 
-    return this.httpService.put<FormData>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } ).pipe(
-      map(() => 'https://storage.yandexcloud.net/yaavto/user-avatars/49.jpg')
-    )
+    return this.httpService.put<string>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } );
   }
 
   public deleteUserAvatar(): Observable<any> {
-     return this.httpService.delete( `${ environment.apiUrl }/users/avatar`, { withCredentials: true } )
+    console.log( 'here' )
+    return this.httpService.delete<any>( `${ environment.apiUrl }/users/avatar`, {} )
   }
 }

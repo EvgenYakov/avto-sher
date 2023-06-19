@@ -7,12 +7,19 @@ import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
-import { BreadcrumbService } from '@services';
-import { changeProfileDescription, selectLoading, selectUserProfile, UserState } from '@store';
+import { BreadcrumbService, UserService } from '@services';
+import {
+  changeProfileAvatar,
+  changeProfileDescription,
+  deleteProfileAvatar,
+  selectLoading,
+  selectUserProfile,
+  UserState
+} from '@store';
 import { UserProfile } from '@models';
 
 import { CardButton, CardLink, UserProfileInfoForm } from '../../interfaces';
-import { CARD_BUTTONS, CARD_LINKS } from '../../constants';
+import { CARD_BUTTONS, CARD_LINKS, FILE_ERRORS } from '../../constants';
 import { USER_PROFILE_DEPS } from './user-profile.dependencies';
 
 @Component( {
@@ -26,7 +33,9 @@ import { USER_PROFILE_DEPS } from './user-profile.dependencies';
 export class UserProfileComponent implements OnInit, OnDestroy {
 
   public userProfile$ = this.store.select( selectUserProfile );
-  public isLoading = this.store.select( selectLoading, { type: LoadingTypes.PROFILE } );
+  public isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.PROFILE } );
+
+  public fileValidationsMsg: string = '';
 
   protected readonly cardLinks: CardLink[] = CARD_LINKS;
   protected readonly cardButtons: CardButton[] = CARD_BUTTONS;
@@ -38,7 +47,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<UserState>,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
   ) {}
 
   ngOnInit() {
@@ -52,6 +61,20 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.store.dispatch( changeProfileDescription( { info: description } ) )
     }
     this.isEditMode = false;
+  }
+
+  public handleFileValidationErrors(errorType: string): void {
+    this.fileValidationsMsg = FILE_ERRORS[errorType];
+  }
+
+  public handleAvatarSelected(newAvatar: File): void {
+    this.fileValidationsMsg = '';
+    this.store.dispatch( changeProfileAvatar( { newAvatar } ) );
+  }
+
+  public handleAvatarDeleted(): void {
+    this.fileValidationsMsg = '';
+    this.store.dispatch( deleteProfileAvatar() );
   }
 
   private getDataFromStore(): void {

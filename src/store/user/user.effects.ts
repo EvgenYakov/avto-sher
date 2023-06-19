@@ -44,7 +44,7 @@ export class UserEffects {
     switchMap( ({ newAvatar }) => this.userService.changeUserAvatar( newAvatar ) ),
     map( (response) => {
       console.log( response )
-      return changeProfileAvatarSuccess( { avatarPath: response } )
+      return changeProfileAvatarSuccess( { avatar: response } )
     } ),
     catchError( (error: HttpErrorResponse) =>
       of( changeProfileAvatarFailure( { errors: error.error.message } ) )
@@ -53,7 +53,7 @@ export class UserEffects {
 
   public deleteProfileAvatar$ = createEffect( () => this.actions$.pipe(
     ofType( deleteProfileAvatar ),
-    map( () => this.userService.deleteUserAvatar() ),
+    switchMap( () => this.userService.deleteUserAvatar() ),
     map( () => deleteProfileAvatarSuccess() ),
     catchError( (error: HttpErrorResponse) =>
       of( deleteProfileAvatarFailure( { errors: error.error.message } ) )

@@ -31,11 +31,11 @@ export const userReducer = createReducer(
       }
     })
   ),
-  on( changeProfileAvatarSuccess, (state, { avatarPath }) => ({
+  on( changeProfileAvatarSuccess, (state, { avatar }) => ({
       ...state,
       userProfile: {
         ...state.userProfile,
-        avatarPath
+        avatar
       }
     })
   ),
