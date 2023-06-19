@@ -1,6 +1,12 @@
 import { createAction, props } from '@ngrx/store';
+import { UserProfile } from '@models';
+import { AuthActions } from '../auth';
 
 export enum UserActions {
+
+  GET_ME = '[USER] Get user information',
+  GET_ME_SUCCESS = '[USER] Get user information success',
+  GET_ME_FAILURE = '[USER] Get user information failure',
 
   CHANGE_PROFILE_DESCRIPTION = '[USER] Change user profile description',
   CHANGE_PROFILE_DESCRIPTION_SUCCESS = '[USER] Change user profile description success',
@@ -14,6 +20,19 @@ export enum UserActions {
   DELETE_PROFILE_AVATAR_SUCCESS = '[USER] Delete user profile avatar success',
   DELETE_PROFILE_AVATAR_FAILURE = '[USER] Delete user profile avatar failure',
 }
+
+export const getMe = createAction(
+  UserActions.GET_ME,
+);
+
+export const getMeSuccess = createAction(
+  UserActions.GET_ME_SUCCESS,
+  props<{ user: UserProfile }>()
+);
+
+export const getMeFailure = createAction(
+  UserActions.GET_ME_FAILURE,
+);
 
 export const changeProfileDescription = createAction(
   UserActions.CHANGE_PROFILE_DESCRIPTION,

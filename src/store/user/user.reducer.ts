@@ -7,9 +7,8 @@ import {
   changeProfileAvatarFailure,
   changeProfileAvatarSuccess,
   changeProfileDescriptionFailure,
-  changeProfileDescriptionSuccess, deleteProfileAvatarFailure, deleteProfileAvatarSuccess
+  changeProfileDescriptionSuccess, deleteProfileAvatarFailure, deleteProfileAvatarSuccess, getMeSuccess
 } from './user.actions';
-import { getMeSuccess } from '../auth';
 
 const initialState: UserState = {
   userProfile: {} as UserProfile,
