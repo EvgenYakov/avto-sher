@@ -12,6 +12,7 @@ import {
   changeProfileAvatar,
   changeProfileDescription,
   deleteProfileAvatar,
+  logout,
   selectLoading,
   selectUserProfile,
   UserState
@@ -75,6 +76,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   public handleAvatarDeleted(): void {
     this.fileValidationsMsg = '';
     this.store.dispatch( deleteProfileAvatar() );
+  }
+
+  public logout(): void {
+    this.store.dispatch( logout() );
   }
 
   private getDataFromStore(): void {

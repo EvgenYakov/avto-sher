@@ -8,26 +8,24 @@ import { Store } from '@ngrx/store';
 import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+import { AuthService, LocalStorageService, UserService } from '@services';
+import { AppRoutes, LoadingTypes, LocalStorageKeys } from '@constants';
+
 import {
-  getMe,
-  getMeFailure,
-  getMeSuccess,
   loginRequest,
   loginRequestFailure,
   loginRequestSuccess,
+  logout,
   refreshTokenRequest,
   refreshTokenRequestFailure,
   refreshTokenRequestSuccess,
   registerRequest,
   registerRequestFailure,
-  registerRequestSuccess,
-  unauthorized
+  registerRequestSuccess
 } from './auth.actions';
 
-import { AuthService, LocalStorageService } from '@services';
-import { AppRoutes, LoadingTypes, LocalStorageKeys } from '@constants';
-
 import { addLoading, removeLoading } from '../shared';
+import { getMe, getMeFailure, getMeSuccess } from '../user';
 
 @Injectable()
 export class AuthEffects {
@@ -35,6 +33,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
+    private userService: UserService,
     private router: Router,
     private store: Store,
     private localStorageService: LocalStorageService
@@ -68,8 +67,8 @@ export class AuthEffects {
   ) );
 
   public getMe = createEffect( () => this.actions$.pipe(
-    ofType( getMe ),
-    concatMap( () => this.authService.getMe().pipe(
+    ofType( getMe, loginRequestSuccess, registerRequestSuccess ),
+    concatMap( () => this.userService.getMe().pipe(
       map( (user) => getMeSuccess( { user } ) ),
       catchError( (error: HttpErrorResponse) => {
         if(error.status === 401) {
@@ -90,16 +89,16 @@ export class AuthEffects {
     } ),
     catchError( (error: HttpErrorResponse) => {
       if(error.status === 401) {
-        this.store.dispatch( unauthorized() );
+        this.store.dispatch( logout() );
       }
       return of( refreshTokenRequestFailure() );
     } )
   ) );
 
-  public unauthorized$ = createEffect( () => this.actions$.pipe(
-      ofType( unauthorized ),
+  public logout = createEffect( () => this.actions$.pipe(
+      ofType( logout ),
+      switchMap( () => this.authService.logout() ),
       tap( () => {
-        this.authService.logout();
         this.localStorageService.removeItemFromStorage( LocalStorageKeys.ACCESS_TOKEN );
         this.router.navigate( [AppRoutes.AUTH] );
       } )
@@ -119,7 +118,6 @@ export class AuthEffects {
       ofType(
         loginRequest,
         registerRequest,
-        getMe
       ),
       map( () => addLoading( { addLoading: LoadingTypes.AUTH } ) )
     )
@@ -132,8 +130,6 @@ export class AuthEffects {
         loginRequestFailure,
         registerRequestSuccess,
         registerRequestFailure,
-        getMeSuccess,
-        getMeFailure
       ),
       map( () => removeLoading( { removeLoading: LoadingTypes.AUTH } ) )
     )

@@ -19,10 +19,9 @@ import {
   changeProfileDescriptionSuccess,
   deleteProfileAvatar,
   deleteProfileAvatarFailure,
-  deleteProfileAvatarSuccess
+  deleteProfileAvatarSuccess, getMe, getMeFailure, getMeSuccess
 } from './user.actions';
 import { addLoading, removeLoading } from '../shared';
-import { getMe, getMeFailure, getMeSuccess } from '../auth';
 
 @Injectable()
 export class UserEffects {

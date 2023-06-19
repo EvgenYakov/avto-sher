@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
 import { UserProfile } from '@models';
 
@@ -15,11 +16,7 @@ export enum AuthActions {
   REFRESH_TOKEN_REQUEST_SUCCESS = '[AUTH] Send refresh token request for getting new tokens success',
   REFRESH_TOKEN_REQUEST_FAILURE = '[AUTH] Send refresh token request for getting new tokens failure',
 
-  UNAUTHORIZED = '[AUTH] Unauthorized',
-
-  GET_ME = '[AUTH] Get user information',
-  GET_ME_SUCCESS = '[AUTH] Get user information success',
-  GET_ME_FAILURE = '[AUTH] Get user information failure',
+  logout = '[AUTH] Logout',
 }
 
 export const loginRequest = createAction(
@@ -64,19 +61,6 @@ export const refreshTokenRequestFailure = createAction(
   AuthActions.REFRESH_TOKEN_REQUEST_FAILURE,
 );
 
-export const unauthorized = createAction(
-  AuthActions.UNAUTHORIZED
-);
-
-export const getMe = createAction(
-  AuthActions.GET_ME,
-);
-
-export const getMeSuccess = createAction(
-  AuthActions.GET_ME_SUCCESS,
-  props<{ user: UserProfile }>()
-);
-
-export const getMeFailure = createAction(
-  AuthActions.GET_ME_FAILURE,
+export const logout = createAction(
+  AuthActions.logout
 );
