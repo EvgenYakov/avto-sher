@@ -1,12 +1,12 @@
 <header class="header">
   <div class="header__first-level container">
-    <img src="assets/icons/logo.png" alt="logo" (click)="navigateToMain()"/>
+    <img src="assets/icons/logo.png" alt="logo"/>
     <div class="header__user-panel">
       <app-user-panel></app-user-panel>
       <i class="header__hamburger pi pi-bars" (click)="isOpen = true"></i>
     </div>
   </div>
-
+  
   <p-sidebar [(visible)]="isOpen" position="right">
     <nav class="mobile-nav">
       <ul class="mobile-nav__list">
@@ -20,14 +20,19 @@
           <a class="mobile-nav__location">
             <i class="pi pi-map-marker"></i>
             <span *ngIf="(regions$ | async) as regions">
-                  <p-dropdown [options]="regions" [(ngModel)]="selectedRegions" optionLabel="name"></p-dropdown>
+              <p-dropdown
+                      [options]="regions"
+                      [filter]="true"
+                      filterBy="name"
+                      optionLabel="name"
+              ></p-dropdown>
             </span>
           </a>
         </li>
       </ul>
     </nav>
   </p-sidebar>
-
+  
   <div class="header__nav-wrapper">
     <nav class="main-nav container">
       <ul class="main-nav__list">
@@ -37,18 +42,28 @@
       </ul>
     </nav>
   </div>
-
+  
   <nav class="secondary-nav container">
     <ul class="secondary-nav__list">
       <li *ngFor="let link of SECONDARY_NAV" [routerLink]="link.routerLink">
         <a class="secondary-nav__link link small-text">{{ link.label }}</a>
       </li>
     </ul>
-
+    
     <a class="secondary-nav__location link small-text">
       <i class="pi pi-map-marker"></i>
       <span *ngIf="(regions$ | async) as regions">
-                  <p-dropdown [options]="regions" [(ngModel)]="selectedRegions" optionLabel="name"></p-dropdown>
+               <p-dropdown
+                       [options]="regions"
+                       [filter]="regions.length > 8"
+                       filterPlaceholder="Название"
+                       emptyFilterMessage="В других городах пока автопарков не найдено"
+                       filterBy="name"
+                       optionLabel="name"
+                       [formControl]="selectedRegionControl"
+               >
+        </p-dropdown>
+   
       </span>
     </a>
   </nav>
