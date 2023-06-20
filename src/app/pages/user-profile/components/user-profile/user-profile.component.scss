@@ -1,5 +1,5 @@
-@import "../../../../../theme/mixins";
-@import "../../../../../theme/colors";
+@import "mixins";
+@import "colors";
 
 :host ::ng-deep {
   .p-card,
@@ -19,6 +19,20 @@
     font-size: 0.9rem;
     color: var(--text-color-secondary);
   }
+
+  .p-button.p-button-text {
+    color: $link-color;
+
+    &:hover {
+      color: $link-color;
+      background: none;
+    }
+  }
+}
+
+.p-error {
+  font-size: 0.75rem;
+  width: 100%;
 }
 
 .profile {
@@ -155,6 +169,7 @@
 
   &__link {
     color: $link-color;
+    width: fit-content;
 
     &:hover {
       color: var(--primary-color);

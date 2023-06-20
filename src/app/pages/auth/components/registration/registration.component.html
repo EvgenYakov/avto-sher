@@ -12,7 +12,7 @@
                   class="field"
                   placeholder="Фамилия Имя Отчество"
                   [errorsMap]="requiredField"
-                  [formControl]="registerForm.controls.fio"
+                  [formControl]="registerForm.controls.fullName"
           ></app-text-input>
 
           <p-tabPanel header="Водитель">
@@ -21,7 +21,7 @@
                     class="field"
                     placeholder="Номер телефона"
                     [errorsMap]="phoneField"
-                    [formControl]="registerForm.controls.phone"
+                    [formControl]="registerForm.controls.phoneNumber"
             ></app-phone-input>
           </p-tabPanel>
 

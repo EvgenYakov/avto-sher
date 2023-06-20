@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { Subject, takeUntil } from 'rxjs';
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
+import { BreadcrumbService } from '@services';
 import {
   loadAutoparkDetailed,
   selectAutoparkCars,
@@ -14,7 +15,6 @@ import {
 } from '@store';
 
 import { AUTOPARK_DETAILED_DEPS } from './autopark-detailed.dependencies';
-import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.service';
 
 @Component( {
   selector: 'app-autopark-profile',

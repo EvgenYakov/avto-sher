@@ -1,4 +1,4 @@
 export enum RegisterType {
-  DRIVER = 'водитель',
-  AUTOPARK = 'автопарк',
+  DRIVER = 'driver',
+  AUTOPARK = 'owner',
 }

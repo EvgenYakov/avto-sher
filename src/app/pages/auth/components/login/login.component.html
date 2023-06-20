@@ -1,13 +1,16 @@
 <div class="content">
   <div class="header">
     <span class="header__label">Вход в существующий аккаунт</span>
-<!--    <app-backend-errors *ngIf="(backendError | async) as message"-->
-<!--                        [message]="message"-->
-<!--    ></app-backend-errors>-->
+    <ng-container *ngIf="(backendError$ | async) as errorMsg">
+      <span class="p-error">
+        {{errorMsg}}
+      </span>
+    </ng-container>
+
   </div>
 
-  <div class="main">
-    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="main">
       <app-text-input
               placeholder="Ваш email"
               [errorsMap]="requiredMsg"
@@ -20,24 +23,24 @@
               [formControl]="loginForm.controls.password"
       ></app-password-input>
 
-    </form>
-
-    <div class="main__forget-psw" (click)="forgetPassword()">
-      Забыли пароль?
+      <div class="main__forget-psw" (click)="forgetPassword()">
+        Забыли пароль?
+      </div>
     </div>
-  </div>
 
-  <div class="footer">
-    <div class="footer__register">
-      <span class="status-label">Нет учетной записи?</span>
-      <span class="redirect" [routerLink]="['registration']"> Зарегистрироваться</span>
+    <div class="footer">
+      <div class="footer__register">
+        <span class="status-label">Нет учетной записи?</span>
+        <span class="redirect" [routerLink]="['registration']"> Зарегистрироваться</span>
+      </div>
+
     </div>
 
     <p-button
             label="Войти"
-            (click)="onSubmit()"
+            type="submit"
             [disabled]="(loginForm.invalid || loginForm.pending)"
     ></p-button>
+  </form>
 
-  </div>
 </div>

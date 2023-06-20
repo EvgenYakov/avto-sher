@@ -1,20 +1,27 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit, } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
+import { Subject, takeUntil } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
-import { Subject } from 'rxjs';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
+import { BreadcrumbService } from '@services';
+import {
+  changeProfileAvatar,
+  changeProfileDescription,
+  deleteProfileAvatar,
+  logout,
+  selectLoading,
+  selectUserProfile,
+  UserState
+} from '@store';
+import { UserProfile } from '@models';
 
-import { UserProfile, UserProfileInfoForm } from '@models';
-import { AppRoutes, MainRoutes } from '@constants';
-import { addBreadcrumb } from '@store';
-
-import { CardButton, CardLink } from '../../interfaces';
-import { CARD_BUTTONS, CARD_LINKS, USER_PROFILE_INFO } from '../../constants';
+import { CardButton, CardLink, UserProfileInfoForm } from '../../interfaces';
+import { CARD_BUTTONS, CARD_LINKS, FILE_ERRORS } from '../../constants';
 import { USER_PROFILE_DEPS } from './user-profile.dependencies';
-import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.service';
 
 @Component( {
   selector: 'app-user-profile',
@@ -25,27 +32,62 @@ import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.servi
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class UserProfileComponent implements OnInit, OnDestroy {
-  @Input() public userProfileInfo: UserProfile = USER_PROFILE_INFO;
 
-  public readonly cardLinks: CardLink[] = CARD_LINKS;
-  public readonly cardButtons: CardButton[] = CARD_BUTTONS;
+  public userProfile$ = this.store.select( selectUserProfile );
+  public isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.PROFILE } );
 
-  public isEditMode: boolean = false;
-  public userProfileInfoForm: FormGroup<UserProfileInfoForm>;
+  public fileValidationsMsg: string = '';
 
-  private store = inject( Store );
-  private breadcrumbService = inject( BreadcrumbService );
+  protected readonly cardLinks: CardLink[] = CARD_LINKS;
+  protected readonly cardButtons: CardButton[] = CARD_BUTTONS;
+
+  protected isEditMode: boolean = false;
+  protected userProfileInfoForm: FormGroup<UserProfileInfoForm>;
 
   private destroy$ = new Subject<void>();
 
+  constructor(
+    private store: Store<UserState>,
+    private breadcrumbService: BreadcrumbService,
+  ) {}
+
   ngOnInit() {
-    this.userProfileInfoForm = this.initializeForm();
     this.setBreadcrumbs();
+    this.getDataFromStore();
   }
 
   public saveDescriptionInfo(): void {
-    this.userProfileInfo.description = this.userProfileInfoForm.controls.description.value || '';
+    const description = this.userProfileInfoForm.controls.description.value;
+    if(description) {
+      this.store.dispatch( changeProfileDescription( { info: description } ) )
+    }
     this.isEditMode = false;
+  }
+
+  public handleFileValidationErrors(errorType: string): void {
+    this.fileValidationsMsg = FILE_ERRORS[errorType];
+  }
+
+  public handleAvatarSelected(newAvatar: File): void {
+    this.fileValidationsMsg = '';
+    this.store.dispatch( changeProfileAvatar( { newAvatar } ) );
+  }
+
+  public handleAvatarDeleted(): void {
+    this.fileValidationsMsg = '';
+    this.store.dispatch( deleteProfileAvatar() );
+  }
+
+  public logout(): void {
+    this.store.dispatch( logout() );
+  }
+
+  private getDataFromStore(): void {
+    this.userProfile$.pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (userProfile) => {
+      this.userProfileInfoForm = this.initializeForm( userProfile )
+    } )
   }
 
   private setBreadcrumbs(): void {
@@ -53,12 +95,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       label: 'Профиль',
       routerLink: `${ AppRoutes.MAIN }/${ MainRoutes.USER_PROFILE }`
     };
-    this.breadcrumbService.addBreadcrumb(breadcrumb);
+    this.breadcrumbService.addBreadcrumb( breadcrumb );
   }
 
-  private initializeForm(): FormGroup<UserProfileInfoForm> {
+  private initializeForm(userProfile: UserProfile): FormGroup<UserProfileInfoForm> {
     return new FormGroup( {
-      description: new FormControl( this.userProfileInfo.description ),
+      description: new FormControl( userProfile.info, [
+        Validators.maxLength( 500 )
+      ] ),
     } );
   }
 

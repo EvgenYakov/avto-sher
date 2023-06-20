@@ -5,6 +5,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { AutoparkService } from '@services';
+import { LoadingTypes } from '@constants';
+
 import {
   loadAuctionAutoparksByRegion,
   loadAuctionAutoparksByRegionFailure,
@@ -13,16 +15,7 @@ import {
   loadAutoparkRegionsFailure,
   loadAutoparkRegionsSuccess
 } from '../actions';
-import {
-  accessTokenStatus, accessTokenStatusFailure, accessTokenStatusSuccess,
-  loginRequest,
-  loginRequestFailure,
-  loginRequestSuccess,
-  registerRequest, registerRequestFailure,
-  registerRequestSuccess
-} from '../../auth';
 import { addLoading, removeLoading } from '../../shared';
-import { LoadingTypes } from '@constants';
 
 @Injectable()
 export class AutoparksEffects {
