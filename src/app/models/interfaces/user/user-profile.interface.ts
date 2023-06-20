@@ -1,10 +1,10 @@
 export interface UserProfile {
-  name: string;
-  lastName: string;
+  id: number;
+  fullName: string;
   phoneNumber: string;
   email: string;
-  avatarPath: string;
-  description: string;
+  avatar: string;
+  info: string;
   requestsCounter: number;
   ordersCounter: number;
   reviewsAboutUserCounter: number;

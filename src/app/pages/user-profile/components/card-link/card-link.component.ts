@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { CardModule } from 'primeng/card';
 
 import { CardLink } from '../../interfaces';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-card-link',
@@ -11,7 +12,7 @@ import { CardLink } from '../../interfaces';
     styleUrls: ['./card-link.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CardModule, RouterLink]
+  imports: [CardModule, RouterLink, NgClass]
 })
 export class CardLinkComponent {
   @Input() public cardLink: CardLink;

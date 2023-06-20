@@ -55,7 +55,7 @@ export class RegistrationComponent implements OnInit {
 
     const formValues = {
       ...this.registerForm.value,
-      type: this.registerType
+      role: this.registerType
     } as RegisterDto;
 
     this.store.dispatch( registerRequest( { registerDto: formValues } ) );
@@ -64,20 +64,20 @@ export class RegistrationComponent implements OnInit {
   public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
     this.checkbox = false;
     if ( index === 0 ) {
-      this.registerForm.controls.phone.addValidators( [Validators.required] );
+      this.registerForm.controls.phoneNumber.addValidators( [Validators.required] );
       this.registerType = RegisterType.DRIVER;
     }
     else if ( index === 1 ) {
-      this.registerForm.controls.phone.clearValidators();
+      this.registerForm.controls.phoneNumber.clearValidators();
       this.registerType = RegisterType.AUTOPARK;
     }
-    this.registerForm.controls.phone.updateValueAndValidity();
+    this.registerForm.controls.phoneNumber.updateValueAndValidity();
   }
 
   private initializeForm(): FormGroup<RegistrationForm> {
     const registerFormGroup = new FormGroup<RegistrationForm>( <RegistrationForm>{
-      fio: new FormControl<string>( '', [Validators.required] ),
-      phone: new FormControl<string>( '' ),
+      fullName: new FormControl<string>( '', [Validators.required] ),
+      phoneNumber: new FormControl<string>( '' ),
       email: new FormControl<string>( '', [
         Validators.required,
         Validators.email,

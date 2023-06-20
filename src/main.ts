@@ -18,8 +18,10 @@ import {
 } from '@store';
 import { environment } from '@environments/environment';
 import { ApplyTokenInterceptor, AuthGuard } from '@services';
+
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
+import { UserEffects } from './store/user';
 
 bootstrapApplication( AppComponent, {
   providers: [
@@ -28,14 +30,7 @@ bootstrapApplication( AppComponent, {
       // withDebugTracing(),
       withRouterConfig( { paramsInheritanceStrategy: 'always' } )
     ),
-    importProvidersFrom( BrowserModule, StoreModule.forRoot( appReducers, {
-      runtimeChecks: {
-        strictActionImmutability: true,
-        strictActionSerializability: true,
-        strictStateImmutability: true,
-        strictStateSerializability: true,
-      },
-    } ), StoreDevtoolsModule.instrument( {
+    importProvidersFrom( BrowserModule, StoreModule.forRoot( appReducers ), StoreDevtoolsModule.instrument( {
       maxAge: 25,
       logOnly: environment.production,
     } ), EffectsModule.forRoot( [
@@ -43,7 +38,8 @@ bootstrapApplication( AppComponent, {
       CarListEffects,
       CarDetailedEffects,
       AutoparkDetailedEffects,
-      AutoparksEffects
+      AutoparksEffects,
+      UserEffects
     ] ) ),
     AuthGuard,
     {

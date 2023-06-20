@@ -3,6 +3,7 @@ import { Route } from '@angular/router';
 import { MainRoutes } from '@constants';
 
 import { MainComponent } from './main.component';
+import { AuthGuard } from '@services';
 
 export default [
   {
@@ -15,7 +16,8 @@ export default [
       },
       {
         path: MainRoutes.USER_PROFILE,
-        loadChildren: () => import('../user-profile/user-profile.routes')
+        loadChildren: () => import('../user-profile/user-profile.routes'),
+        canActivate: [AuthGuard]
       },
       {
         path: MainRoutes.AUTOPARK_DETAILED + '/:id',
