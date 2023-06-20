@@ -3,11 +3,11 @@ import { createReducer, on } from '@ngrx/store';
 import { AutoparksState } from '../states';
 import { loadAuctionAutoparksByRegionSuccess, loadAutoparkRegionsSuccess } from '../actions';
 
-import { Auction } from '@models';
+import { AuctionAutoparks } from '@models';
 
 const initialState: AutoparksState = {
   regions: [],
-  auctionAutoparksCard: {} as Auction
+  auctionAutoparksCard: {} as AuctionAutoparks
 }
 
 export const autoparksReducer = createReducer(

@@ -1,15 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Auction, AutoparkRegion } from '@models';
+import { AuctionAutoparks, Region } from '@models';
 
 export enum AutoparksActions {
   LOAD_AUTOPARK_REGIONS = '[AUTOPARK] Load all autoparks regions',
   LOAD_AUTOPARK_REGIONS_SUCCESS = '[AUTOPARK] Load all autoparks regions success',
   LOAD_AUTOPARK_REGIONS_FAILURE = '[AUTOPARK] Load all autoparks regions failure',
 
-  LOAD_AUCTION_AUTOPARKS_BY_REGION = '[AUTOPARKS] Load autoparks for start page by particular region',
-  LOAD_AUCTION_AUTOPARKS_BY_REGION_SUCCESS = '[AUTOPARKS] Load autoparks for start page by particular region success',
-  LOAD_AUCTION_AUTOPARKS_BY_REGION_FAILURE = '[AUTOPARKS] Load autoparks for start page by particular region failure',
+  LOAD_AUCTION_AUTOPARKS_BY_REGION = '[AUTOPARKS] Load auction autoparks',
+  LOAD_AUCTION_AUTOPARKS_BY_REGION_SUCCESS = '[AUTOPARKS] Load auction autoparks success',
+  LOAD_AUCTION_AUTOPARKS_BY_REGION_FAILURE = '[AUTOPARKS] Load auction autoparks failure',
 }
 
 export const loadAutoparkRegions = createAction(
@@ -18,7 +18,7 @@ export const loadAutoparkRegions = createAction(
 
 export const loadAutoparkRegionsSuccess = createAction(
   AutoparksActions.LOAD_AUTOPARK_REGIONS_SUCCESS,
-  props<{ regions: AutoparkRegion[] }>()
+  props<{ regions: Region[] }>()
 );
 
 export const loadAutoparkRegionsFailure = createAction(
@@ -27,12 +27,12 @@ export const loadAutoparkRegionsFailure = createAction(
 
 export const loadAuctionAutoparksByRegion = createAction(
   AutoparksActions.LOAD_AUCTION_AUTOPARKS_BY_REGION,
-  props<{ regionId: number }>()
+  props<{ regionName: string }>()
 );
 
 export const loadAuctionAutoparksByRegionSuccess = createAction(
   AutoparksActions.LOAD_AUCTION_AUTOPARKS_BY_REGION_SUCCESS,
-  props<{ auctionAutoparks: Auction }>()
+  props<{ auctionAutoparks: AuctionAutoparks }>()
 );
 
 export const loadAuctionAutoparksByRegionFailure = createAction(
