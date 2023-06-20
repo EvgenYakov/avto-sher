@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { loadAuctionAutoparksByRegion, selectAuctionAutoparks, selectAutoparksRegions, selectLoading } from '@store';
+import { selectAuctionAutoparks, selectLoading } from '@store';
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
@@ -29,20 +29,10 @@ export class StartPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataFromStore();
-    this.getAuctionAutoparksByRegionAutoparksCount();
   }
 
   public navigateToDetailed(autoparkId: number): void {
     this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, autoparkId] );
-  }
-
-  private getAuctionAutoparksByRegionAutoparksCount(): void {
-    this.store.select( selectAutoparksRegions )
-    .subscribe( (regions) => {
-      if(regions.length > 0) {
-        this.store.dispatch( loadAuctionAutoparksByRegion( { regionName: regions[0].name } ) );
-      }
-    } );
   }
 
   private getDataFromStore(): void {

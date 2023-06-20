@@ -12,10 +12,6 @@
     @include flexMix(row, center, space-between);
 
     padding: 1.5rem 0;
-
-    img {
-      cursor: pointer;
-    }
   }
 
   &__user-panel {

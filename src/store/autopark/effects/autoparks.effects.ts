@@ -13,17 +13,20 @@ import {
   loadAuctionAutoparksByRegionSuccess,
   loadAutoparkRegions,
   loadAutoparkRegionsFailure,
-  loadAutoparkRegionsSuccess
+  loadAutoparkRegionsSuccess,
+  selectRegion
 } from '../actions';
 import { addLoading, removeLoading } from '../../shared';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AutoparksEffects {
 
   private actions$ = inject( Actions );
+  private store = inject( Store );
   private autoparkService = inject( AutoparkService );
 
-  public loadAutoparksRegions = createEffect( () => this.actions$.pipe(
+  public loadRegions = createEffect( () => this.actions$.pipe(
     ofType( loadAutoparkRegions ),
     switchMap( () => this.autoparkService.getAutoparksRegions() ),
     map( (regions) => loadAutoparkRegionsSuccess( { regions } ) ),
@@ -33,9 +36,17 @@ export class AutoparksEffects {
   public loadAuctionAutoparksByRegion = createEffect( () => this.actions$.pipe(
     ofType( loadAuctionAutoparksByRegion ),
     switchMap( ({ regionName }) => this.autoparkService.getAuctionAutoparksByRegion( regionName ) ),
-    map( (auctionAutoparks) => loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } ) ),
+    map( (auctionAutoparks) => {
+      console.log(auctionAutoparks)
+      return loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } )
+    } ),
     catchError( () => of( loadAuctionAutoparksByRegionFailure() ) ),
   ) );
+
+  public selectRegion$ = createEffect( () => this.actions$.pipe(
+    ofType( selectRegion ),
+    map( ({ region }) => loadAuctionAutoparksByRegion( { regionName: region.name } ) )
+  ) )
 
   public addLoading$ = createEffect( () =>
     this.actions$.pipe(
