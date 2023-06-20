@@ -1,7 +1,7 @@
 <app-spinner *ngIf="isLoading$ | async; else auctionCards"></app-spinner>
 
 <ng-template #auctionCards>
-  <div class="wrapper" *ngIf="(auctionAutoparks|async) as cards">
+  <div class="auction-places" *ngIf="(auctionAutoparks$|async) as cards">
     <div class="top container">
       <div class="top__title title">
         ТОП автопарки
@@ -37,7 +37,7 @@
       <div class="new__grid-list grid">
         <app-auction-autopark-card
                 class="item"
-                *ngFor="let card of cards.new"
+                *ngFor="let card of cards.fresh"
                 [card]="card"
                 (click)="navigateToDetailed(card.id)"
         ></app-auction-autopark-card>

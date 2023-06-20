@@ -1,6 +1,6 @@
-import { Auction, AutoparkRegion } from '@models';
+import { AuctionAutoparks, Region } from '@models';
 
 export interface AutoparksState {
-  regions: AutoparkRegion[];
-  auctionAutoparksCard: Auction;
+  regions: Region[];
+  auctionAutoparksCard: AuctionAutoparks;
 }

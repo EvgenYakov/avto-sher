@@ -1,5 +1,5 @@
 export * from './autopark-region.interface'
 export * from './autopark.interface'
 export * from './autopark-status-data.interface'
-export * from './autopark-auction-card.interface'
-export * from './auction'
+export * from './auction-autopark-card.interface'
+export * from './auction-autoparks.interface'

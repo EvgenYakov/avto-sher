@@ -1,9 +1,10 @@
-export interface AutoparkAuctionCard {
+export interface AuctionAutoparkCard {
   id: number;
   title: string;
   logo: string;
   rating: number;
-  carsQuantity: number;
+  region: string;
+  carsCount: number;
   topPlace: number;
   checkedPlace: number;
   newPlace: number;
