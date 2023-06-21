@@ -21,10 +21,7 @@ export interface AutoparkDetailedResponse {
 export class AutoparkService extends BaseService {
 
   public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
-    const params = new HttpParams();
-    params.append( 'region', regionName );
-
-    return this.httpService.get<AuctionAutoparks>( `${ environment.apiUrl }/autoparks/auction`, { params } )
+    return this.httpService.get<AuctionAutoparks>( `${ environment.apiUrl }/autoparks/auction`, { params: { region: regionName } } )
   }
 
   public getAutoparksRegions(): Observable<Region[]> {

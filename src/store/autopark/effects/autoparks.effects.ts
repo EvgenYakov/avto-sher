@@ -1,11 +1,11 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { AutoparkService } from '@services';
-import { LoadingTypes } from '@constants';
+import { AutoparkService, LocalStorageService } from '@services';
+import { LoadingTypes, LocalStorageKeys } from '@constants';
 
 import {
   loadAuctionAutoparksByRegion,
@@ -17,14 +17,15 @@ import {
   selectRegion
 } from '../actions';
 import { addLoading, removeLoading } from '../../shared';
-import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AutoparksEffects {
 
-  private actions$ = inject( Actions );
-  private store = inject( Store );
-  private autoparkService = inject( AutoparkService );
+  constructor(
+    private actions$: Actions,
+    private autoparkService: AutoparkService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   public loadRegions = createEffect( () => this.actions$.pipe(
     ofType( loadAutoparkRegions ),
@@ -36,16 +37,16 @@ export class AutoparksEffects {
   public loadAuctionAutoparksByRegion = createEffect( () => this.actions$.pipe(
     ofType( loadAuctionAutoparksByRegion ),
     switchMap( ({ regionName }) => this.autoparkService.getAuctionAutoparksByRegion( regionName ) ),
-    map( (auctionAutoparks) => {
-      console.log(auctionAutoparks)
-      return loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } )
-    } ),
+    map( (auctionAutoparks) => loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } ) ),
     catchError( () => of( loadAuctionAutoparksByRegionFailure() ) ),
   ) );
 
   public selectRegion$ = createEffect( () => this.actions$.pipe(
     ofType( selectRegion ),
-    map( ({ region }) => loadAuctionAutoparksByRegion( { regionName: region.name } ) )
+    map( ({ region }) => {
+      this.localStorageService.addItemToStorage( LocalStorageKeys.REGION, region );
+      return loadAuctionAutoparksByRegion( { regionName: region.name } )
+    } )
   ) )
 
   public addLoading$ = createEffect( () =>
