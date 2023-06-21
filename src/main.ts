@@ -8,9 +8,17 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { appReducers, AuthEffects, AutoparkDetailedEffects, CarDetailedEffects, CarListEffects } from '@store';
+import {
+  appReducers,
+  AuthEffects,
+  AutoparkDetailedEffects,
+  AutoparksEffects,
+  CarDetailedEffects,
+  CarListEffects
+} from '@store';
 import { environment } from '@environments/environment';
 import { ApplyTokenInterceptor, AuthGuard } from '@services';
+
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
 import { UserEffects } from './store/user';
@@ -30,6 +38,7 @@ bootstrapApplication( AppComponent, {
       CarListEffects,
       CarDetailedEffects,
       AutoparkDetailedEffects,
+      AutoparksEffects,
       UserEffects
     ] ) ),
     AuthGuard,

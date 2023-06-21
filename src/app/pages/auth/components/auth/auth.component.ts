@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-import { AUTH_DEPS } from './auth.dependencies';
 import { Store } from '@ngrx/store';
+
 import { selectLoading } from '@store';
 import { LoadingTypes } from '@constants';
+
+import { AUTH_DEPS } from './auth.dependencies';
 
 @Component( {
   selector: 'app-auth',
