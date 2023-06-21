@@ -4,5 +4,5 @@ export interface CarDetailedState {
   autoProfile: AutoProfile;
   pathsOfImages: string[];
   additional: string[];
-  error: BackendError | null;
+  errors: string ;
 }
