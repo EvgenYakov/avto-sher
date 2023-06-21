@@ -2,13 +2,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
+import { Observable } from 'rxjs';
+
 import { selectAuctionAutoparks, selectLoading, selectRegion } from '@store';
 import { AppRoutes, LoadingTypes, LocalStorageKeys, MainRoutes } from '@constants';
+import { LocalStorageService } from '@services';
+import { AuctionAutoparks } from '@models';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
-import { Observable } from 'rxjs';
-import { AuctionAutoparks } from '@models';
-import { LocalStorageService } from '@services';
 
 @Component( {
   selector: 'app-start-page',
