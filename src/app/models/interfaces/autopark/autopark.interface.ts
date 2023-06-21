@@ -1,11 +1,12 @@
 import { AutoparkStatusData } from './autopark-status-data.interface';
 
+
 export interface AutoparkCard {
   id: number;
+  title: string;
   logo: string;
-  autoparkName: string;
-  autoCount: number;
   rating: number;
+  autoCount: number;
   isFavorite: boolean;
 }
 

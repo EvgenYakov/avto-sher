@@ -1,7 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
-import { checkedAutoparksCards, newAutoparksCards, topAutoparksCards } from '@test-data';
+import { selectAuctionAutoparks, selectLoading } from '@store';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
+
 import { START_PAGE_DEPS } from './start-page.dependencies';
+import { Observable } from 'rxjs';
+import { AuctionAutoparks } from '@models';
 
 @Component( {
   selector: 'app-start-page',
@@ -11,11 +17,26 @@ import { START_PAGE_DEPS } from './start-page.dependencies';
   imports: [START_PAGE_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class StartPageComponent {
+export class StartPageComponent implements OnInit {
 
-  public topAutoparksCard = topAutoparksCards;
-  public checkedAutoparksCard = checkedAutoparksCards;
-  public newAutoparksCard = newAutoparksCards;
+  constructor(
+    private store: Store,
+    private router: Router
+  ) {}
 
-  protected readonly newAutoparksCards = newAutoparksCards;
+  public auctionAutoparks$: Observable<AuctionAutoparks>;
+  public isLoading$: Observable<boolean>;
+
+  ngOnInit(): void {
+    this.getDataFromStore();
+  }
+
+  public navigateToDetailed(autoparkId: number): void {
+    this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, autoparkId] );
+  }
+
+  private getDataFromStore(): void {
+    this.auctionAutoparks$ = this.store.select( selectAuctionAutoparks );
+    this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARKS } );
+  }
 }

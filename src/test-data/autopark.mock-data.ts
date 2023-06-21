@@ -27,7 +27,7 @@ const autoparkCardBlueprintFactory: BlueprintFactory<AutoparkCard> = () => (
   {
     id: (): number => faker.datatype.number(),
     logo: (): string => faker.image.image(),
-    autoparkName: (): string => faker.lorem.word(),
+    title: (): string => faker.lorem.word(),
     autoCount: (): number => faker.datatype.number( { max: 400 } ),
     rating: (): number => faker.datatype.number( { min: 1, max: 5 } ),
     isFavorite: (): boolean => faker.datatype.boolean(),
@@ -43,7 +43,7 @@ const autoparkDetailedBlueprintFactory: BlueprintFactory<AutoparkDetailed> = () 
   {
     id: (): number => faker.datatype.number(),
     logo: (): string => faker.image.image(),
-    autoparkName: (): string => faker.lorem.word(),
+    title: (): string => faker.lorem.word(),
     autoCount: (): number => faker.datatype.number( { max: 1000 } ),
     rating: (): number => faker.datatype.number( { min: 0, max: 5 } ),
     isFavorite: (): boolean => faker.datatype.boolean(),

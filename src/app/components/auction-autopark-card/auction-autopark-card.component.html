@@ -1,14 +1,14 @@
-<div class="card" (click)="navigate(card.id)">
+<div class="card">
   <div class="card__logo">
     <img [src]="card.logo" alt="autopark logo">
   </div>
   <div class="card__content">
     <div class="title">
-      {{card.autoparkName}}
+      {{card.title}}
     </div>
     <div class="additional">
       <div class="additional__auto-count">
-        {{card.autoCount}} автомобилей
+        {{card.carsCount}} автомобилей
       </div>
       <div class="additional__rating">
         <app-rating-stars [rating]="{value: card.rating, date:''}"></app-rating-stars>

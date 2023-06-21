@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../helpers/base.service';
+import { HttpParams } from '@angular/common/http';
+
 import { map, Observable, timer } from 'rxjs';
 
-import { AutoCard, AutoparkCard, AutoparkDetailed, AutoProfile, ReviewUser } from '@models';
-import { autoparkDetailedData, carsData, reviewsUserData, topAutoparksCards } from '@test-data';
+import { environment } from '@environments/environment';
+import { AuctionAutoparks, AutoCard, AutoparkDetailed, Region, ReviewUser } from '@models';
+import { autoparkDetailedData, carsData, reviewsUserData } from '@test-data';
+
+import { BaseService } from '../helpers';
 
 export interface AutoparkDetailedResponse {
   autoparkDetailed: AutoparkDetailed,
@@ -11,29 +15,29 @@ export interface AutoparkDetailedResponse {
   reviews: ReviewUser[]
 }
 
-@Injectable({
+@Injectable( {
   providedIn: 'root'
-})
+} )
 export class AutoparkService extends BaseService {
-  public getAutoparks(): Observable<AutoparkCard[]> {
-    return timer(1000).pipe(
-      map(() => topAutoparksCards)
-    )
+
+  public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
+    return this.httpService.get<AuctionAutoparks>( `${ environment.apiUrl }/autoparks/auction`, { params: { region: regionName } } )
+  }
+
+  public getAutoparksRegions(): Observable<Region[]> {
+    return this.httpService.get<Region[]>( `${ environment.apiUrl }/autoparks/regions` )
   }
 
   public getAutoparkById(autoparkId: number): Observable<AutoparkDetailedResponse> {
-    return timer(500).pipe(
-      map(() => {
+    return timer( 500 ).pipe(
+      map( () => {
         return {
           autoparkDetailed: autoparkDetailedData,
           cars: carsData,
           reviews: reviewsUserData
         };
-      })
+      } )
     );
   }
 
-  public addAutoToAutopark(auto: AutoProfile, autoparkId: number): void {
-
-  }
 }

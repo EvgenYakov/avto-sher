@@ -1,9 +1,9 @@
-@import "../../../theme/mixins";
+@import "mixins";
 
 :host ::ng-deep {
   .checked .item {
     .card__logo {
-      height: 193px;
+      height: 12rem;
     }
 
     .card__content .additional {
@@ -12,8 +12,8 @@
   }
 }
 
-.wrapper {
-  @include flexMix(column, unset, space-between, 110px);
+.auction-places {
+  @include flexMix(column, unset, flex-start, 6.875rem);
 
   width: 100%;
   height: 100%;
@@ -37,7 +37,7 @@
   }
 
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 1.25rem;
   grid-template-columns: repeat(4, 1fr);
 }
 
@@ -54,6 +54,6 @@
     }
 
     grid-template-columns: repeat(5, 1fr);
-    grid-gap: 15px;
+    grid-gap: 1rem;
   }
 }

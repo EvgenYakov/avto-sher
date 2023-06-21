@@ -1,7 +1,5 @@
-export * from './actions/autopark-profile.actions'
-
-export * from './reducers/autopark-profile.reducer'
-
-export * from './effects/autopark-detailed.effects'
-
-export * from './selectors/autopark-detailed.selectors'
+export * from './states'
+export * from './actions'
+export * from './reducers'
+export * from './effects'
+export * from './selectors'

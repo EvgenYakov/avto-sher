@@ -2,7 +2,7 @@ export enum LoadingTypes {
   AUTH = 'auth',
   CARS_LIST = 'cars',
   CAR_DETAILED = 'car',
-  AUTOPARKS_LIST = 'autoparks',
+  AUTOPARKS = 'autoparks',
   AUTOPARK_DETAILED = 'autopark',
   REVIEWS_LIST = 'reviews',
   PROFILE = 'profile'
