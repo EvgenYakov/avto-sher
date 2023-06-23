@@ -10,6 +10,7 @@ import { CarProfile } from '@models';
 
 import { loadCar, loadCarFailure, loadCarSuccess } from '../actions';
 import { Store } from '@ngrx/store';
+import { loadAutoparkCars } from '../../autopark';
 
 @Injectable()
 export class CarDetailedEffects {
@@ -23,7 +24,10 @@ export class CarDetailedEffects {
   public loadCarProfile$ = createEffect( () => this.actions$.pipe(
     ofType( loadCar ),
     switchMap( ({ carId }) => this.carService.getCarProfile( carId ) ),
-    map( (car: CarProfile) => loadCarSuccess( { car } ) ),
+    map( (car: CarProfile) => {
+      this.store.dispatch( loadAutoparkCars( { autoparkId: car.autoparkId } ) )
+      return loadCarSuccess( { car } )
+    } ),
     catchError( (error: HttpErrorResponse) => of( loadCarFailure( { error: error.message } ) ) )
   ) );
 

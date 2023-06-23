@@ -22,5 +22,6 @@ export interface CarCard {
 
 export interface CarProfile extends CarCard {
   bonuses: AutoparkBonus[];
+  autoparkId: number;
   autoparkAddress: string;
 }

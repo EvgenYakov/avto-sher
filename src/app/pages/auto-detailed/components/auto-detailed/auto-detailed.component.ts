@@ -3,18 +3,18 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { isEmpty, Observable, Subject, takeUntil } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
 import { AppRoutes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
-import { CarProfile } from '@models';
-import { loadCar, selectCarProfile } from '@store';
+import { CarCard, CarProfile } from '@models';
+import { loadAutoparkCars, loadCar, selectAutoparkCars, selectCarProfile } from '@store';
+import { AutoCardComponent, LoadMoreComponent, RentCardComponent } from '@components';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
 import { AUTO_DETAILED_DEPS } from './auto-detailed.dependencies';
-import { RentCardComponent } from '@components';
 
 @Component( {
   selector: 'app-car-detailed',
@@ -22,11 +22,12 @@ import { RentCardComponent } from '@components';
   styleUrls: ['./auto-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS, RentCardComponent]
+  imports: [AUTO_DETAILED_DEPS, RentCardComponent, AutoCardComponent, LoadMoreComponent]
 } )
 export class AutoDetailedComponent implements OnInit, OnDestroy {
 
   public carProfile$: Observable<CarProfile>;
+  public autoparkCars$: Observable<CarCard[]>;
 
   public responsiveOptions = RESPONSIVE_OPTIONS;
 
@@ -49,7 +50,6 @@ export class AutoDetailedComponent implements OnInit, OnDestroy {
       takeUntil( this.destroy$ )
     ).subscribe( (params) => {
       const carId = params['id'];
-
       this.store.dispatch( loadCar( { carId } ) );
       this.setBreadcrumbs( carId );
     } );
@@ -57,6 +57,7 @@ export class AutoDetailedComponent implements OnInit, OnDestroy {
 
   private getDataFromStore(): void {
     this.carProfile$ = this.store.select( selectCarProfile );
+    this.autoparkCars$ = this.store.select( selectAutoparkCars );
   }
 
   private setBreadcrumbs(autoId: number): void {

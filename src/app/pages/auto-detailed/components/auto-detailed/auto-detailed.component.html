@@ -115,4 +115,13 @@
     <!--    -->
     <!--    </div>-->
   </div>
+  
+  <div class="cars-list">
+    <div class="cars-list__title">
+      Другие объявления автопарка
+    </div>
+    <app-load-more>
+      <app-car-card *ngFor="let car of autoparkCars$|async" [car]="car"></app-car-card>
+    </app-load-more>
+  </div>
 </div>

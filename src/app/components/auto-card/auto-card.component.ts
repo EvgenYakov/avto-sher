@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CarCard } from '@models';
+import { AppRoutes, MainRoutes } from '@constants';
 
 import { AUTO_CARD_DEPS } from './auto-card.dependencies';
 
@@ -14,4 +16,12 @@ import { AUTO_CARD_DEPS } from './auto-card.dependencies';
 } )
 export class AutoCardComponent {
   @Input() public car: CarCard;
+
+  constructor(
+    private router: Router
+  ) {}
+
+  public navigateToCarProfile(carId: number): void {
+    this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTO_DETAILED, carId] )
+  }
 }

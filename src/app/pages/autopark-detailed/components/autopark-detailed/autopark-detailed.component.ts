@@ -41,6 +41,8 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   public cars$: Observable<CarCard[]>;
   // public reviews: Observable<ReviewUser[]>;
 
+  private autoparkId: number;
+
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
@@ -51,21 +53,18 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   public changeActiveIndex(event: { index: number }): void {
     switch (event.index) {
       case 0:
-        this.store.dispatch( loadAutoparkCars() );
+        this.store.dispatch( loadAutoparkCars( { autoparkId: this.autoparkId } ) );
         break;
     }
-  }
-
-  public navigateToCarProfile(carId: number): void {
-    this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTO_DETAILED, carId] )
   }
 
   private getDataFromRoute(): void {
     this.activatedRoute.params.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (params) => {
-      this.store.dispatch( loadAutoparkDetailed( { autoparkId: params['id'] } ) );
-      this.setBreadcrumbs( params['id'] );
+      this.autoparkId = params['id'];
+      this.store.dispatch( loadAutoparkDetailed( { autoparkId: this.autoparkId } ) );
+      this.setBreadcrumbs( this.autoparkId );
     } );
   }
 
