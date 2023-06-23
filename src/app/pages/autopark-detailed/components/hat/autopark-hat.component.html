@@ -3,21 +3,30 @@
     <img [src]="hatData.logo" alt="автопарк logo">
   </div>
   <div class="info">
-    <div class="info__status" [ngStyle]="{'color':hatData.status.color}">
-      <div class="icon">
-        <img [src]="hatData.status.icon" alt="кионка статуса автопарка">
-      </div>
-      <div class="status-label">
-        <span>{{hatData.status.label | titlecase}} автопарк</span>
-      </div>
-    </div>
+    <!--    <div class="info__status" [ngStyle]="{'color':hatData.status.color}">-->
+    <!--      <div class="icon">-->
+    <!--        <img [src]="hatData.status.icon" alt="иконка статуса автопарка">-->
+    <!--      </div>-->
+    <!--      <div class="status-label">-->
+    <!--        <span>{{hatData.status.label | titlecase}} автопарк</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
     <div class="info__name title">
       {{hatData.title}}
     </div>
     <div class="info__sub-panel">
-      <app-sub-info-panel class="panel" [title]="hatData.autoCount+''" subtitle="Автомобилей"></app-sub-info-panel>
-      <app-sub-info-panel class="panel" [title]="hatData.rating + ' / 5'" subtitle="Рейтинг автопарка"></app-sub-info-panel>
-      <app-sub-info-panel class="panel" [title]="hatData.ordersCount+''" subtitle="Выполненных заказов"></app-sub-info-panel>
+      <app-sub-info-panel class="panel"
+                          [title]="hatData.carsCount+''"
+                          subtitle="Автомобилей"
+      ></app-sub-info-panel>
+      <app-sub-info-panel class="panel"
+                          [title]="hatData.rating + ' / 5'"
+                          subtitle="Рейтинг автопарка"
+      ></app-sub-info-panel>
+      <app-sub-info-panel class="panel"
+                          [title]="hatData.ordersCount+''"
+                          subtitle="Выполненных заказов"
+      ></app-sub-info-panel>
     </div>
   </div>
   <div class="favorite">

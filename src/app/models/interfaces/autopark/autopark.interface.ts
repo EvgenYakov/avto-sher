@@ -1,6 +1,3 @@
-import { AutoparkStatusData } from './autopark-status-data.interface';
-
-
 export interface AutoparkCard {
   id: number;
   title: string;
@@ -10,17 +7,26 @@ export interface AutoparkCard {
   isFavorite: boolean;
 }
 
-export interface AutoparkDetailed extends AutoparkCard {
+export interface AutoparkDetailed {
+  id: number;
+  title: string;
+  logo: string;
+  rating: number;
+  isPremium: boolean;
+  isFavorite: boolean;
+  region: string;
+  carsCount: number;
   ordersCount: number;
-  status: AutoparkStatusData;
-  address: string;
-  features: string[];
-  bonuses: AutoparkBonus[];
+  description: string;
+  backgroundImage: string;
+  createdAt: Date;
+  address: string
+  bonuses: AutoparkBonus[]
 }
 
 export interface AutoparkBonus {
   id: number;
   title: string;
-  icon: string;
   description: string;
+  icon: string;
 }

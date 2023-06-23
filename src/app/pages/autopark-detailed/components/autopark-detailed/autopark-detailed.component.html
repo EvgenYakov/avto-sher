@@ -3,28 +3,30 @@
     <div class="hat container">
       <app-autopark-hat [hatData]="autopark"></app-autopark-hat>
     </div>
-
+    
     <div class="tabs">
-      <p-tabView>
+      <p-tabView [activeIndex]="1" (onChange)="changeActiveIndex($event)">
         <p-tabPanel header="Автомобили">
           <app-load-more>
-            <app-auto-card *ngFor="let auto of cars|async" [autoCard]="auto"></app-auto-card>
+            <app-car-card *ngFor="let car of cars$|async" [car]="car"></app-car-card>
           </app-load-more>
         </p-tabPanel>
         <p-tabPanel header="Профиль">
-          авто
+          <div class="container">
+            {{autopark |json}}
+          </div>
         </p-tabPanel>
-        <p-tabPanel header="Отзывы">
-          <app-load-more btnLabel="Другие отзывы">
-            <app-review-user-card *ngFor="let review of reviews|async" [review]="review"></app-review-user-card>
-          </app-load-more>
+        <p-tabPanel [disabled]="true" header="Отзывы">
+          <!--          <app-load-more btnLabel="Другие отзывы">-->
+          <!--            <app-review-user-card *ngFor="let review of reviews|async" [review]="review"></app-review-user-card>-->
+          <!--          </app-load-more>-->
         </p-tabPanel>
-        <p-tabPanel header="Связаться с автопарком">
-          авто
+        <p-tabPanel [disabled]="true" header="Связаться с автопарком">
+        
         </p-tabPanel>
       </p-tabView>
     </div>
   </div>
 </ng-template>
 
-<app-spinner *ngIf="isLoading | async; else autoparkDetailed"></app-spinner>
+<app-spinner *ngIf="isLoading$ | async; else autoparkDetailed"></app-spinner>

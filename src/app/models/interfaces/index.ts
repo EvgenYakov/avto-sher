@@ -1,4 +1,4 @@
-export * from './auto'
+export * from './car'
 export * from './autopark'
 export * from './controls'
 export * from './form'

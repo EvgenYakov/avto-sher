@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { AutoparkDetailedState } from '../states/autopark-detailed.state';
+import { AutoparkDetailedState } from '../states';
 
-const autoparkDetailedFeatureSelector = createFeatureSelector<AutoparkDetailedState>('autoparkDetailed');
+const autoparkDetailedFeatureSelector = createFeatureSelector<AutoparkDetailedState>( 'autoparkDetailed' );
 
 export const selectAutoparkDetailed = createSelector(
   autoparkDetailedFeatureSelector,
@@ -17,4 +17,9 @@ export const selectAutoparkCars = createSelector(
 export const selectAutoparkReviews = createSelector(
   autoparkDetailedFeatureSelector,
   (state) => state.reviews
+);
+
+export const selectAutoparkCarsPage = createSelector(
+  autoparkDetailedFeatureSelector,
+  (state) => state.autoparkCarsPage
 );

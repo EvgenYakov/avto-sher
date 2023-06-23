@@ -17,7 +17,7 @@ import { addBreadcrumb } from '@store';
 import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.service';
 
 @Component( {
-  selector: 'app-auto-detailed',
+  selector: 'app-car-detailed',
   templateUrl: './auto-detailed.component.html',
   styleUrls: ['./auto-detailed.component.scss'],
   standalone: true,
