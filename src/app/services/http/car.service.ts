@@ -31,7 +31,11 @@ export class CarService extends BaseService {
     return this.httpService.get<any>( `${ environment.apiUrl }/cars/${ carId }` ).pipe(
       map((response) => {
         console.log(response)
-        return response
+        const car = response.car;
+        return {
+          ...car,
+          autoparkAddress: 'Москва, ул. Тверская, 42'
+        }
       })
     );
   }
