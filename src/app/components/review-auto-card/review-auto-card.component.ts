@@ -6,7 +6,7 @@ import { reviewAutoData } from '@test-data';
 import { ReviewAuto } from '@models';
 
 @Component( {
-  selector: 'app-review-auto-card',
+  selector: 'app-review-car-card',
   templateUrl: './review-auto-card.component.html',
   styleUrls: ['./review-auto-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -5,5 +5,6 @@ export * from './main-routes.enum';
 export * from './autopark-status.enum';
 export * from './loading-types.enum';
 export * from './user-status.enum';
+export * from './car-characteristics.enum'
 //constants
 export * from './controls-validators.constant';

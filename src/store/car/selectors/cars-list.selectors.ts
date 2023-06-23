@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { CarsListState } from '@store';
-import { autoCardAdapter } from '../reducers/cars-list.reducer';
+import { CarsListState } from '../state';
+import { autoCardAdapter } from '../reducers';
 
-const carsListFeatureSelector = createFeatureSelector<CarsListState>('carListState');
+const carsListFeatureSelector = createFeatureSelector<CarsListState>('cars');
 
 export const {
   selectEntities: selectCarsEntities,
@@ -14,4 +14,3 @@ export const getCarsEntities = createSelector(
   carsListFeatureSelector,
   selectCars
 )
-

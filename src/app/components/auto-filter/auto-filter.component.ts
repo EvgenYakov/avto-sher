@@ -6,7 +6,7 @@ import { AUTO_FILTER_DEPS } from './auto-filter.dependencies';
 import { Dropdown, DropdownOption, FilterForm } from '@models';
 
 @Component({
-    selector: 'app-auto-filter',
+    selector: 'app-car-filter',
     templateUrl: './auto-filter.component.html',
     styleUrls: ['./auto-filter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

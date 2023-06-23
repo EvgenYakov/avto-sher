@@ -1,21 +1,31 @@
 import { createReducer, on } from '@ngrx/store';
 
 import { AutoparkDetailed } from '@models';
-import { AutoparkDetailedState } from '../states/autopark-detailed.state';
-import { loadAutoparkDetailedSuccess } from '../actions/autopark-detailed.actions';
+
+import { AutoparkDetailedState } from '../states';
+import { loadAutoparkCarsSuccess, loadAutoparkDetailedSuccess, loadMoreAutoparkCars } from '../actions';
 
 const initialState: AutoparkDetailedState = {
   autoparkDetailed: {} as AutoparkDetailed,
   cars: [],
-  reviews: []
+  reviews: [],
+  autoparkCarsPage: 1,
+  autoparkCarsLimit: 5,
+  errors: ''
 }
 
 export const autoparkDetailedReducer = createReducer(
   initialState,
-  on(loadAutoparkDetailedSuccess, (state, action) => ({
+  on( loadAutoparkDetailedSuccess, (state, { autoparkDetailed }) => ({
     ...state,
-    autoparkDetailed: action.autoparkDetailedResponse.autoparkDetailed,
-    cars: action.autoparkDetailedResponse.cars,
-    reviews: action.autoparkDetailedResponse.reviews
-  })),
+    autoparkDetailed
+  }) ),
+  on( loadAutoparkCarsSuccess, (state, { cars }) => ({
+    ...state,
+    cars
+  }) ),
+  on( loadMoreAutoparkCars, (state, {}) => ({
+    ...state,
+    autoparkCarsPage: state.autoparkCarsPage + 1
+  }) ),
 )

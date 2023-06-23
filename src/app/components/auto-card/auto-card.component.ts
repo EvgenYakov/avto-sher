@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { AutoCard } from '@models';
+import { AutoCard, CarCard } from '@models';
 import { AUTO_CARD_DEPS } from './auto-card.dependencies';
 
 @Component({
-    selector: 'app-auto-card',
+    selector: 'app-car-card',
     templateUrl: './auto-card.component.html',
     styleUrls: ['./auto-card.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -12,5 +12,5 @@ import { AUTO_CARD_DEPS } from './auto-card.dependencies';
     imports: [AUTO_CARD_DEPS]
 })
 export class AutoCardComponent {
-  @Input() public autoCard: AutoCard;
+  @Input() public car: CarCard;
 }

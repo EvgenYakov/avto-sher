@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     if(this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION )) {
       const region = this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION );
       this.selectedRegionControl.setValue( region )
-      this.store.dispatch( selectRegion( { region } ) )
     }
 
     this.selectedRegionControl.valueChanges.pipe(
