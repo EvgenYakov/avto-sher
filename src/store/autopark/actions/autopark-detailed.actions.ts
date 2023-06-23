@@ -36,6 +36,7 @@ export const loadMoreAutoparkCars = createAction(
 
 export const loadAutoparkCars = createAction(
   AutoparkDetailedActions.LOAD_AUTOPARK_CARS,
+  props<{ autoparkId: number }>()
 );
 
 export const loadAutoparkCarsSuccess = createAction(

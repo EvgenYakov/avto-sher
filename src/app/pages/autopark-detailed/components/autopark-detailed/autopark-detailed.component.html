@@ -8,7 +8,7 @@
       <p-tabView [activeIndex]="1" (onChange)="changeActiveIndex($event)">
         <p-tabPanel header="Автомобили">
           <app-load-more>
-            <app-car-card *ngFor="let car of cars$|async" [car]="car" (click)="navigateToCarProfile(car.id)"></app-car-card>
+            <app-car-card *ngFor="let car of cars$|async" [car]="car"></app-car-card>
           </app-load-more>
         </p-tabPanel>
         <p-tabPanel header="Профиль">
