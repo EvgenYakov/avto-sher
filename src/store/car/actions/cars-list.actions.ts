@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AutoCard, FilterParams } from '@models';
+import { CarCard, FilterParams } from '@models';
 
 export enum CarsListActions {
   LOAD_ALL_CARS = '[CAR] Get all cars',
@@ -25,7 +25,7 @@ export const loadAllCars = createAction(
 
 export const loadAllCarsSuccess = createAction(
   CarsListActions.LOAD_ALL_CARS_SUCCESS,
-  props<{ cars: AutoCard[] }>()
+  props<{ cars: CarCard[] }>()
 );
 
 export const loadAllCarsFailure = createAction(
@@ -71,7 +71,7 @@ export const filterCar = createAction(
 
 export const filterCarSuccess = createAction(
   CarsListActions.FILTER_CAR_REQUEST_SUCCESS,
-  props<{ filteredCars: AutoCard[] }>()
+  props<{ filteredCars: CarCard[] }>()
 );
 
 export const filterCarFailure = createAction(

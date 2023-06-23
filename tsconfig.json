@@ -28,7 +28,6 @@
       "@models": ["./src/app/models/index"],
       "@services": ["./src/app/services/index"],
       "@store": ["./src/store/index"],
-      "@test-data": ["./src/test-data/index"],
       "@environments/*": ["./src/environments/*"]
     }
   },
