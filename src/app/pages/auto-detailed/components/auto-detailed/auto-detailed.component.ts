@@ -9,11 +9,12 @@ import { MenuItem } from 'primeng/api';
 import { AppRoutes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
 import { CarProfile } from '@models';
+import { loadCar, selectCarProfile } from '@store';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
 import { AUTO_DETAILED_DEPS } from './auto-detailed.dependencies';
-import { loadCar, selectCarProfile } from '@store';
+import { RentCardComponent } from '@components';
 
 @Component( {
   selector: 'app-car-detailed',
@@ -21,7 +22,7 @@ import { loadCar, selectCarProfile } from '@store';
   styleUrls: ['./auto-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS]
+  imports: [AUTO_DETAILED_DEPS, RentCardComponent]
 } )
 export class AutoDetailedComponent implements OnInit, OnDestroy {
 

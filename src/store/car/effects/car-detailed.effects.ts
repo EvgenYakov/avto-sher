@@ -6,23 +6,24 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 
 import { CarService } from '@services';
+import { CarProfile } from '@models';
 
 import { loadCar, loadCarFailure, loadCarSuccess } from '../actions';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class CarDetailedEffects {
   constructor(
     private actions$: Actions,
     private carService: CarService,
+    private store: Store
   ) {
   }
 
-  public loadCar$ = createEffect( () => this.actions$.pipe(
+  public loadCarProfile$ = createEffect( () => this.actions$.pipe(
     ofType( loadCar ),
     switchMap( ({ carId }) => this.carService.getCarProfile( carId ) ),
-    map( (car) => {
-      return loadCarSuccess( { car } )
-    } ),
+    map( (car: CarProfile) => loadCarSuccess( { car } ) ),
     catchError( (error: HttpErrorResponse) => of( loadCarFailure( { error: error.message } ) ) )
   ) );
 

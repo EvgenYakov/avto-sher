@@ -1,0 +1,47 @@
+@import "mixins";
+
+:host ::ng-deep {
+  .p-card .p-card-body {
+    padding: 35px 38px;
+  }
+
+  .p-card .p-card-content {
+    padding: 0;
+  }
+
+  .p-button {
+    width: 100%;
+  }
+}
+
+.rent-card {
+  height: 100%;
+  width: 100%;
+
+  .hat {
+    @include flexMix(row, center, space-between);
+
+    margin-bottom: 1rem;
+
+    &__price {
+      &:first-child {
+        font-size: 24px;
+      }
+    }
+
+    &__schedule {
+      font-size: 24px;
+      color: var(--text-color-secondary);
+    }
+  }
+
+  .conditions {
+    margin-bottom: 32px;
+
+    ul {
+      list-style: inherit;
+      margin-left: 20px;
+    }
+  }
+
+}

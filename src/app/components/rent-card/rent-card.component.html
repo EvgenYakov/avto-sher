@@ -1,0 +1,25 @@
+<p-card class="rent-card">
+  <div class="hat">
+    <div class="hat__price">
+      <span>
+      {{price}}
+      </span>
+      <span>руб / сут</span>
+    </div>
+    <div class="hat__schedule">
+      {{schedule}}
+    </div>
+  </div>
+  
+  <div class="conditions">
+    <ul>
+      <li *ngFor="let item of conditions">
+        {{item}}
+      </li>
+    </ul>
+  </div>
+  
+  <div class="btn">
+    <p-button [label]="btnTitle"></p-button>
+  </div>
+</p-card>
