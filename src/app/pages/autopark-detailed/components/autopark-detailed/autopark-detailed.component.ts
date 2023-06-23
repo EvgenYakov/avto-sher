@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 
 import { Store } from '@ngrx/store';
@@ -33,6 +33,7 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     private store: Store,
     private activatedRoute: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
+    private router: Router
   ) {}
 
   public isLoading$: Observable<boolean>;
@@ -53,6 +54,10 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
         this.store.dispatch( loadAutoparkCars() );
         break;
     }
+  }
+
+  public navigateToCarProfile(carId: number): void {
+    this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTO_DETAILED, carId] )
   }
 
   private getDataFromRoute(): void {
@@ -82,5 +87,4 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

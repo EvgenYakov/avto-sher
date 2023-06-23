@@ -1,20 +1,19 @@
-import { ChangeDetectionStrategy, Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { MenuItem } from 'primeng/api';
 
-import { AutoProfile } from '@models';
-import { carData } from '@test-data';
+import { AppRoutes, MainRoutes } from '@constants';
+import { BreadcrumbService } from '@services';
+import { CarProfile } from '@models';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
 import { AUTO_DETAILED_DEPS } from './auto-detailed.dependencies';
-import { MenuItem } from 'primeng/api';
-import { AppRoutes, MainRoutes } from '@constants';
-import { addBreadcrumb } from '@store';
-import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.service';
+import { loadCar, selectCarProfile } from '@store';
 
 @Component( {
   selector: 'app-car-detailed',
@@ -25,27 +24,38 @@ import { BreadcrumbService } from '../../../../services/helpers/breadcrumb.servi
   imports: [AUTO_DETAILED_DEPS]
 } )
 export class AutoDetailedComponent implements OnInit, OnDestroy {
-  @Input() public autoCard: AutoProfile = carData;
 
-
-  private store = inject( Store );
-  private activatedRoute = inject( ActivatedRoute );
-  private breadcrumbService = inject( BreadcrumbService );
-
-  private destroy$ = new Subject<void>();
+  public carProfile$: Observable<CarProfile>;
 
   public responsiveOptions = RESPONSIVE_OPTIONS;
 
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private store: Store,
+    private activatedRoute: ActivatedRoute,
+    private breadcrumbService: BreadcrumbService
+  ) {}
+
+
   ngOnInit(): void {
     this.getQueryParams();
+    this.getDataFromStore();
   }
 
   private getQueryParams(): void {
     this.activatedRoute.params.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (params) => {
-      this.setBreadcrumbs( params['id'] );
+      const carId = params['id'];
+
+      this.store.dispatch( loadCar( { carId } ) );
+      this.setBreadcrumbs( carId );
     } );
+  }
+
+  private getDataFromStore(): void {
+    this.carProfile$ = this.store.select( selectCarProfile );
   }
 
   private setBreadcrumbs(autoId: number): void {
@@ -53,7 +63,7 @@ export class AutoDetailedComponent implements OnInit, OnDestroy {
       label: 'Автомобиль',
       routerLink: `${ AppRoutes.MAIN }/${ MainRoutes.AUTO_DETAILED }/${ autoId }`
     };
-    this.breadcrumbService.addBreadcrumb(breadcrumb);
+    this.breadcrumbService.addBreadcrumb( breadcrumb );
   }
 
   ngOnDestroy(): void {

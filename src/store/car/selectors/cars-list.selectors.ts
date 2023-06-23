@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { CarsListState } from '../state';
+import { CarsListState } from '../states';
 import { autoCardAdapter } from '../reducers';
 
 const carsListFeatureSelector = createFeatureSelector<CarsListState>('cars');

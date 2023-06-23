@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 
 import { MainRoutes } from '@constants';
+import { AuthGuard } from '@services';
 
 import { MainComponent } from './main.component';
-import { AuthGuard } from '@services';
 
 export default [
   {
