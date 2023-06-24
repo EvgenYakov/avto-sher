@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { JsonPipe } from '@angular/common';
 
 import { Store } from '@ngrx/store';
@@ -33,12 +33,15 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     private store: Store,
     private activatedRoute: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
+    private router: Router
   ) {}
 
   public isLoading$: Observable<boolean>;
   public autoparkDetailed$: Observable<AutoparkDetailed>;
   public cars$: Observable<CarCard[]>;
   // public reviews: Observable<ReviewUser[]>;
+
+  private autoparkId: number;
 
   private destroy$ = new Subject<void>();
 
@@ -50,7 +53,7 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
   public changeActiveIndex(event: { index: number }): void {
     switch (event.index) {
       case 0:
-        this.store.dispatch( loadAutoparkCars() );
+        this.store.dispatch( loadAutoparkCars( { autoparkId: this.autoparkId } ) );
         break;
     }
   }
@@ -59,8 +62,9 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (params) => {
-      this.store.dispatch( loadAutoparkDetailed( { autoparkId: params['id'] } ) );
-      this.setBreadcrumbs( params['id'] );
+      this.autoparkId = params['id'];
+      this.store.dispatch( loadAutoparkDetailed( { autoparkId: this.autoparkId } ) );
+      this.setBreadcrumbs( this.autoparkId );
     } );
   }
 
@@ -82,5 +86,4 @@ export class AutoparkDetailedComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

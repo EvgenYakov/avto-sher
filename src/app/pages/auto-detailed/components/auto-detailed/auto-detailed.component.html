@@ -1,70 +1,127 @@
-<div class="auto-card container">
-  <div class="auto-card__gallery gallery">
-    <p-galleria
-      [value]="autoCard.pathsOfImages"
-      [numVisible]="5"
-      [responsiveOptions]="responsiveOptions"
-    >
-      <ng-template pTemplate="item" let-item>
-        <img [src]="item" class="gallery__img" />
-      </ng-template>
-      <ng-template pTemplate="thumbnail" let-item>
-        <img [src]="item" class="gallery__thumbnail" />
-      </ng-template>
-    </p-galleria>
+<div class="auto-card container" *ngIf="(carProfile$ | async) as car">
+  
+  <div class="auto-card__flex-block">
+    
+    <div class="left">
+      <div class="gallery">
+        <div class="gallery__logo">
+        
+        </div>
+        <div class="gallery__photos">
+        
+        </div>
+        <!--    <p-galleria-->
+        <!--            [value]="auto.photos"-->
+        <!--            [numVisible]="5"-->
+        <!--            [responsiveOptions]="responsiveOptions"-->
+        <!--    >-->
+        <!--      <ng-template pTemplate="item" let-item>-->
+        <!--        <img [src]="item" class="gallery__img"/>-->
+        <!--      </ng-template>-->
+        <!--      <ng-template pTemplate="thumbnail" let-item>-->
+        <!--        <img [src]="item" class="gallery__thumbnail"/>-->
+        <!--      </ng-template>-->
+        <!--    </p-galleria>-->
+      </div>
+      <div class="rent-conditions">
+        <div class="title subtitle">
+          Условия аренды
+        </div>
+        <div class="list">
+          <div class="list__item">
+            – Выплата осуществляется раз в 3 дня
+          </div>
+          <div class="list__item">
+            – Аренда от 7 дней
+          </div>
+          <div class="list__item">
+            – “График аренды” - 6/1 (6 дней оплачивается, 1 день бесплатно)
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="right">
+      <div class="content">
+        <div class="content__hat">
+          {{car.model}} {{car.brand}} <span class="year">{{car.yearOfRelease}}</span>
+        </div>
+        <div class="main-content">
+          <div class="content__characteristic">
+            <div class="row">
+              <div class="row__name">
+                Мощность:
+              </div>
+              <div class="row__value">
+                {{car.enginePower}} л.с.
+              </div>
+            </div>
+            <div class="row">
+              <div class="row__name">
+                Коробка:
+              </div>
+              <div class="row__value">
+                {{car.transmission}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="row__name">
+                Топливо:
+              </div>
+              <div class="row__value">
+                {{car.fuel}}
+              </div>
+            </div>
+          </div>
+          <div class="content__additional-info">
+            <ng-container *ngFor="let item of car.additionalInfo">
+              <div class="item">
+                <i class="pi pi-check"></i>
+                {{item}}
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      
+      </div>
+      <div class="rent-card">
+        <app-rent-card
+                [price]="car.price"
+                [conditions]="car.financialInfo"
+                [btnTitle]="'Арендовать'"
+                [schedule]="'6/1'"
+        ></app-rent-card>
+      </div>
+    </div>
+  
+  
   </div>
-
-  <div class="auto-card__content">
-    <div class="auto-card__header">
-      <div class="auto-card__title">
-        {{ autoCard.title }} {{ autoCard.year }}
-      </div>
-      <div class="auto-card__views-counter">
-        <i class="pi pi-eye"></i>{{ autoCard.viewsCounter }}
-      </div>
+  
+  <div class="address">
+    <div class="address__title subtitle">
+      Адрес автопарка
     </div>
-
-    <div class="auto-card__info">
-      <div class="auto-card__list">
-        <div class="auto-card__subtitle">Характеристики</div>
-        <div class="auto-card__list-item">
-          Топливо: {{ autoCard.characteristics.fuelType }}
-        </div>
-        <div class="auto-card__list-item">
-          Мощность: {{ autoCard.characteristics.power }} л.с.
-        </div>
-        <div class="auto-card__list-item">
-          Коробка: {{ autoCard.characteristics.gearboxType }}
-        </div>
-        <div class="auto-card__list-item">
-          Тариф: {{ autoCard.characteristics.fare }}
-        </div>
-      </div>
-
-      <div class="auto-card__list">
-        <div class="auto-card__subtitle">Условия аренды</div>
-        <div
-          *ngFor="let condition of autoCard.conditions"
-          class="auto-card__list-item"
-        >
-          {{ condition }}
-        </div>
-      </div>
-
-      <div class="auto-card__list">
-        <div class="auto-card__subtitle">График работы</div>
-        <div
-          *ngFor="let day of autoCard.daysOfWork"
-          class="auto-card__list-item"
-        >
-          {{ day }}
-        </div>
-      </div>
+    <div>
+      {{car.autoparkAddress}}
     </div>
-
-    <div class="auto-card__footer">
-      <div class="auto-card__price">{{ autoCard.price }} руб / сут</div>
-      <p-button label="Арендовать" class="auto-card__button"></p-button>
+  </div>
+  
+  <div class="bonuses">
+    <!--    <div class="bonuses__title subtitle">-->
+    <!--      Бонусная система-->
+    <!--    </div>-->
+    <!--    -->
+    <!--    <div class="bonuses__list">-->
+    <!--    -->
+    <!--    </div>-->
+  </div>
+  
+  <div class="cars-list">
+    <div class="cars-list__title">
+      Другие объявления автопарка
     </div>
+    <app-load-more>
+      <app-car-card *ngFor="let car of autoparkCars$|async" [car]="car"></app-car-card>
+    </app-load-more>
   </div>
 </div>

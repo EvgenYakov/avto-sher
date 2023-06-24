@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" (click)="navigateToCarProfile(car.id)">
   <p-card class="auto-card">
     <img src="assets/images/car-image.jpg" class="auto-card__img" alt="auto avatar"/>
 
     <div class="auto-card__content">
       <div class="auto-card__row">
         <div class="subtitle">
-          {{ car.marka }} {{car.model}} <span class="auto-card__year">{{ car.yearOfRelease }}</span>
+          {{ car.brand }} {{car.model}} <span class="auto-card__year">{{ car.yearOfRelease }}</span>
         </div>
         <div class="auto-card__autopark">Автопарк: {{ car.autoparkName }}</div>
         <div class="auto-card__location small-text">

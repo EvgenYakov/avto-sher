@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 
 import { REVIEW_AUTO_CARD_DEPS } from './review-auto-card.dependencies';
 
-import { reviewAutoData } from '@test-data';
 import { ReviewAuto } from '@models';
 
 @Component( {
@@ -14,7 +13,7 @@ import { ReviewAuto } from '@models';
   imports: [REVIEW_AUTO_CARD_DEPS]
 } )
 export class ReviewAutoCardComponent implements OnInit {
-  @Input() public autoReview: ReviewAuto = reviewAutoData;
+  @Input() public autoReview: ReviewAuto;
   public expanded = false;
   public comment: string = '';
 
