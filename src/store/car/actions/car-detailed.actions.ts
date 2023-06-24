@@ -1,10 +1,10 @@
 import { createAction, props } from '@ngrx/store';
-import { AutoCard, AutoProfile } from '@models';
+import { CarCard, CarProfile } from '@models';
 
 export enum CarDetailedActions {
-  LOAD_CAR = '[CAR] Get car profile',
-  LOAD_CAR_SUCCESS = '[CAR] Get car profile success',
-  LOAD_CAR_FAILURE = '[CAR] Get car profile failure',
+  LOAD_CAR = '[CAR] Load car profile',
+  LOAD_CAR_SUCCESS = '[CAR] Load car profile success',
+  LOAD_CAR_FAILURE = '[CAR] Load car profile failure',
 
   ADD_PHOTO = '[CAR] Add photo car',
   ADD_PHOTO_SUCCESS = '[CAR] Add photo car success',
@@ -26,12 +26,12 @@ export const loadCar = createAction(
 
 export const loadCarSuccess = createAction(
   CarDetailedActions.LOAD_CAR_SUCCESS,
-  props<{ car: AutoProfile }>()
+  props<{ car: CarProfile }>()
 );
 
 export const loadCarFailure = createAction(
   CarDetailedActions.LOAD_CAR_FAILURE,
-  props<{ errors: any }>()
+  props<{ error: string }>()
 );
 
 export const addPhoto = createAction(
@@ -71,7 +71,7 @@ export const changeCarStatus = createAction(
 
 export const changeCarStatusSuccess = createAction(
   CarDetailedActions.CHANGE_STATUS_SUCCESS,
-  props<{ newCar: AutoCard }>()
+  props<{ newCar: CarCard }>()
 );
 
 export const changeCarStatusFailure = createAction(

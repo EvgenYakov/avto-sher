@@ -1,12 +1,3 @@
-export interface AutoparkCard {
-  id: number;
-  title: string;
-  logo: string;
-  rating: number;
-  autoCount: number;
-  isFavorite: boolean;
-}
-
 export interface AutoparkDetailed {
   id: number;
   title: string;

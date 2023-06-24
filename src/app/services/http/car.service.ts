@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { map, Observable, of } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { AutoCard, AutoparkDetailed, AutoProfile, CarCard, FilterParams } from '@models';
-import { carData, carsData } from '@test-data';
+import { CarCard, CarProfile } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -13,47 +12,25 @@ import { BaseService } from '../helpers';
 } )
 export class CarService extends BaseService {
 
-  public getAutoparkCars(autopark: AutoparkDetailed, page: number, limit: number = 5): Observable<CarCard[]> {
-    console.log( `getAutoparkCars: autoparkId=${ autopark.id }, page=${ page }, limit=${ limit }` )
-    return this.httpService.get<any[]>( `${ environment.apiUrl }/cars/autopark/${autopark.id}`, {
+  public getAutoparkCars(autoparkId: number, page: number, limit: number = 5): Observable<CarCard[]> {
+    return this.httpService.get<any[]>( `${ environment.apiUrl }/cars/autopark/${ autoparkId }`, {
       params: {
         page,
         limit
       }
-    } ).pipe(
-      map((response) => response.map((car) => ({
-        ...car,
-        autoparkName: autopark.title,
-        region: autopark.region
-      })))
+    } );
+  }
+
+  public getCarProfile(carId: number): Observable<CarProfile> {
+    return this.httpService.get<any>( `${ environment.apiUrl }/cars/${ carId }` ).pipe(
+      map( (response) => {
+        const car = response.car;
+        return {
+          ...car,
+          autoparkId: 18,
+          autoparkAddress: 'Москва, ул. Тверская, 42'
+        }
+      } )
     );
-  }
-
-  public getListCars(): Observable<AutoCard[]> {
-    return of( carsData );
-  }
-
-  public filteredCars(filterParams: FilterParams): Observable<AutoCard[]> {
-    return of( carsData );
-  }
-
-  public createCar(carNew: AutoProfile, autoparkId: number): Observable<AutoProfile> {
-    return of( carData );
-  }
-
-  public deleteCar(carId: number): Observable<number> {
-    return of( 1 );
-  }
-
-  public getCarProfile(carId: number): Observable<AutoProfile> {
-    return of( carData );
-  }
-
-  public addPhoto(carId: number, photo: string): Observable<string> {
-    return of( 'https://picsum.photos/200/300' );
-  }
-
-  public deletePhotos(carId: number, photos: string[]): Observable<string[]> {
-    return of( ['https://picsum.photos/id/237/200/300', 'https://picsum.photos/seed/picsum/200/300'] )
   }
 }

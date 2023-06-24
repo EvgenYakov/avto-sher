@@ -2,15 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
 import { Store } from '@ngrx/store';
 
-import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatest, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 
 import { AutoparkService, CarService } from '@services';
 import { LoadingTypes } from '@constants';
-import { CarCard } from '@models';
 
 import {
   loadAutoparkCars,
@@ -34,8 +32,12 @@ export class AutoparkDetailedEffects {
   ) {}
 
   public loadAutoparkDetailed$ = createEffect( () => this.actions$.pipe(
-    ofType( loadAutoparkDetailed ),
-    switchMap( ({ autoparkId }) => this.autoparkService.getAutoparkById( autoparkId ) ),
+    ofType( loadAutoparkDetailed, loadAutoparkCars ),
+    withLatestFrom(
+      this.store.select( selectAutoparkDetailed )
+    ),
+    // filter( ([_, data]) => !data ),
+    switchMap( ([{ autoparkId }]) => this.autoparkService.getAutoparkById( autoparkId ) ),
     map( (autoparkDetailed) => loadAutoparkDetailedSuccess( { autoparkDetailed } ) ),
     catchError( (error: HttpErrorResponse) => of( loadAutoparkDetailedFailure( { errors: error.error.message } ) ) ),
   ) );
@@ -43,11 +45,23 @@ export class AutoparkDetailedEffects {
   public loadAutoparkCars$ = createEffect( () => this.actions$.pipe(
     ofType( loadAutoparkCars ),
     withLatestFrom(
-      this.store.select( selectAutoparkDetailed ),
       this.store.select( selectAutoparkCarsPage )
     ),
-    switchMap( ([_, autopark, page]) => this.carService.getAutoparkCars( autopark, page ) ),
-    map( (cars: CarCard[]) => loadAutoparkCarsSuccess( { cars } ) ),
+    switchMap( ([{ autoparkId }, page]) =>
+      combineLatest( [
+        this.carService.getAutoparkCars( autoparkId, page ),
+        this.store.select( selectAutoparkDetailed )
+      ] ).pipe(
+        map( ([cars, autopark]) => {
+          const carsWithAutoparkProperties = cars.map( (car) => ({
+            ...car,
+            autoparkName: autopark.title,
+            region: autopark.region
+          }) )
+          return loadAutoparkCarsSuccess( { cars: carsWithAutoparkProperties } )
+        } ),
+      )
+    ),
     catchError( (error: HttpErrorResponse) => of( loadAutoparkCarsFailure( { errors: error } ) ) )
   ) );
 
