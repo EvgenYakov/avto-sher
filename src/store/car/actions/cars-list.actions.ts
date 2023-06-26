@@ -14,9 +14,14 @@ export enum CarsListActions {
   // DELETE_CAR_SUCCESS = '[CAR] Add new car in autopark success',
   // DELETE_CAR_FAILURE = '[CAR] Add new car in autopark failure',
   //
-  FILTER_CAR_REQUEST = '[CAR] Add new car in autopark',
-  FILTER_CAR_REQUEST_SUCCESS = '[CAR] Add new car in autopark success',
-  FILTER_CAR_REQUEST_FAILURE = '[CAR] Add new car in autopark failure',
+  FILTER_CAR_REQUEST = '[CARS] Load cars by filter',
+  FILTER_CAR_REQUEST_SUCCESS = '[CARS] Load cars by filter success',
+  FILTER_CAR_REQUEST_FAILURE = '[CARS] Load cars by filter failure',
+
+  LOAD_USED_BRANDS = '[CARS BRANDS] Load used cars brands',
+  LOAD_USED_BRANDS_SUCCESS = '[CARS BRANDS] Load used cars brands success',
+  LOAD_USED_MODELS = '[CARS MODELS] Load used cars models',
+  LOAD_USED_MODELS_SUCCESS = '[CARS MODELS] Load used cars models by brand success',
 }
 
 export const loadAllCars = createAction(
@@ -76,5 +81,24 @@ export const filterCarSuccess = createAction(
 
 export const filterCarFailure = createAction(
   CarsListActions.FILTER_CAR_REQUEST_FAILURE,
-  props<{ errors: any }>()
+  props<{ errors: string }>()
+);
+
+export const loadUsedCarsBrands = createAction(
+  CarsListActions.LOAD_USED_BRANDS,
+);
+
+export const loadUsedCarsBrandsSuccess = createAction(
+  CarsListActions.LOAD_USED_BRANDS_SUCCESS,
+  props<{ brands: string[] }>()
+);
+
+export const loadModelsByBrand = createAction(
+  CarsListActions.LOAD_USED_MODELS,
+  props<{ brand: string }>()
+);
+
+export const loadModelsByBrandSuccess = createAction(
+  CarsListActions.LOAD_USED_MODELS_SUCCESS,
+  props<{ models: string[] }>()
 );
