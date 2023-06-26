@@ -1,60 +1,38 @@
-import { Dropdown, DropdownOption } from '@models';
+import { DropdownOption } from '@models';
+import { CarTariff, Fuel, Transmission } from '@constants';
 
-export const FARE_OPTIONS: DropdownOption[] = [
-  { label: 'Эконом', value: 'economy' },
-  { label: 'Комфорт', value: 'comfort' },
-  { label: 'Комфорт +', value: 'comfort-plus' },
-  { label: 'Бизнес', value: 'business' },
+export const TARIFF_OPTIONS: DropdownOption[] = [
+  { label: CarTariff.ECONOMY, value: CarTariff.ECONOMY },
+  { label: CarTariff.COMFORT, value: CarTariff.COMFORT },
+  { label: CarTariff.COMFORT_PLUS, value: CarTariff.COMFORT_PLUS },
+  { label: CarTariff.BUSINESS, value: CarTariff.BUSINESS },
+  { label: CarTariff.MINIVAN, value: CarTariff.MINIVAN },
+  { label: CarTariff.DELIVERY, value: CarTariff.DELIVERY },
 ];
 
 export const FUEL_OPTIONS: DropdownOption[] = [
-  { label: 'Бензин', value: 'petrol' },
-  { label: 'Дизель', value: 'diesel' },
+  { label: Fuel.PETROL, value: Fuel.PETROL },
+  { label: Fuel.DIESEL, value: Fuel.DIESEL },
+  { label: Fuel.ELECTRO, value: Fuel.ELECTRO },
 ];
 
-export const GEARBOX_OPTIONS: DropdownOption[] = [
-  { label: 'Механическая', value: 'manual' },
-  { label: 'Автоматическая', value: 'automatic' },
+export const TRANSMISSION_OPTIONS: DropdownOption[] = [
+  { label: Transmission.MECHANICAL, value: Transmission.MECHANICAL },
+  { label: Transmission.AUTOMATIC, value: Transmission.AUTOMATIC },
+  { label: Transmission.ROBOTIC, value: Transmission.ROBOTIC },
+  { label: Transmission.VARIABLE, value: Transmission.VARIABLE },
 ];
 
 export const ADDITIONAL_OPTIONS: DropdownOption[] = [
-  { label: 'Без комиссии', value: 'without-commission' },
-  { label: 'Фирменная оклейка', value: 'branded-stickers' },
-  { label: 'Желтые номера', value: 'yellow-numbers' },
-  { label: 'Без залога', value: 'without-bail' },
-  { label: 'Детское кресло', value: 'child-seat' },
+  { label: 'Фирменная оклейка', value: 'Фирменная оклейка' },
+  { label: 'Желтые номера', value: 'Желтые номера' },
+  { label: 'Детское кресло', value: 'Детское кресло' },
+  // { label: 'Разрешено работать инвалидам', value: 'Разрешено работать инвалидам' },
+  { label: 'Разрешено межгород', value: 'Разрешено межгород' },
 ];
 
-export const BRAND_OPTIONS: DropdownOption[] = [
-  { label: 'BMW', value: 'bmw' },
-  { label: 'AUDI', value: 'audi' },
-  { label: 'LEXUS', value: 'lexus' },
-];
-
-export const MODEL_OPTIONS: DropdownOption[] = [
-  { label: 'X6', value: 'x6' },
-  { label: 'E30', value: 'e30' },
-  { label: 'Q5', value: 'q5' },
-  { label: 'A4', value: 'a4' },
-  { label: 'ES', value: 'es' },
-  { label: 'LX', value: 'lx' },
-];
-
-export const DROPDOWNS: Dropdown[] = [
-  {
-    formControlName: 'brand',
-    placeholder: 'Выберите марку',
-    options: BRAND_OPTIONS,
-  },
-  {
-    formControlName: 'model',
-    placeholder: 'Выберите модель',
-    options: MODEL_OPTIONS,
-  },
-  { formControlName: 'fuel', placeholder: 'Топливо', options: FUEL_OPTIONS },
-  {
-    formControlName: 'gearbox',
-    placeholder: 'Коробка',
-    options: GEARBOX_OPTIONS,
-  },
+export const FINANCIAL_OPTIONS: DropdownOption[] = [
+  { label: 'Без комиссии', value: 'Без комиссии' },
+  { label: 'Без залога', value: 'Без залога' },
+  { label: 'С возможностью выкупа', value: 'С возможностью выкупа' },
 ];

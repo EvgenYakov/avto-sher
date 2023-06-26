@@ -1,4 +1,4 @@
-export enum CarType {
+export enum CarTariff {
   ECONOMY = 'Эконом',
   COMFORT = 'Комфорт',
   COMFORT_PLUS = 'Комфорт плюс',
@@ -12,7 +12,7 @@ export enum CarStatus {
   UNAVAILABLE = 'Недоступна'
 }
 
-export enum CarTransmission {
+export enum Transmission {
   MECHANICAL = 'Механическая',
   AUTOMATIC = 'Автоматическая',
   ROBOTIC = 'Роботизированная',
