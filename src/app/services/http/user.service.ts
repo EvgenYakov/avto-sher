@@ -42,7 +42,7 @@ export class UserService extends BaseService {
     const formData = new FormData();
     formData.append( 'image', newAvatar );
 
-    return this.httpService.put<{
+    return this.httpService.patch<{
       url: string
     }>( `${ environment.apiUrl }/users/avatar`, formData, { withCredentials: true } ).pipe(
       map( (response) => response.url + '?' + new Date().getTime() )

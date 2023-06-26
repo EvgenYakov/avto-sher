@@ -1,7 +1,7 @@
 <div class="container" (click)="navigateToCarProfile(car.id)">
   <p-card class="auto-card">
     
-    <img src="assets/images/car-image.jpg" class="auto-card__img" alt="auto avatar"/>
+    <img [src]="car.photos[0]" class="auto-card__img" alt="auto avatar"/>
     
     <div class="auto-card__content">
       <div class="auto-card__row">
