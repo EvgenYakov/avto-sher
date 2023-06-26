@@ -1,25 +1,20 @@
-<p-card class="rent-card">
-  <div class="hat">
-    <div class="hat__price">
-      <span>
-      {{price}}
-      </span>
-      <span>руб / сут</span>
-    </div>
-    <div class="hat__schedule">
-      {{schedule}}
-    </div>
+<div class="rent-card__additional">
+  <div class="rent-card__price subtitle">
+    {{ price }} руб / сут
   </div>
-  
-  <div class="conditions">
-    <ul>
-      <li *ngFor="let item of conditions">
-        {{item}}
+  <div>
+    <ul class="rent-card__list">
+      <li *ngFor="let financialInfo of financialInfo" class="small-text">
+        {{ financialInfo }}
+      </li>
+      <li *ngFor="let additionalInfo of additionalInfo" class="small-text">
+        {{ additionalInfo }}
       </li>
     </ul>
   </div>
   
-  <div class="btn">
+  <div>
     <p-button [label]="btnTitle"></p-button>
   </div>
-</p-card>
+
+</div>
