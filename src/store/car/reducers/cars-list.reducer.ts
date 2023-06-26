@@ -4,12 +4,19 @@ import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { CarCard, FilterParams } from '@models';
 
 import { CarsListState } from '../states';
-import { filterCarFailure } from '../actions';
+import {
+  filterCarFailure,
+  filterCarSuccess,
+  loadUsedCarsBrandsSuccess,
+  loadModelsByBrandSuccess
+} from '../actions';
 
 export const autoCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
 
 export const initialState: CarsListState = autoCardAdapter.getInitialState( {
   filters: {} as FilterParams,
+  usedBrands: [],
+  usedModels: [],
   allCarsPage: 1,
   allCarsLimit: 20,
   error: '',
@@ -17,25 +24,21 @@ export const initialState: CarsListState = autoCardAdapter.getInitialState( {
 
 export const carsListReducer = createReducer(
   initialState,
-  on(
-    filterCarFailure, (state, action) => ({
-        ...state,
-        error: action.errors
-      }
-    ) ),
-  // on( loadAllCarsSuccess, (states, action) => (
-  //   autoCardAdapter.addMany( action.cars, { ...states } )
-  // ) ),
-  // on( loadAllCarsSuccess, (states, action) => (
-  //   autoCardAdapter.addMany( action.cars, { ...states } )
-  // ) ),
-  // on( createCarSuccess, (states, action) => (
-  //   autoCardAdapter.addOne( action.car, { ...states } )
-  // ) ),
-  // on( deleteCarSuccess, (states, action) => (
-  //   autoCardAdapter.removeOne( action.carId, { ...states } )
-  // ) ),
-  // on( filterCarSuccess, (states, action) => (
-  //   autoCardAdapter.upsertMany( action.filteredCars, { ...states } )
-  // ) ),
+  on( filterCarSuccess, (state, { filteredCars }) => ({
+    ...state,
+    ...autoCardAdapter.setAll( filteredCars, state )
+  }) ),
+  on( loadUsedCarsBrandsSuccess, (state, { brands }) => ({
+    ...state,
+    usedBrands: brands
+  }) ),
+  on( loadModelsByBrandSuccess, (state, { models }) => ({
+    ...state,
+    usedModels: models
+  }) ),
+  on( filterCarFailure, (state, action) => ({
+      ...state,
+      error: action.errors
+    }
+  ) ),
 )

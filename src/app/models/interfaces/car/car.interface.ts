@@ -1,10 +1,10 @@
-import { CarStatus, CarTransmission, CarType, Fuel } from '@constants';
+import { CarStatus, Transmission, CarTariff, Fuel } from '@constants';
 import { AutoparkBonus } from '../autopark';
 
 export interface CarCard {
   id: number;
   fuel: Fuel;
-  type: CarType;
+  type: CarTariff;
   enginePower: number;
   status: CarStatus;
   createdAt: Date;
@@ -13,7 +13,7 @@ export interface CarCard {
   yearOfRelease: number;
   photos: string[];
   price: number;
-  transmission: CarTransmission;
+  transmission: Transmission;
   model: string;
   brand: string;
   autoparkName: string;

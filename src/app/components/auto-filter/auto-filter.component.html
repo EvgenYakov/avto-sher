@@ -5,8 +5,8 @@
 
     <form [formGroup]="filterForm" class="filter__form">
       <p-selectButton
-        [formControlName]="'fare'"
-        [options]="fareOptions"
+        [formControlName]="'type'"
+        [options]="tariffOptions"
         [optionLabel]="'label'"
         [optionValue]="'value'"
       ></p-selectButton>
@@ -26,7 +26,7 @@
         <div class="filter__price">
           Цена
           <p-inputNumber
-            [formControlName]="'minPrice'"
+            [formControlName]="'startPrice'"
             [mode]="'currency'"
             [currency]="'RUB'"
             [locale]="'ru-RU'"
@@ -34,7 +34,7 @@
           ></p-inputNumber>
           <span class="filter__price-dash"></span>
           <p-inputNumber
-            [formControlName]="'maxPrice'"
+            [formControlName]="'endPrice'"
             [mode]="'currency'"
             [currency]="'RUB'"
             [locale]="'ru-RU'"
@@ -42,14 +42,28 @@
           ></p-inputNumber>
         </div>
 
-        <div class="filter__additional-options">
-          <p-checkbox
-            *ngFor="let option of additionalOptions"
-            [formControl]="filterForm.controls.additionalOptions"
-            [label]="option.label"
-            [value]="option.value"
-          ></p-checkbox>
+        
+        <div class="options">
+          <div class="filter__additional-options">
+            <p-checkbox
+                    *ngFor="let option of additionalOptions"
+                    [formControl]="filterForm.controls.additionalInfo"
+                    [label]="option.label"
+                    [value]="option.value"
+            ></p-checkbox>
+          </div>
+          
+          <div class="filter__financial-options">
+            <p-checkbox
+                    *ngFor="let option of financialOptions"
+                    [formControl]="filterForm.controls.financialInfo"
+                    [label]="option.label"
+                    [value]="option.value"
+            ></p-checkbox>
+          </div>
         </div>
+        
+    
       </div>
 
       <p-button
