@@ -14,3 +14,13 @@ export const getCarsEntities = createSelector(
   carsListFeatureSelector,
   selectCars
 )
+
+export const selectCarBrands = createSelector(
+  carsListFeatureSelector,
+  (state) => state.usedBrands
+);
+
+export const selectCarModels = createSelector(
+  carsListFeatureSelector,
+  (state) => state.usedModels
+);

@@ -4,7 +4,9 @@ import { CarCard, FilterParams } from '@models';
 
 export interface CarsListState extends EntityState<CarCard> {
   filters: FilterParams;
-  error: string;
+  usedBrands: string[];
+  usedModels: string[];
   allCarsPage: number;
   allCarsLimit: number;
+  error: string;
 }
