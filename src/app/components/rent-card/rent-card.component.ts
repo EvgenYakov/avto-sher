@@ -11,7 +11,8 @@ import { ButtonModule } from 'primeng/button';
   imports: [CommonModule, CardModule, ButtonModule],
 } )
 export class RentCardComponent {
-  @Input() public conditions: string[];
+  @Input() public financialInfo: string[];
+  @Input() public additionalInfo: string[];
   @Input() public btnTitle: string;
   @Input() public price: number;
   @Input() public schedule: string;

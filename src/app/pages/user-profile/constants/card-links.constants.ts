@@ -1,3 +1,5 @@
+import { MainRoutes } from '@constants';
+
 import { CardLink } from '../interfaces';
 
 export const CARD_LINKS: CardLink[] = [
@@ -5,7 +7,7 @@ export const CARD_LINKS: CardLink[] = [
     title: 'Мои заказы',
     counterProperty: 'ordersCounter',
     counterText: 'завершенных заказов',
-    routerLink: '',
+    routerLink: MainRoutes.ORDER_HISTORY,
     cssClass: 'orders',
     isDisabled: false
   },
