@@ -1,0 +1,87 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-card .p-card-body {
+    //padding: 1rem;
+    padding: 0;
+  }
+
+  .p-card .p-card-content {
+    //padding: 1.25rem 0;
+    padding: 0;
+  }
+
+  .p-card {
+    width: 250px;
+    //height: 644px;
+    border-radius: 14px;
+    border: 1px solid #CED4DA;
+  }
+
+  .p-calendar {
+    width: 182px;
+    height: 26px;
+
+    .p-inputtext {
+      height: 26px;
+    }
+  }
+
+  .p-dropdown {
+    width: 100%;
+  }
+
+  .p-inputnumber-input {
+    width: 90px;
+    height: 26px;
+  }
+}
+
+.history-filter .item {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid #D9D9D9;
+}
+
+.history-filter .item:last-child {
+  border-bottom: none;
+}
+
+.history-filter {
+
+  &__label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__date {
+    .datepickers {
+      &__row:first-child {
+        margin-bottom: 10px;
+      }
+
+      &__row {
+        @include flexMix(row, center, flex-start, 1rem);
+      }
+    }
+  }
+
+  &__tariff {
+    .tariffs {
+      @include flexMix(column, flex-start, flex-start, 10px);
+    }
+  }
+
+  &__price {
+    .price-range {
+      @include flexMix(row, center, space-between);
+
+      &__dash {
+        width: 14px;
+        height: 2px;
+        background-color: $light-text-color;
+      }
+    }
+  }
+}

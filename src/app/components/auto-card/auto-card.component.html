@@ -1,62 +1,61 @@
 <div class="container" (click)="navigateToCarProfile(car.id)">
-  <p-card class="auto-card">
-    <img src="assets/images/car-image.jpg" class="auto-card__img" alt="auto avatar"/>
-
+  <div class="auto-card">
+    
+    <img [src]="car.photos[0]" class="auto-card__img" alt="auto avatar"/>
+    
     <div class="auto-card__content">
       <div class="auto-card__row">
         <div class="subtitle">
           {{ car.brand }} {{car.model}} <span class="auto-card__year">{{ car.yearOfRelease }}</span>
         </div>
         <div class="auto-card__autopark">Автопарк: {{ car.autoparkName }}</div>
-        <div class="auto-card__location small-text">
+        <div class="auto-card__location small-text" *ngIf="car.region">
           <i class="auto-card__location-icon pi pi-map-marker"></i>
           {{ car.region }}
         </div>
       </div>
-
+      
       <div class="auto-card__row">
-        <div>Характеристики</div>
-        <div class="auto-card__characteristics">
-          <div class="block">
-            <div class="small-text">
-              Топливо:
+        <ng-container *ngIf="!anotherCharacteristicContent; else newContent">
+          <div>Характеристики</div>
+          <div class="auto-card__characteristics">
+            <div class="block">
+              <div class="small-text">
+                Топливо:
+              </div>
+              <div class="small-text">
+                Мощность:
+              </div>
+              <div class="small-text">
+                Коробка:
+              </div>
             </div>
-            <div class="small-text">
-              Мощность:
-            </div>
-            <div class="small-text">
-              Коробка:
+            
+            <div class="block">
+              <div class="small-text">
+                {{ car.fuel}}
+              </div>
+              <div class="small-text">
+                {{ car.enginePower }} л.с.
+              </div>
+              <div class="small-text">
+                {{ car.transmission }}
+              </div>
             </div>
           </div>
-
-          <div class="block">
-            <div class="small-text">
-              {{ car.fuel}}
-            </div>
-            <div class="small-text">
-              {{ car.enginePower }} л.с.
-            </div>
-            <div class="small-text">
-              {{ car.transmission }}
-            </div>
-          </div>
-        </div>
+        </ng-container>
+        <ng-template #newContent>
+          <ng-content></ng-content>
+        </ng-template>
       </div>
     </div>
-
-    <div class="auto-card__additional">
-      <div class="auto-card__price subtitle">
-        {{ car.price }} руб / сут
-      </div>
-      <ul class="auto-card__list">
-        <li *ngFor="let financialInfo of car.financialInfo" class="small-text">
-          {{ financialInfo }}
-        </li>
-        <li *ngFor="let additionalInfo of car.additionalInfo" class="small-text">
-          {{ additionalInfo }}
-        </li>
-      </ul>
-      <p-button label="Подробнее"></p-button>
-    </div>
-  </p-card>
+    
+    <app-rent-card
+            [additionalInfo]="car.additionalInfo"
+            [financialInfo]="car.financialInfo"
+            [price]="car.price"
+            [btnTitle]="buttonLabel"
+    ></app-rent-card>
+  
+  </div>
 </div>

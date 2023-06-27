@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CarCard } from '@models';
+import { CarCard, OrderHistoryCarCard } from '@models';
 import { AppRoutes, MainRoutes } from '@constants';
 
 import { AUTO_CARD_DEPS } from './auto-card.dependencies';
@@ -15,7 +15,9 @@ import { AUTO_CARD_DEPS } from './auto-card.dependencies';
   imports: [AUTO_CARD_DEPS]
 } )
 export class AutoCardComponent {
-  @Input() public car: CarCard;
+  @Input() public car: CarCard | OrderHistoryCarCard;
+  @Input() public buttonLabel: string = 'Арендовать';
+  @Input() public anotherCharacteristicContent: boolean = false;
 
   constructor(
     private router: Router

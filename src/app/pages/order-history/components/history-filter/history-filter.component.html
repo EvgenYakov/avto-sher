@@ -1,0 +1,90 @@
+<p-card class="history-filter">
+  <form [formGroup]="historyFilterForm">
+    <div class="history-filter__date item">
+      <div class="history-filter__label">
+        Дата заказа
+      </div>
+      <div class="datepickers">
+        <div class="datepickers__row">
+          От
+          <p-calendar [formControlName]="'dateStart'" [showIcon]="true"></p-calendar>
+        </div>
+        <div class="datepickers__row">
+          До
+          <p-calendar [formControlName]="'dateFinish'" [showIcon]="true"></p-calendar>
+        </div>
+      </div>
+    </div>
+    <div class="history-filter__tariff item">
+      <div class="history-filter__label">
+        Тариф
+      </div>
+      <div class="tariffs">
+        <p-checkbox
+                *ngFor="let option of tariffs"
+                [formControl]="historyFilterForm.controls.tariff"
+                [label]="option.label"
+                [value]="option.value"
+        ></p-checkbox>
+      </div>
+    
+    </div>
+    <div class="history-filter__brand item">
+      <div class="history-filter__label">
+        Марка
+      </div>
+      <div class="dropdown">
+        <p-dropdown
+                formControlName="brand"
+                [options]="(brands$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [filter]="true"
+                [showClear]="true"
+                optionLabel="label"
+                filterBy="label"
+                placeholder="Выберите марку"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div class="history-filter__model item">
+      <div class="history-filter__label">
+        Модель
+      </div>
+      <div class="dropdown">
+        <p-dropdown
+                [formControlName]="'model'"
+                [options]="(models$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+                placeholder="Выберите модель"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="history-filter__price item">
+      <div class="history-filter__label">
+        Цена
+      </div>
+      <div class="price-range">
+        <p-inputNumber
+                [formControlName]="'startPrice'"
+                [mode]="'currency'"
+                [currency]="'RUB'"
+                [locale]="'ru-RU'"
+                placeholder="min"
+        ></p-inputNumber>
+        <span class="price-range__dash"></span>
+        <p-inputNumber
+                [formControlName]="'endPrice'"
+                [mode]="'currency'"
+                [currency]="'RUB'"
+                [locale]="'ru-RU'"
+                placeholder="max"
+        ></p-inputNumber>
+      </div>
+    </div>
+  </form>
+
+</p-card>

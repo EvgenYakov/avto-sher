@@ -7,15 +7,16 @@ import { combineLatest, map, Observable, of, startWith, Subject, switchMap, take
 
 import { Dropdown, DropdownOption, FilterForm, FilterParams } from '@models';
 import { filterCar, loadModelsByBrand, loadUsedCarsBrands, selectCarBrands, selectCarModels } from '@store';
+import { TARIFF_OPTIONS } from '@constants';
 
 import {
   ADDITIONAL_OPTIONS,
   FINANCIAL_OPTIONS,
   FUEL_OPTIONS,
-  TARIFF_OPTIONS,
   TRANSMISSION_OPTIONS,
 } from './constants/characteristics.constants';
 import { AUTO_FILTER_DEPS } from './auto-filter.dependencies';
+import { DropdownOptionsService } from '../../services/mappers/dropdown-options.service';
 
 @Component( {
   selector: 'app-car-filter',
@@ -38,6 +39,7 @@ export class AutoFilterComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
+    private dropdownOptionMapper: DropdownOptionsService
   ) {}
 
   ngOnInit(): void {
@@ -72,10 +74,7 @@ export class AutoFilterComponent implements OnInit, OnDestroy {
         if(selectedBrand) {
           this.store.dispatch( loadModelsByBrand( { brand: selectedBrand } ) );
           return this.store.select( selectCarModels ).pipe(
-            map( models => models.map( option => ({
-              label: option,
-              value: option
-            }) ) ),
+            map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) ),
             map( modelOptions => this.createDropdowns( brandOptions, modelOptions ) )
           );
         } else {

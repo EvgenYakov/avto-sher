@@ -1,14 +1,5 @@
 import { DropdownOption } from '@models';
-import { CarTariff, Fuel, Transmission } from '@constants';
-
-export const TARIFF_OPTIONS: DropdownOption[] = [
-  { label: CarTariff.ECONOMY, value: CarTariff.ECONOMY },
-  { label: CarTariff.COMFORT, value: CarTariff.COMFORT },
-  { label: CarTariff.COMFORT_PLUS, value: CarTariff.COMFORT_PLUS },
-  { label: CarTariff.BUSINESS, value: CarTariff.BUSINESS },
-  { label: CarTariff.MINIVAN, value: CarTariff.MINIVAN },
-  { label: CarTariff.DELIVERY, value: CarTariff.DELIVERY },
-];
+import { Fuel, Transmission } from '@constants';
 
 export const FUEL_OPTIONS: DropdownOption[] = [
   { label: Fuel.PETROL, value: Fuel.PETROL },
