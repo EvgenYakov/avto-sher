@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CarCard } from '@models';
+import { CarCard, OrderHistoryCarCard } from '@models';
 import { AppRoutes, MainRoutes } from '@constants';
 
 import { AUTO_CARD_DEPS } from './auto-card.dependencies';
-import { RentCardComponent } from '../rent-card';
 
 @Component( {
   selector: 'app-car-card',
@@ -13,11 +12,12 @@ import { RentCardComponent } from '../rent-card';
   styleUrls: ['./auto-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AUTO_CARD_DEPS, RentCardComponent]
+  imports: [AUTO_CARD_DEPS]
 } )
 export class AutoCardComponent {
-  @Input() public car: CarCard;
+  @Input() public car: CarCard | OrderHistoryCarCard;
   @Input() public buttonLabel: string = 'Арендовать';
+  @Input() public anotherCharacteristicContent: boolean = false;
 
   constructor(
     private router: Router

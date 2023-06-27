@@ -1,3 +1,46 @@
-<div class="container">
-  <app-history-filter></app-history-filter>
+<div class="container order-history-page">
+  <div class="order-history-page__title">
+    История заказов
+  </div>
+  
+  <div class="order-history-page__content content">
+    <div class="content__filter">
+      <app-history-filter></app-history-filter>
+    </div>
+    <div class="content__car-list">
+      <app-car-card
+              *ngFor="let car of orderedCars$|async"
+              [car]="car"
+              [anotherCharacteristicContent]="true"
+              buttonLabel="Подробнее"
+      >
+        <div class="auto-characteristics">
+          <div class="block">
+            <div class="small-text">
+              Топливо:
+            </div>
+            <div class="small-text">
+              Мощность:
+            </div>
+            <div class="small-text">
+              Коробка:
+            </div>
+          </div>
+          
+          <div class="block">
+            <div class="small-text">
+              {{ car.fuel}}
+            </div>
+            <div class="small-text">
+              {{ car.enginePower }} л.с.
+            </div>
+            <div class="small-text">
+              {{ car.transmission }}
+            </div>
+          </div>
+        </div>
+        <p-button label="Написать отзыв" class="review-btn" styleClass="p-button-outlined"></p-button>
+      </app-car-card>
+    </div>
+  </div>
 </div>

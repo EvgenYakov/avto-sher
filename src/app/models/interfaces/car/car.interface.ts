@@ -1,4 +1,4 @@
-import { CarStatus, Transmission, CarTariff, Fuel } from '@constants';
+import { CarStatus, CarTariff, Fuel, Transmission } from '@constants';
 import { AutoparkBonus } from '../autopark';
 
 export interface CarCard {
@@ -24,4 +24,16 @@ export interface CarProfile extends CarCard {
   bonuses: AutoparkBonus[];
   autoparkId: number;
   autoparkAddress: string;
+}
+
+export interface OrderHistoryCarCard extends CarCard {
+  orderDate: string;
+}
+
+export interface CarResponse extends CarCard {
+  autopark: {
+    id: number,
+    title: 'string',
+    address: 'string'
+  },
 }
