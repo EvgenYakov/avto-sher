@@ -15,6 +15,9 @@ import {
 } from '../actions';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
+import { addLoading, removeLoading } from '../../shared';
+import { LoadingTypes } from '@constants';
+import { loadAuctionAutoparksByRegionFailure, loadAuctionAutoparksByRegionSuccess } from '../../autopark';
 
 @Injectable()
 export class CarListEffects {
@@ -47,11 +50,26 @@ export class CarListEffects {
   public filteredCars$ = createEffect( () => this.actions$.pipe(
     ofType( filterCar ),
     switchMap( ({ filterParams }) => this.carService.getCarsByFilter( filterParams ) ),
-    map( (filteredCars) => {
-      console.log(filteredCars)
-      return filterCarSuccess( { filteredCars } )
-    } ),
+    map( (filteredCars) => filterCarSuccess( { filteredCars } ) ),
     catchError( (error: HttpErrorResponse) => of( filterCarFailure( { errors: error.message } ) ) )
   ) );
+
+  public addLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        loadModelsByBrand
+      ),
+      map( () => addLoading( { addLoading: LoadingTypes.CAR_MODELS } ) )
+    )
+  );
+
+  public removeLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        loadModelsByBrandSuccess,
+      ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.CAR_MODELS } ) )
+    )
+  );
 
 }
