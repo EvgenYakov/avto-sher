@@ -19,16 +19,32 @@
   }
 
   .gallery {
-    background-color: #a088b9;
+    max-width: 640px;
 
-    &__logo {
-      height: 355px;
+    @include media-l() {
+      width: 480px;
     }
 
-    &__photos {
-      height: 63px;
-      background-color: #be175c;
+    @include media-s() {
+      width: 300px;
+    }
 
+    &__img {
+      width: 100%;
+      height: 350px;
+
+      @include media-l() {
+        height: 260px;
+      }
+
+      @include media-s() {
+        height: 160px;
+      }
+    }
+
+    &__thumbnail {
+      width: 80px;
+      height: 40px;
     }
   }
 

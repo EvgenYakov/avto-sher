@@ -1,47 +1,38 @@
 @import "mixins";
-
-:host ::ng-deep {
-  .p-card .p-card-body {
-    padding: 35px 38px;
-  }
-
-  .p-card .p-card-content {
-    padding: 0;
-  }
-
-  .p-button {
-    width: 100%;
-  }
-}
+@import "colors";
 
 .rent-card {
-  height: 100%;
-  width: 100%;
 
-  .hat {
-    @include flexMix(row, center, space-between);
+  &__additional {
+    @include flexMix(column, stretch, space-between, 0.75rem);
 
-    margin-bottom: 1rem;
-
-    &__price {
-      &:first-child {
-        font-size: 24px;
-      }
+    @include media-xl() {
+      height: 12.5rem;
+      font-size: 14px;
+      padding: 1rem;
+      width: 12.5rem;
     }
 
-    &__schedule {
-      font-size: 24px;
-      color: var(--text-color-secondary);
+    @include media-l() {
+      width: 100%;
+    }
+
+    width: 21.875rem;
+    padding: 2rem;
+    border: 1px solid $light-text-color;
+    border-radius: 1rem;
+  }
+
+  &__price {
+    @include media-xl() {
+      font-size: 18px;
     }
   }
 
-  .conditions {
-    margin-bottom: 32px;
-
-    ul {
-      list-style: inherit;
-      margin-left: 20px;
-    }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    list-style: inside;
   }
-
 }

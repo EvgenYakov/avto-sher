@@ -3,14 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
 
-import { isEmpty, Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
 import { AppRoutes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
 import { CarCard, CarProfile } from '@models';
-import { loadAutoparkCars, loadCar, selectAutoparkCars, selectCarProfile } from '@store';
-import { AutoCardComponent, LoadMoreComponent, RentCardComponent } from '@components';
+import { loadCar, selectAutoparkCars, selectCarProfile } from '@store';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
@@ -22,7 +21,7 @@ import { AUTO_DETAILED_DEPS } from './auto-detailed.dependencies';
   styleUrls: ['./auto-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS, RentCardComponent, AutoCardComponent, LoadMoreComponent]
+  imports: [AUTO_DETAILED_DEPS]
 } )
 export class AutoDetailedComponent implements OnInit, OnDestroy {
 

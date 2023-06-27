@@ -4,24 +4,18 @@
     
     <div class="left">
       <div class="gallery">
-        <div class="gallery__logo">
-        
-        </div>
-        <div class="gallery__photos">
-        
-        </div>
-        <!--    <p-galleria-->
-        <!--            [value]="auto.photos"-->
-        <!--            [numVisible]="5"-->
-        <!--            [responsiveOptions]="responsiveOptions"-->
-        <!--    >-->
-        <!--      <ng-template pTemplate="item" let-item>-->
-        <!--        <img [src]="item" class="gallery__img"/>-->
-        <!--      </ng-template>-->
-        <!--      <ng-template pTemplate="thumbnail" let-item>-->
-        <!--        <img [src]="item" class="gallery__thumbnail"/>-->
-        <!--      </ng-template>-->
-        <!--    </p-galleria>-->
+        <p-galleria
+                [value]="car.photos"
+                [numVisible]="5"
+                [responsiveOptions]="responsiveOptions"
+        >
+          <ng-template pTemplate="item" let-item>
+            <img [src]="item" class="gallery__img"/>
+          </ng-template>
+          <ng-template pTemplate="thumbnail" let-item>
+            <img [src]="item" class="gallery__thumbnail"/>
+          </ng-template>
+        </p-galleria>
       </div>
       <div class="rent-conditions">
         <div class="title subtitle">
@@ -87,7 +81,7 @@
       <div class="rent-card">
         <app-rent-card
                 [price]="car.price"
-                [conditions]="car.financialInfo"
+                [financialInfo]="car.financialInfo"
                 [btnTitle]="'Арендовать'"
                 [schedule]="'6/1'"
         ></app-rent-card>

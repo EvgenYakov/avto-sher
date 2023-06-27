@@ -3,22 +3,6 @@
 
 :host ::ng-deep {
 
-  .p-card-content {
-    @include flexMix(row, stretch, space-between);
-
-    @include media-xl() {
-      padding: 0.5rem;
-      gap: 1.5rem;
-    }
-
-    @include media-l() {
-      flex-direction: column;
-    }
-
-    padding: 1rem;
-    gap: 2rem;
-  }
-
   .p-button {
     @include media-xl() {
       width: 100%;
@@ -30,6 +14,12 @@
 }
 
 .auto-card {
+  @include flexMix(row, stretch, space-between, 2rem);
+
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #CED4DA;
+
   &__img {
     @include media-xl() {
       height: 200px;
@@ -41,8 +31,8 @@
       height: 200px;
     }
 
-    width: 320px;
-    height: 230px;
+    width: 322px;
+    height: 250px;
     object-fit: cover;
     border-radius: 1rem;
   }
@@ -104,38 +94,5 @@
     .block > * {
       margin-top: 0.625rem;
     }
-  }
-
-  &__additional {
-    @include flexMix(column, stretch, space-between);
-
-    @include media-xl() {
-      height: 12.5rem;
-      font-size: 14px;
-      padding: 1rem;
-      width: 12.5rem;
-    }
-
-    @include media-l() {
-      width: 100%;
-    }
-
-    width: 21.875rem;
-    padding: 2rem;
-    border: 1px solid $light-text-color;
-    border-radius: 1rem;
-  }
-
-  &__price {
-    @include media-xl() {
-      font-size: 18px;
-    }
-  }
-
-  &__list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    list-style: inside;
   }
 }
