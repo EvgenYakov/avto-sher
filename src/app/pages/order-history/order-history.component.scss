@@ -1,0 +1,50 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .auto-card {
+    gap: 1rem!important;
+
+    .auto-card__img {
+      width: 280px;
+      height: 190px;
+    }
+
+    .rent-card__additional {
+      width: 300px;
+      height: 180px;
+      padding: 18px 25px;
+    }
+  }
+  .review-btn .p-button {
+    width: 180px;
+  }
+}
+
+.order-history-page {
+  &__title {
+    font-size: 46px;
+    font-weight: 600;
+    margin-bottom: 45px;
+  }
+
+  &__content {
+    @include flexMix(row, flex-start, space-between, 35px);
+
+    .content {
+      &__car-list {
+        @include flexMix(column, flex-start, flex-start, 20px);
+      }
+    }
+  }
+}
+
+.auto-characteristics {
+  @include flexMix(сolumn, stretch, space-between);
+
+  width: 12.5rem;
+
+  .block > * {
+    margin-top: 0.625rem;
+  }
+}

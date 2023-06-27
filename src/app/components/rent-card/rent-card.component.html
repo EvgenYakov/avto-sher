@@ -4,11 +4,8 @@
   </div>
   <div>
     <ul class="rent-card__list">
-      <li *ngFor="let financialInfo of financialInfo" class="small-text">
-        {{ financialInfo }}
-      </li>
-      <li *ngFor="let additionalInfo of additionalInfo" class="small-text">
-        {{ additionalInfo }}
+      <li *ngFor="let info of combinedInfo" class="small-text">
+        {{ info }}
       </li>
     </ul>
   </div>

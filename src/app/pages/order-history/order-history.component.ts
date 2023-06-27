@@ -1,15 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { Store } from '@ngrx/store';
+
+import { Observable } from 'rxjs';
+
+import { CarService } from '@services';
+import { OrderHistoryCarCard } from '@models';
 
 import { ORDER_HISTORY_DEPS } from './order-history.dependencies';
-import { HistoryFilterComponent } from './components/history-filter/history-filter.component';
 
 @Component( {
   selector: 'app-order-history',
   standalone: true,
-  imports: [ORDER_HISTORY_DEPS, HistoryFilterComponent],
   templateUrl: './order-history.component.html',
-  styleUrls: ['./order-history.component.scss']
+  styleUrls: ['./order-history.component.scss'],
+  imports: [ORDER_HISTORY_DEPS],
 } )
-export class OrderHistoryComponent {
+export class OrderHistoryComponent implements OnInit {
+
+  public orderedCars$: Observable<OrderHistoryCarCard[]>;
+
+  constructor(
+    private store: Store,
+    private service: CarService
+  ) {}
+
+  ngOnInit(): void {
+    this.orderedCars$ = this.service.getOrderHistoryCars( 1,20 );
+  }
 
 }

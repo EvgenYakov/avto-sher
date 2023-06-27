@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { CarCard, CarProfile, FilterParams } from '@models';
+import { CarCard, CarProfile, CarResponse, FilterParams, OrderHistoryCarCard } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -12,8 +12,24 @@ import { BaseService } from '../helpers';
 } )
 export class CarService extends BaseService {
 
+  public getOrderHistoryCars(page: number, limit: number = 5): Observable<OrderHistoryCarCard[]> {
+    return this.httpService.get<CarResponse[]>( `${ environment.apiUrl }/cars`, {
+      params: {
+        page,
+        limit
+      }
+    } ).pipe(
+      map( (carsResponse) => {
+        return carsResponse.map( (carResponse) => ({
+          ...carResponse,
+          autoparkName: carResponse.autopark.title,
+          orderDate: '12/06/2023'
+        }) )
+      } )
+    );
+  }
+
   public getCarsByFilter(filterParams: FilterParams, page: number = 1, limit: number = 5): Observable<CarCard[]> {
-    console.log( filterParams )
     return this.httpService.post<CarCard[]>( `${ environment.apiUrl }/cars/filter`, filterParams, {
       params: {
         page,
@@ -37,8 +53,8 @@ export class CarService extends BaseService {
         const car = response.car;
         return {
           ...car,
-          autoparkId: 18,
-          autoparkAddress: 'Москва, ул. Тверская, 42'
+          autoparkId: car.autopark.id,
+          autoparkAddress: car.autopark.address
         }
       } )
     );
