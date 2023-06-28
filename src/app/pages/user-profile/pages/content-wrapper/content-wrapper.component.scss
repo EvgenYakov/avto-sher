@@ -1,0 +1,15 @@
+@import "mixins";
+
+.wrapper {
+
+  &__title {
+    font-size: 46px;
+    font-weight: bold;
+  }
+
+  &__content {
+    @include flexMix(row, flex-start, space-between, 2.188rem);
+
+    margin-top: 2.813rem;
+  }
+}

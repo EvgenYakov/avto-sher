@@ -1,4 +1,4 @@
-import { CarStatus, CarTariff, Fuel, Transmission } from '@constants';
+import { RequestStatus, CarTariff, Fuel, Transmission } from '@constants';
 import { AutoparkBonus } from '../autopark';
 
 export interface CarCard {
@@ -6,7 +6,7 @@ export interface CarCard {
   fuel: Fuel;
   type: CarTariff;
   enginePower: number;
-  status: CarStatus;
+  status: RequestStatus;
   createdAt: Date;
   additionalInfo: string[];
   financialInfo: string[];

@@ -4,6 +4,7 @@
 :host ::ng-deep {
   .auto-card {
     gap: 1rem!important;
+    margin-bottom: 1.25rem;
 
     .auto-card__img {
       width: 280px;
@@ -18,24 +19,6 @@
   }
   .review-btn .p-button {
     width: 180px;
-  }
-}
-
-.order-history-page {
-  &__title {
-    font-size: 46px;
-    font-weight: 600;
-    margin-bottom: 45px;
-  }
-
-  &__content {
-    @include flexMix(row, flex-start, space-between, 35px);
-
-    .content {
-      &__car-list {
-        @include flexMix(column, flex-start, flex-start, 20px);
-      }
-    }
   }
 }
 

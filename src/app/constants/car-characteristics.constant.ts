@@ -18,10 +18,17 @@ export const TARIFF_OPTIONS: DropdownOption[] = [
   { label: CarTariff.DELIVERY, value: CarTariff.DELIVERY },
 ];
 
-export enum CarStatus {
+export enum RequestStatus {
   AVAILABLE = 'Доступна',
-  UNAVAILABLE = 'Недоступна'
+  UNAVAILABLE = 'Недоступна',
+  WAITING = 'Ожидание',
 }
+
+export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
+  { label: RequestStatus.AVAILABLE, value: RequestStatus.AVAILABLE },
+  { label: RequestStatus.UNAVAILABLE, value: RequestStatus.UNAVAILABLE },
+  { label: RequestStatus.WAITING, value: RequestStatus.WAITING },
+]
 
 export enum Transmission {
   MECHANICAL = 'Механическая',
