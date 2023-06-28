@@ -1,0 +1,19 @@
+<div class="container wrapper">
+  <div class="wrapper__title">
+    {{title}}
+  </div>
+  
+  <div class="wrapper__content">
+    <div class="sidenav">
+      <app-sidenav-filter [filterType]="filterType!"></app-sidenav-filter>
+    </div>
+    <div class="cards-list">
+      <ng-container *ngIf="cardsType == CardsType.ORDER_HISTORY">
+        <app-order-history-list></app-order-history-list>
+      </ng-container>
+      <ng-container *ngIf="cardsType == CardsType.MY_REQUESTS">
+        <app-cars-request-list></app-cars-request-list>
+      </ng-container>
+    </div>
+  </div>
+</div>

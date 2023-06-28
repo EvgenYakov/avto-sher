@@ -1,34 +1,38 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
 import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs';
 
-import { LoadingTypes, TARIFF_OPTIONS } from '@constants';
+import { LoadingTypes, REQUEST_STATUS_OPTIONS, TARIFF_OPTIONS } from '@constants';
 import { loadModelsByBrand, loadUsedCarsBrands, selectCarBrands, selectCarModels, selectLoading } from '@store';
 import { DropdownOptionsService } from '@services';
 import { DropdownOption } from '@models';
 
-import { HistoryFilterForm } from './models/history-filter-form.interface';
-import { HISTORY_FILTER_DEPS } from './history-filter.dependencies';
+import { FilterType } from '../../constant/filter-type.enum';
+import { HistoryFilterForm } from './models/sidenav-filter-form.interface';
+import { HISTORY_FILTER_DEPS } from './sidenav-filter.dependencies';
 
 @Component( {
-  selector: 'app-history-filter',
+  selector: 'app-sidenav-filter',
   standalone: true,
-  templateUrl: './history-filter.component.html',
-  styleUrls: ['./history-filter.component.scss'],
+  templateUrl: './sidenav-filter.component.html',
+  styleUrls: ['./sidenav-filter.component.scss'],
   imports: [HISTORY_FILTER_DEPS],
 } )
-export class HistoryFilterComponent implements OnInit, OnDestroy {
+export class SidenavFilterComponent implements OnInit, OnDestroy {
+
+  @Input() filterType: FilterType;
 
   public readonly tariffs = TARIFF_OPTIONS;
+  public readonly requestStatuses = REQUEST_STATUS_OPTIONS;
 
   public areModelsLoaded$: Observable<boolean>;
   public brands$: Observable<DropdownOption[]>;
   public models$: Observable<DropdownOption[]>;
 
-  public historyFilterForm: FormGroup<HistoryFilterForm>
+  public sidenavFilterForm: FormGroup<HistoryFilterForm>
 
 
   private isModelDisabled$ = new BehaviorSubject( true );
@@ -42,10 +46,10 @@ export class HistoryFilterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.dispatch( loadUsedCarsBrands() );
 
-    this.historyFilterForm = this.initializeForm();
+    this.sidenavFilterForm = this.initializeForm();
     this.getDataFromStore();
 
-    this.historyFilterForm.controls.brand.valueChanges.pipe(
+    this.sidenavFilterForm.controls.brand.valueChanges.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (brand) => {
       if(brand) {
@@ -62,6 +66,7 @@ export class HistoryFilterComponent implements OnInit, OnDestroy {
     return new FormGroup<HistoryFilterForm>( <HistoryFilterForm>{
       dateStart: new FormControl(),
       dateFinish: new FormControl(),
+      requestStatuses: new FormControl(),
       tariff: new FormControl(),
       brand: new FormControl(),
       model: new FormControl(),
@@ -90,8 +95,8 @@ export class HistoryFilterComponent implements OnInit, OnDestroy {
       takeUntil( this.destroy$ )
     ).subscribe( (isDisabled) => {
       isDisabled
-        ? this.historyFilterForm.controls.model.disable()
-        : this.historyFilterForm.controls.model.enable();
+        ? this.sidenavFilterForm.controls.model.disable()
+        : this.sidenavFilterForm.controls.model.enable();
     } )
   }
 
@@ -100,4 +105,5 @@ export class HistoryFilterComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
+  protected readonly FilterType = FilterType;
 }

@@ -15,7 +15,7 @@ export const CARD_LINKS: CardLink[] = [
     title: 'Мои заявки',
     counterProperty: 'requestsCounter',
     counterText: 'завершенных заказов',
-    routerLink: '',
+    routerLink: MainRoutes.MY_REQUESTS,
     cssClass: 'requests',
     isDisabled: false
   },
