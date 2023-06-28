@@ -1,0 +1,33 @@
+<app-car-card
+        *ngFor="let car of orderedCars$ | async"
+        [car]="car"
+        [anotherCharacteristicContent]="true"
+        buttonLabel="Подробнее"
+>
+  <div class="auto-characteristics">
+    <div class="block">
+      <div class="small-text">
+        Топливо:
+      </div>
+      <div class="small-text">
+        Мощность:
+      </div>
+      <div class="small-text">
+        Коробка:
+      </div>
+    </div>
+    
+    <div class="block">
+      <div class="small-text">
+        {{ car.fuel}}
+      </div>
+      <div class="small-text">
+        {{ car.enginePower }} л.с.
+      </div>
+      <div class="small-text">
+        {{ car.transmission }}
+      </div>
+    </div>
+  </div>
+  <p-button label="Написать отзыв" class="review-btn" styleClass="p-button-outlined"></p-button>
+</app-car-card>

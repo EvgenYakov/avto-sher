@@ -1,7 +1,7 @@
-<p-card class="history-filter">
-  <form [formGroup]="historyFilterForm">
-    <div class="history-filter__date item">
-      <div class="history-filter__label">
+<div class="sidenav-filter">
+  <form [formGroup]="sidenavFilterForm">
+    <div class="sidenav-filter__date item" *ngIf="filterType == FilterType.HISTORY">
+      <div class="label">
         Дата заказа
       </div>
       <div class="datepickers">
@@ -15,22 +15,35 @@
         </div>
       </div>
     </div>
-    <div class="history-filter__tariff item">
-      <div class="history-filter__label">
+    <div class="sidenav-filter__request-status item" *ngIf="filterType == FilterType.REQUESTS">
+      <div class="label">
+        Статус заказа
+      </div>
+      <div class="statuses">
+        <p-checkbox
+                *ngFor="let option of requestStatuses"
+                [formControlName]="'requestStatuses'"
+                [label]="option.label"
+                [value]="option.value"
+        ></p-checkbox>
+      </div>
+    </div>
+    <div class="sidenav-filter__tariff item">
+      <div class="label">
         Тариф
       </div>
       <div class="tariffs">
         <p-checkbox
                 *ngFor="let option of tariffs"
-                [formControl]="historyFilterForm.controls.tariff"
+                [formControl]="sidenavFilterForm.controls.tariff"
                 [label]="option.label"
                 [value]="option.value"
         ></p-checkbox>
       </div>
     
     </div>
-    <div class="history-filter__brand item">
-      <div class="history-filter__label">
+    <div class="sidenav-filter__brand item">
+      <div class="label">
         Марка
       </div>
       <div class="dropdown">
@@ -47,8 +60,8 @@
         ></p-dropdown>
       </div>
     </div>
-    <div class="history-filter__model item">
-      <div class="history-filter__label">
+    <div class="sidenav-filter__model item">
+      <div class="label">
         Модель
       </div>
       <div class="dropdown">
@@ -63,8 +76,8 @@
         </p-dropdown>
       </div>
     </div>
-    <div class="history-filter__price item">
-      <div class="history-filter__label">
+    <div class="sidenav-filter__price item">
+      <div class="label">
         Цена
       </div>
       <div class="price-range">
@@ -87,4 +100,4 @@
     </div>
   </form>
 
-</p-card>
+</div>
