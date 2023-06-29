@@ -1,6 +1,6 @@
 <div class="container auto-card" (click)="navigateToCarProfile(car.id)">
   
-  <p-image [src]="car.photos[0]" alt="car image" [preview]="true"></p-image>
+  <p-image [src]="car.photos[0]" alt="car image" [preview]="true" (click)="handleImageClick($event)"></p-image>
   
   <div class="auto-card__content">
     <div class="autopark-block">
