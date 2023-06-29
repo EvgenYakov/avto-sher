@@ -3,20 +3,23 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import { combineLatest, map, Observable, of, startWith, Subject, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs';
 
 import { Dropdown, DropdownOption, FilterForm, FilterParams } from '@models';
-import { filterCar, loadModelsByBrand, loadUsedCarsBrands, selectCarBrands, selectCarModels } from '@store';
-import { TARIFF_OPTIONS } from '@constants';
-
 import {
-  ADDITIONAL_OPTIONS,
-  FINANCIAL_OPTIONS,
-  FUEL_OPTIONS,
-  TRANSMISSION_OPTIONS,
-} from './constants/characteristics.constants';
-import { AUTO_FILTER_DEPS } from './auto-filter.dependencies';
+  filterCar,
+  loadModelsByBrand,
+  loadUsedCarsBrands,
+  selectCarBrands,
+  selectCarModels,
+  selectLoading
+} from '@store';
+import { LoadingTypes, TARIFF_OPTIONS } from '@constants';
+
 import { DropdownOptionsService } from '../../services/mappers/dropdown-options.service';
+import { ADDITIONAL_OPTIONS, FINANCIAL_OPTIONS, } from './constants/characteristics.constants';
+import { AUTO_FILTER_DEPS } from './auto-filter.dependencies';
+import { STATIC_DROPDOWNS } from './constants/dropdowns.constant';
 
 @Component( {
   selector: 'app-car-filter',
@@ -28,12 +31,18 @@ import { DropdownOptionsService } from '../../services/mappers/dropdown-options.
 } )
 export class AutoFilterComponent implements OnInit, OnDestroy {
 
-  public dropdowns: Dropdown[];
-  public tariffOptions: DropdownOption[] = TARIFF_OPTIONS;
-  public additionalOptions: DropdownOption[] = ADDITIONAL_OPTIONS;
-  public financialOptions: DropdownOption[] = FINANCIAL_OPTIONS;
+  public readonly staticDropdowns: Dropdown[] = STATIC_DROPDOWNS;
+  public readonly tariffOptions: DropdownOption[] = TARIFF_OPTIONS;
+  public readonly additionalOptions: DropdownOption[] = ADDITIONAL_OPTIONS;
+  public readonly financialOptions: DropdownOption[] = FINANCIAL_OPTIONS;
+
+  public areModelsLoaded$: Observable<boolean>;
+  public brands$: Observable<DropdownOption[]>;
+  public models$: Observable<DropdownOption[]>;
 
   public filterForm: FormGroup<FilterForm>;
+
+  private isModelDisabled$ = new BehaviorSubject( true );
 
   private destroy$ = new Subject<void>();
 
@@ -44,12 +53,21 @@ export class AutoFilterComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store.dispatch( loadUsedCarsBrands() );
+
     this.filterForm = this.initializeForm();
-    this.initializeDropdowns().pipe(
+    this.getDataFromStore();
+
+    this.filterForm.controls.brand.valueChanges.pipe(
       takeUntil( this.destroy$ )
-    ).subscribe( dropdowns => {
-      this.dropdowns = dropdowns;
+    ).subscribe( (brand) => {
+      if(brand) {
+        this.store.dispatch( loadModelsByBrand( { brand } ) );
+      } else {
+        this.isModelDisabled$.next( true );
+      }
     } );
+
+    this.modelDisabled();
   }
 
   public onSubmit(): void {
@@ -57,60 +75,29 @@ export class AutoFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch( filterCar( { filterParams } ) );
   }
 
-  private initializeDropdowns(): Observable<Dropdown[]> {
-    return this.store.select( selectCarBrands ).pipe(
-      switchMap( brands => {
-        const brandOptions: DropdownOption[] = brands.map( option => ({
-          label: option,
-          value: option
-        }) );
-
-        return combineLatest( [
-          of( brandOptions ),
-          this.filterForm.controls.brand.valueChanges.pipe( startWith( '' ) )
-        ] );
-      } ),
-      switchMap( ([brandOptions, selectedBrand]) => {
-        if(selectedBrand) {
-          this.store.dispatch( loadModelsByBrand( { brand: selectedBrand } ) );
-          return this.store.select( selectCarModels ).pipe(
-            map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) ),
-            map( modelOptions => this.createDropdowns( brandOptions, modelOptions ) )
-          );
-        } else {
-          const emptyModelOptions: DropdownOption[] = [];
-          return of( this.createDropdowns( brandOptions, emptyModelOptions ) );
+  private getDataFromStore(): void {
+    this.areModelsLoaded$ = this.store.select( selectLoading, { type: LoadingTypes.CAR_MODELS } );
+    this.brands$ = this.store.select( selectCarBrands ).pipe(
+      map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) )
+    );
+    this.models$ = this.store.select( selectCarModels ).pipe(
+      map( (models) => {
+        if(models.length) {
+          this.isModelDisabled$.next( false );
         }
-      } )
+        return this.dropdownOptionMapper.mapToDropdownOptions( models )
+      } ),
     );
   }
 
-  private createDropdowns(
-    brandOptions: DropdownOption[],
-    modelOptions: DropdownOption[]
-  ): Dropdown[] {
-    return [
-      {
-        formControlName: 'brand',
-        placeholder: 'Выберите марку',
-        options: brandOptions,
-      },
-      {
-        formControlName: 'model',
-        placeholder: 'Выберите модель',
-        options: modelOptions,
-      },
-      {
-        formControlName: 'fuel',
-        placeholder: 'Топливо',
-        options: FUEL_OPTIONS
-      },
-      {
-        formControlName: 'transmission',
-        placeholder: 'Коробка',
-        options: TRANSMISSION_OPTIONS,
-      },
-    ];
+  private modelDisabled(): void {
+    this.isModelDisabled$.pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (isDisabled) => {
+      isDisabled
+        ? this.filterForm.controls.model.disable()
+        : this.filterForm.controls.model.enable();
+    } )
   }
 
   private initializeForm(): FormGroup<FilterForm> {

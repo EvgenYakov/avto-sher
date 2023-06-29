@@ -13,7 +13,27 @@
 
       <div class="filter__dropdowns">
         <p-dropdown
-          *ngFor="let dropdown of dropdowns"
+                formControlName="brand"
+                [options]="(brands$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [filter]="true"
+                [showClear]="true"
+                optionLabel="label"
+                filterBy="label"
+                placeholder="Выберите марку"
+        ></p-dropdown>
+        <p-dropdown
+                [formControlName]="'model'"
+                [options]="(models$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+                placeholder="Выберите модель"
+        >
+        </p-dropdown>
+        <p-dropdown
+          *ngFor="let dropdown of staticDropdowns"
           [formControlName]="dropdown.formControlName"
           [options]="dropdown.options"
           [placeholder]="dropdown.placeholder"
@@ -41,7 +61,6 @@
             [placeholder]="'Максимум'"
           ></p-inputNumber>
         </div>
-
         
         <div class="options">
           <div class="filter__additional-options">
@@ -63,7 +82,6 @@
           </div>
         </div>
         
-    
       </div>
 
       <p-button
