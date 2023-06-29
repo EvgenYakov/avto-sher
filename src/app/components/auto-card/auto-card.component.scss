@@ -42,6 +42,10 @@
   }
 }
 
+.auto-card:hover {
+  cursor: pointer;
+}
+
 .auto-card {
   @include flexMix(row, stretch, space-between, 2rem);
 
