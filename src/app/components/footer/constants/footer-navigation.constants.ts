@@ -42,7 +42,39 @@ export const INFO_COLUMN: MenuItem[] = [
     routerLink: AppRoutes.RULES,
   },
   {
+    label: 'Вакансии',
+    routerLink: AppRoutes.JOB,
+  },
+  {
     label: 'Команда сайта',
     routerLink: AppRoutes.TEAM,
   },
 ];
+
+export const SOCIAL_NETWORK: { icon: string, hoverIcon: string, link: string }[] = [
+  {
+    icon: 'assets/icons/social-network/OK.svg',
+    hoverIcon: 'assets/icons/social-network/OKH.svg',
+    link: 'https://m.ok.ru/group/70000002667676?__dp=y'
+  },
+  {
+    icon: 'assets/icons/social-network/TG.svg',
+    hoverIcon: 'assets/icons/social-network/TGH.svg',
+    link: 'https://t.me/YA_AVTO_RF_Official'
+  },
+  {
+    icon: 'assets/icons/social-network/VK.svg',
+    hoverIcon: 'assets/icons/social-network/VKH.svg',
+    link: 'https://vk.com/public214842462'
+  },
+  {
+    icon: 'assets/icons/social-network/Zen.svg',
+    hoverIcon: 'assets/icons/social-network/ZenH.svg',
+    link: 'https://dzen.ru/ya_avto_rf_official'
+  },
+  {
+    icon: 'assets/icons/social-network/RuTube.svg',
+    hoverIcon: 'assets/icons/social-network/RuTubeH.svg',
+    link: 'https://rutube.ru/channel/31362933/'
+  },
+]

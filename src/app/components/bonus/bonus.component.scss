@@ -1,0 +1,20 @@
+@import "mixins";
+
+.bonus {
+  @include flexMix(row, flex-start, flex-start, 15px);
+
+  &__icon {
+    width: 29px;
+    height: 29px;
+  }
+
+  &__title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  &__description {
+    font-size: 14px;
+  }
+
+}
