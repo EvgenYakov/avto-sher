@@ -23,6 +23,10 @@ export class AutoCardComponent {
     private router: Router
   ) {}
 
+  public handleImageClick(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
   public navigateToCarProfile(carId: number): void {
     this.router.navigate( [AppRoutes.MAIN + '/' + MainRoutes.AUTO_DETAILED, carId] )
   }

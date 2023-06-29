@@ -1,3 +1,8 @@
+export interface AutoparkDetailedResponse {
+  autopark: AutoparkDetailed;
+  bonuses: AutoparkBonus[];
+}
+
 export interface AutoparkDetailed {
   id: number;
   title: string;
@@ -11,8 +16,9 @@ export interface AutoparkDetailed {
   description: string;
   backgroundImage: string;
   createdAt: Date;
-  address: string
-  bonuses: AutoparkBonus[]
+  address: string;
+  rentalConditions: string[];
+  bonuses: AutoparkBonus[];
 }
 
 export interface AutoparkBonus {

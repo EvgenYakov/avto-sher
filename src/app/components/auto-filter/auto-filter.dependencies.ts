@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgFor } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
@@ -9,5 +9,6 @@ import { ButtonModule } from 'primeng/button';
 
 export const AUTO_FILTER_DEPS = [
   FormsModule, ReactiveFormsModule,
-  SelectButtonModule, NgFor, DropdownModule, InputNumberModule, CheckboxModule, ButtonModule
+  SelectButtonModule, NgFor, DropdownModule, InputNumberModule, CheckboxModule, ButtonModule,
+  AsyncPipe
 ];

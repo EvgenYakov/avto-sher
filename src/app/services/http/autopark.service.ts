@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { AuctionAutoparks, AutoparkBonus, AutoparkDetailed, Region } from '@models';
+import { AuctionAutoparks, AutoparkDetailed, AutoparkDetailedResponse, Region } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -21,7 +21,7 @@ export class AutoparkService extends BaseService {
   }
 
   public getAutoparkById(autoparkId: number): Observable<AutoparkDetailed> {
-    return this.httpService.get<any>( `${ environment.apiUrl }/autoparks/${ autoparkId }` ).pipe(
+    return this.httpService.get<AutoparkDetailedResponse>( `${ environment.apiUrl }/autoparks/${ autoparkId }` ).pipe(
       map( (response) => {
         return {
           ...response.autopark,

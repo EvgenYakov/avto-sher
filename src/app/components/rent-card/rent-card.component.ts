@@ -10,7 +10,7 @@ import { ButtonModule } from 'primeng/button';
   standalone: true,
   imports: [CommonModule, CardModule, ButtonModule],
 } )
-export class RentCardComponent implements OnChanges{
+export class RentCardComponent implements OnChanges {
   @Input() public financialInfo: string[];
   @Input() public additionalInfo: string[];
   @Input() public btnTitle: string;
@@ -20,13 +20,13 @@ export class RentCardComponent implements OnChanges{
   public combinedInfo: string[];
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['financialInfo'] || changes['additionalInfo']) {
+    if(changes['financialInfo'] || changes['additionalInfo']) {
       this.combineInfo();
     }
   }
 
   private combineInfo(): void {
     const combined = [...(this.financialInfo || []), ...(this.additionalInfo || [])];
-    this.combinedInfo = combined.slice(0, 3);
+    this.combinedInfo = combined.slice( 0, 3 );
   }
 }

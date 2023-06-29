@@ -1,7 +1,7 @@
 @import "mixins";
 
 :host ::ng-deep {
-  .p-card .p-card-body {
+  .auto-card {
     margin-bottom: 1.25rem;
   }
 }
