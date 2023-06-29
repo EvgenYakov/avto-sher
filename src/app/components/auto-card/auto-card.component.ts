@@ -5,6 +5,7 @@ import { CarCard, OrderHistoryCarCard } from '@models';
 import { AppRoutes, MainRoutes } from '@constants';
 
 import { AUTO_CARD_DEPS } from './auto-card.dependencies';
+import { ImageModule } from 'primeng/image';
 
 @Component( {
   selector: 'app-car-card',
@@ -12,7 +13,7 @@ import { AUTO_CARD_DEPS } from './auto-card.dependencies';
   styleUrls: ['./auto-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AUTO_CARD_DEPS]
+  imports: [AUTO_CARD_DEPS, ImageModule]
 } )
 export class AutoCardComponent {
   @Input() public car: CarCard | OrderHistoryCarCard;
