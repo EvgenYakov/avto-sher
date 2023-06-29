@@ -1,7 +1,26 @@
 @import "mixins";
 @import "colors";
 
-.auto-card {
+:host ::ng-deep {
+  .rent-card-profile {
+    .rent-card__price {
+      font-weight: unset;
+
+      span {
+        font-weight: bold;
+        font-size: 30px;
+      }
+    }
+  }
+
+  .car-card {
+    .auto {
+      margin-bottom: 1.25rem;
+    }
+  }
+}
+
+.auto {
 
   .subtitle {
     font-size: 24px;
@@ -30,16 +49,14 @@
     }
 
     &__img {
+      @include media-xl() {
+        height: unset;
+      }
+
       width: 100%;
-      height: 350px;
-
-      @include media-l() {
-        height: 260px;
-      }
-
-      @include media-s() {
-        height: 160px;
-      }
+      height: 355px;
+      border-radius: 14px;
+      object-fit: cover;
     }
 
     &__thumbnail {
@@ -90,36 +107,49 @@
     }
   }
 
+  .right {
+    @include flexMix(column, unset, unset, 5.875rem);
+  }
+
   .rent-conditions {
     width: 100%;
 
     .title {
-      margin-top: 76px;
+      margin-top: 4.75rem;
     }
 
     .list {
       &__item {
-        margin-top: 15px;
+        margin-top: 0.938rem;
         color: var(--text-color-secondary)
       }
     }
   }
 
   .rent-card {
-    width: 440px;
-    height: 270px;
-    margin-top: 94px;
+    width: 26.875rem;
   }
 
+  .bonuses {
+    margin-top: 3.125rem;
 
-  .address {
+    &__list {
+      @include flexMix(row, flex-start, flex-start, 1.563rem);
+      flex-wrap: wrap;
+
+      .item {
+        max-width: 22.5rem;
+      }
+    }
   }
 
   .cars-list {
+    margin-top: 6.875rem;
+
     &__title {
       font-size: 36px;
       font-weight: 600;
-      margin-bottom: 60px;
+      margin-bottom: 3.75rem;
     }
   }
 }

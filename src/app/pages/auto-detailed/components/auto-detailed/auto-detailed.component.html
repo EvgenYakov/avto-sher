@@ -1,6 +1,6 @@
-<div class="auto-card container" *ngIf="(carProfile$ | async) as car">
+<div class="auto container" *ngIf="(carProfile$ | async) as car">
   
-  <div class="auto-card__flex-block">
+  <div class="auto__flex-block">
     
     <div class="left">
       <div class="gallery">
@@ -22,15 +22,10 @@
           Условия аренды
         </div>
         <div class="list">
-          <div class="list__item">
-            – Выплата осуществляется раз в 3 дня
+          <div *ngFor="let item of (autopark$|async)?.rentalConditions" class="list__item">
+            – {{item}}
           </div>
-          <div class="list__item">
-            – Аренда от 7 дней
-          </div>
-          <div class="list__item">
-            – “График аренды” - 6/1 (6 дней оплачивается, 1 день бесплатно)
-          </div>
+        
         </div>
       </div>
     </div>
@@ -78,16 +73,17 @@
         </div>
       
       </div>
-      <div class="rent-card">
+      <div class="rent-card-profile">
         <app-rent-card
                 [price]="car.price"
                 [financialInfo]="car.financialInfo"
                 [btnTitle]="'Арендовать'"
                 [schedule]="'6/1'"
-        ></app-rent-card>
+        >
+          <p-button label="Оставить отзыв" styleClass="p-button-outlined"></p-button>
+        </app-rent-card>
       </div>
     </div>
-  
   
   </div>
   
@@ -101,13 +97,17 @@
   </div>
   
   <div class="bonuses">
-    <!--    <div class="bonuses__title subtitle">-->
-    <!--      Бонусная система-->
-    <!--    </div>-->
-    <!--    -->
-    <!--    <div class="bonuses__list">-->
-    <!--    -->
-    <!--    </div>-->
+        <div class="bonuses__title subtitle">
+          Бонусная система
+        </div>
+        
+        <div class="bonuses__list">
+          <app-bonus
+                  *ngFor="let bonus of (autopark$|async)?.bonuses"
+                  [bonus]="bonus"
+                  class="item"
+          ></app-bonus>
+        </div>
   </div>
   
   <div class="cars-list">
@@ -115,7 +115,7 @@
       Другие объявления автопарка
     </div>
     <app-load-more>
-      <app-car-card *ngFor="let car of autoparkCars$|async" [car]="car"></app-car-card>
+      <app-car-card class="car-card" *ngFor="let car of autoparkCars$|async" [car]="car"></app-car-card>
     </app-load-more>
   </div>
 </div>
