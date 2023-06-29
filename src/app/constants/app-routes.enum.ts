@@ -15,4 +15,5 @@ export enum AppRoutes {
   ADD_AUTOPARK = '',
   CONDITIONS = '/conditions',
   TEAM = '/team',
+  JOB = '/job',
 }
