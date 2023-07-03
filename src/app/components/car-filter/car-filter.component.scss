@@ -1,0 +1,115 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+
+  //.p-calendar {
+  //  width: 182px;
+  //  height: 26px;
+  //
+  //  .p-inputtext {
+  //    height: 26px;
+  //  }
+  //}
+
+  .p-buttonset .p-button {
+    padding: 1rem;
+  }
+
+  .p-inputtext {
+    padding: 3px 15px;
+  }
+
+  .p-multiselect .p-multiselect-label {
+    padding: 3px;
+  }
+
+  .p-multiselect, .p-dropdown {
+    height: 25px;
+    width: 216px;
+  }
+
+  .p-inputnumber-input {
+    width: 100px;
+    height: 26px;
+  }
+
+  .p-multiselect-header {
+    display: none;
+  }
+
+  .more-additional-info {
+    .p-multiselect {
+      width: 85px;
+      border: 0;
+    }
+
+    .pi-chevron-down:before {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.filter .block:first-child {
+  @include flexMix(row, flex-start, space-between, 14px, wrap);
+
+  @include media-l() {
+    flex-direction: column;
+    flex-wrap: unset;
+  }
+
+  max-width: 485px;
+}
+
+.filter .block:nth-child(2) {
+  @include flexMix(column, center, space-between, 14px);
+
+  max-width: 240px;
+}
+
+.filter .block:nth-child(3) {
+  @include flexMix(column, flex-start, space-between);
+}
+
+.filter .block:nth-child(4) {
+  @include flexMix(column, flex-start, flex-start, 10px);
+
+  max-width: 231px;
+  font-size: 14px;
+}
+
+.filter {
+  @include flexMix(row, unset, unset, 0, wrap);
+
+  @include media-l() {
+    justify-content: center;
+  }
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #CED4DA;
+
+  .label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .block {
+    padding: 1.25rem 1rem;
+  }
+
+  .price {
+    width: 216px;
+
+    &__range {
+      @include flexMix(row, center, space-between);
+    }
+  }
+
+}
+
+.dash {
+  width: 10px;
+  height: 1.5px;
+  background-color: black;
+}

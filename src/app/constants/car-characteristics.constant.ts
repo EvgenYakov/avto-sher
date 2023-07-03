@@ -33,12 +33,23 @@ export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
 export enum Transmission {
   MECHANICAL = 'Механическая',
   AUTOMATIC = 'Автоматическая',
-  ROBOTIC = 'Роботизированная',
-  VARIABLE = 'Вариативная'
 }
 
 export enum Fuel {
   DIESEL = 'Дизель',
   PETROL = 'Бензин',
-  ELECTRO = 'Электро'
+  GAS = 'Газ'
 }
+
+export const MIN_RENTAL_PERIOD: DropdownOption[] = [
+  { label: 'От 1 дня', value: 'От 1 дня'},
+  { label: 'От 7 дня', value: 'От 7 дня'},
+  { label: 'От 14 дня', value: 'От 14 дня'},
+  { label: 'От 30 дня', value: 'От 30 дня'},
+]
+
+export const WORK_SCHEDULE: DropdownOption[] = [
+  {label: '5/2', value:'5/2'},
+  {label: '6/1', value:'6/1'},
+  {label: '7/0', value:'7/0'},
+]
