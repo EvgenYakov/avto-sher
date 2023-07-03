@@ -49,7 +49,13 @@ export class RegistrationComponent implements OnInit {
     this.router.navigate( ['../'], { relativeTo: this.route } );
   }
 
-  public openConfidentiality() {}
+  public openConfidentiality(): void {
+    this.router.navigate( ['/privacy'] );
+  }
+
+  public openOfferAgreement(): void {
+    this.router.navigate( ['/offer-agreement'] );
+  }
 
   public onSubmit(): void {
 
@@ -63,11 +69,11 @@ export class RegistrationComponent implements OnInit {
 
   public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
     this.checkbox = false;
-    if ( index === 0 ) {
+
+    if(index === 0) {
       this.registerForm.controls.phoneNumber.addValidators( [Validators.required] );
       this.registerType = RegisterType.DRIVER;
-    }
-    else if ( index === 1 ) {
+    } else if(index === 1) {
       this.registerForm.controls.phoneNumber.clearValidators();
       this.registerType = RegisterType.AUTOPARK;
     }
