@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { CarCard, CarProfile, CarResponse, FilterParams, OrderHistoryCarCard } from '@models';
+import { CarCard, CarProfile, FilterParams, OrderHistoryCarCard } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -12,21 +12,23 @@ import { BaseService } from '../helpers';
 } )
 export class CarService extends BaseService {
 
-  public getOrderHistoryCars(page: number, limit: number = 5): Observable<OrderHistoryCarCard[]> {
-    return this.httpService.get<CarResponse[]>( `${ environment.apiUrl }/cars`, {
+  public getAllCars(page: number, limit: number = 12): Observable<CarCard[]> {
+    console.log(page)
+    return this.httpService.get<CarCard[]>( `${ environment.apiUrl }/cars`, {
       params: {
         page,
         limit
       }
-    } ).pipe(
-      map( (carsResponse) => {
-        return carsResponse.map( (carResponse) => ({
-          ...carResponse,
-          autoparkName: carResponse.autopark.title,
-          orderDate: '12/06/2023'
-        }) )
-      } )
-    );
+    } )
+  }
+
+  public getOrderHistoryCars(page: number, limit: number = 5): Observable<OrderHistoryCarCard[]> {
+    return this.httpService.get<[]>( `${ environment.apiUrl }/cars`, {
+      params: {
+        page,
+        limit
+      }
+    } );
   }
 
   public getCarsByFilter(filterParams: FilterParams, page: number = 1, limit: number = 5): Observable<CarCard[]> {
@@ -44,7 +46,7 @@ export class CarService extends BaseService {
         page,
         limit
       }
-    } );
+    } )
   }
 
   public getCarProfile(carId: number): Observable<CarProfile> {

@@ -25,7 +25,7 @@ export class CarDetailedEffects {
     ofType( loadCar ),
     switchMap( ({ carId }) => this.carService.getCarProfile( carId ) ),
     map( (car: CarProfile) => {
-      this.store.dispatch( loadAutoparkCars( { autoparkId: car.autoparkId } ) )
+      this.store.dispatch( loadAutoparkCars( { autoparkId: car.autopark.id } ) )
       return loadCarSuccess( { car } )
     } ),
     catchError( (error: HttpErrorResponse) => of( loadCarFailure( { error: error.message } ) ) )

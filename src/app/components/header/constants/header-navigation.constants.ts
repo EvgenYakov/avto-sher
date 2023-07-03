@@ -9,7 +9,7 @@ export const MAIN_NAV: MenuItem[] = [
   },
   {
     label: 'Автомобили',
-    routerLink: '',
+    routerLink: AppRoutes.CARS,
   },
   {
     label: 'Правила',

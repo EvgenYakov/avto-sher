@@ -1,6 +1,6 @@
 import { Route } from '@angular/router';
 
-import { MainRoutes } from '@constants';
+import { AppRoutes, MainRoutes } from '@constants';
 import { AuthGuard } from '@services';
 
 import { MainComponent } from './main.component';
@@ -26,6 +26,10 @@ export default [
       {
         path: MainRoutes.AUTO_DETAILED + '/:id',
         loadChildren: () => import('../auto-detailed/auto-detailed.routes')
+      },
+      {
+        path: AppRoutes.CARS,
+        loadChildren: () => import('../cars/cars.routes')
       },
     ]
   }

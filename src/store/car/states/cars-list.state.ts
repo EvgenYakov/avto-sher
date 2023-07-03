@@ -6,7 +6,7 @@ export interface CarsListState extends EntityState<CarCard> {
   filters: FilterParams;
   usedBrands: string[];
   usedModels: string[];
-  allCarsPage: number;
-  allCarsLimit: number;
+  page: number;
+  limit: number;
   error: string;
 }

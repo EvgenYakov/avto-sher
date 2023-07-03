@@ -24,3 +24,8 @@ export const selectCarModels = createSelector(
   carsListFeatureSelector,
   (state) => state.usedModels
 );
+
+export const selectCarsPage = createSelector(
+  carsListFeatureSelector,
+  (state) => state.page
+);
