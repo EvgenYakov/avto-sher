@@ -5,10 +5,13 @@ import { CarCard, FilterParams } from '@models';
 
 import { CarsListState } from '../states';
 import {
+  filterCar,
   filterCarFailure,
   filterCarSuccess,
-  loadUsedCarsBrandsSuccess,
-  loadModelsByBrandSuccess
+  loadAllCarsSuccess,
+  loadModelsByBrandSuccess,
+  loadMore,
+  loadUsedCarsBrandsSuccess
 } from '../actions';
 
 export const autoCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
@@ -17,13 +20,22 @@ export const initialState: CarsListState = autoCardAdapter.getInitialState( {
   filters: {} as FilterParams,
   usedBrands: [],
   usedModels: [],
-  allCarsPage: 1,
-  allCarsLimit: 20,
+  page: 1,
+  limit: 12,
   error: '',
 } );
 
 export const carsListReducer = createReducer(
   initialState,
+  on( loadAllCarsSuccess, (state, { cars }) => ({
+    ...state,
+    ...autoCardAdapter.addMany( cars, state )
+  }) ),
+  on( filterCar, (state, { filterParams }) => ({
+      ...state,
+      filters: filterParams
+    }
+  ) ),
   on( filterCarSuccess, (state, { filteredCars }) => ({
     ...state,
     ...autoCardAdapter.setAll( filteredCars, state )
@@ -36,9 +48,14 @@ export const carsListReducer = createReducer(
     ...state,
     usedModels: models
   }) ),
-  on( filterCarFailure, (state, action) => ({
+  on( filterCarFailure, (state, { errors }) => ({
       ...state,
-      error: action.errors
+      error: errors
+    }
+  ) ),
+  on( loadMore, (state) => ({
+      ...state,
+      page: state.page + 1
     }
   ) ),
 )

@@ -22,7 +22,13 @@ export enum CarsListActions {
   LOAD_USED_BRANDS_SUCCESS = '[CARS BRANDS] Load used cars brands success',
   LOAD_USED_MODELS = '[CARS MODELS] Load used cars models',
   LOAD_USED_MODELS_SUCCESS = '[CARS MODELS] Load used cars models by brand success',
+
+  LOAD_MORE = '[CARS LIST] Load more cars'
 }
+
+export const loadMore = createAction(
+  CarsListActions.LOAD_MORE,
+);
 
 export const loadAllCars = createAction(
   CarsListActions.LOAD_ALL_CARS,
@@ -31,11 +37,6 @@ export const loadAllCars = createAction(
 export const loadAllCarsSuccess = createAction(
   CarsListActions.LOAD_ALL_CARS_SUCCESS,
   props<{ cars: CarCard[] }>()
-);
-
-export const loadAllCarsFailure = createAction(
-  CarsListActions.LOAD_ALL_CARS_FAILURE,
-  props<{ errors: any }>()
 );
 
 
