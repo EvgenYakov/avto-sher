@@ -1,0 +1,116 @@
+<form [formGroup]="filterForm">
+  <div class="filter">
+    <div class="block">
+      <div class="dropdown" *ngFor="let dropdown of dropdowns">
+        <div class="label">
+          {{dropdown.label}}
+        </div>
+        <p-multiSelect
+                [options]="dropdown.options"
+                [placeholder]="dropdown.placeholder"
+                [formControlName]="dropdown.formControlName"
+        ></p-multiSelect>
+      </div>
+      
+      <div class="price">
+        <div class="label">
+          Цена
+        </div>
+        <div class="price__range">
+          <p-inputNumber
+                  [formControl]="filterForm.controls.startPrice"
+                  [mode]="'currency'"
+                  [currency]="'RUB'"
+                  [locale]="'ru-RU'"
+                  placeholder="От"
+          ></p-inputNumber>
+          <div class="dash"></div>
+          <p-inputNumber
+                  [formControl]="filterForm.controls.endPrice"
+                  [mode]="'currency'"
+                  [currency]="'RUB'"
+                  [locale]="'ru-RU'"
+                  placeholder="До"
+          ></p-inputNumber>
+        </div>
+      </div>
+    
+    </div>
+    <div class="block">
+      <div class="brand">
+        <div class="label">
+          Марка
+        </div>
+        <p-dropdown
+                [formControl]="filterForm.controls.brand"
+                [options]="(brands$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [filter]="true"
+                [showClear]="true"
+                optionLabel="label"
+                filterBy="label"
+                placeholder="Выберите марку"
+        ></p-dropdown>
+      </div>
+      <div class="model">
+        <div class="label">
+          Модель
+        </div>
+        <p-dropdown
+                [formControl]="filterForm.controls.model"
+                [options]="(models$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+                placeholder="Выберите модель"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="block">
+      <div class="block__transmission">
+        <p-selectButton
+                [formControl]="filterForm.controls.transmission"
+                [options]="transmission"
+                [optionLabel]="'label'"
+                [optionValue]="'value'"
+        ></p-selectButton>
+      </div>
+      <div class="block__fuel-type">
+        <p-selectButton
+                [formControl]="filterForm.controls.fuelType"
+                [options]="fuel"
+                [optionLabel]="'label'"
+                [optionValue]="'value'"
+        ></p-selectButton>
+      </div>
+    </div>
+    <div class="block">
+      <div class="label">
+        Дополнительно
+      </div>
+<!--      <p-checkbox-->
+<!--              *ngFor="let option of additionalShort"-->
+<!--              [label]="option.label"-->
+<!--              [value]="option.value"-->
+<!--      ></p-checkbox>-->
+      <p-multiSelect
+              [options]="additional"
+              [filter]="false"
+              [formControl]="filterForm.controls.additionalInfo"
+              display="chip"
+              placeholder="ещё"
+              class="more-additional-info"
+      ></p-multiSelect>
+      <p-multiSelect
+              [options]="financial"
+              [filter]="false"
+              [formControl]="filterForm.controls.financialInfo"
+              display="chip"
+              placeholder="ещё"
+              class="more-additional-info"
+      ></p-multiSelect>
+    </div>
+  </div>
+</form>
