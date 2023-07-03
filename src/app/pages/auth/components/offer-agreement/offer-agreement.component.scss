@@ -1,0 +1,17 @@
+.offer {
+  margin: 2.5rem auto;
+  padding: 1.625rem;
+  border: 1px solid black;
+  border-radius: 14px;
+
+  &__title {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  h4 {
+    margin-bottom: 0.5rem;
+    margin-top: 1.2rem;
+  }
+}
