@@ -1,0 +1,108 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-inputnumber-input {
+    width: 130px;
+  }
+
+  .p-button {
+    @include media-l() {
+      width: 100%;
+      flex-grow: 1;
+    }
+  }
+}
+
+.filter {
+  padding: 3rem 0;
+  background-color: $dark-bg-color;
+  color: $light-text-color;
+
+  &__container {
+    @include flexMix(column, flex-start, space-between);
+
+    gap: 2rem;
+
+    @include media-l() {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  &__title {
+    color: var(--primary-color-text);
+  }
+
+  &__form {
+    @include flexMix(column, flex-start, space-between);
+
+    gap: 2rem;
+
+    @include media-l() {
+      align-items: center;
+    }
+  }
+
+  &__dropdowns {
+    @include flexMix(row, flex-start, flex-start);
+
+    gap: 2rem;
+
+    @include media-l() {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  &__row {
+    @include flexMix(row, center, space-between);
+
+    gap: 2rem;
+
+    @include media-xl() {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    @include media-l() {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__price {
+    @include flexMix(row, center, space-between);
+
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @include media-s() {
+      @include flexMix(row, center, flex-start, 0.2rem);
+    }
+  }
+
+  &__price-dash {
+    width: 1rem;
+    height: 2px;
+    background-color: $light-text-color;
+  }
+
+  .options {
+    @include flexMix(column, flex-start, flex-start, 1.25rem);
+  }
+
+  &__additional-options, &__financial-options {
+    @include flexMix(row, center, flex-start);
+
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    @include media-l() {
+      justify-content: center;
+    }
+  }
+
+  &__button {
+    width: 100%;
+  }
+}

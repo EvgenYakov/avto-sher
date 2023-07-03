@@ -1,4 +1,5 @@
 export interface Dropdown {
+  label?: string;
   formControlName: string;
   placeholder: string;
   options: DropdownOption[];

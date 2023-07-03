@@ -1,7 +1,8 @@
 import { Dropdown } from '@models';
-import { FUEL_OPTIONS, TRANSMISSION_OPTIONS } from './characteristics.constants';
+import { FUEL_OPTIONS, TRANSMISSION_OPTIONS } from '@constants';
 
-export const STATIC_DROPDOWNS: Dropdown[] = [
+export let STATIC_DROPDOWNS: Dropdown[];
+STATIC_DROPDOWNS = [
   {
     formControlName: 'fuel',
     placeholder: 'Топливо',

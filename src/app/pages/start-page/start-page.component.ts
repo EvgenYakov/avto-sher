@@ -10,13 +10,14 @@ import { LocalStorageService } from '@services';
 import { AuctionAutoparks } from '@models';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
+import { CarFilterComponent } from './components/car-filter/car-filter.component';
 
 @Component( {
   selector: 'app-start-page',
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.scss'],
   standalone: true,
-  imports: [START_PAGE_DEPS],
+  imports: [START_PAGE_DEPS, CarFilterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class StartPageComponent implements OnInit {
