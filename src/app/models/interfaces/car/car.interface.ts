@@ -16,25 +16,19 @@ export interface CarCard {
   transmission: Transmission;
   model: string;
   brand: string;
-  autoparkName: string;
-  region: string;
+  autopark: {
+    id: number;
+    title: string;
+    region: string;
+    address: string;
+    bonuses: AutoparkBonus[]
+  }
 }
 
 export interface CarProfile extends CarCard {
-  bonuses: AutoparkBonus[];
-  rentalConditions: string[];
-  autoparkId: number;
-  autoparkAddress: string;
+
 }
 
 export interface OrderHistoryCarCard extends CarCard {
   orderDate: string;
-}
-
-export interface CarResponse extends CarCard {
-  autopark: {
-    id: number,
-    title: 'string',
-    address: 'string'
-  },
 }

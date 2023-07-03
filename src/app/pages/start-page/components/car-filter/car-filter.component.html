@@ -1,0 +1,94 @@
+<div class="filter">
+  <div class="filter__container container">
+    <div class="filter__title title">Поиск автомобилей</div>
+    <div>Более 10 800 проверенных автомобилей</div>
+    
+    <form [formGroup]="filterForm" class="filter__form">
+      <p-selectButton
+              [formControlName]="'type'"
+              [options]="tariffOptions"
+              [optionLabel]="'label'"
+              [optionValue]="'value'"
+      ></p-selectButton>
+      
+      <div class="filter__dropdowns">
+        <p-dropdown
+                formControlName="brand"
+                [options]="(brands$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [filter]="true"
+                [showClear]="true"
+                optionLabel="label"
+                filterBy="label"
+                placeholder="Выберите марку"
+        ></p-dropdown>
+        <p-dropdown
+                [formControlName]="'model'"
+                [options]="(models$ | async)!"
+                [optionValue]="'value'"
+                [optionLabel]="'label'"
+                [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+                placeholder="Выберите модель"
+        >
+        </p-dropdown>
+        <p-dropdown
+                *ngFor="let dropdown of staticDropdowns"
+                [formControlName]="dropdown.formControlName"
+                [options]="dropdown.options"
+                [placeholder]="dropdown.placeholder"
+                [optionLabel]="'label'"
+                [optionValue]="'value'"
+        ></p-dropdown>
+      </div>
+      
+      <div class="filter__row">
+        <div class="filter__price">
+          Цена
+          <p-inputNumber
+                  [formControlName]="'startPrice'"
+                  [mode]="'currency'"
+                  [currency]="'RUB'"
+                  [locale]="'ru-RU'"
+                  [placeholder]="'Минимум'"
+          ></p-inputNumber>
+          <span class="filter__price-dash"></span>
+          <p-inputNumber
+                  [formControlName]="'endPrice'"
+                  [mode]="'currency'"
+                  [currency]="'RUB'"
+                  [locale]="'ru-RU'"
+                  [placeholder]="'Максимум'"
+          ></p-inputNumber>
+        </div>
+        
+        <div class="options">
+          <div class="filter__additional-options">
+            <p-checkbox
+                    *ngFor="let option of additionalOptions"
+                    [formControl]="filterForm.controls.additionalInfo"
+                    [label]="option.label"
+                    [value]="option.value"
+            ></p-checkbox>
+          </div>
+          
+          <div class="filter__financial-options">
+            <p-checkbox
+                    *ngFor="let option of financialOptions"
+                    [formControl]="filterForm.controls.financialInfo"
+                    [label]="option.label"
+                    [value]="option.value"
+            ></p-checkbox>
+          </div>
+        </div>
+      
+      </div>
+      
+      <p-button
+              class="filter__button"
+              label="Поиск по параметрам"
+              (click)="onSubmit()"
+      ></p-button>
+    </form>
+  </div>
+</div>

@@ -7,7 +7,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 
-export const AUTO_FILTER_DEPS = [
+export const CAR_FILTER_DEPS = [
   FormsModule, ReactiveFormsModule,
   SelectButtonModule, NgFor, DropdownModule, InputNumberModule, CheckboxModule, ButtonModule,
   AsyncPipe
