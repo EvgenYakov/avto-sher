@@ -12,9 +12,7 @@
           </app-load-more>
         </p-tabPanel>
         <p-tabPanel header="Профиль">
-          <div class="container">
-            {{autopark |json}}
-          </div>
+          <app-profile [autopark]="autopark"></app-profile>
         </p-tabPanel>
         <p-tabPanel [disabled]="true" header="Отзывы">
           <!--          <app-load-more btnLabel="Другие отзывы">-->
