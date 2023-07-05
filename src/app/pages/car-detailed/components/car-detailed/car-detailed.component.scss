@@ -3,6 +3,8 @@
 
 :host ::ng-deep {
   .rent-card-profile {
+    width: 26.875rem;
+
     .rent-card__price {
       font-weight: unset;
 
@@ -74,11 +76,21 @@
     }
 
     &__hat {
+      @include flexMix(row, center, space-between);
+      width: 100%;
       font-size: 36px;
       font-weight: 600;
 
       .year {
         color: $pale-color
+      }
+
+      .count {
+        @include flexMix(row, center, flex-start, 10px);
+
+        color: var(--text-color-secondary);
+        font-size: 14px;
+        font-weight: 300;
       }
     }
 
@@ -124,10 +136,6 @@
         color: var(--text-color-secondary)
       }
     }
-  }
-
-  .rent-card {
-    width: 26.875rem;
   }
 
   .bonuses {

@@ -1,10 +1,10 @@
 import { Route } from '@angular/router';
 
-import { AutoDetailedComponent } from './components';
+import { CarDetailedComponent } from './components';
 
 export default [
   {
     path: '',
-    component: AutoDetailedComponent
+    component: CarDetailedComponent
   }
 ] as Route[]

@@ -22,7 +22,7 @@
           Условия аренды
         </div>
         <div class="list">
-          <div *ngFor="let item of (autopark$|async)?.rentalConditions" class="list__item">
+          <div *ngFor="let item of car.autopark.rentalConditions" class="list__item">
             – {{item}}
           </div>
         
@@ -33,7 +33,13 @@
     <div class="right">
       <div class="content">
         <div class="content__hat">
-          {{car.model}} {{car.brand}} <span class="year">{{car.yearOfRelease}}</span>
+          <div>
+            {{car.model}} {{car.brand}} <span class="year">{{car.yearOfRelease}}</span>
+          </div>
+          <div class="count">
+            <i class="pi pi-eye"></i>
+            <span>1200</span>
+          </div>
         </div>
         <div class="main-content">
           <div class="content__characteristic">
@@ -61,6 +67,14 @@
                 {{car.fuel}}
               </div>
             </div>
+            <div class="row">
+              <div class="row__name">
+                Тариф:
+              </div>
+              <div class="row__value">
+                {{car.type}}
+              </div>
+            </div>
           </div>
           <div class="content__additional-info">
             <ng-container *ngFor="let item of car.additionalInfo">
@@ -78,7 +92,7 @@
                 [price]="car.price"
                 [financialInfo]="car.financialInfo"
                 [btnTitle]="'Арендовать'"
-                [schedule]="'6/1'"
+                [schedule]="car.autopark.rentSchedule"
         >
           <p-button label="Оставить отзыв" styleClass="p-button-outlined"></p-button>
         </app-rent-card>
@@ -92,22 +106,22 @@
       Адрес автопарка
     </div>
     <div>
-      {{car.autoparkAddress}}
+      {{car.autopark.address}}
     </div>
   </div>
   
   <div class="bonuses">
-        <div class="bonuses__title subtitle">
-          Бонусная система
-        </div>
-        
-        <div class="bonuses__list">
-          <app-bonus
-                  *ngFor="let bonus of (autopark$|async)?.bonuses"
-                  [bonus]="bonus"
-                  class="item"
-          ></app-bonus>
-        </div>
+    <div class="bonuses__title subtitle">
+      Бонусная система
+    </div>
+    
+    <div class="bonuses__list">
+      <app-bonus
+              *ngFor="let bonus of car.autopark.bonuses"
+              [bonus]="bonus"
+              class="item"
+      ></app-bonus>
+    </div>
   </div>
   
   <div class="cars-list">
@@ -115,7 +129,7 @@
       Другие объявления автопарка
     </div>
     <app-load-more>
-      <app-car-card class="car-card" *ngFor="let car of autoparkCars$|async" [car]="car"></app-car-card>
+      <app-car-card class="car-card" *ngFor="let car of autoparkCars$ | async" [car]="car"></app-car-card>
     </app-load-more>
   </div>
 </div>
