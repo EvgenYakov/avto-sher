@@ -9,27 +9,25 @@ import { MenuItem } from 'primeng/api';
 import { AppRoutes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
 import { AutoparkDetailed, CarCard, CarProfile } from '@models';
-import { loadAutoparkDetailed, loadCar, selectAutoparkCars, selectAutoparkDetailed, selectCarProfile } from '@store';
+import { loadCar, selectAutoparkCars, selectAutoparkDetailed, selectCarProfile } from '@store';
+import { BonusComponent } from '@components';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
-import { AUTO_DETAILED_DEPS } from './auto-detailed.dependencies';
-import { BonusComponent } from '../../../../components/bonus/bonus.component';
+import { AUTO_DETAILED_DEPS } from './car-detailed.dependencies';
 
 @Component( {
   selector: 'app-car-detailed',
-  templateUrl: './auto-detailed.component.html',
-  styleUrls: ['./auto-detailed.component.scss'],
+  templateUrl: './car-detailed.component.html',
+  styleUrls: ['./car-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [AUTO_DETAILED_DEPS, BonusComponent]
 } )
-export class AutoDetailedComponent implements OnInit, OnDestroy {
+export class CarDetailedComponent implements OnInit, OnDestroy {
 
   public carProfile$: Observable<CarProfile>;
   public autoparkCars$: Observable<CarCard[]>;
-
-  public autopark$: Observable<AutoparkDetailed>;
 
   public responsiveOptions = RESPONSIVE_OPTIONS;
 
@@ -60,7 +58,6 @@ export class AutoDetailedComponent implements OnInit, OnDestroy {
   private getDataFromStore(): void {
     this.carProfile$ = this.store.select( selectCarProfile );
     this.autoparkCars$ = this.store.select( selectAutoparkCars );
-    this.autopark$ = this.store.select(selectAutoparkDetailed)
   }
 
   private setBreadcrumbs(autoId: number): void {
