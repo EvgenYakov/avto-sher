@@ -25,7 +25,7 @@ export default [
       },
       {
         path: MainRoutes.AUTO_DETAILED + '/:id',
-        loadChildren: () => import('../auto-detailed/auto-detailed.routes')
+        loadChildren: () => import('../car-detailed/car-detailed.routes')
       },
       {
         path: AppRoutes.CARS,

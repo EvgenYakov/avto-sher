@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 
 import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { selectRegion, selectRegions } from '@store';
+import { setCurrentRegion, selectListOfRegion } from '@store';
 import { Region } from '@models';
 import { LocalStorageKeys } from '@constants';
 import { LocalStorageService } from '@services';
@@ -40,22 +40,26 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.regions$ = this.store.select( selectRegions );
+    const region = this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION );
+    this.selectedRegionControl = new FormControl<Region | null>( region );
 
-    this.selectedRegionControl = new FormControl<Region | null>( null );
-
-    if(this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION )) {
-      const region = this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION );
-      this.selectedRegionControl.setValue( region )
+    if (region) {
+      this.store.dispatch( setCurrentRegion( { region } ) )
     }
+
+    this.getDataFromStore();
 
     this.selectedRegionControl.valueChanges.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (region) => {
-      if(region) {
-        this.store.dispatch( selectRegion( { region } ) )
+      if (region) {
+        this.store.dispatch( setCurrentRegion( { region } ) )
       }
     } );
+  }
+
+  private getDataFromStore(): void {
+    this.regions$ = this.store.select( selectListOfRegion );
   }
 
   ngOnDestroy(): void {

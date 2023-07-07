@@ -16,22 +16,12 @@
     padding: 1rem;
   }
 
-  .p-inputtext {
-    padding: 3px 15px;
-  }
-
-  .p-multiselect .p-multiselect-label {
-    padding: 3px;
-  }
-
   .p-multiselect, .p-dropdown {
-    height: 25px;
-    width: 216px;
+    width: 266px;
   }
 
   .p-inputnumber-input {
-    width: 100px;
-    height: 26px;
+    width: 120px;
   }
 
   .p-multiselect-header {
@@ -40,12 +30,7 @@
 
   .more-additional-info {
     .p-multiselect {
-      width: 85px;
-      border: 0;
-    }
-
-    .pi-chevron-down:before {
-      color: var(--primary-color);
+      //width: 165px;
     }
   }
 }
@@ -58,32 +43,36 @@
     flex-wrap: unset;
   }
 
-  max-width: 485px;
+  .dropdown:nth-child(3) {
+    order: 1;
+  }
+
+  max-width: 585px;
 }
 
 .filter .block:nth-child(2) {
   @include flexMix(column, center, space-between, 14px);
 
-  max-width: 240px;
 }
 
 .filter .block:nth-child(3) {
-  @include flexMix(column, flex-start, space-between);
+  @include flexMix(column, stretch, center, 43px);
 }
 
 .filter .block:nth-child(4) {
-  @include flexMix(column, flex-start, flex-start, 10px);
-
-  max-width: 231px;
-  font-size: 14px;
+  @include flexMix(row, center, flex-start, 22px, wrap);
 }
 
 .filter {
   @include flexMix(row, unset, unset, 0, wrap);
 
+  @include media-xl() {
+    justify-content: center;
+  }
   @include media-l() {
     justify-content: center;
   }
+
   width: 100%;
   border-radius: 14px;
   border: 1px solid #CED4DA;
@@ -99,7 +88,7 @@
   }
 
   .price {
-    width: 216px;
+    width: 266px;
 
     &__range {
       @include flexMix(row, center, space-between);
@@ -112,4 +101,18 @@
   width: 10px;
   height: 1.5px;
   background-color: black;
+}
+
+.open-close-additional-filters {
+  @include flexMix(row, center, flex-start, 10px);
+
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+
+  .pi {
+    color: var(--primary-color);
+  }
 }

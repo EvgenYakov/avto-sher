@@ -1,19 +1,15 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { LoadingState } from './loading.state';
-import { LoadingTypes } from '@constants';
+import { RegionState } from './region.state';
 
-const loadingFeatureSelector = createFeatureSelector<LoadingState>('loading');
+const regionFeatureSelector = createFeatureSelector<RegionState>('region');
 
-export const selectLoadingTypes = createSelector(
-  loadingFeatureSelector,
-  (state: LoadingState) => state.types
+export const selectRegion = createSelector(
+  regionFeatureSelector,
+  (state: RegionState) => state.currentRegion
 )
 
-export const selectLoading = createSelector(
-  selectLoadingTypes,
-  (types: LoadingTypes[], props: { type: LoadingTypes }) => types.includes(props.type)
+export const selectListOfRegion = createSelector(
+  regionFeatureSelector,
+  (state: RegionState) => state.regions
 )
-
-
-

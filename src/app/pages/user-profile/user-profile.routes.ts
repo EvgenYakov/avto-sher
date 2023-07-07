@@ -4,8 +4,8 @@ import { MainRoutes } from '@constants';
 
 import { UserProfileComponent } from './components/user-profile';
 import { ContentWrapperComponent } from './pages/content-wrapper';
-import { FilterType } from './pages/content-wrapper/constant/filter-type.enum';
-import { CardsType } from './pages/content-wrapper/constant/cards-type.enum';
+import { FilterType } from '../../components/car-filter/constant/filter-type.enum';
+import { CardsType } from '../../components/car-filter/constant/cards-type.enum';
 
 export default [
   {

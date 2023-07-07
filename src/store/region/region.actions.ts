@@ -1,17 +1,28 @@
 import { createAction, props } from '@ngrx/store';
-import { LoadingTypes } from '@constants';
+import { Region } from '@models';
 
-export enum LoadingActions {
-  ADD_LOADING = '[UI] Add loading',
-  REMOVE_LOADING = '[UI] Remove loading',
+export enum RegionActions {
+  LOAD_REGIONS = '[REGIONS] Load regions',
+  LOAD_REGIONS_SUCCESS = '[REGIONS] Load regions success',
+
+  SET_CURRENT_REGION = '[REGION] Change region',
+  SET_CURRENT_REGION_SUCCESS = '[REGION] Change region success',
 }
 
-export const addLoading = createAction(
-  LoadingActions.ADD_LOADING,
-  props<{ addLoading: LoadingTypes }>()
+export const setCurrentRegion = createAction(
+  RegionActions.SET_CURRENT_REGION,
+  props<{ region: Region }>()
 );
 
-export const removeLoading = createAction(
-  LoadingActions.REMOVE_LOADING,
-  props<{ removeLoading: LoadingTypes }>()
+export const setCurrentRegionSuccess = createAction(
+  RegionActions.SET_CURRENT_REGION_SUCCESS,
+);
+
+export const loadRegions = createAction(
+  RegionActions.LOAD_REGIONS,
+);
+
+export const loadRegionsSuccess = createAction(
+  RegionActions.LOAD_REGIONS_SUCCESS,
+  props<{ regions: Region[] }>()
 );

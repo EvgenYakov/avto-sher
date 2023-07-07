@@ -7,5 +7,5 @@ export interface Dropdown {
 
 export interface DropdownOption {
   label: string;
-  value: string;
+  value: string | number;
 }

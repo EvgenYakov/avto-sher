@@ -11,15 +11,3 @@ export interface FilterForm {
   additionalInfo: FormControl<string[] | null>;
   financialInfo: FormControl<string[] | null>;
 }
-
-export interface FilterParams {
-  startPrice: number;
-  endPrice: number;
-  type: string;
-  brand: string;
-  model: string;
-  fuel: string;
-  transmission: string;
-  additionalInfo: string[];
-  financialInfo: string[];
-}

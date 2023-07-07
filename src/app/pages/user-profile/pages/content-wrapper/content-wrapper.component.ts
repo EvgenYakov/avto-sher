@@ -6,8 +6,8 @@ import { MenuItem } from 'primeng/api';
 import { BreadcrumbService } from '@services';
 import { AppRoutes, MainRoutes } from '@constants';
 
-import { FilterType } from './constant/filter-type.enum';
-import { CardsType } from './constant/cards-type.enum';
+import { FilterType } from '../../../../components/car-filter/constant/filter-type.enum';
+import { CardsType } from '../../../../components/car-filter/constant/cards-type.enum';
 import { CONTENT_WRAPPER_DEPS } from './content-wrapper.dependencies';
 
 @Component( {

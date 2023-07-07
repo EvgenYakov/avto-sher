@@ -21,7 +21,10 @@ export interface CarCard {
     title: string;
     region: string;
     address: string;
-    bonuses: AutoparkBonus[]
+    rentSchedule: string;
+    rentalConditions: string;
+    minRentPeriod: string;
+    bonuses: AutoparkBonus[];
   }
 }
 

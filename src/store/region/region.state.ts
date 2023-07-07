@@ -1,5 +1,6 @@
-import { LoadingTypes } from '@constants';
+import { Region } from '@models';
 
-export interface LoadingState {
-  types: LoadingTypes[];
+export interface RegionState {
+  regions: Region[];
+  currentRegion: Region;
 }
