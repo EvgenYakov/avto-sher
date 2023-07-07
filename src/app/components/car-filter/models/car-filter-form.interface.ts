@@ -5,8 +5,8 @@ export interface CarFilterForm {
   // dateFinish?: FormControl<string>;
   // requestStatuses?: FormControl<string[]>;
   type: FormControl<string[]>;
-  rentalPeriod: FormControl<string[]>;
-  workSchedule: FormControl<string[]>;
+  minRentPeriod: FormControl<number>;
+  rentSchedule: FormControl<string[]>;
   brand: FormControl<string>;
   model: FormControl<string>;
   transmission: FormControl<string[]>;
@@ -27,6 +27,6 @@ export interface CarFilterParams {
   transmission: string[];
   additionalInfo: string[];
   financialInfo: string[];
-  rentalPeriod: string[];
-  workSchedule: string[];
+  minRentPeriod: number;
+  rentSchedule: string[];
 }

@@ -1,19 +1,22 @@
-import { LoadingState } from './loading.state';
 import { createReducer, on } from '@ngrx/store';
-import { addLoading, removeLoading } from './loading.actions';
+import { Region } from '@models';
 
-const initialState: LoadingState = {
-  types: []
+import { RegionState } from './region.state';
+import { setCurrentRegion, loadRegionsSuccess } from './region.actions';
+
+const initialState: RegionState = {
+  regions: [],
+  currentRegion: {} as Region
 }
 
-export const loadingReducer = createReducer(
+export const regionReducer = createReducer(
   initialState,
-  on(addLoading, (state, action) => ({
+  on(setCurrentRegion, (state, { region }) => ({
     ...state,
-    types: [...state.types, action.addLoading]
+    currentRegion: { ...region } // создание нового объекта currentRegion
   })),
-  on(removeLoading, (state, action) => ({
+  on(loadRegionsSuccess, (state, { regions }) => ({
     ...state,
-    types: state.types.filter(a => a !== action.removeLoading)
+    regions
   })),
 );

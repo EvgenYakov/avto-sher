@@ -36,8 +36,8 @@ export const FUEL_OPTIONS: DropdownOption[] = [
 ];
 
 export const TRANSMISSION_OPTIONS: DropdownOption[] = [
-  { label: Transmission.MECHANICAL, value: Transmission.MECHANICAL },
-  { label: Transmission.AUTOMATIC, value: Transmission.AUTOMATIC },
+  { label: Transmission.MECHANICAL, value: 'Механическая' },
+  { label: Transmission.AUTOMATIC, value: 'Автоматическая' },
 ];
 
 export const ADDITIONAL_OPTIONS: DropdownOption[] = [
@@ -68,10 +68,10 @@ export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
 ]
 
 export const MIN_RENTAL_PERIOD_OPTIONS: DropdownOption[] = [
-  { label: 'От 1 дня', value: 'От 1 дня'},
-  { label: 'От 7 дня', value: 'От 7 дня'},
-  { label: 'От 14 дня', value: 'От 14 дня'},
-  { label: 'От 30 дня', value: 'От 30 дня'},
+  { label: 'От 1 дня', value: 1},
+  { label: 'От 7 дня', value: 7},
+  { label: 'От 14 дня', value: 14},
+  { label: 'От 30 дня', value: 30},
 ]
 
 export const WORK_SCHEDULE_OPTIONS: DropdownOption[] = [

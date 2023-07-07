@@ -7,6 +7,7 @@
       <p-selectButton
               [formControlName]="'type'"
               [options]="tariffOptions"
+              [multiple]="true"
               [optionLabel]="'label'"
               [optionValue]="'value'"
       ></p-selectButton>
@@ -32,14 +33,15 @@
                 placeholder="Выберите модель"
         >
         </p-dropdown>
-        <p-dropdown
+        <p-multiSelect
                 *ngFor="let dropdown of staticDropdowns"
                 [formControlName]="dropdown.formControlName"
                 [options]="dropdown.options"
                 [placeholder]="dropdown.placeholder"
                 [optionLabel]="'label'"
                 [optionValue]="'value'"
-        ></p-dropdown>
+                display="chip"
+        ></p-multiSelect>
       </div>
       
       <div class="filter__row">

@@ -4,20 +4,20 @@ import { MIN_RENTAL_PERIOD_OPTIONS, TARIFF_OPTIONS, WORK_SCHEDULE_OPTIONS } from
 export const STATIC_DROPDOWNS: Dropdown[] = [
   {
     label: 'Тариф',
-    formControlName: 'tariff',
+    formControlName: 'type',
     placeholder: 'Выберите тариф',
     options: TARIFF_OPTIONS
   },
   {
-    label: 'Срок аренды',
-    formControlName: 'rentalPeriod',
-    placeholder: 'Выберите срок аренды',
-    options: MIN_RENTAL_PERIOD_OPTIONS
-  },
-  {
     label: 'График работы',
-    formControlName: 'workSchedule',
+    formControlName: 'rentSchedule',
     placeholder: 'График работы',
     options: WORK_SCHEDULE_OPTIONS
+  },
+  {
+    label: 'Срок аренды',
+    formControlName: 'minRentPeriod',
+    placeholder: 'Выберите срок аренды',
+    options: MIN_RENTAL_PERIOD_OPTIONS
   },
 ];

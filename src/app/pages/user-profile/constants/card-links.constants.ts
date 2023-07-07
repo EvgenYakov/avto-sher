@@ -9,7 +9,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'завершенных заказов',
     routerLink: MainRoutes.ORDER_HISTORY,
     cssClass: 'orders',
-    isDisabled: false
+    isDisabled: true
   },
   {
     title: 'Мои заявки',
@@ -17,7 +17,7 @@ export const CARD_LINKS: CardLink[] = [
     counterText: 'завершенных заказов',
     routerLink: MainRoutes.MY_REQUESTS,
     cssClass: 'requests',
-    isDisabled: false
+    isDisabled: true
   },
   {
     title: 'Избранное: Автомобили',

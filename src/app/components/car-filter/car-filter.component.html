@@ -1,15 +1,27 @@
 <form [formGroup]="filterForm">
   <div class="filter">
     <div class="block">
-      <div class="dropdown" *ngFor="let dropdown of dropdowns">
-        <div class="label">
-          {{dropdown.label}}
-        </div>
-        <p-multiSelect
-                [options]="dropdown.options"
-                [placeholder]="dropdown.placeholder"
-                [formControlName]="dropdown.formControlName"
-        ></p-multiSelect>
+      <div class="dropdown" *ngFor="let dropdown of dropdowns;  let i = index">
+        <ng-container *ngIf="i<2">
+          <div class="label">
+            {{dropdown.label}}
+          </div>
+          <p-multiSelect
+                  [options]="dropdown.options"
+                  [placeholder]="dropdown.placeholder"
+                  [formControlName]="dropdown.formControlName"
+          ></p-multiSelect>
+        </ng-container>
+       <ng-container *ngIf="i>=2">
+         <div class="label">
+           {{dropdown.label}}
+         </div>
+         <p-dropdown
+                 [options]="dropdown.options"
+                 [placeholder]="dropdown.placeholder"
+                 [formControlName]="dropdown.formControlName"
+         ></p-dropdown>
+       </ng-container>
       </div>
       
       <div class="price">
@@ -73,44 +85,55 @@
         <p-selectButton
                 [formControl]="filterForm.controls.transmission"
                 [options]="transmission"
+                [multiple]="true"
                 [optionLabel]="'label'"
                 [optionValue]="'value'"
         ></p-selectButton>
       </div>
       <div class="block__fuel-type">
         <p-selectButton
-                [formControl]="filterForm.controls.fuelType"
+                [formControl]="filterForm.controls.fuel"
                 [options]="fuel"
+                [multiple]="true"
                 [optionLabel]="'label'"
                 [optionValue]="'value'"
         ></p-selectButton>
       </div>
     </div>
-    <div class="block">
-      <div class="label">
-        Дополнительно
+    <div class="block" *ngIf="isOpenAdditionalFilters">
+      <div class="block__additional">
+        <div class="label">
+          Дополнительная
+        </div>
+        <p-multiSelect
+                [options]="additional"
+                [filter]="false"
+                [formControl]="filterForm.controls.additionalInfo"
+                display="chip"
+                placeholder="Выберите"
+                class="more-additional-info"
+        ></p-multiSelect>
       </div>
-<!--      <p-checkbox-->
-<!--              *ngFor="let option of additionalShort"-->
-<!--              [label]="option.label"-->
-<!--              [value]="option.value"-->
-<!--      ></p-checkbox>-->
-      <p-multiSelect
-              [options]="additional"
-              [filter]="false"
-              [formControl]="filterForm.controls.additionalInfo"
-              display="chip"
-              placeholder="ещё"
-              class="more-additional-info"
-      ></p-multiSelect>
-      <p-multiSelect
-              [options]="financial"
-              [filter]="false"
-              [formControl]="filterForm.controls.financialInfo"
-              display="chip"
-              placeholder="ещё"
-              class="more-additional-info"
-      ></p-multiSelect>
+      
+      <div class="block__financial">
+        <div class="label">
+          Финансовая
+        </div>
+        <p-multiSelect
+                [options]="financial"
+                [filter]="false"
+                [formControl]="filterForm.controls.financialInfo"
+                display="chip"
+                placeholder="Выберите"
+                class="more-additional-info"
+        ></p-multiSelect>
+      </div>
+    
     </div>
   </div>
 </form>
+<div class="open-close-additional-filters" (click)="isOpenAdditionalFilters = !isOpenAdditionalFilters">
+  Полный набор фильтров
+  <i class="pi pi-angle-down" *ngIf="!isOpenAdditionalFilters"></i>
+  <i class="pi pi-angle-up" *ngIf="isOpenAdditionalFilters"></i>
+</div>

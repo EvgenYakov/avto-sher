@@ -12,6 +12,10 @@
       flex-grow: 1;
     }
   }
+
+  .p-multiselect-header {
+    display: none;
+  }
 }
 
 .filter {
@@ -100,9 +104,5 @@
     @include media-l() {
       justify-content: center;
     }
-  }
-
-  &__button {
-    width: 100%;
   }
 }

@@ -1,11 +1,5 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
-import { Store } from '@ngrx/store';
-
-import { LocalStorageService } from '@services';
-import { LocalStorageKeys } from '@constants';
-import { getMe } from '@store';
 
 @Component( {
   selector: 'app-root',
@@ -15,15 +9,6 @@ import { getMe } from '@store';
   imports: [RouterOutlet],
   changeDetection: ChangeDetectionStrategy.OnPush,
 } )
-export class AppComponent implements OnInit {
-
-  private localStorage = inject( LocalStorageService );
-  private store = inject( Store );
-
-  ngOnInit(): void {
-    if(this.localStorage.getItemFromStorage( LocalStorageKeys.ACCESS_TOKEN )) {
-      this.store.dispatch( getMe() );
-    }
-  }
+export class AppComponent {
 
 }

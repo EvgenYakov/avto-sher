@@ -1,45 +1,41 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
-import { CarCard, FilterParams } from '@models';
+import { CarCard } from '@models';
+import { CarFilterParams } from '@components';
 
 import { CarsListState } from '../states';
 import {
-  filterCar,
-  filterCarFailure,
-  filterCarSuccess,
-  loadAllCarsSuccess,
+  loadCarsSuccess,
   loadModelsByBrandSuccess,
   loadMore,
-  loadUsedCarsBrandsSuccess
+  loadMoreSuccess,
+  loadUsedCarsBrandsSuccess,
+  setCarsFiltersParams
 } from '../actions';
 
 export const autoCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
 
 export const initialState: CarsListState = autoCardAdapter.getInitialState( {
-  filters: {} as FilterParams,
+  filters: {} as CarFilterParams,
   usedBrands: [],
   usedModels: [],
   page: 1,
-  limit: 12,
+  limit: 7,
   error: '',
 } );
 
 export const carsListReducer = createReducer(
   initialState,
-  on( loadAllCarsSuccess, (state, { cars }) => ({
+  on( loadCarsSuccess, (state, { cars }) => ({
     ...state,
-    ...autoCardAdapter.addMany( cars, state )
+    ...autoCardAdapter.setAll( cars, state )
   }) ),
-  on( filterCar, (state, { filterParams }) => ({
+  on( setCarsFiltersParams, (state, { params }) => ({
       ...state,
-      filters: filterParams
+      filters: params
     }
   ) ),
-  on( filterCarSuccess, (state, { filteredCars }) => ({
-    ...state,
-    ...autoCardAdapter.setAll( filteredCars, state )
-  }) ),
   on( loadUsedCarsBrandsSuccess, (state, { brands }) => ({
     ...state,
     usedBrands: brands
@@ -48,14 +44,14 @@ export const carsListReducer = createReducer(
     ...state,
     usedModels: models
   }) ),
-  on( filterCarFailure, (state, { errors }) => ({
-      ...state,
-      error: errors
-    }
-  ) ),
   on( loadMore, (state) => ({
       ...state,
       page: state.page + 1
+    }
+  ) ),
+  on( loadMoreSuccess, (state, { cars }) => ({
+      ...state,
+      ...autoCardAdapter.setMany( cars, state )
     }
   ) ),
 )

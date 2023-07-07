@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
 import { catchError, map, of, switchMap } from 'rxjs';
 
@@ -9,8 +10,14 @@ import { CarService } from '@services';
 import { CarProfile } from '@models';
 
 import { loadCar, loadCarFailure, loadCarSuccess } from '../actions';
-import { Store } from '@ngrx/store';
-import { loadAutoparkCars } from '../../autopark';
+import {
+  loadAutoparkCars,
+  loadAutoparkDetailed,
+  loadAutoparkDetailedFailure,
+  loadAutoparkDetailedSuccess
+} from '../../autopark';
+import { addLoading, removeLoading } from '../../shared';
+import { LoadingTypes } from '@constants';
 
 @Injectable()
 export class CarDetailedEffects {
@@ -48,4 +55,20 @@ export class CarDetailedEffects {
   //     of( deletePhotosFailure( { errors: error } ) )
   //   )
   // ) );
+
+  addLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( loadCar ),
+      map( () => addLoading( { addLoading: LoadingTypes.CAR_DETAILED } ) )
+    )
+  );
+
+  removeLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        loadCarSuccess,
+      ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.CAR_DETAILED } ) )
+    )
+  );
 }

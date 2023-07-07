@@ -1,17 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, map, Observable, Subject, takeUntil, throttleTime } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, take, takeUntil } from 'rxjs';
 
 import { ADDITIONAL_OPTIONS, FINANCIAL_OPTIONS, FUEL_OPTIONS, LoadingTypes, TRANSMISSION_OPTIONS } from '@constants';
 import { DropdownOption } from '@models';
 import { DropdownOptionsService } from '@services';
-import { loadModelsByBrand, loadUsedCarsBrands, selectCarBrands, selectCarModels, selectLoading } from '@store';
+import {
+  loadCars,
+  loadModelsByBrand,
+  loadUsedCarsBrands,
+  selectCarBrands,
+  selectCarModels,
+  selectCarsFilterParams,
+  selectLoading, setCarsFiltersParams
+} from '@store';
 
-import { FilterType } from './constant/filter-type.enum';
-import { CarFilterForm } from './models/sidenav-filter-form.interface';
-import { STATIC_DROPDOWNS } from './constant/static-dropdowns.constant';
+import { FilterType, STATIC_DROPDOWNS } from './constant';
+import { CarFilterForm, CarFilterParams } from './models';
 import { CAR_FILTER_DEPS } from './car-filter.dependencies';
 
 @Component( {
@@ -21,21 +28,22 @@ import { CAR_FILTER_DEPS } from './car-filter.dependencies';
   styleUrls: ['./car-filter.component.scss'],
   imports: [CAR_FILTER_DEPS],
 } )
-export class CarFilterComponent {
+export class CarFilterComponent implements OnInit, OnDestroy {
   @Input() filterType: FilterType;
 
   public readonly dropdowns = STATIC_DROPDOWNS;
   public readonly transmission = TRANSMISSION_OPTIONS;
   public readonly fuel = FUEL_OPTIONS;
-  // public readonly additionalShort = ADDITIONAL_OPTIONS.slice( 0, 2 );
   public readonly additional = ADDITIONAL_OPTIONS;
   public readonly financial = FINANCIAL_OPTIONS;
+
+  public filterForm: FormGroup<CarFilterForm>
+  public isOpenAdditionalFilters: boolean = false;
 
   public areModelsLoaded$: Observable<boolean>;
   public brands$: Observable<DropdownOption[]>;
   public models$: Observable<DropdownOption[]>;
 
-  public filterForm: FormGroup<CarFilterForm>
 
   private isModelDisabled$ = new BehaviorSubject( true );
   private destroy$ = new Subject<void>();
@@ -54,7 +62,7 @@ export class CarFilterComponent {
     this.filterForm.controls.brand.valueChanges.pipe(
       takeUntil( this.destroy$ )
     ).subscribe( (brand) => {
-      if(brand) {
+      if (brand) {
         this.store.dispatch( loadModelsByBrand( { brand } ) );
       } else {
         this.isModelDisabled$.next( true );
@@ -64,23 +72,25 @@ export class CarFilterComponent {
     this.modelDisabled();
 
     this.filterForm.valueChanges.pipe(
-      throttleTime( 1000 )
-    ).subscribe( (filterForm) => {
-      console.log( filterForm )
+    ).subscribe( () => {
+      const params = this.filterForm.value as CarFilterParams;
+
+      this.store.dispatch( setCarsFiltersParams( { params } ) );
+      this.store.dispatch( loadCars() );
     } )
   }
 
   private initializeForm(): FormGroup<CarFilterForm> {
     return new FormGroup<CarFilterForm>( <CarFilterForm>{
-      tariff: new FormControl(),
-      rentalPeriod: new FormControl(),
-      workSchedule: new FormControl(),
+      type: new FormControl(),
+      minRentPeriod: new FormControl(),
+      rentSchedule: new FormControl(),
       startPrice: new FormControl(),
       endPrice: new FormControl(),
       brand: new FormControl(),
       model: new FormControl(),
       transmission: new FormControl(),
-      fuelType: new FormControl(),
+      fuel: new FormControl(),
       additionalInfo: new FormControl(),
       financialInfo: new FormControl(),
     } );
@@ -88,17 +98,27 @@ export class CarFilterComponent {
 
   private getDataFromStore(): void {
     this.areModelsLoaded$ = this.store.select( selectLoading, { type: LoadingTypes.CAR_MODELS } );
+
     this.brands$ = this.store.select( selectCarBrands ).pipe(
       map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) )
     );
+
     this.models$ = this.store.select( selectCarModels ).pipe(
       map( (models) => {
-        if(models.length) {
+        if (models.length) {
           this.isModelDisabled$.next( false );
         }
         return this.dropdownOptionMapper.mapToDropdownOptions( models )
       } ),
     );
+
+    this.store.select( selectCarsFilterParams ).pipe(
+      take( 1 )
+    ).subscribe( (params: CarFilterParams) => {
+      if (params) {
+        this.filterForm.patchValue( { ...params} );
+      }
+    } );
   }
 
   private modelDisabled(): void {
@@ -115,7 +135,4 @@ export class CarFilterComponent {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  protected readonly FilterType = FilterType;
-  protected readonly ADDITIONAL_OPTIONS = ADDITIONAL_OPTIONS;
 }

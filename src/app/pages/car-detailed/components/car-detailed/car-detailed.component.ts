@@ -6,11 +6,11 @@ import { Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
-import { AppRoutes, MainRoutes } from '@constants';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { BreadcrumbService } from '@services';
-import { AutoparkDetailed, CarCard, CarProfile } from '@models';
-import { loadCar, selectAutoparkCars, selectAutoparkDetailed, selectCarProfile } from '@store';
-import { BonusComponent } from '@components';
+import { CarCard, CarProfile } from '@models';
+import { loadCar, selectAutoparkCars, selectCarProfile, selectLoading } from '@store';
+import { BonusComponent, SpinnerComponent } from '@components';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
@@ -22,14 +22,15 @@ import { AUTO_DETAILED_DEPS } from './car-detailed.dependencies';
   styleUrls: ['./car-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS, BonusComponent]
+  imports: [AUTO_DETAILED_DEPS, BonusComponent, SpinnerComponent]
 } )
 export class CarDetailedComponent implements OnInit, OnDestroy {
 
   public carProfile$: Observable<CarProfile>;
   public autoparkCars$: Observable<CarCard[]>;
+  public isLoading$: Observable<boolean>;
 
-  public responsiveOptions = RESPONSIVE_OPTIONS;
+  public readonly responsiveOptions = RESPONSIVE_OPTIONS;
 
   private destroy$ = new Subject<void>();
 
@@ -56,6 +57,7 @@ export class CarDetailedComponent implements OnInit, OnDestroy {
   }
 
   private getDataFromStore(): void {
+    this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.CAR_DETAILED } );
     this.carProfile$ = this.store.select( selectCarProfile );
     this.autoparkCars$ = this.store.select( selectAutoparkCars );
   }
