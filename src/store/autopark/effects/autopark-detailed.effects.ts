@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { catchError, combineLatest, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 
 import { AutoparkService, CarService } from '@services';
@@ -32,7 +32,7 @@ export class AutoparkDetailedEffects {
   ) {}
 
   public loadAutoparkDetailed$ = createEffect( () => this.actions$.pipe(
-    ofType( loadAutoparkDetailed, loadAutoparkCars ),
+    ofType( loadAutoparkDetailed ),
     withLatestFrom(
       this.store.select( selectAutoparkDetailed )
     ),
@@ -47,21 +47,8 @@ export class AutoparkDetailedEffects {
     withLatestFrom(
       this.store.select( selectAutoparkCarsPage )
     ),
-    switchMap( ([{ autoparkId }, page]) =>
-      combineLatest( [
-        this.carService.getAutoparkCars( autoparkId, page ),
-        this.store.select( selectAutoparkDetailed )
-      ] ).pipe(
-        map( ([cars, autopark]) => {
-          const carsWithAutoparkProperties = cars.map( (car) => ({
-            ...car,
-            autoparkName: autopark.title,
-            region: autopark.region
-          }) )
-          return loadAutoparkCarsSuccess( { cars: carsWithAutoparkProperties } )
-        } ),
-      )
-    ),
+    switchMap( ([{ autoparkId }, page]) => this.carService.getAutoparkCars( autoparkId, page ) ),
+    map( (cars) => loadAutoparkCarsSuccess( { cars } ) ),
     catchError( (error: HttpErrorResponse) => of( loadAutoparkCarsFailure( { errors: error } ) ) )
   ) );
 

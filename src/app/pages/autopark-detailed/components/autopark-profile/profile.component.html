@@ -1,0 +1,26 @@
+<div class="container profile">
+  <div class="bonus-system">
+    <div class="profile-title">
+      Бонусная система
+    </div>
+    <div class="bonus-system__list">
+      <app-bonus *ngFor="let bonus of autopark.bonuses" [bonus]="bonus" class="bonus"></app-bonus>
+    </div>
+  </div>
+  <div class="rental-conditions">
+    <div class="profile-title">
+      Условия аренды
+    </div>
+    <div class="rental-conditions__list">
+      <p *ngFor="let condition of autopark.rentalConditions">- {{condition}}</p>
+    </div>
+  </div>
+  <div class="map">
+    <div class="profile-title">
+      Как нас найти
+    </div>
+    <div class="map__address">
+      {{autopark.address}}
+    </div>
+  </div>
+</div>

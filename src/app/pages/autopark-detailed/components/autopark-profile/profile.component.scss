@@ -1,0 +1,35 @@
+@import "mixins";
+
+.profile {
+  @include flexMix(column, unset, unset, 35px);
+
+  .profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 18px;
+  }
+
+  .bonus-system {
+
+    &__list {
+      @include flexMix(row, flex-start, flex-start, 23px, wrap);
+
+      .bonus {
+        width: 340px;
+      }
+    }
+  }
+
+  .rental-conditions {
+    &__list > p {
+      margin-bottom: 15px;
+    }
+  }
+
+  .map {
+    &__address {
+      //width: 396px;
+      //height: 280px;
+    }
+  }
+}

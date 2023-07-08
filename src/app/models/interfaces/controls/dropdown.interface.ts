@@ -1,4 +1,5 @@
 export interface Dropdown {
+  label?: string;
   formControlName: string;
   placeholder: string;
   options: DropdownOption[];
@@ -6,5 +7,5 @@ export interface Dropdown {
 
 export interface DropdownOption {
   label: string;
-  value: string;
+  value: string | number;
 }

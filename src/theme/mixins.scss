@@ -1,9 +1,10 @@
-@mixin flexMix($direction: row, $align: center, $justify: center, $gap: 0) {
+@mixin flexMix($direction: row, $align: center, $justify: center, $gap: 0, $wrap: unset) {
   display: flex;
   flex-direction: $direction;
   align-items: $align;
   justify-content: $justify;
   gap: $gap;
+  flex-wrap: $wrap;
 }
 
 @mixin circle-logo-properties($width) {

@@ -4,6 +4,19 @@
 .footer {
   background-color: $dark-bg-color;
   color: var(--primary-color-text);
+  font-size: 14px;
+
+  &__contact-info {
+    margin-bottom: 25px;
+    color: #CED4DA;
+  }
+
+  &__mail {
+    @include flexMix(row, center, flex-start, 1rem);
+
+    margin-bottom: 40px;
+    color: #CED4DA;
+  }
 
   &__subtitle {
     @include media-xl() {
@@ -12,25 +25,25 @@
 
     margin-bottom: 1.5rem;
     text-transform: uppercase;
+
+    .logo {
+      margin-top: -0.7rem;
+
+      @include media-l() {
+        margin-top: 1rem;
+      }
+    }
   }
 
   &__menu {
-    @include flexMix(row, stretch, flex-start);
+    @include flexMix(row, flex-start, space-between, 0, wrap);
 
     padding: 3rem 0;
-    gap: 8rem;
 
-    @include media-xl() {
-      justify-content: space-between;
-      gap: 0;
+    @include media-s() {
+      gap: 2rem;
     }
 
-    @include media-l() {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 3rem;
-    }
   }
 
   &__list {
@@ -41,9 +54,6 @@
 
   &__list-row {
     @include flexMix(row, flex-start, flex-start, 10px);
-    @include media-l() {
-      justify-content: center;
-    }
   }
 
   &__link {

@@ -1,12 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { selectAuctionAutoparks, selectLoading, selectRegion } from '@store';
-import { AppRoutes, LoadingTypes, LocalStorageKeys, MainRoutes } from '@constants';
-import { LocalStorageService } from '@services';
+import { loadAuctionAutoparksByRegion, selectAuctionAutoparks, selectCurrentRegion, selectLoading } from '@store';
+import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { AuctionAutoparks } from '@models';
 
 import { START_PAGE_DEPS } from './start-page.dependencies';
@@ -19,23 +18,20 @@ import { START_PAGE_DEPS } from './start-page.dependencies';
   imports: [START_PAGE_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class StartPageComponent implements OnInit {
+export class StartPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
     private router: Router,
-    private localStorageService: LocalStorageService
   ) {}
 
   public auctionAutoparks$: Observable<AuctionAutoparks>;
   public isLoading$: Observable<boolean>;
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
     this.getDataFromStore();
-    if(this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION )) {
-      const region = this.localStorageService.getItemFromStorage( LocalStorageKeys.REGION );
-      this.store.dispatch( selectRegion( { region } ) )
-    }
   }
 
   public navigateToDetailed(autoparkId: number): void {
@@ -43,8 +39,17 @@ export class StartPageComponent implements OnInit {
   }
 
   private getDataFromStore(): void {
+    this.store.select( selectCurrentRegion ).pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (region) => {
+      this.store.dispatch( loadAuctionAutoparksByRegion( { regionName: region.name } ) )
+    } )
     this.auctionAutoparks$ = this.store.select( selectAuctionAutoparks );
     this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARKS } );
+  }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

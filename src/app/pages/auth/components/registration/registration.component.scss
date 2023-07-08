@@ -16,7 +16,7 @@
   }
 }
 
-.container {
+.registration {
   @include flexMix(column, none, none);
   height: 100%;
 
@@ -37,22 +37,27 @@
       margin-top: 0;
     }
 
-    margin-top: 2.188rem;
+    //margin-top: 2.188rem;
 
-    &__approval {
+
+    &__privacy, &__offer {
       @include flexMix(row, center, flex-start);
 
       font-size: 14px;
       line-height: 16px;
 
-      .text-block {
-        margin-left: 1.563rem;
-      }
-
-      .confidentiality {
+      .confidentiality, .offer {
         color: $link-color;
         cursor: pointer;
       }
+
+      .text-block {
+        margin-left: 1.563rem;
+      }
+    }
+
+    &__privacy {
+      margin-bottom: 0.5rem;
     }
 
     &__btns {
@@ -60,7 +65,7 @@
         margin-top: 1.5rem;
       }
       @include flexMix(row, center, space-between);
-      margin-top: 3.625rem;
+      margin-top: 2rem;
 
       .back-link {
         @include media-s() {

@@ -1,0 +1,17 @@
+<div class="cars container">
+  <div class="cars__filter">
+    <app-car-filter></app-car-filter>
+  </div>
+  
+  <ng-template #carsList>
+    <div class="cars__list">
+      <app-load-more (loadMoreClicked)="loadMore()">
+        <app-car-card *ngFor="let car of cars$|async" [car]="car" class="card"></app-car-card>
+      </app-load-more>
+    </div>
+  </ng-template>
+  
+  <app-spinner *ngIf="isLoading$ | async; else carsList"></app-spinner>
+
+</div>
+

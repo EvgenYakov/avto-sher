@@ -1,74 +1,111 @@
 import { Injectable } from '@angular/core';
 
+import { map, switchMap, withLatestFrom } from 'rxjs';
+
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
-import { CarService } from '@services';
+import { CarService, isObjectEmptyOrAllNull } from '@services';
+import { LoadingTypes } from '@constants';
+
 import {
-  filterCar,
-  filterCarFailure,
-  filterCarSuccess,
+  loadCars,
+  loadCarsSuccess,
   loadModelsByBrand,
-  loadModelsByBrandSuccess,
+  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
   loadUsedCarsBrands,
   loadUsedCarsBrandsSuccess
 } from '../actions';
-import { catchError, map, of, switchMap } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { addLoading, removeLoading } from '../../shared';
-import { LoadingTypes } from '@constants';
-import { loadAuctionAutoparksByRegionFailure, loadAuctionAutoparksByRegionSuccess } from '../../autopark';
+import { selectCarsFilterParams, selectCarsLimit, selectCarsPage } from '../selectors';
 
 @Injectable()
 export class CarListEffects {
   constructor(
     private actions$: Actions,
     private carService: CarService,
-    private store: Store
-  ) {
-  }
+    private store: Store,
+  ) {}
 
-  // public loadAllCars$ = createEffect( () => this.actions$.pipe(
-  //   ofType( loadAllCars ),
-  //   switchMap( () => this.carService.getListCars() ),
-  //   map( (cars) => loadAllCarsSuccess( { cars } ) ),
-  //   catchError( (error: HttpErrorResponse) => of( loadAllCarsFailure( { errors: error.error.message } ) ) )
-  // ) );
+  public loadAllCars$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( loadCars ),
+      withLatestFrom(
+        this.store.select( selectCarsPage ),
+        this.store.select( selectCarsLimit ),
+        this.store.select( selectCarsFilterParams ),
+      ),
+      switchMap( ([{ regionName }, page, limit, params]) => {
+        if (isObjectEmptyOrAllNull( params )) {
+          return this.carService.getAllCars( regionName, page, limit )
+        } else {
+          return this.carService.getCarsByFilter( params, regionName, page, limit )
+        }
+      } ),
+      map( (cars) => loadCarsSuccess( { cars } ) )
+    )
+  );
+
+  public loadMoreCars$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( loadMoreCars ),
+      withLatestFrom(
+        this.store.select( selectCarsPage ),
+        this.store.select( selectCarsLimit ),
+        this.store.select( selectCarsFilterParams ),
+      ),
+      switchMap( ([{ regionName }, page, limit, params]) => {
+        if (isObjectEmptyOrAllNull( params )) {
+          return this.carService.getAllCars( regionName, page, limit )
+        } else {
+          return this.carService.getCarsByFilter( params, regionName, page, limit )
+        }
+      } ),
+      map( (cars) => loadMoreCarsSuccess( { cars } ) )
+    )
+  );
 
   public getUsedBrands$ = createEffect( () => this.actions$.pipe(
     ofType( loadUsedCarsBrands ),
-    switchMap( () => this.carService.getCarsBrands() ),
+    switchMap( ({ regionName }) => this.carService.getCarsBrands( regionName ) ),
     map( (brands) => loadUsedCarsBrandsSuccess( { brands } ) ),
   ) );
 
   public getModelsByBrand$ = createEffect( () => this.actions$.pipe(
     ofType( loadModelsByBrand ),
-    switchMap( ({ brand }) => this.carService.getModelsByBrand( brand ) ),
+    switchMap( ({ regionName, brand }) => this.carService.getModelsByBrand( regionName, brand ) ),
     map( (models) => loadModelsByBrandSuccess( { models } ) ),
   ) );
 
-  public filteredCars$ = createEffect( () => this.actions$.pipe(
-    ofType( filterCar ),
-    switchMap( ({ filterParams }) => this.carService.getCarsByFilter( filterParams ) ),
-    map( (filteredCars) => filterCarSuccess( { filteredCars } ) ),
-    catchError( (error: HttpErrorResponse) => of( filterCarFailure( { errors: error.message } ) ) )
-  ) );
-
-  public addLoading$ = createEffect( () =>
+  public addModelsLoading$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(
-        loadModelsByBrand
-      ),
+      ofType( loadModelsByBrand ),
       map( () => addLoading( { addLoading: LoadingTypes.CAR_MODELS } ) )
     )
   );
 
-  public removeLoading$ = createEffect( () =>
+  public removeModelsLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( loadModelsByBrandSuccess, ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.CAR_MODELS } ) )
+    )
+  );
+
+  public addCarsListLoading$ = createEffect( () =>
     this.actions$.pipe(
       ofType(
-        loadModelsByBrandSuccess,
+        loadCars
       ),
-      map( () => removeLoading( { removeLoading: LoadingTypes.CAR_MODELS } ) )
+      map( () => addLoading( { addLoading: LoadingTypes.CARS_LIST } ) )
+    )
+  );
+
+  public removeCarsListLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        loadCarsSuccess,
+      ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.CARS_LIST } ) )
     )
   );
 

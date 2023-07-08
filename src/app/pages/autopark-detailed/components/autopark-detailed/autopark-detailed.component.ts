@@ -18,13 +18,15 @@ import {
 import { AutoparkDetailed, CarCard } from '@models';
 
 import { AUTOPARK_DETAILED_DEPS } from './autopark-detailed.dependencies';
+import { BonusComponent } from '../../../../components/bonus/bonus.component';
+import { ProfileComponent } from '../autopark-profile/profile.component';
 
 @Component( {
   selector: 'app-autopark-profile',
   templateUrl: './autopark-detailed.component.html',
   styleUrls: ['./autopark-detailed.component.scss'],
   standalone: true,
-  imports: [AUTOPARK_DETAILED_DEPS, JsonPipe],
+  imports: [AUTOPARK_DETAILED_DEPS, JsonPipe, BonusComponent, ProfileComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
 export class AutoparkDetailedComponent implements OnInit, OnDestroy {
