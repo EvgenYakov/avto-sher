@@ -1,0 +1,139 @@
+<ng-template #carDetailed>
+  <div class="auto container" *ngIf="(carProfile$ | async) as car">
+    
+    <div class="auto__flex-block">
+      
+      <div class="left">
+        <div class="gallery">
+          <p-galleria
+                  [value]="car.photos"
+                  [numVisible]="5"
+                  [responsiveOptions]="responsiveOptions"
+          >
+            <ng-template pTemplate="item" let-item>
+              <img [src]="item" class="gallery__img"/>
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+              <img [src]="item" class="gallery__thumbnail"/>
+            </ng-template>
+          </p-galleria>
+        </div>
+        <div class="rent-conditions">
+          <div class="title subtitle">
+            Условия аренды
+          </div>
+          <div class="list">
+            <div *ngFor="let item of car.autopark.rentalConditions" class="list__item">
+              – {{item}}
+            </div>
+          
+          </div>
+        </div>
+      </div>
+      
+      <div class="right">
+        <div class="content">
+          <div class="content__hat">
+            <div>
+              {{car.model}} {{car.brand}} <span class="year">{{car.yearOfRelease}}</span>
+            </div>
+            <div class="count">
+              <i class="pi pi-eye"></i>
+              <span>1200</span>
+            </div>
+          </div>
+          <div class="main-content">
+            <div class="content__characteristic">
+              <div class="row">
+                <div class="row__name">
+                  Мощность:
+                </div>
+                <div class="row__value">
+                  {{car.enginePower}} л.с.
+                </div>
+              </div>
+              <div class="row">
+                <div class="row__name">
+                  Коробка:
+                </div>
+                <div class="row__value">
+                  {{car.transmission}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="row__name">
+                  Топливо:
+                </div>
+                <div class="row__value">
+                  {{car.fuel}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="row__name">
+                  Тариф:
+                </div>
+                <div class="row__value">
+                  {{car.type}}
+                </div>
+              </div>
+            </div>
+            <div class="content__additional-info">
+              <ng-container *ngFor="let item of car.additionalInfo">
+                <div class="item">
+                  <i class="pi pi-check"></i>
+                  {{item}}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        
+        </div>
+        <div class="rent-card-profile">
+          <app-rent-card
+                  [price]="car.price"
+                  [financialInfo]="car.financialInfo"
+                  [btnTitle]="'Арендовать'"
+                  [schedule]="car.autopark.rentSchedule"
+          >
+            <p-button label="Оставить отзыв" styleClass="p-button-outlined"></p-button>
+          </app-rent-card>
+        </div>
+      </div>
+    
+    </div>
+    
+    <div class="address">
+      <div class="address__title subtitle">
+        Адрес автопарка
+      </div>
+      <div>
+        {{car.autopark.address}}
+      </div>
+    </div>
+    
+    <div class="bonuses">
+      <div class="bonuses__title subtitle">
+        Бонусная система
+      </div>
+      
+      <div class="bonuses__list">
+        <app-bonus
+                *ngFor="let bonus of car.autopark.bonuses"
+                [bonus]="bonus"
+                class="item"
+        ></app-bonus>
+      </div>
+    </div>
+    
+    <div class="cars-list">
+      <div class="cars-list__title">
+        Другие объявления автопарка
+      </div>
+      <app-load-more>
+        <app-car-card class="car-card" *ngFor="let car of autoparkCars$ | async" [car]="car"></app-car-card>
+      </app-load-more>
+    </div>
+  </div>
+</ng-template>
+
+<app-spinner *ngIf="isLoading$ | async; else carDetailed"></app-spinner>

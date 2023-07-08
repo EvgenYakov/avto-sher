@@ -1,10 +1,17 @@
 <div class="rent-card">
-  <div class="rent-card__price subtitle">
-    <span>{{ price }}</span> руб / сут
+  <div class="rent-card__hat">
+    <div class="rent-card__price subtitle">
+      <span>{{ price }}</span> руб / сут
+    </div>
+    
+    <div class="rent-card__schedule" *ngIf="schedule">
+      {{schedule}}
+    </div>
   </div>
   
+  
   <ul class="rent-card__list">
-    <li *ngFor="let info of combinedInfo" class="small-text">
+    <li *ngFor="let info of financialInfo" class="small-text">
       {{ info }}
     </li>
   </ul>

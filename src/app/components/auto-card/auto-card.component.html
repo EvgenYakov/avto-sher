@@ -1,4 +1,4 @@
-<div class="container auto-card" (click)="navigateToCarProfile(car.id)">
+<div class="auto-card" (click)="navigateToCarProfile(car.id)">
   
   <p-image [src]="car.photos[0]" alt="car image" [preview]="true" (click)="handleImageClick($event)"></p-image>
   
@@ -7,13 +7,13 @@
       <div class="subtitle">
         {{ car.brand }} {{car.model}} <span class="autopark-block__year">{{ car.yearOfRelease }}</span>
       </div>
-      <div class="autopark-block__title">Автопарк: {{ car.autoparkName }}</div>
-      <div class="autopark-block__location small-text" *ngIf="car.region">
+      <div class="autopark-block__title">Автопарк: {{ car.autopark.title }}</div>
+      <div class="autopark-block__location small-text" *ngIf="car.autopark.region as region">
         <i class="autopark-block__location-icon pi pi-map-marker"></i>
-        {{ car.region }}
+        {{ region }}
       </div>
     </div>
-    
+    Тариф: {{car.type}}
     <div class="characteristics-block">
       <div class="characteristics-block__label">
         Характеристики
@@ -49,13 +49,12 @@
         <ng-content></ng-content>
       </ng-template>
     </div>
-    
   </div>
   
   <div class="auto-card__rent">
     <app-rent-card
-            [additionalInfo]="car.additionalInfo"
             [financialInfo]="car.financialInfo"
+            [schedule]="car.autopark.rentSchedule"
             [price]="car.price"
             [btnTitle]="buttonLabel"
     ></app-rent-card>

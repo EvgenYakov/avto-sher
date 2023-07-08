@@ -1,0 +1,118 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+
+  //.p-calendar {
+  //  width: 182px;
+  //  height: 26px;
+  //
+  //  .p-inputtext {
+  //    height: 26px;
+  //  }
+  //}
+
+  .p-buttonset .p-button {
+    padding: 1rem;
+  }
+
+  .p-multiselect, .p-dropdown {
+    width: 266px;
+  }
+
+  .p-inputnumber-input {
+    width: 120px;
+  }
+
+  .p-multiselect-header {
+    display: none;
+  }
+
+  .more-additional-info {
+    .p-multiselect {
+      //width: 165px;
+    }
+  }
+}
+
+.filter .block:first-child {
+  @include flexMix(row, flex-start, space-between, 14px, wrap);
+
+  @include media-l() {
+    flex-direction: column;
+    flex-wrap: unset;
+  }
+
+  .dropdown:nth-child(3) {
+    order: 1;
+  }
+
+  max-width: 585px;
+}
+
+.filter .block:nth-child(2) {
+  @include flexMix(column, center, space-between, 14px);
+
+}
+
+.filter .block:nth-child(3) {
+  @include flexMix(column, stretch, center, 43px);
+}
+
+.filter .block:nth-child(4) {
+  @include flexMix(row, center, flex-start, 22px, wrap);
+}
+
+.filter {
+  @include flexMix(row, unset, unset, 0, wrap);
+
+  @include media-xl() {
+    justify-content: center;
+  }
+  @include media-l() {
+    justify-content: center;
+  }
+
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid #CED4DA;
+
+  .label {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .block {
+    padding: 1.25rem 1rem;
+  }
+
+  .price {
+    width: 266px;
+
+    &__range {
+      @include flexMix(row, center, space-between);
+    }
+  }
+
+}
+
+.dash {
+  width: 10px;
+  height: 1.5px;
+  background-color: black;
+}
+
+.open-close-additional-filters {
+  @include flexMix(row, center, flex-start, 10px);
+
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+
+  .pi {
+    color: var(--primary-color);
+  }
+}

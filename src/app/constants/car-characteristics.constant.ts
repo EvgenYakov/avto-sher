@@ -9,6 +9,17 @@ export enum CarTariff {
   DELIVERY = 'Доставка'
 }
 
+export enum Transmission {
+  MECHANICAL = 'Механика',
+  AUTOMATIC = 'Автомат',
+}
+
+export enum Fuel {
+  DIESEL = 'Дизель',
+  PETROL = 'Бензин',
+  GAS = 'Газ'
+}
+
 export const TARIFF_OPTIONS: DropdownOption[] = [
   { label: CarTariff.ECONOMY, value: CarTariff.ECONOMY },
   { label: CarTariff.COMFORT, value: CarTariff.COMFORT },
@@ -17,6 +28,32 @@ export const TARIFF_OPTIONS: DropdownOption[] = [
   { label: CarTariff.MINIVAN, value: CarTariff.MINIVAN },
   { label: CarTariff.DELIVERY, value: CarTariff.DELIVERY },
 ];
+
+export const FUEL_OPTIONS: DropdownOption[] = [
+  { label: Fuel.PETROL, value: Fuel.PETROL },
+  { label: Fuel.DIESEL, value: Fuel.DIESEL },
+  { label: Fuel.GAS, value: Fuel.GAS },
+];
+
+export const TRANSMISSION_OPTIONS: DropdownOption[] = [
+  { label: Transmission.MECHANICAL, value: 'Механическая' },
+  { label: Transmission.AUTOMATIC, value: 'Автоматическая' },
+];
+
+export const ADDITIONAL_OPTIONS: DropdownOption[] = [
+  { label: 'Фирменная оклейка', value: 'Фирменная оклейка' },
+  { label: 'Желтые номера', value: 'Желтые номера' },
+  { label: 'Детское кресло', value: 'Детское кресло' },
+  { label: 'Разрешено работать инвалидам', value: 'Разрешено работать инвалидам' },
+  { label: 'Разрешено межгород', value: 'Разрешено межгород' },
+];
+
+export const FINANCIAL_OPTIONS: DropdownOption[] = [
+  { label: 'Без комиссии', value: 'Без комиссии' },
+  { label: 'Без залога', value: 'Без залога' },
+  { label: 'С возможностью выкупа', value: 'С возможностью выкупа' },
+];
+
 
 export enum RequestStatus {
   AVAILABLE = 'Доступна',
@@ -30,15 +67,15 @@ export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
   { label: RequestStatus.WAITING, value: RequestStatus.WAITING },
 ]
 
-export enum Transmission {
-  MECHANICAL = 'Механическая',
-  AUTOMATIC = 'Автоматическая',
-  ROBOTIC = 'Роботизированная',
-  VARIABLE = 'Вариативная'
-}
+export const MIN_RENTAL_PERIOD_OPTIONS: DropdownOption[] = [
+  { label: 'От 1 дня', value: 1},
+  { label: 'От 7 дня', value: 7},
+  { label: 'От 14 дня', value: 14},
+  { label: 'От 30 дня', value: 30},
+]
 
-export enum Fuel {
-  DIESEL = 'Дизель',
-  PETROL = 'Бензин',
-  ELECTRO = 'Электро'
-}
+export const WORK_SCHEDULE_OPTIONS: DropdownOption[] = [
+  {label: '5/2', value:'5/2'},
+  {label: '6/1', value:'6/1'},
+  {label: '7/0', value:'7/0'},
+]

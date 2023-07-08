@@ -1,33 +1,40 @@
 import { createReducer, on } from '@ngrx/store';
 import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
-import { CarCard, FilterParams } from '@models';
+import { CarCard } from '@models';
+import { CarFilterParams } from '@components';
 
 import { CarsListState } from '../states';
 import {
-  filterCarFailure,
-  filterCarSuccess,
+  loadCars,
+  loadCarsSuccess,
+  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
   loadUsedCarsBrandsSuccess,
-  loadModelsByBrandSuccess
+  setCarsFiltersParams
 } from '../actions';
 
 export const autoCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
 
 export const initialState: CarsListState = autoCardAdapter.getInitialState( {
-  filters: {} as FilterParams,
+  filters: {} as CarFilterParams,
   usedBrands: [],
   usedModels: [],
-  allCarsPage: 1,
-  allCarsLimit: 20,
+  page: 1,
+  limit: 7,
   error: '',
 } );
 
 export const carsListReducer = createReducer(
   initialState,
-  on( filterCarSuccess, (state, { filteredCars }) => ({
+  on( loadCarsSuccess, (state, { cars }) => ({
     ...state,
-    ...autoCardAdapter.setAll( filteredCars, state )
+    ...autoCardAdapter.setAll( cars, state ),
   }) ),
+  on( setCarsFiltersParams, (state, { params }) => ({
+      ...state,
+      filters: params
+    }
+  ) ),
   on( loadUsedCarsBrandsSuccess, (state, { brands }) => ({
     ...state,
     usedBrands: brands
@@ -36,9 +43,14 @@ export const carsListReducer = createReducer(
     ...state,
     usedModels: models
   }) ),
-  on( filterCarFailure, (state, action) => ({
+  on( loadMoreCars, (state) => ({
       ...state,
-      error: action.errors
+      page: state.page + 1
+    }
+  ) ),
+  on( loadMoreCarsSuccess, (state, { cars }) => ({
+      ...state,
+      ...autoCardAdapter.setMany( cars, state )
     }
   ) ),
 )

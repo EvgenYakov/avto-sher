@@ -45,18 +45,9 @@ export const INFO_COLUMN: MenuItem[] = [
     label: 'Вакансии',
     routerLink: AppRoutes.JOB,
   },
-  {
-    label: 'Команда сайта',
-    routerLink: AppRoutes.TEAM,
-  },
 ];
 
 export const SOCIAL_NETWORK: { icon: string, hoverIcon: string, link: string }[] = [
-  {
-    icon: 'assets/icons/social-network/OK.svg',
-    hoverIcon: 'assets/icons/social-network/OKH.svg',
-    link: 'https://m.ok.ru/group/70000002667676?__dp=y'
-  },
   {
     icon: 'assets/icons/social-network/TG.svg',
     hoverIcon: 'assets/icons/social-network/TGH.svg',
@@ -66,6 +57,11 @@ export const SOCIAL_NETWORK: { icon: string, hoverIcon: string, link: string }[]
     icon: 'assets/icons/social-network/VK.svg',
     hoverIcon: 'assets/icons/social-network/VKH.svg',
     link: 'https://vk.com/public214842462'
+  },
+  {
+    icon: 'assets/icons/social-network/OK.svg',
+    hoverIcon: 'assets/icons/social-network/OKH.svg',
+    link: 'https://m.ok.ru/group/70000002667676?__dp=y'
   },
   {
     icon: 'assets/icons/social-network/Zen.svg',

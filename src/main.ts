@@ -22,6 +22,7 @@ import { ApplyTokenInterceptor, AuthGuard } from '@services';
 
 import { AppComponent } from './app/app.component';
 import { appRoutes } from './app/app.routes'
+import { RegionEffects } from './store/region/region.effects';
 
 bootstrapApplication( AppComponent, {
   providers: [
@@ -39,7 +40,8 @@ bootstrapApplication( AppComponent, {
       CarDetailedEffects,
       AutoparkDetailedEffects,
       AutoparksEffects,
-      UserEffects
+      UserEffects,
+      RegionEffects
     ] ) ),
     AuthGuard,
     {
