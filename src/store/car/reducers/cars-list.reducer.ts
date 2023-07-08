@@ -6,10 +6,9 @@ import { CarFilterParams } from '@components';
 
 import { CarsListState } from '../states';
 import {
+  loadCars,
   loadCarsSuccess,
-  loadModelsByBrandSuccess,
-  loadMore,
-  loadMoreSuccess,
+  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
   loadUsedCarsBrandsSuccess,
   setCarsFiltersParams
 } from '../actions';
@@ -29,7 +28,7 @@ export const carsListReducer = createReducer(
   initialState,
   on( loadCarsSuccess, (state, { cars }) => ({
     ...state,
-    ...autoCardAdapter.setAll( cars, state )
+    ...autoCardAdapter.setAll( cars, state ),
   }) ),
   on( setCarsFiltersParams, (state, { params }) => ({
       ...state,
@@ -44,12 +43,12 @@ export const carsListReducer = createReducer(
     ...state,
     usedModels: models
   }) ),
-  on( loadMore, (state) => ({
+  on( loadMoreCars, (state) => ({
       ...state,
       page: state.page + 1
     }
   ) ),
-  on( loadMoreSuccess, (state, { cars }) => ({
+  on( loadMoreCarsSuccess, (state, { cars }) => ({
       ...state,
       ...autoCardAdapter.setMany( cars, state )
     }

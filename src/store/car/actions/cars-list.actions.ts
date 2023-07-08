@@ -25,11 +25,12 @@ export enum CarsListActions {
   LOAD_MORE_SUCCESS = '[CARS LIST] Load more cars success',
 }
 
-export const loadMore = createAction(
+export const loadMoreCars = createAction(
   CarsListActions.LOAD_MORE,
+  props<{regionName: string}>()
 );
 
-export const loadMoreSuccess = createAction(
+export const loadMoreCarsSuccess = createAction(
   CarsListActions.LOAD_MORE_SUCCESS,
   props<{ cars: CarCard[] }>()
 );
@@ -41,6 +42,7 @@ export const setCarsFiltersParams = createAction(
 
 export const loadCars = createAction(
   CarsListActions.LOAD_CARS,
+  props<{regionName: string}>()
 );
 
 export const loadCarsSuccess = createAction(
@@ -82,6 +84,7 @@ export const loadCarsSuccess = createAction(
 
 export const loadUsedCarsBrands = createAction(
   CarsListActions.LOAD_USED_BRANDS,
+  props<{regionName: string}>()
 );
 
 export const loadUsedCarsBrandsSuccess = createAction(
@@ -91,7 +94,7 @@ export const loadUsedCarsBrandsSuccess = createAction(
 
 export const loadModelsByBrand = createAction(
   CarsListActions.LOAD_USED_MODELS,
-  props<{ brand: string }>()
+  props<{ regionName: string, brand: string }>()
 );
 
 export const loadModelsByBrandSuccess = createAction(

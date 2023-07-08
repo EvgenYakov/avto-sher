@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, map, Observable, Subject, take, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, switchMap, take, takeUntil } from 'rxjs';
 
 import { ADDITIONAL_OPTIONS, FINANCIAL_OPTIONS, FUEL_OPTIONS, LoadingTypes, TRANSMISSION_OPTIONS } from '@constants';
 import { DropdownOption } from '@models';
@@ -14,7 +14,9 @@ import {
   selectCarBrands,
   selectCarModels,
   selectCarsFilterParams,
-  selectLoading, setCarsFiltersParams
+  selectCurrentRegion,
+  selectLoading,
+  setCarsFiltersParams
 } from '@store';
 
 import { FilterType, STATIC_DROPDOWNS } from './constant';
@@ -54,30 +56,58 @@ export class CarFilterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch( loadUsedCarsBrands() );
-
     this.filterForm = this.initializeForm();
+
     this.getDataFromStore();
-
-    this.filterForm.controls.brand.valueChanges.pipe(
-      takeUntil( this.destroy$ )
-    ).subscribe( (brand) => {
-      if (brand) {
-        this.store.dispatch( loadModelsByBrand( { brand } ) );
-      } else {
-        this.isModelDisabled$.next( true );
-      }
-    } );
-
+    this.initializeModels();
     this.modelDisabled();
 
     this.filterForm.valueChanges.pipe(
+      takeUntil( this.destroy$ )
     ).subscribe( () => {
       const params = this.filterForm.value as CarFilterParams;
 
-      this.store.dispatch( setCarsFiltersParams( { params } ) );
-      this.store.dispatch( loadCars() );
+      const filteredParams: CarFilterParams = {
+        startPrice: params.startPrice,
+        endPrice: params.endPrice,
+        type: params.type?.length === 0 ? null : params.type,
+        brand: params.brand,
+        model: params.model,
+        fuel: params.fuel?.length === 0 ? null : params.fuel,
+        transmission: params.transmission?.length === 0 ? null : params.transmission,
+        additionalInfo: params.additionalInfo?.length === 0 ? null : params.additionalInfo,
+        financialInfo: params.financialInfo?.length === 0 ? null : params.financialInfo,
+        minRentPeriod: params.minRentPeriod,
+        rentSchedule: params.rentSchedule?.length === 0 ? null : params.rentSchedule,
+      };
+
+      this.store.dispatch( setCarsFiltersParams( { params: filteredParams } ) );
+
+      this.store.select( selectCurrentRegion ).pipe(
+        takeUntil( this.destroy$ )
+      ).subscribe( (region) => {
+        this.store.dispatch( loadCars( { regionName: region.name } ) );
+      } );
     } )
+  }
+
+  private initializeModels(): void {
+    this.filterForm.controls.brand.valueChanges.pipe(
+      switchMap( (brand) =>
+        this.store.select( selectCurrentRegion ).pipe(
+          takeUntil( this.destroy$ ),
+          map( (region) => ({ regionName: region.name, brand }) )
+        )
+      ),
+      takeUntil( this.destroy$ )
+    ).subscribe( ({ regionName, brand }) => {
+      if (!brand) {
+        this.isModelDisabled$.next( true );
+        this.filterForm.controls.model.reset();
+        return;
+      }
+      this.store.dispatch( loadModelsByBrand( { regionName, brand } ) );
+    } );
   }
 
   private initializeForm(): FormGroup<CarFilterForm> {
@@ -99,6 +129,12 @@ export class CarFilterComponent implements OnInit, OnDestroy {
   private getDataFromStore(): void {
     this.areModelsLoaded$ = this.store.select( selectLoading, { type: LoadingTypes.CAR_MODELS } );
 
+    this.store.select( selectCurrentRegion ).pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (region) => {
+      this.store.dispatch( loadUsedCarsBrands( { regionName: region.name } ) );
+    } );
+
     this.brands$ = this.store.select( selectCarBrands ).pipe(
       map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) )
     );
@@ -116,7 +152,7 @@ export class CarFilterComponent implements OnInit, OnDestroy {
       take( 1 )
     ).subscribe( (params: CarFilterParams) => {
       if (params) {
-        this.filterForm.patchValue( { ...params} );
+        this.filterForm.patchValue( { ...params } );
       }
     } );
   }

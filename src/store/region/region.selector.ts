@@ -4,7 +4,7 @@ import { RegionState } from './region.state';
 
 const regionFeatureSelector = createFeatureSelector<RegionState>('region');
 
-export const selectRegion = createSelector(
+export const selectCurrentRegion = createSelector(
   regionFeatureSelector,
   (state: RegionState) => state.currentRegion
 )
