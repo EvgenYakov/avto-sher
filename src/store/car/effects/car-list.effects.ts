@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { map, skip, switchMap, withLatestFrom } from 'rxjs';
+import { map, switchMap, withLatestFrom } from 'rxjs';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,15 +12,12 @@ import {
   loadCars,
   loadCarsSuccess,
   loadModelsByBrand,
-  loadModelsByBrandSuccess,
-  loadMore,
-  loadMoreSuccess,
+  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
   loadUsedCarsBrands,
   loadUsedCarsBrandsSuccess
 } from '../actions';
 import { addLoading, removeLoading } from '../../shared';
 import { selectCarsFilterParams, selectCarsLimit, selectCarsPage } from '../selectors';
-import { selectRegion, setCurrentRegion } from '../../region';
 
 @Injectable()
 export class CarListEffects {
@@ -32,65 +29,64 @@ export class CarListEffects {
 
   public loadAllCars$ = createEffect( () =>
     this.actions$.pipe(
-      ofType( loadCars, loadMore ),
+      ofType( loadCars ),
       withLatestFrom(
         this.store.select( selectCarsPage ),
         this.store.select( selectCarsLimit ),
         this.store.select( selectCarsFilterParams ),
-        this.store.select( selectRegion )
       ),
-      switchMap( ([action, page, limit, params, region]) => {
-        const isLoadMoreAction = action.type === loadMore.type;
-
+      switchMap( ([{ regionName }, page, limit, params]) => {
         if (isObjectEmptyOrAllNull( params )) {
-          return this.carService.getAllCars( region.name, page, limit ).pipe(
-            map( cars => ({ cars, isLoadMoreAction }) )
-          );
+          return this.carService.getAllCars( regionName, page, limit )
         } else {
-          return this.carService.getCarsByFilter( params, region.name, page, limit ).pipe(
-            map( cars => ({ cars, isLoadMoreAction }) )
-          );
+          return this.carService.getCarsByFilter( params, regionName, page, limit )
         }
       } ),
-      map( ({ cars, isLoadMoreAction }) =>
-        isLoadMoreAction ? loadMoreSuccess( { cars } ) : loadCarsSuccess( { cars } )
-      )
+      map( (cars) => loadCarsSuccess( { cars } ) )
+    )
+  );
+
+  public loadMoreCars$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( loadMoreCars ),
+      withLatestFrom(
+        this.store.select( selectCarsPage ),
+        this.store.select( selectCarsLimit ),
+        this.store.select( selectCarsFilterParams ),
+      ),
+      switchMap( ([{ regionName }, page, limit, params]) => {
+        if (isObjectEmptyOrAllNull( params )) {
+          return this.carService.getAllCars( regionName, page, limit )
+        } else {
+          return this.carService.getCarsByFilter( params, regionName, page, limit )
+        }
+      } ),
+      map( (cars) => loadMoreCarsSuccess( { cars } ) )
     )
   );
 
   public getUsedBrands$ = createEffect( () => this.actions$.pipe(
-    ofType( loadUsedCarsBrands, setCurrentRegion ),
-    withLatestFrom(
-      this.store.select( selectRegion )
-    ),
-    skip( 1 ),
-    switchMap( ([_, region]) => this.carService.getCarsBrands( region.name ) ),
+    ofType( loadUsedCarsBrands ),
+    switchMap( ({ regionName }) => this.carService.getCarsBrands( regionName ) ),
     map( (brands) => loadUsedCarsBrandsSuccess( { brands } ) ),
   ) );
 
   public getModelsByBrand$ = createEffect( () => this.actions$.pipe(
     ofType( loadModelsByBrand ),
-    withLatestFrom(
-      this.store.select( selectRegion )
-    ),
-    switchMap( ([{ brand }, region]) => this.carService.getModelsByBrand( region.name, brand ) ),
+    switchMap( ({ regionName, brand }) => this.carService.getModelsByBrand( regionName, brand ) ),
     map( (models) => loadModelsByBrandSuccess( { models } ) ),
   ) );
 
   public addModelsLoading$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(
-        loadModelsByBrand
-      ),
+      ofType( loadModelsByBrand ),
       map( () => addLoading( { addLoading: LoadingTypes.CAR_MODELS } ) )
     )
   );
 
   public removeModelsLoading$ = createEffect( () =>
     this.actions$.pipe(
-      ofType(
-        loadModelsByBrandSuccess,
-      ),
+      ofType( loadModelsByBrandSuccess, ),
       map( () => removeLoading( { removeLoading: LoadingTypes.CAR_MODELS } ) )
     )
   );

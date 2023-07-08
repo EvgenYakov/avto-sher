@@ -14,7 +14,6 @@ import { BaseService } from '../helpers';
 export class CarService extends BaseService {
 
   public getAllCars(region: string, page: number, limit: number): Observable<CarCard[]> {
-    console.log('Все машины по региону ', region)
     return this.httpService.get<CarCard[]>( `${ environment.apiUrl }/cars`, {
       params: {
         page,
@@ -34,8 +33,6 @@ export class CarService extends BaseService {
   }
 
   public getCarsByFilter(filterParams: CarFilterParams, region: string, page: number, limit: number): Observable<CarCard[]> {
-    console.log('Все фильтер машины по региону ', region)
-
     return this.httpService.post<CarCard[]>( `${ environment.apiUrl }/cars/filter`, filterParams, {
       params: {
         page,

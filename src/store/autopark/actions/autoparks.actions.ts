@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { AuctionAutoparks, Region } from '@models';
+import { AuctionAutoparks } from '@models';
 
 export enum AutoparksActions {
   LOAD_AUCTION_AUTOPARKS = '[AUCTION] Load auction autoparks',
@@ -9,6 +9,7 @@ export enum AutoparksActions {
 
 export const loadAuctionAutoparksByRegion = createAction(
   AutoparksActions.LOAD_AUCTION_AUTOPARKS,
+  props<{ regionName: string }>()
 );
 
 export const loadAuctionAutoparksByRegionSuccess = createAction(

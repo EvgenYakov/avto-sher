@@ -1,18 +1,15 @@
 import { FormControl } from '@angular/forms';
 
 export interface CarFilterForm {
-  // dateStart?: FormControl<string>;
-  // dateFinish?: FormControl<string>;
-  // requestStatuses?: FormControl<string[]>;
-  type: FormControl<string[]>;
+  type: FormControl<string[] | null>;
   minRentPeriod: FormControl<number>;
-  rentSchedule: FormControl<string[]>;
+  rentSchedule: FormControl<string[] | null>;
   brand: FormControl<string>;
   model: FormControl<string>;
-  transmission: FormControl<string[]>;
-  fuel: FormControl<string[]>;
-  additionalInfo: FormControl<string[]>;
-  financialInfo: FormControl<string[]>;
+  transmission: FormControl<string[] | null>;
+  fuel: FormControl<string[] | null>;
+  additionalInfo: FormControl<string[] | null>;
+  financialInfo: FormControl<string[] | null>;
   startPrice: FormControl<number>;
   endPrice: FormControl<number>;
 }
@@ -20,13 +17,13 @@ export interface CarFilterForm {
 export interface CarFilterParams {
   startPrice: number;
   endPrice: number;
-  type: string[];
+  type: string[] | null;
   brand: string;
   model: string;
-  fuel: string[];
-  transmission: string[];
-  additionalInfo: string[];
-  financialInfo: string[];
+  fuel: string[] | null;
+  transmission: string[] | null;
+  additionalInfo: string[] | null;
+  financialInfo: string[] | null;
   minRentPeriod: number;
-  rentSchedule: string[];
+  rentSchedule: string[] | null;
 }

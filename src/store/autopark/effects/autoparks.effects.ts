@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 
-import { map, skip, switchMap, withLatestFrom } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 
 import { AutoparkService } from '@services';
 import { LoadingTypes } from '@constants';
 
 import { loadAuctionAutoparksByRegion, loadAuctionAutoparksByRegionSuccess, } from '../actions';
 import { addLoading, removeLoading } from '../../shared';
-import { selectRegion, setCurrentRegion } from '../../region';
 
 @Injectable()
 export class AutoparksEffects {
@@ -18,19 +16,12 @@ export class AutoparksEffects {
   constructor(
     private actions$: Actions,
     private autoparkService: AutoparkService,
-    private store: Store
   ) {}
 
 
   public loadAuctionAutoparksByRegion = createEffect( () => this.actions$.pipe(
-    ofType( loadAuctionAutoparksByRegion, setCurrentRegion ),
-    withLatestFrom(
-      this.store.select( selectRegion )
-    ),
-    skip(1),
-    switchMap( ([_, region]) =>
-      this.autoparkService.getAuctionAutoparksByRegion( region.name )
-    ),
+    ofType( loadAuctionAutoparksByRegion ),
+    switchMap( ({ regionName }) => this.autoparkService.getAuctionAutoparksByRegion( regionName ) ),
     map( (auctionAutoparks) => loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } ) ),
   ) );
 

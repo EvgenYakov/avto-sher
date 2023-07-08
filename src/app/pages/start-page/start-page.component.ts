@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { loadAuctionAutoparksByRegion, selectAuctionAutoparks, selectLoading, selectRegion } from '@store';
+import { loadAuctionAutoparksByRegion, selectAuctionAutoparks, selectCurrentRegion, selectLoading } from '@store';
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { AuctionAutoparks } from '@models';
 
@@ -18,7 +18,7 @@ import { START_PAGE_DEPS } from './start-page.dependencies';
   imports: [START_PAGE_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush
 } )
-export class StartPageComponent implements OnInit {
+export class StartPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store,
@@ -28,8 +28,9 @@ export class StartPageComponent implements OnInit {
   public auctionAutoparks$: Observable<AuctionAutoparks>;
   public isLoading$: Observable<boolean>;
 
+  private destroy$ = new Subject<void>();
+
   ngOnInit(): void {
-    this.store.dispatch(loadAuctionAutoparksByRegion())
     this.getDataFromStore();
   }
 
@@ -38,7 +39,17 @@ export class StartPageComponent implements OnInit {
   }
 
   private getDataFromStore(): void {
+    this.store.select( selectCurrentRegion ).pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (region) => {
+      this.store.dispatch( loadAuctionAutoparksByRegion( { regionName: region.name } ) )
+    } )
     this.auctionAutoparks$ = this.store.select( selectAuctionAutoparks );
     this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARKS } );
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

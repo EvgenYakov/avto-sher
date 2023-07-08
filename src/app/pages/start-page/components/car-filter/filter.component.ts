@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { BehaviorSubject, map, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 
 import { Dropdown, DropdownOption, FilterForm } from '@models';
 import { ADDITIONAL_OPTIONS, AppRoutes, FINANCIAL_OPTIONS, LoadingTypes, TARIFF_OPTIONS } from '@constants';
@@ -13,23 +13,24 @@ import {
   loadUsedCarsBrands,
   selectCarBrands,
   selectCarModels,
+  selectCurrentRegion,
   selectLoading,
   setCarsFiltersParams
 } from '@store';
 
 import { STATIC_DROPDOWNS } from '../../constants/dropdowns.constant';
-import { CAR_FILTER_DEPS } from './car-filter.dependencies';
+import { CAR_FILTER_DEPS } from './filter.dependencies';
 import { CarFilterParams } from '@components';
 import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component( {
   selector: 'app-car-filter',
   standalone: true,
-  templateUrl: './car-filter.component.html',
-  styleUrls: ['./car-filter.component.scss'],
+  templateUrl: './filter.component.html',
+  styleUrls: ['./filter.component.scss'],
   imports: [CAR_FILTER_DEPS, MultiSelectModule],
 } )
-export class CarFilterComponent implements OnInit, OnDestroy {
+export class FilterComponent implements OnInit, OnDestroy {
 
   public readonly staticDropdowns: Dropdown[] = STATIC_DROPDOWNS;
   public readonly tariffOptions: DropdownOption[] = TARIFF_OPTIONS;
@@ -53,21 +54,9 @@ export class CarFilterComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch( loadUsedCarsBrands() );
-
     this.filterForm = this.initializeForm();
     this.getDataFromStore();
-
-    this.filterForm.controls.brand.valueChanges.pipe(
-      takeUntil( this.destroy$ )
-    ).subscribe( (brand) => {
-      if (brand) {
-        this.store.dispatch( loadModelsByBrand( { brand } ) );
-      } else {
-        this.isModelDisabled$.next( true );
-      }
-    } );
-
+    this.initializeModels();
     this.modelDisabled();
   }
 
@@ -78,15 +67,40 @@ export class CarFilterComponent implements OnInit, OnDestroy {
     this.store.dispatch( setCarsFiltersParams( {
       params: {
         ...filterParams,
-        fuel: filterParams.fuel,
-        type: filterParams.type,
-        transmission: filterParams.transmission,
+        // fuel: filterParams.fuel,
+        // type: filterParams.type,
+        // transmission: filterParams.transmission,
       }
     } ) );
   }
 
+  private initializeModels(): void {
+    this.filterForm.controls.brand.valueChanges.pipe(
+      switchMap( (brand) =>
+        this.store.select( selectCurrentRegion ).pipe(
+          takeUntil( this.destroy$ ),
+          map( (region) => ({ regionName: region.name, brand }) )
+        )
+      ),
+      takeUntil( this.destroy$ )
+    ).subscribe( ({ regionName, brand }) => {
+      if (!brand) {
+        this.isModelDisabled$.next( true );
+        this.filterForm.controls.model.reset();
+        return;
+      }
+      this.store.dispatch( loadModelsByBrand( { regionName, brand } ) );
+    } );
+  }
+
   private getDataFromStore(): void {
     this.areModelsLoaded$ = this.store.select( selectLoading, { type: LoadingTypes.CAR_MODELS } );
+
+    this.store.select( selectCurrentRegion ).pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (region) => {
+      this.store.dispatch( loadUsedCarsBrands( { regionName: region.name } ) );
+    } );
 
     this.brands$ = this.store.select( selectCarBrands ).pipe(
       map( (brands) => this.dropdownOptionMapper.mapToDropdownOptions( brands ) )
