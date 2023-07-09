@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { ToasterType } from '@constants';
 
 export enum ToasterActions {
   ADD_BE_ERROR = '[TOASTER] Add BE error message'
@@ -6,5 +7,5 @@ export enum ToasterActions {
 
 export const addBeErrorMessage = createAction(
   ToasterActions.ADD_BE_ERROR,
-  props<{detail: string}>()
+  props<{ severity: ToasterType; detail: string }>()
 )

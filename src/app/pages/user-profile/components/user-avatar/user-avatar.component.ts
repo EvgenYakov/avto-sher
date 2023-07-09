@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { Observable } from 'rxjs';
+
+import { SpinnerComponent } from '@components';
 
 @Component( {
   selector: 'app-user-avatar',
@@ -8,25 +12,24 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./user-avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, ReactiveFormsModule]
+  imports: [NgIf, ReactiveFormsModule, SpinnerComponent, AsyncPipe]
 } )
 export class UserAvatarComponent {
   @Input() public avatarPath: string;
   @Input() public maxFileSize = 1024 * 1024;
-  @Input() public allowedExtensions = ['png', 'jpeg', 'jpg', 'svg'];
+  @Input() public allowedExtensions = ['png', 'jpeg', 'jpg', 'webp'];
+  @Input() isLoading: Observable<boolean>;
 
   @Output() public fileValidationErrors = new EventEmitter<string>();
   @Output() public avatarSelected = new EventEmitter<File>();
   @Output() public avatarDeleted = new EventEmitter<void>();
 
-  public showControls: boolean = false;
-
   public onFileSelect(event: any) {
-    if(event.target.files.length > 0) {
+    if (event.target.files.length > 0) {
       const file = event.target.files[0];
 
       const validationErrors = this.validateFile( file );
-      if(validationErrors.length > 0) {
+      if (validationErrors.length > 0) {
         this.fileValidationErrors.emit( validationErrors );
       } else {
         this.avatarSelected.emit( file );
@@ -42,8 +45,8 @@ export class UserAvatarComponent {
     const maxSize = this.maxFileSize;
     const allowedExtensions = this.allowedExtensions;
 
-    return !this.isFileSizeValid(file, maxSize) ? 'maxSize' :
-      !this.isFileExtensionValid(file, allowedExtensions) ? 'extension' :
+    return !this.isFileSizeValid( file, maxSize ) ? 'maxSize' :
+      !this.isFileExtensionValid( file, allowedExtensions ) ? 'extension' :
         '';
   }
 

@@ -5,5 +5,8 @@ const toasterFeatureSelector = createFeatureSelector<ToasterState>( 'toaster' );
 
 export const selectBeError = createSelector(
   toasterFeatureSelector,
-  (state) => state.detail
-)
+  (state: ToasterState) => ({
+    message: state.detail,
+    severity: state.severity
+  })
+);

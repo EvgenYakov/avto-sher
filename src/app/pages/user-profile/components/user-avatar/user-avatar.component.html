@@ -1,19 +1,23 @@
 <div class="avatar">
-  <div *ngIf="avatarPath; else addPhoto">
-    <img [src]="avatarPath" class="avatar__img" alt="user avatar"/>
-    <img src="assets/icons/camera.png" class="avatar__change" alt="camera icon">
-    <div class="avatar__controls">
-      <span class="avatar__control link" (click)="fileInput.click()">Изменить</span>
-      <span class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
+  <ng-template #avatar>
+    <div *ngIf="avatarPath; else addPhoto">
+      <img [src]="avatarPath" class="avatar__img" alt="user avatar"/>
+      <img src="assets/icons/camera.png" class="avatar__change" alt="camera icon">
+      <div class="avatar__controls">
+        <span class="avatar__control link" (click)="fileInput.click()">Изменить</span>
+        <span class="avatar__control link" (click)="deleteAvatar()">Удалить</span>
+      </div>
     </div>
-  </div>
-
-  <ng-template #addPhoto>
-    <div class="avatar__upload link" (click)="fileInput.click()">
-      <i class="pi pi-camera avatar__upload-icon"></i>
-      <span class="avatar__upload-text">Добавить</span>
-    </div>
+    
+    <ng-template #addPhoto>
+      <div class="avatar__upload link" (click)="fileInput.click()">
+        <i class="pi pi-camera avatar__upload-icon"></i>
+        <span class="avatar__upload-text">Добавить</span>
+      </div>
+    </ng-template>
   </ng-template>
-
+  
+  <app-spinner *ngIf="isLoading|async; else avatar"></app-spinner>
+  
   <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)" [accept]="'image/*'">
 </div>

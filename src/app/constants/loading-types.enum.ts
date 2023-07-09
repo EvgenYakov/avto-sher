@@ -6,5 +6,6 @@ export enum LoadingTypes {
   AUTOPARK_DETAILED = 'autopark',
   REVIEWS_LIST = 'reviews',
   PROFILE = 'profile',
+  USER_AVATAR = 'user-avatar',
   CAR_MODELS = 'models'
 }

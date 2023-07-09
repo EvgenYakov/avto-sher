@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { getMe, loadRegions, selectBeError } from '@store';
 
 import { MAIN_DEPS } from './main.dependencies';
-import { LocalStorageKeys } from '@constants';
+import { LocalStorageKeys, ToasterType } from '@constants';
 import { LocalStorageService } from '@services';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -42,8 +42,21 @@ export class MainComponent implements OnInit, OnDestroy {
   private getDataFromStore(): void {
     this.store.select( selectBeError ).pipe(
 
-    ).subscribe( (detail) => {
-      this.messageService.add( { severity: 'error', summary: 'Error', detail: detail } );
+    ).subscribe( ({ message, severity }) => {
+      switch (severity) {
+        case ToasterType.ERROR:
+          this.messageService.add( { severity: 'error', summary: 'Error', detail: message } );
+          break;
+        case ToasterType.INFO:
+          this.messageService.add( { severity: 'info', summary: 'Info', detail: message } );
+          break;
+        case ToasterType.WARN:
+          this.messageService.add( { severity: 'warn', summary: 'Warn', detail: message } );
+          break;
+        case ToasterType.SUCCESS:
+          this.messageService.add( { severity: 'success', summary: 'Success', detail: message } );
+          break;
+      }
     } )
   }
 
