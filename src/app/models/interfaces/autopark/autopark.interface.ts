@@ -13,6 +13,8 @@ export interface AutoparkDetailed {
   createdAt: Date;
   address: string;
   rentalConditions: string[];
+  rentSchedule: string;
+  minRentPeriod: string;
   bonuses: AutoparkBonus[];
 }
 

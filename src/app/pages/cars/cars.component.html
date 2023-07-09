@@ -5,7 +5,7 @@
   
   <ng-template #carsList>
     <div class="cars__list">
-      <app-load-more (loadMoreClicked)="loadMore()">
+      <app-load-more (loadMoreClicked)="loadMore()" [isShowBtn]="isLoadMore$">
         <app-car-card *ngFor="let car of cars$|async" [car]="car" class="card"></app-car-card>
       </app-load-more>
     </div>

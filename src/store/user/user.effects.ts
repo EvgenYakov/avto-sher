@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
-import { LoadingTypes } from '@constants';
+import { LoadingTypes, ToasterType } from '@constants';
 import { UserService } from '@services';
 
 import {
@@ -19,9 +19,12 @@ import {
   changeProfileDescriptionSuccess,
   deleteProfileAvatar,
   deleteProfileAvatarFailure,
-  deleteProfileAvatarSuccess, getMe, getMeFailure, getMeSuccess
+  deleteProfileAvatarSuccess,
+  getMe,
+  getMeFailure,
+  getMeSuccess
 } from './user.actions';
-import { addLoading, removeLoading } from '../shared';
+import { addBeErrorMessage, addLoading, removeLoading } from '../shared';
 
 @Injectable()
 export class UserEffects {
@@ -29,34 +32,36 @@ export class UserEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private userService: UserService
+    private userService: UserService,
   ) {}
 
   public changeProfileDescription$ = createEffect( () => this.actions$.pipe(
     ofType( changeProfileDescription ),
     switchMap( ({ info }) => this.userService.changeUserProfileDescription( info ) ),
     map( (description) => changeProfileDescriptionSuccess( { info: description } ) ),
-    catchError( (error: HttpErrorResponse) =>
-      of( changeProfileDescriptionFailure( { errors: error.error.message } ) )
-    )
+    catchError( (error: HttpErrorResponse) => of( changeProfileDescriptionFailure( { errors: error.error.message } ) ) )
   ) );
 
   public changeProfileAvatar$ = createEffect( () => this.actions$.pipe(
     ofType( changeProfileAvatar ),
-    switchMap( ({ newAvatar }) => this.userService.changeUserAvatar( newAvatar ) ),
-    map( (response) => changeProfileAvatarSuccess( { avatar: response } ) ),
-    catchError( (error: HttpErrorResponse) =>
-      of( changeProfileAvatarFailure( { errors: error.error.message } ) )
-    )
+    switchMap( ({ newAvatar }) => this.userService.changeUserAvatar( newAvatar ).pipe(
+      map( (response) => changeProfileAvatarSuccess( { avatar: response } ) ),
+      catchError( (error: HttpErrorResponse) => {
+        this.store.dispatch( addBeErrorMessage( { detail: error.error.message, severity: ToasterType.WARN } ) );
+        return of( changeProfileAvatarFailure( { errors: error.error.message } ) )
+      } )
+    ) ),
   ) );
 
   public deleteProfileAvatar$ = createEffect( () => this.actions$.pipe(
     ofType( deleteProfileAvatar ),
-    switchMap( () => this.userService.deleteUserAvatar() ),
-    map( () => deleteProfileAvatarSuccess() ),
-    catchError( (error: HttpErrorResponse) =>
-      of( deleteProfileAvatarFailure( { errors: error.error.message } ) )
-    )
+    switchMap( () => this.userService.deleteUserAvatar().pipe(
+      map( () => deleteProfileAvatarSuccess() ),
+      catchError( (error: HttpErrorResponse) => {
+        this.store.dispatch( addBeErrorMessage( { detail: error.error.message, severity: ToasterType.ERROR } ) );
+        return of( deleteProfileAvatarFailure( { errors: error.error.message } ) )
+      } )
+    ) ),
   ) );
 
   addLoading$ = createEffect( () =>
@@ -73,6 +78,23 @@ export class UserEffects {
         getMeFailure,
       ),
       map( () => removeLoading( { removeLoading: LoadingTypes.PROFILE } ) )
+    )
+  );
+
+  addUserAvatarLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType( changeProfileAvatar ),
+      map( () => addLoading( { addLoading: LoadingTypes.USER_AVATAR } ) )
+    )
+  );
+
+  removeUserAvatarLoading$ = createEffect( () =>
+    this.actions$.pipe(
+      ofType(
+        changeProfileAvatarSuccess,
+        changeProfileAvatarFailure,
+      ),
+      map( () => removeLoading( { removeLoading: LoadingTypes.USER_AVATAR } ) )
     )
   );
 }

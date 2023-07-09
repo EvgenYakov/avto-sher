@@ -2,7 +2,7 @@
   <div class="card-list__content">
     <ng-content></ng-content>
   </div>
-  <div class="card-list__btn">
+  <div class="card-list__btn" *ngIf="isShowBtn | async">
     <p-button [label]="btnLabel"
               (click)="loadMore()"
               styleClass="p-button-outlined"

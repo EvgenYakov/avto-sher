@@ -11,8 +11,20 @@
     <div class="profile-title">
       Условия аренды
     </div>
-    <div class="rental-conditions__list">
-      <p *ngFor="let condition of autopark.rentalConditions">- {{condition}}</p>
+    <div class="list">
+      <ul *ngFor="let item of autopark.rentalConditions" class="list__item">
+        <li>
+          – {{item}}
+        </li>
+      </ul>
+      <ul>
+        <li class="list__item">
+          – Аренда от {{autopark.minRentPeriod}} дней
+        </li>
+        <li class="list__item" *rentSchedule="autopark.rentSchedule; let scheduleText">
+          – График аренды {{autopark.rentSchedule}} ({{ scheduleText }})
+        </li>
+      </ul>
     </div>
   </div>
   <div class="map">
