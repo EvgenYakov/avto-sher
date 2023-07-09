@@ -2,24 +2,26 @@
 @import "colors";
 
 .hat-wrapper {
-  @include flexMix(row, flex-start, space-between);
+  @include flexMix(row, flex-start, space-between, 2rem);
+
   @include media-l() {
+    height: fit-content;
     align-items: center;
     flex-direction: column;
   }
 
   width: 100%;
-  min-height: 15.625rem;
-  gap: 3vw;
+  height: 15.625rem;
   padding: 1.438rem;
   border-radius: 14px;
   background: linear-gradient(180deg, #000000 0%, #CA1B1B 100%);
 
   .logo-wrapper {
     @include media-xl() {
-      height: 11.875rem;
+      width: unset;
     }
 
+    position: relative;
     height: 13.125rem;
     width: 13.125rem;
 
@@ -29,48 +31,58 @@
       object-fit: cover;
       border-radius: 10px;
     }
+
+    .absolute-wrap {
+      position: absolute;
+      width: 100%;
+    }
+
+    &-ispremium {
+      @include flexMix(row, center, center, 10px);
+
+      height: 28px;
+      width: 100%;
+      border-radius: 10px 10px 0 0;
+      background-color: #000000;
+      color: #ffc107
+    }
   }
 
   .info {
     @include flexMix(column, flex-start, flex-start);
+
     @include media-l() {
       align-items: center;
     }
 
-    &__status {
-      @include flexMix(row, center, flex-start);
-
-      height: 1.75rem;
-      width: fit-content;
-      padding: 0 1.25rem;
-      border-radius: 3px;
-      background: $dark-bg-color;
-
-      .icon {
-        height: 1rem;
-        width: 1.25rem;
-        margin-right: 3px;
-
-        img {
-          height: inherit;
-          width: inherit;
-        }
-      }
-
-      .status-label {
-        font-size: 14px;
-      }
-    }
+    height: 100%;
 
     &__name {
       @include media-xl() {
         font-size: 24px;
       }
+      @include media-s() {
+        text-align: center;
+      }
 
-      margin-top: 1rem;
-      margin-bottom: 3.625rem;
+      margin-bottom: 5px;
       word-wrap: break-word;
       color: var(--surface-a)
+    }
+
+    &__address {
+      margin-bottom: 0.5rem;
+      color: var(--surface-a);
+    }
+
+    &__description {
+      @include media-l() {
+        margin-bottom: 1.5rem;
+      }
+
+      color: #7E7E7E;
+      width: 70%;
+      margin-bottom: auto;
     }
 
     &__sub-panel {

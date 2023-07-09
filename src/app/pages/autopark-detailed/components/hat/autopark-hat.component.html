@@ -1,32 +1,31 @@
 <div class="hat-wrapper" *ngIf="hatData">
   <div class="logo-wrapper">
+    <div class="absolute-wrap">
+      <div class="logo-wrapper-ispremium" *ngIf="hatData.isPremium">
+        <div class="icon">
+          <img src="assets/icons/autopark-status/premium.svg" alt="иконка премиум автопарка">
+        </div>
+        <div class="status-label">
+          <span>Премиум автопарк</span>
+        </div>
+      </div>
+    </div>
+ 
     <img [src]="hatData.logo" alt="автопарк logo">
   </div>
   <div class="info">
-    <!--    <div class="info__status" [ngStyle]="{'color':hatData.status.color}">-->
-    <!--      <div class="icon">-->
-    <!--        <img [src]="hatData.status.icon" alt="иконка статуса автопарка">-->
-    <!--      </div>-->
-    <!--      <div class="status-label">-->
-    <!--        <span>{{hatData.status.label | titlecase}} автопарк</span>-->
-    <!--      </div>-->
-    <!--    </div>-->
     <div class="info__name title">
       {{hatData.title}}
     </div>
+    <div class="info__address">
+      <i class="pi pi-map-marker"></i>
+      {{hatData.region}}, {{hatData.address}}
+    </div>
+    <div class="info__description">
+      {{hatData.description}}
+    </div>
     <div class="info__sub-panel">
-      <app-sub-info-panel class="panel"
-                          [title]="hatData.carsCount+''"
-                          subtitle="Автомобилей"
-      ></app-sub-info-panel>
-      <app-sub-info-panel class="panel"
-                          [title]="hatData.rating + ' / 5'"
-                          subtitle="Рейтинг автопарка"
-      ></app-sub-info-panel>
-      <app-sub-info-panel class="panel"
-                          [title]="hatData.ordersCount+''"
-                          subtitle="Выполненных заказов"
-      ></app-sub-info-panel>
+      <app-sub-info-panel class="panel" *ngFor="let item of hatDataItems" [hatDataItem]="item"></app-sub-info-panel>
     </div>
   </div>
   <div class="favorite">

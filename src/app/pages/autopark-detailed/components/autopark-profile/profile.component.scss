@@ -21,8 +21,11 @@
   }
 
   .rental-conditions {
-    &__list > p {
-      margin-bottom: 15px;
+    .list {
+      &__item {
+        margin-top: 0.938rem;
+        color: var(--text-color-secondary)
+      }
     }
   }
 
