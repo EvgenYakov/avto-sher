@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, } from '@angular
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MenuItem } from 'primeng/api';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 
@@ -35,6 +35,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   public userProfile$ = this.store.select( selectUserProfile );
   public isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.PROFILE } );
+  public isChangingAvatarLoading$: Observable<boolean> = this.store.select( selectLoading, { type: LoadingTypes.USER_AVATAR } );
 
   public fileValidationsMsg: string = '';
 

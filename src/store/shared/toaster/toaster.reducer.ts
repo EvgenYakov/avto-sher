@@ -11,9 +11,9 @@ const initialState: ToasterState = {
 
 export const toasterReducer = createReducer(
   initialState,
-  on( addBeErrorMessage, (state, { detail }) => ({
+  on( addBeErrorMessage, (state, action) => ({
     ...state,
-    detail,
-    severity: ToasterType.ERROR
+    detail: action.detail,
+    severity: action.severity
   }) ),
 );

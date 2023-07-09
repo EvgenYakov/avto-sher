@@ -11,6 +11,7 @@ import { BreadcrumbService } from '@services';
 import { CarCard, CarProfile } from '@models';
 import { loadCar, selectAutoparkCars, selectCarProfile, selectLoading } from '@store';
 import { BonusComponent, SpinnerComponent } from '@components';
+import { RentScheduleDirective } from '@directives';
 
 
 import { RESPONSIVE_OPTIONS } from '../../constants';
@@ -22,7 +23,7 @@ import { AUTO_DETAILED_DEPS } from './car-detailed.dependencies';
   styleUrls: ['./car-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS, BonusComponent, SpinnerComponent]
+  imports: [AUTO_DETAILED_DEPS, BonusComponent, SpinnerComponent, RentScheduleDirective]
 } )
 export class CarDetailedComponent implements OnInit, OnDestroy {
 
