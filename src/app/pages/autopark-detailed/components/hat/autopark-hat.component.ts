@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { AutoparkDetailed } from '@models';
+
 import { AUTOPARK_HAT_DEPS } from './autopark-hat.dependencies';
+import { HatDataItem } from '../../models/hat-data-item.interface';
 
 @Component( {
   selector: 'app-autopark-hat',
@@ -12,6 +14,29 @@ import { AUTOPARK_HAT_DEPS } from './autopark-hat.dependencies';
   imports: [AUTOPARK_HAT_DEPS],
 } )
 export class AutoparkHatComponent {
-  @Input() hatData: AutoparkDetailed;
+  private _hatData: AutoparkDetailed;
+  hatDataItems: HatDataItem[] = [];
+
+  @Input()
+  set hatData(value: AutoparkDetailed) {
+    this._hatData = value;
+    this.hatDataItems = this.transformHatData();
+  }
+
+  get hatData(): AutoparkDetailed {
+    return this._hatData;
+  }
+
+  private transformHatData(): HatDataItem[] {
+    if (!this._hatData) {
+      return [];
+    }
+
+    return [
+      { title: `${this._hatData.carsCount}`, subtitle: 'Автомобилей' },
+      { title: `${this._hatData.rating} / 5`, subtitle: 'Рейтинг автопарка' },
+      { title: `${this._hatData.ordersCount}`, subtitle: 'Выполненных заказов' }
+    ];
+  }
 
 }

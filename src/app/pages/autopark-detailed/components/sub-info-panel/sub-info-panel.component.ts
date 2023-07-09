@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { HatDataItem } from '../../models/hat-data-item.interface';
 
 @Component( {
   selector: 'app-sub-info-panel',
@@ -8,6 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   standalone: true
 } )
 export class SubInfoPanelComponent {
-  @Input() title: string;
-  @Input() subtitle: string;
+  @Input() hatDataItem: HatDataItem;
 }
