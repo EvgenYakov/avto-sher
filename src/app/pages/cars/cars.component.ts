@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 
 import { Store } from '@ngrx/store';
@@ -23,6 +23,8 @@ export class CarsComponent implements OnInit, OnDestroy {
 
   public cars$: Observable<CarCard[]>;
   public isLoading$: Observable<boolean>;
+
+  public isLoadMore$ = new BehaviorSubject( true );
 
   private destroy$ = new Subject<void>();
 
@@ -53,7 +55,9 @@ export class CarsComponent implements OnInit, OnDestroy {
   }
 
   private getDataFromStore(): void {
+
     this.cars$ = this.store.select( getCarsEntities );
+
     this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.CARS_LIST } );
 
     this.getCars();
