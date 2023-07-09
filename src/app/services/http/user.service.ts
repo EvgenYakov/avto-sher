@@ -18,7 +18,7 @@ export class UserService extends BaseService {
       map( (response: UserProfile) => {
         return <UserProfile>{
           ...response,
-          avatar: response.avatar + '?' + new Date().getTime(),
+          avatar: response.avatar ? response.avatar + '?' + new Date().getTime() : '',
           requestsCounter: 4,
           ordersCounter: 10,
           reviewsAboutUserCounter: 0,

@@ -5,14 +5,15 @@
     <div class="profile__grid" *ngIf="(userProfile$|async) as userProfile">
       <p-card class="user-card">
         <div class="card profile__user-card">
-          <app-user-avatar
-                  [avatarPath]="userProfile.avatar"
-                  (fileValidationErrors)="handleFileValidationErrors($event)"
-                  (avatarSelected)="handleAvatarSelected($event)"
-                  (avatarDeleted)="handleAvatarDeleted()"
-                  class="card__avatar"
-          ></app-user-avatar>
-
+            <app-user-avatar
+                    [avatarPath]="userProfile.avatar"
+                    (fileValidationErrors)="handleFileValidationErrors($event)"
+                    (avatarSelected)="handleAvatarSelected($event)"
+                    (avatarDeleted)="handleAvatarDeleted()"
+                    [isLoading]="isChangingAvatarLoading$"
+                    class="card__avatar"
+            ></app-user-avatar>
+      
           <div class="card__info">
             <div class="card__header">
               <div class="subtitle">
