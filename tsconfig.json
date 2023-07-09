@@ -23,6 +23,7 @@
     "lib": ["ES2022", "dom"],
     "paths": {
       "@components": ["./src/app/components/index"],
+      "@directives": ["./src/app/directives/index"],
       "@constants": ["./src/app/constants/index"],
       "@pages": ["./src/app/pages/index"],
       "@models": ["./src/app/models/index"],
