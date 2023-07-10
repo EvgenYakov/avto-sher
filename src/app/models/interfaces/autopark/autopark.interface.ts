@@ -1,12 +1,15 @@
-export interface AutoparkDetailed {
+export interface AutoparkCard {
   id: number;
   title: string;
   logo: string;
   rating: number;
   isPremium: boolean;
-  isFavorite: boolean;
   region: string;
   carsCount: number;
+}
+
+export interface AutoparkDetailed extends AutoparkCard {
+  isFavorite: boolean;
   ordersCount: number;
   description: string;
   backgroundImage: string;

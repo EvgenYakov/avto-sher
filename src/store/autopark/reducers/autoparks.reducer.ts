@@ -1,19 +1,30 @@
 import { createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
-import { AuctionAutoparks } from '@models';
+import { AuctionAutoparks, AutoparkCard } from '@models';
 
 import { AutoparksState } from '../states';
-import { loadAuctionAutoparksByRegionSuccess } from '../actions';
+import { loadAuctionAutoparksByRegionSuccess, loadAutoparksSuccess } from '../actions';
 
 
-const initialState: AutoparksState = {
-  auctionAutoparksCard: {} as AuctionAutoparks
-}
+export const autoparkCardAdapter: EntityAdapter<AutoparkCard> = createEntityAdapter<AutoparkCard>( {} );
+
+
+const initialState: AutoparksState = autoparkCardAdapter.getInitialState( {
+    auctionAutoparksCard: {} as AuctionAutoparks,
+    filters: [],
+    page: 1,
+    limit: 10
+  } )
 
 export const autoparksReducer = createReducer(
   initialState,
   on( loadAuctionAutoparksByRegionSuccess, (state, { auctionAutoparks }) => ({
     ...state,
     auctionAutoparksCard: auctionAutoparks
+  }) ),
+  on( loadAutoparksSuccess, (state, { autoparks }) => ({
+    ...state,
+    ...autoparkCardAdapter.setAll( autoparks, state ),
   }) ),
 )
