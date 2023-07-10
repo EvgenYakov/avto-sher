@@ -1,0 +1,5 @@
+@import "mixins";
+
+.autoparks {
+  @include flexMix(column, unset, unset, 20px);
+}
