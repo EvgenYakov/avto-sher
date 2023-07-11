@@ -28,6 +28,8 @@ export enum MainRoutes {
   MY_REQUESTS = 'cars-requests'
 }
 
-export enum AutoparkControlPanel {
-  CARS_TABLE = 'cars'
+export enum ControlPanel {
+  AUTOPARK_CONTROL = 'autopark-control',
+  CREATE_CAR = 'create-car',
+  CARS_TABLE = 'cars',
 }

@@ -1,4 +1,5 @@
 import { SidebarConfig } from '../models/sidebar-config.interface';
+import { AppRoutes, ControlPanel } from '@constants';
 
 export const SIDEBAR_CONFIG: SidebarConfig[] = [
   {
@@ -23,7 +24,7 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Машины',
-        link: ''
+        link: AppRoutes.AUTOPARK_PANEL+'/'+ControlPanel.AUTOPARK_CONTROL + '/'+ControlPanel.CARS_TABLE
       },
       {
         title: 'Верификация',

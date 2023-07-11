@@ -25,9 +25,9 @@ export const appRoutes: Routes = [
   {
     path: 'offer-agreement', component: OfferAgreementComponent
   },
-  { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
-  {
-    path: AppRoutes.NOT_FOUND_PAGE,
-    loadChildren: () => import('./pages/not-found/not-found.routes')
-  },
+  // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
+  // {
+  //   path: AppRoutes.NOT_FOUND_PAGE,
+  //   loadChildren: () => import('./pages/not-found/not-found.routes')
+  // },
 ];
