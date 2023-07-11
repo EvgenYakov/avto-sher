@@ -1,0 +1,50 @@
+@import "mixins";
+@import "colors";
+
+$nav-panel-width: 88px;
+
+:host ::ng-deep {
+  .p-sidebar-left {
+    left: $nav-panel-width;
+  }
+
+  .p-sidebar .p-sidebar-header {
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  .p-sidebar .p-sidebar-content {
+    height: 100%;
+  }
+}
+
+.control-panel {
+  width: 100%;
+  height: 100%;
+
+  .item {
+    margin-bottom: 11px;
+
+    a {
+      color: #C0BFBE;
+      text-decoration: none;
+    }
+  }
+
+  &__side-navigation {
+    @include flexMix(column, center, flex-start);
+
+    width: $nav-panel-width;
+    height: 100%;
+    padding-top: 26px;
+    border: 1px solid #CED4DA;
+
+    .item {
+      margin-bottom: 1rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

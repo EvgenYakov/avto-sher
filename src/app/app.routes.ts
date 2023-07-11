@@ -12,6 +12,10 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./pages/main/main.routes')
   },
   {
+    path: AppRoutes.AUTOPARK_PANEL,
+    loadChildren: () => import('./pages/control-panel/control-panel.routes')
+  },
+  {
     path: AppRoutes.AUTH,
     loadChildren: () => import('./pages/auth/auth.routes')
   },
@@ -20,10 +24,10 @@ export const appRoutes: Routes = [
   },
   {
     path: 'offer-agreement', component: OfferAgreementComponent
-  }
-  // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
-  // {
-  //   path: AppRoutes.NOT_FOUND_PAGE,
-  //   loadChildren: () => import('./pages/not-found/not-found.routes')
-  // },
+  },
+  { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
+  {
+    path: AppRoutes.NOT_FOUND_PAGE,
+    loadChildren: () => import('./pages/not-found/not-found.routes')
+  },
 ];

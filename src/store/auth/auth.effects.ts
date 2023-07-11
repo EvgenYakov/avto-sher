@@ -56,14 +56,16 @@ export class AuthEffects {
 
   public registerRequest$ = createEffect( () => this.actions$.pipe(
     ofType( registerRequest ),
-    switchMap( ({ registerDto }) => this.authService.registration( registerDto ) ),
-    map( (authResponse) => {
-      this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
-      return registerRequestSuccess( { authResponse } )
-    } ),
-    catchError( (error: HttpErrorResponse) =>
-      of( registerRequestFailure( { backendErrors: error.error.message } ) )
-    )
+    switchMap( ({ registerDto }) => this.authService.registration( registerDto ).pipe(
+      map( (authResponse) => {
+        this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
+        return registerRequestSuccess( { authResponse } )
+      } ),
+      catchError( (error: HttpErrorResponse) =>
+        of( registerRequestFailure( { backendErrors: error.error.message } ) )
+      )
+    ) ),
+
   ) );
 
   public getMe = createEffect( () => this.actions$.pipe(
@@ -108,7 +110,7 @@ export class AuthEffects {
 
   public navigate$ = createEffect( () => this.actions$.pipe(
       ofType( loginRequestSuccess, registerRequestSuccess ),
-      tap( () => this.router.navigate( [AppRoutes.MAIN] ) )
+      tap( () => this.router.navigate( [AppRoutes.AUTOPARK_PANEL] ) )
     ),
     { dispatch: false }
   );

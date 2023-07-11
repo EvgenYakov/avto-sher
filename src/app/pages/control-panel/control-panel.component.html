@@ -1,0 +1,28 @@
+<div class="control-panel">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">
+      <ng-container *ngIf="selectedIconIndex !== null">
+        {{ sidebarConfig[selectedIconIndex].headerLabel }}
+      </ng-container>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <ng-container *ngIf="selectedIconIndex !== null">
+        <ul class="list">
+          <li *ngFor="let item of sidebarConfig[selectedIconIndex].content" class="item">
+            <a [href]="item.link">{{ item.title }}</a>
+          </li>
+        </ul>
+      </ng-container>
+    </ng-template>
+  </p-sidebar>
+  <div class="control-panel__side-navigation">
+    <ul>
+      <li class="item" *ngFor="let config of sidebarConfig; let i = index" (click)="selectIcon(i)">
+        <img [src]="config.icon" alt="Иконка">
+      </li>
+    </ul>
+  </div>
+  <div class="control-panel__layouts">
+    <router-outlet></router-outlet>
+  </div>
+</div>
