@@ -17,6 +17,7 @@ export class AuthService extends BaseService {
   }
 
   public registration(registerDto: RegisterDto): Observable<AuthResponse> {
+    console.log(registerDto)
     return this.httpService.post<AuthResponse>( `${ environment.apiUrl }/auth/sign-up`, registerDto, { withCredentials: true } );
   }
 

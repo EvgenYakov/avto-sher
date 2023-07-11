@@ -1,6 +1,7 @@
 export enum AppRoutes {
   MAIN = 'main',
   AUTH = 'auth',
+  AUTOPARK_PANEL = 'autopark-panel',
   NOT_FOUND_PAGE = 'not_found',
   RULES = '/rules',
   CARS = 'cars',
@@ -17,4 +18,16 @@ export enum AppRoutes {
   CONDITIONS = '/conditions',
   TEAM = '/team',
   JOB = '/job',
+}
+
+export enum MainRoutes {
+  USER_PROFILE = 'profile',
+  AUTOPARK_DETAILED = 'autopark',
+  AUTO_DETAILED = 'auto',
+  ORDER_HISTORY = 'history',
+  MY_REQUESTS = 'cars-requests'
+}
+
+export enum AutoparkControlPanel {
+  CARS_TABLE = 'cars'
 }

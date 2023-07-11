@@ -69,6 +69,7 @@ export class RegistrationComponent implements OnInit {
 
   public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
     this.checkbox = false;
+    this.activeIndex = index;
 
     if(index === 0) {
       this.registerForm.controls.phoneNumber.addValidators( [Validators.required] );

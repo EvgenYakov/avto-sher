@@ -10,7 +10,7 @@
           
           <app-text-input
                   class="field"
-                  placeholder="Фамилия Имя Отчество"
+                  [placeholder]="activeIndex === 0 ? 'Фамилия Имя Отчество' : 'ФИО Представителя'"
                   [errorsMap]="requiredField"
                   [formControl]="registerForm.controls.fullName"
           ></app-text-input>
