@@ -1,0 +1,185 @@
+@import "mixins";
+@import "colors";
+
+:host ::ng-deep {
+  .p-inputtext, p-inputNumber,
+  .p-inputnumber, .p-dropdown, .p-multiselect {
+    width: 100%;
+  }
+
+  .options {
+    p-inputNumber, .p-inputnumber {
+      width: 5.75rem;
+      height: 2rem;
+    }
+  }
+
+  .add-btn .p-button {
+    padding: 0.906rem 3.594rem;
+  }
+
+  .cancel-btn .p-button {
+    padding: 0.906rem 3.375rem;
+  }
+}
+
+.create-car {
+  .subtitle {
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 1.313rem;
+    margin-bottom: 1rem;
+  }
+
+  .label {
+    font-size: 0.875rem;
+    margin-bottom: 1.875rem;
+    color: #495057;
+  }
+}
+
+.container {
+  @include flexMix(column, flex-start, flex-start, 3.125rem);
+
+  &__title {
+    font-weight: 500;
+    font-size: 2.875rem;
+  }
+
+  &__specifications {
+    @include flexMix(column, flex-start, flex-start, 1.875rem);
+
+    width: 100%;
+
+    .mark-model {
+      @include media-l() {
+        flex-direction: column;
+      }
+
+      .mark, .model {
+        @include media-l() {
+          width: 100%;
+        }
+        width: 50%;
+      }
+    }
+
+    .additional {
+      @include media-l() {
+        flex-wrap: wrap;
+      }
+      @include media-s() {
+        flex-direction: column;
+      }
+
+    }
+  }
+
+  &__financial-additional-info {
+    @include flexMix(row, flex-start, flex-start, 1.25rem);
+
+    @include media-l() {
+      flex-direction: column;
+    }
+
+    width: 100%;
+
+    .financial-info {
+      width: 100%;
+
+      .options {
+        @include flexMix(column, flex-start, flex-start, 1.25rem);
+      }
+    }
+
+    .additional-info {
+      width: 100%;
+
+      .label {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  &__bonus-system {
+    width: 100%;
+  }
+
+  &__btns {
+    :first-child {
+      margin-right: 1.25rem;
+    }
+  }
+}
+
+.mark-model, .additional {
+  @include flexMix(row, flex-start, space-between, 1.25rem);
+
+  width: 100%;
+}
+
+.year, .kpp, .fuel-type, .power {
+  @include media-l() {
+    width: 47%;
+  }
+  @include media-s() {
+    width: 100%;
+  }
+
+  width: 25%;
+}
+
+.tariff {
+  @include media-l() {
+    width: 100%;
+  }
+
+  width: 49.2%;
+
+  .label {
+    margin: 0.938rem 0;
+  }
+}
+
+.deposit, .commission, .redemption {
+  @include flexMix(row, center, flex-start, 0.625rem);
+}
+
+.bonuses {
+  @include media-xl {
+    width: 100%;
+  }
+
+  width: 56rem;
+  height: 18.75rem;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+  overflow: auto;
+
+  .field-checkbox {
+    @include flexMix(row, center, flex-start, 1rem);
+  }
+}
+
+.vertical-line {
+  width: 1px;
+  height: 30px;
+
+  background: #6E757C;
+}
+
+.bonus {
+  padding: 0.625rem 1.25rem;
+  border-bottom: 1px solid #D9D9D9;
+
+  &__title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__description {
+    font-weight: 400;
+    font-size: 0.75rem;
+  }
+}
