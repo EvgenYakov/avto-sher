@@ -5,7 +5,7 @@ import { AppRoutes } from '@constants';
 export const MAIN_NAV: MenuItem[] = [
   {
     label: 'Автопарки',
-    routerLink: '',
+    routerLink: AppRoutes.AUTOPARKS,
   },
   {
     label: 'Автомобили',

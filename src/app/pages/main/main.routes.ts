@@ -31,6 +31,10 @@ export default [
         path: AppRoutes.CARS,
         loadChildren: () => import('../cars/cars.routes')
       },
+      {
+        path: AppRoutes.AUTOPARKS,
+        loadChildren: () => import('../autoparks-list/autoparks.routes')
+      },
     ]
   }
 ] as Route[];
