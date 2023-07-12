@@ -7,7 +7,12 @@ import { map, switchMap } from 'rxjs';
 import { AutoparkService } from '@services';
 import { LoadingTypes } from '@constants';
 
-import { loadAuctionAutoparksByRegion, loadAuctionAutoparksByRegionSuccess, } from '../actions';
+import {
+  loadAuctionAutoparksByRegion,
+  loadAuctionAutoparksByRegionSuccess,
+  loadAutoparks,
+  loadAutoparksSuccess,
+} from '../actions';
 import { addLoading, removeLoading } from '../../shared';
 
 @Injectable()
@@ -25,10 +30,18 @@ export class AutoparksEffects {
     map( (auctionAutoparks) => loadAuctionAutoparksByRegionSuccess( { auctionAutoparks } ) ),
   ) );
 
+  public loadAutoparks = createEffect( () => this.actions$.pipe(
+    ofType( loadAutoparks ),
+    switchMap( ({ regionName }) => this.autoparkService.getAutoparksList( regionName ) ),
+    map( (autoparks) => loadAutoparksSuccess( { autoparks } ) ),
+  ) );
+
+
   public addLoading$ = createEffect( () =>
     this.actions$.pipe(
       ofType(
-        loadAuctionAutoparksByRegion
+        loadAuctionAutoparksByRegion,
+        loadAutoparks
       ),
       map( () => addLoading( { addLoading: LoadingTypes.AUTOPARKS } ) )
     )
@@ -38,6 +51,7 @@ export class AutoparksEffects {
     this.actions$.pipe(
       ofType(
         loadAuctionAutoparksByRegionSuccess,
+        loadAutoparksSuccess
       ),
       map( () => removeLoading( { removeLoading: LoadingTypes.AUTOPARKS } ) )
     )

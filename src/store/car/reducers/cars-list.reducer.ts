@@ -6,16 +6,17 @@ import { CarFilterParams } from '@components';
 
 import { CarsListState } from '../states';
 import {
-  loadCars,
   loadCarsSuccess,
-  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
+  loadModelsByBrandSuccess,
+  loadMoreCars,
+  loadMoreCarsSuccess,
   loadUsedCarsBrandsSuccess,
   setCarsFiltersParams
 } from '../actions';
 
-export const autoCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
+export const carCardAdapter: EntityAdapter<CarCard> = createEntityAdapter<CarCard>( {} );
 
-export const initialState: CarsListState = autoCardAdapter.getInitialState( {
+export const initialState: CarsListState = carCardAdapter.getInitialState( {
   filters: {} as CarFilterParams,
   usedBrands: [],
   usedModels: [],
@@ -28,7 +29,7 @@ export const carsListReducer = createReducer(
   initialState,
   on( loadCarsSuccess, (state, { cars }) => ({
     ...state,
-    ...autoCardAdapter.setAll( cars, state ),
+    ...carCardAdapter.setAll( cars, state ),
   }) ),
   on( setCarsFiltersParams, (state, { params }) => ({
       ...state,
@@ -50,7 +51,7 @@ export const carsListReducer = createReducer(
   ) ),
   on( loadMoreCarsSuccess, (state, { cars }) => ({
       ...state,
-      ...autoCardAdapter.setMany( cars, state )
+      ...carCardAdapter.setMany( cars, state )
     }
   ) ),
 )

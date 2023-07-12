@@ -1,5 +1,9 @@
-import { AuctionAutoparks } from '@models';
+import { AuctionAutoparks, AutoparkCard } from '@models';
+import { EntityState } from '@ngrx/entity';
 
-export interface AutoparksState {
+export interface AutoparksState extends EntityState<AutoparkCard>{
   auctionAutoparksCard: AuctionAutoparks;
+  filters: [],
+  page: number,
+  limit: number
 }
