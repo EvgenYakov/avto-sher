@@ -5,6 +5,7 @@
   
   <div class="main">
     <div class="tabs">
+      <p class="p-error">{{errors$ | async}}</p>
       <form [formGroup]="registerForm">
         <p-tabView [activeIndex]="activeIndex" (onChange)="onTabChanged($event)">
           

@@ -1,4 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
 
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
@@ -10,4 +11,6 @@ import { PasswordInputComponent } from '../../../../components/controls/password
 
 
 export const REGISTRATION_DEPS = [
-  FormsModule, ReactiveFormsModule, TabViewModule, TextInputComponent, PhoneInputComponent, PasswordInputComponent, CheckboxModule, ButtonModule];
+  FormsModule, ReactiveFormsModule, TabViewModule, TextInputComponent, PhoneInputComponent,
+  PasswordInputComponent, CheckboxModule, ButtonModule, AsyncPipe
+];

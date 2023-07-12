@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { AuthResponse, LoginDto, RegisterDto } from '@pages';
+import { AuthResponse, LoginDto, RegisterDto, RegisterOwner } from '@pages';
 
 import { BaseService } from '../helpers';
 
@@ -17,7 +17,15 @@ export class AuthService extends BaseService {
   }
 
   public registration(registerDto: RegisterDto): Observable<AuthResponse> {
-    console.log(registerDto)
+    if (registerDto.role === 'owner') {
+      const owner: RegisterOwner = {
+        email: registerDto.email,
+        fullName: registerDto.fullName,
+        role: registerDto.role,
+        password: registerDto.password
+      }
+      return this.httpService.post<AuthResponse>( `${ environment.apiUrl }/auth/sign-up`, owner, { withCredentials: true } );
+    }
     return this.httpService.post<AuthResponse>( `${ environment.apiUrl }/auth/sign-up`, registerDto, { withCredentials: true } );
   }
 
