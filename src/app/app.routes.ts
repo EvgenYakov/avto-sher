@@ -2,8 +2,7 @@ import { Routes } from '@angular/router';
 
 import { AppRoutes } from '@constants';
 
-import { PrivacyComponent } from './pages/auth/components/privacy/privacy.component';
-import { OfferAgreementComponent } from './pages/auth/components/offer-agreement/offer-agreement.component';
+import { OfferAgreementComponent, PrivacyComponent } from './components/docx';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/' + AppRoutes.MAIN, pathMatch: 'full' },
@@ -20,14 +19,14 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./pages/auth/auth.routes')
   },
   {
-    path: 'privacy', component: PrivacyComponent
+    path: AppRoutes.PRIVACY, component: PrivacyComponent
   },
   {
-    path: 'offer-agreement', component: OfferAgreementComponent
+    path: AppRoutes.OFFER_AGREEMENT, component: OfferAgreementComponent
   },
-  // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
-  // {
-  //   path: AppRoutes.NOT_FOUND_PAGE,
-  //   loadChildren: () => import('./pages/not-found/not-found.routes')
-  // },
+  { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
+  {
+    path: AppRoutes.NOT_FOUND_PAGE,
+    loadChildren: () => import('./pages/not-found/not-found.routes')
+  },
 ];

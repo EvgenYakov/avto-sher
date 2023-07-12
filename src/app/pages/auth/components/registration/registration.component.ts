@@ -5,7 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AuthState, registerRequest, selectAuthErrors } from '@store';
-import { EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
+import { AppRoutes, EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
 
 import { RegisterDto, RegistrationForm } from '../../models';
 import { RegisterType } from '../../constants';
@@ -53,14 +53,6 @@ export class RegistrationComponent implements OnInit {
     this.router.navigate( ['../'], { relativeTo: this.route } );
   }
 
-  public openConfidentiality(): void {
-    this.router.navigate( ['/privacy'] );
-  }
-
-  public openOfferAgreement(): void {
-    this.router.navigate( ['/offer-agreement'] );
-  }
-
   public onSubmit(): void {
 
     const formValues = {
@@ -102,4 +94,6 @@ export class RegistrationComponent implements OnInit {
 
     return registerFormGroup;
   }
+
+  protected readonly AppRoutes = AppRoutes;
 }
