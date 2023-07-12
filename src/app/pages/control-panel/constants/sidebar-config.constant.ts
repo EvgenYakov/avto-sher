@@ -24,7 +24,7 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Машины',
-        link: AppRoutes.AUTOPARK_PANEL+'/'+ControlPanel.AUTOPARK_CONTROL + '/'+ControlPanel.CARS_TABLE
+        link: AppRoutes.AUTOPARK_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CARS_TABLE
       },
       {
         title: 'Верификация',
@@ -32,7 +32,7 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
       },
       {
         title: 'Создание',
-        link: ''
+        link: AppRoutes.AUTOPARK_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CREATE_AUTOPARK
       },
     ]
   },
