@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { AuctionAutoparks, AutoparkBonus, AutoparkDetailed, Region } from '@models';
+import { AuctionAutoparks, AutoparkBonus, AutoparkCard, AutoparkDetailed, Region } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -16,6 +16,16 @@ export class AutoparkService extends BaseService {
 
   public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
     return this.httpService.get<AuctionAutoparks>( `${this.apiUrl}/auction`, { params: { region: regionName } } )
+  }
+
+  public getAutoparksList(regionName: string): Observable<AutoparkCard[]> {
+    return this.httpService.get<AutoparkCard[]>( this.apiUrl, {
+      params: {
+        page: 1,
+        limit: 20,
+        region: regionName
+      }
+    } )
   }
 
   public getRegions(): Observable<Region[]> {
