@@ -1,10 +1,7 @@
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-  <div class="container create-car">
-    <div class="container__title">
-      Добавление автомобиля
-    </div>
+  <div class="create-car">
     
-    <div class="container__specifications">
+    <div class="create-car__specifications">
       <div class="mark-model">
         <div class="mark">
           <div class="subtitle">
@@ -99,7 +96,7 @@
       </div>
     </div>
     
-    <div class="container__financial-additional-info">
+    <div class="create-car__financial-additional-info">
       <div class="financial-info">
         <div class="subtitle">
           Финансовая информация
@@ -136,7 +133,7 @@
       </div>
     </div>
     
-    <div class="container__photos">
+    <div class="create-car__photos">
       <div class="subtitle">
         Фотографии автомобиля
       </div>
@@ -146,7 +143,7 @@
       <file-upload></file-upload>
     </div>
     
-    <div class="container__btns">
+    <div class="create-car__btns">
       <p-button
               type="submit"
               [disabled]="(carForm.invalid || carForm.pending)"
