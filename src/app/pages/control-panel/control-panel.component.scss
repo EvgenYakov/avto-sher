@@ -39,7 +39,7 @@ $nav-panel-width: 88px;
     width: $nav-panel-width;
     height: 100%;
     padding-top: 26px;
-    //position: fixed;
+    position: fixed;
     border: 1px solid #CED4DA;
 
     .item {
@@ -56,12 +56,17 @@ $nav-panel-width: 88px;
 
     width: 100%;
     height: 4rem;
-    padding: 0 2rem;
+    padding: 0 2rem 0 8rem;
 
     .title {
       font-size: 28px;
       font-weight: bold;
     }
+
+    .right-side {
+      @include flexMix();
+    }
+
     .icons {
       ul li {
         display: inline;
@@ -76,6 +81,6 @@ $nav-panel-width: 88px;
   }
 
   &__content {
-    padding: 2rem;
+    padding: 2rem 2rem 2rem 8rem ;
   }
 }
