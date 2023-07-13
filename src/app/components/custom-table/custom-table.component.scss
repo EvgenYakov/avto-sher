@@ -1,0 +1,17 @@
+@import "colors";
+
+:host ::ng-deep {
+  .p-datatable > .p-datatable-wrapper {
+    height: 30rem;
+  }
+}
+
+.search {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.data_row:hover {
+  background-color: rgba(206, 205, 205, 0.81);
+  cursor: pointer;
+}

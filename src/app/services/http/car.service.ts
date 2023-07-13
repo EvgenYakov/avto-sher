@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
 import { CarCard, CarProfile, OrderHistoryCarCard } from '@models';
@@ -14,13 +14,15 @@ import { BaseService } from '../helpers';
 export class CarService extends BaseService {
 
   public getAllCars(region: string, page: number, limit: number): Observable<CarCard[]> {
-    return this.httpService.get<CarCard[]>( `${ environment.apiUrl }/cars`, {
+    return this.httpService.get<any>( `${ environment.apiUrl }/cars`, {
       params: {
         page,
         limit,
         region
       }
-    } )
+    } ).pipe(
+      map((response) => response.data)
+    )
   }
 
   public getOrderHistoryCars(page: number, limit: number = 5): Observable<OrderHistoryCarCard[]> {

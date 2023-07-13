@@ -4,13 +4,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
 
-import { AuthState, registerRequest } from '@store';
-import { EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
+import { AuthState, registerRequest, selectAuthErrors } from '@store';
+import { AppRoutes, EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
 
 import { RegisterDto, RegistrationForm } from '../../models';
 import { RegisterType } from '../../constants';
 
 import { REGISTRATION_DEPS } from './registration.dependencies';
+import { Observable } from 'rxjs';
 
 @Component( {
   selector: 'app-registration',
@@ -25,6 +26,8 @@ export class RegistrationComponent implements OnInit {
   public readonly emailField = EMAIL_FIELD;
   public readonly phoneField = PHONE_FIELD;
   public readonly passwordField = PASSWORD_FIELD;
+
+  public errors$: Observable<string>;
 
   public checkbox = false;
   public activeIndex = 0;
@@ -43,18 +46,11 @@ export class RegistrationComponent implements OnInit {
   public ngOnInit(): void {
     this.registerForm = this.initializeForm();
     this.onTabChanged( { originalEvent: null, index: 0 } );
+    this.errors$ = this.store.select( selectAuthErrors );
   }
 
   public navigateBack(): void {
     this.router.navigate( ['../'], { relativeTo: this.route } );
-  }
-
-  public openConfidentiality(): void {
-    this.router.navigate( ['/privacy'] );
-  }
-
-  public openOfferAgreement(): void {
-    this.router.navigate( ['/offer-agreement'] );
   }
 
   public onSubmit(): void {
@@ -69,11 +65,12 @@ export class RegistrationComponent implements OnInit {
 
   public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
     this.checkbox = false;
+    this.activeIndex = index;
 
-    if(index === 0) {
+    if (index === 0) {
       this.registerForm.controls.phoneNumber.addValidators( [Validators.required] );
       this.registerType = RegisterType.DRIVER;
-    } else if(index === 1) {
+    } else if (index === 1) {
       this.registerForm.controls.phoneNumber.clearValidators();
       this.registerType = RegisterType.AUTOPARK;
     }
@@ -97,4 +94,6 @@ export class RegistrationComponent implements OnInit {
 
     return registerFormGroup;
   }
+
+  protected readonly AppRoutes = AppRoutes;
 }

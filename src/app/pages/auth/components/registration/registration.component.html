@@ -5,12 +5,13 @@
   
   <div class="main">
     <div class="tabs">
+      <p class="p-error">{{errors$ | async}}</p>
       <form [formGroup]="registerForm">
         <p-tabView [activeIndex]="activeIndex" (onChange)="onTabChanged($event)">
           
           <app-text-input
                   class="field"
-                  placeholder="Фамилия Имя Отчество"
+                  [placeholder]="activeIndex === 0 ? 'Фамилия Имя Отчество' : 'ФИО Представителя'"
                   [errorsMap]="requiredField"
                   [formControl]="registerForm.controls.fullName"
           ></app-text-input>
@@ -55,9 +56,9 @@
       ></p-checkbox>
       <div class="text-block">
         <span class="text">Я даю согласие на обработку моих персональных данных</span>
-        <span class="confidentiality" (click)="openConfidentiality()"> Политика конфиденциальности</span>
+        <a class="confidentiality" [href]="AppRoutes.PRIVACY" target="_blank"> Политика конфиденциальности</a>
         <span> И принимаю договор оферты </span>
-        <span class="offer" (click)="openOfferAgreement()">Оферта</span>
+        <a class="offer" [href]="AppRoutes.OFFER_AGREEMENT" target="_blank">Оферта</a>
       </div>
     </div>
   </div>

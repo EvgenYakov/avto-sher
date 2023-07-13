@@ -1,0 +1,6 @@
+<div (click)="navigateToCreateCar()">Добавить машину</div>
+
+<app-custom-table
+  [tableData]="cars$|async"
+  [columnNames]="columnNames"
+></app-custom-table>
