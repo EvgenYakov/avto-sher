@@ -31,13 +31,12 @@
             <p-inputNumber
                     [useGrouping]="false"
                     [min]="1940" [max]="getCurrentYear()"
-                    [formControl]="carForm.controls.yearCreated"
+                    [formControl]="carForm.controls.yearOfRelease"
                     suffix=" год"
                     placeholder="Введите год"
             ></p-inputNumber>
           </div>
         </div>
-        
         <div class="kpp">
           <div class="subtitle">
             КПП
@@ -49,7 +48,6 @@
             ></p-dropdown>
           </div>
         </div>
-        
         <div class="fuel-type">
           <div class="subtitle">
             Тип топлива
@@ -62,7 +60,6 @@
             ></p-dropdown>
           </div>
         </div>
-        
         <div class="power">
           <div class="subtitle">
             Мощность
@@ -71,13 +68,18 @@
             <p-inputNumber
                     [useGrouping]="false"
                     [min]="20" [max]="1000"
-                    [formControl]="carForm.controls.power"
+                    [formControl]="carForm.controls.enginePower"
                     suffix=" л.с."
                     placeholder="Введите мощность автомобиля"
             ></p-inputNumber>
           </div>
         </div>
-      
+      </div>
+      <div class="rental-conditions">
+      <p-dropdown
+        [options]="workSchedule"
+        placeholder="Выберите график работы"
+      ></p-dropdown>
       </div>
       <div class="tariff">
         <div class="subtitle">
@@ -89,7 +91,7 @@
         <div class="specification-input">
           <p-dropdown
                   [options]="tariffTypes"
-                  [formControl]="carForm.controls.tariff"
+                  [formControl]="carForm.controls.type"
                   placeholder="Выберите тариф(ы)"
           ></p-dropdown>
         </div>

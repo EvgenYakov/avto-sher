@@ -11,6 +11,8 @@ import { Store } from '@ngrx/store';
 import { AutoparkService } from '@services';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
+import { Router } from '@angular/router';
+import { AppRoutes, ControlPanel } from '@constants';
 
 @Component( {
   selector: 'app-create-autopark',
@@ -33,10 +35,15 @@ export class CreateAutoparkComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private service: AutoparkService
+    private service: AutoparkService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.bonuses$ = this.service.getDefaultBonuses();
+  }
+
+  public navigateToVerification(): void {
+    this.router.navigate( ['/' + AppRoutes.AUTOPARK_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.AUTOPARK + '/' + ControlPanel.VERIFICATION] )
   }
 }

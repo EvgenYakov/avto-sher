@@ -3,7 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { InputTextModule } from 'primeng/inputtext';
 
-import { ADDITIONAL_OPTIONS, FUEL_OPTIONS, TARIFF_OPTIONS, TRANSMISSION_OPTIONS } from '@constants';
+import {
+  ADDITIONAL_OPTIONS,
+  FUEL_OPTIONS,
+  MIN_RENTAL_PERIOD_OPTIONS,
+  TARIFF_OPTIONS,
+  TRANSMISSION_OPTIONS,
+  WORK_SCHEDULE_OPTIONS
+} from '@constants';
 
 import { CreateCarForm } from '../../models';
 import { FULL_FINANCIAL_OPTIONS } from '../../constants';
@@ -22,6 +29,8 @@ export class CreateCarComponent {
   public readonly fuelTypes = FUEL_OPTIONS;
   public readonly tariffTypes = TARIFF_OPTIONS;
   public readonly additionalInfo = ADDITIONAL_OPTIONS;
+  public readonly workSchedule = WORK_SCHEDULE_OPTIONS;
+  public readonly rentalPeriod = MIN_RENTAL_PERIOD_OPTIONS;
 
   public carForm: FormGroup<CreateCarForm>;
 
@@ -37,11 +46,11 @@ export class CreateCarComponent {
     return new FormGroup<CreateCarForm>( <CreateCarForm>{
       brand: new FormControl<string>( '', [Validators.required] ),
       model: new FormControl<string>( '', [Validators.required] ),
-      yearCreated: new FormControl<number | null>( null, [Validators.required] ),
+      yearOfRelease: new FormControl<number | null>( null, [Validators.required] ),
       transmission: new FormControl<string>( '', [Validators.required] ),
       fuelType: new FormControl<string>( '', [Validators.required] ),
-      power: new FormControl<number | null>( null, [Validators.required] ),
-      tariff: new FormControl<string>( '', [Validators.required] ),
+      enginePower: new FormControl<number | null>( null, [Validators.required] ),
+      type: new FormControl<string>( '', [Validators.required] ),
     } );
   }
 
