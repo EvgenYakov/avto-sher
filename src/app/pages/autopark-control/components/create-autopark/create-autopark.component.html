@@ -1,8 +1,4 @@
 <div class="autopark">
-  <p-steps [model]="items" class="steps" [readonly]="true"></p-steps>
-  <p class="autopark__info-text">
-    Для пользования ресурсом ЯАВТО.РФ необходимо корректно заполнить данные. Все поля обязательны к заполнению
-  </p>
   <div class="autopark__title">
     <div class="label">
       Введите название автопарка
@@ -101,5 +97,5 @@
     </div>
     <textarea rows="5" cols="90" pInputTextarea [autoResize]="true" placeholder="Описание"></textarea>
   </div>
-  <p-button class="next" label="Далее"></p-button>
+  <p-button (click)="navigateToVerification()" class="next" label="Далее"></p-button>
 </div>
