@@ -9,7 +9,7 @@ import { catchError, concatMap, map, switchMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { AuthService, LocalStorageService, UserService } from '@services';
-import { AppRoutes, LoadingTypes, LocalStorageKeys } from '@constants';
+import { AppRoutes, LoadingTypes, LocalStorageKeys, UserRole } from '@constants';
 
 import {
   loginRequest,
@@ -56,14 +56,15 @@ export class AuthEffects {
 
   public registerRequest$ = createEffect( () => this.actions$.pipe(
     ofType( registerRequest ),
-    switchMap( ({ registerDto }) => this.authService.registration( registerDto ) ),
-    map( (authResponse) => {
-      this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
-      return registerRequestSuccess( { authResponse } )
-    } ),
-    catchError( (error: HttpErrorResponse) =>
-      of( registerRequestFailure( { backendErrors: error.error.message } ) )
-    )
+    switchMap( ({ registerDto }) => this.authService.registration( registerDto ).pipe(
+      map( (authResponse) => {
+        this.localStorageService.addItemToStorage( LocalStorageKeys.ACCESS_TOKEN, authResponse.accessToken );
+        return registerRequestSuccess( { authResponse } )
+      } ),
+      catchError( (error: HttpErrorResponse) =>
+        of( registerRequestFailure( { backendErrors: error.error.message } ) )
+      )
+    ) ),
   ) );
 
   public getMe = createEffect( () => this.actions$.pipe(
@@ -71,7 +72,7 @@ export class AuthEffects {
     concatMap( () => this.userService.getMe().pipe(
       map( (user) => getMeSuccess( { user } ) ),
       catchError( (error: HttpErrorResponse) => {
-        if(error.status === 401) {
+        if (error.status === 401) {
           this.store.dispatch( refreshTokenRequest() );
         }
         return of( getMeFailure() );
@@ -88,7 +89,7 @@ export class AuthEffects {
       return refreshTokenRequestSuccess();
     } ),
     catchError( (error: HttpErrorResponse) => {
-      if(error.status === 401) {
+      if (error.status === 401) {
         this.store.dispatch( logout() );
       }
       return of( refreshTokenRequestFailure() );
@@ -108,7 +109,21 @@ export class AuthEffects {
 
   public navigate$ = createEffect( () => this.actions$.pipe(
       ofType( loginRequestSuccess, registerRequestSuccess ),
-      tap( () => this.router.navigate( [AppRoutes.MAIN] ) )
+      tap( ({ authResponse }) => {
+        this.localStorageService.addItemToStorage( 'role', authResponse.role );
+
+        switch (authResponse.role) {
+          case UserRole.OWNER:
+            this.router.navigate( [AppRoutes.AUTOPARK_PANEL] )
+            break;
+          case UserRole.DRIVER:
+            this.router.navigate( [AppRoutes.MAIN] )
+            break;
+          case UserRole.ADMIN:
+            this.router.navigate( [AppRoutes.AUTOPARK_PANEL] )
+            break;
+        }
+      } )
     ),
     { dispatch: false }
   );

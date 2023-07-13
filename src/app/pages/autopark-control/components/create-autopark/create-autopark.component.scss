@@ -1,0 +1,140 @@
+@import "colors";
+@import "mixins";
+
+$input-width: 641px;
+
+:host ::ng-deep {
+  .p-inputtext, {
+    width: 100%;
+  }
+
+  .p-element {
+    //float: right;
+    //width: 20rem;
+  }
+
+  .steps .p-element {
+    width: 10rem;
+  }
+}
+
+.autopark {
+  @include flexMix(column, flex-start, flex-start, 47px);
+
+  .label {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  &__info-text {
+    color: $label-text-color;
+  }
+
+  &__title {
+    width: $input-width;
+  }
+
+  &__address {
+    width: $input-width;
+
+    .inputs {
+      @include flexMix(row, flex-start, flex-start, 20px);
+    }
+  }
+
+  &__photos {
+    .autopark__info-text {
+      margin-bottom: 30px;
+    }
+
+    .setting-block {
+      @include flexMix(row, flex-start, flex-start);
+
+      width: 1200px;
+      height: 235px;
+      padding: 35px;
+      border-radius: 14px;
+      border: 1px solid #CED4DA;
+
+      &__logo {
+        width: 220px;
+        height: 100%;
+        margin-right: 35px;
+        background-color: gray;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+
+      &__info {
+        margin-right: auto;
+
+        .title {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 15px;
+        }
+
+        .owner {
+          color: $label-text-color;
+        }
+      }
+
+      &__load-btns {
+        .link {
+          color: $link-color;
+          font-size: 18px;
+          margin-left: 35px;
+        }
+      }
+    }
+  }
+
+  &__bonuses {
+    @include flexMix(row, flex-start, space-between);
+
+    .autopark__info-text {
+      margin-bottom: 30px;
+    }
+
+    width: 87.7%;
+
+    input {
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.bonuses {
+  @include media-xl {
+    width: 100%;
+  }
+
+  width: $input-width;
+  min-height: fit-content;
+  max-height: 18.75rem;
+  margin-top: 30px;
+  border: 1px solid #D9D9D9;
+  border-radius: 6px;
+  overflow: auto;
+
+  .bonus {
+    @include flexMix(row, center, flex-start, 1rem);
+
+    padding: 10px 20px;
+
+    &__title {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &__description {
+      font-size: 12px;
+      color: $label-text-color
+    }
+  }
+}

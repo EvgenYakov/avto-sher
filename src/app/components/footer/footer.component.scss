@@ -9,6 +9,10 @@
   &__contact-info {
     margin-bottom: 25px;
     color: #CED4DA;
+
+    p:first-child {
+      margin-bottom: 0.3rem;
+    }
   }
 
   &__mail {

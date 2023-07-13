@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { AuctionAutoparks, AutoparkCard, AutoparkDetailed, Region } from '@models';
+import { AuctionAutoparks, AutoparkBonus, AutoparkCard, AutoparkDetailed, Region } from '@models';
 
 import { BaseService } from '../helpers';
 
@@ -12,12 +12,14 @@ import { BaseService } from '../helpers';
 } )
 export class AutoparkService extends BaseService {
 
+  private readonly apiUrl = `${ environment.apiUrl }/autoparks`;
+
   public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
-    return this.httpService.get<AuctionAutoparks>( `${ environment.apiUrl }/autoparks/auction`, { params: { region: regionName } } )
+    return this.httpService.get<AuctionAutoparks>( `${this.apiUrl}/auction`, { params: { region: regionName } } )
   }
 
   public getAutoparksList(regionName: string): Observable<AutoparkCard[]> {
-    return this.httpService.get<AutoparkCard[]>( `${ environment.apiUrl }/autoparks`, {
+    return this.httpService.get<AutoparkCard[]>( this.apiUrl, {
       params: {
         page: 1,
         limit: 20,
@@ -27,11 +29,11 @@ export class AutoparkService extends BaseService {
   }
 
   public getRegions(): Observable<Region[]> {
-    return this.httpService.get<Region[]>( `${ environment.apiUrl }/autoparks/regions` )
+    return this.httpService.get<Region[]>( `${this.apiUrl}/regions` )
   }
 
   public getAutoparkById(autoparkId: number): Observable<AutoparkDetailed> {
-    return this.httpService.get<any>( `${ environment.apiUrl }/autoparks/${ autoparkId }` ).pipe(
+    return this.httpService.get<any>( `${this.apiUrl}/${ autoparkId }` ).pipe(
       map( (response) => {
         return {
           ...response,
@@ -40,6 +42,10 @@ export class AutoparkService extends BaseService {
         }
       } )
     )
+  }
+
+  public getDefaultBonuses(): Observable<AutoparkBonus[]> {
+    return this.httpService.get<AutoparkBonus[]>(`${environment.apiUrl}/autopark-bonuses/default`);
   }
 
 }

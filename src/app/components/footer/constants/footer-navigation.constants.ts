@@ -36,15 +36,28 @@ export const INFO_COLUMN: MenuItem[] = [
   {
     label: 'Обратная связь',
     routerLink: AppRoutes.FEEDBACK,
+    target: '_blank'
   },
   {
     label: 'Правила',
     routerLink: AppRoutes.RULES,
+    target: '_blank'
   },
   {
     label: 'Вакансии',
     routerLink: AppRoutes.JOB,
+    target: '_blank'
   },
+  {
+    label: 'Политика конфиденциальности',
+    routerLink: AppRoutes.PRIVACY,
+    target: '_blank'
+  },
+  {
+    label: 'Оферта',
+    routerLink: AppRoutes.OFFER_AGREEMENT,
+    target: '_blank'
+  }
 ];
 
 export const SOCIAL_NETWORK: { icon: string, hoverIcon: string, link: string }[] = [
