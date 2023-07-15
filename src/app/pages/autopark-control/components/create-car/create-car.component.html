@@ -22,65 +22,54 @@
           </div>
         </div>
       </div>
-      <div class="additional">
-        <div class="year">
-          <div class="subtitle">
-            Год выпуска
-          </div>
-          <div class="specification-input">
-            <p-inputNumber
-                    [useGrouping]="false"
-                    [min]="1940" [max]="getCurrentYear()"
-                    [formControl]="carForm.controls.yearOfRelease"
-                    suffix=" год"
-                    placeholder="Введите год"
-            ></p-inputNumber>
-          </div>
-        </div>
-        <div class="kpp">
-          <div class="subtitle">
-            КПП
-          </div>
-          <div class="specification-input">
-            <p-dropdown [options]="transmission"
-                        [formControl]="carForm.controls.transmission"
-                        placeholder="Выберите из списка"
-            ></p-dropdown>
-          </div>
-        </div>
-        <div class="fuel-type">
-          <div class="subtitle">
-            Тип топлива
-          </div>
-          <div class="specification-input">
+      <div class="dropdowns">
+        <ng-container *ngFor="let options of STATIC_DROPDOWNS">
+          <div class="block">
+            <div class="subtitle">
+              {{options.label}}
+            </div>
             <p-dropdown
-                    [options]="fuelTypes"
-                    [formControl]="carForm.controls.fuelType"
-                    placeholder="Выберите из списка"
+                    [options]="options.options"
+                    [formControlName]="options.formControlName"
+                    [placeholder]="options.placeholder"
+                    class="dropdown"
             ></p-dropdown>
           </div>
-        </div>
-        <div class="power">
-          <div class="subtitle">
-            Мощность
+        
+        </ng-container>
+        <div class="year-power">
+          <div class="year">
+            <div class="subtitle">
+              Год выпуска
+            </div>
+            <div class="specification-input">
+              <p-inputNumber
+                      [useGrouping]="false"
+                      [min]="1940" [max]="getCurrentYear()"
+                      [formControl]="carForm.controls.yearOfRelease"
+                      suffix=" год"
+                      placeholder="Введите год"
+              ></p-inputNumber>
+            </div>
           </div>
-          <div class="specification-input">
-            <p-inputNumber
-                    [useGrouping]="false"
-                    [min]="20" [max]="1000"
-                    [formControl]="carForm.controls.enginePower"
-                    suffix=" л.с."
-                    placeholder="Введите мощность автомобиля"
-            ></p-inputNumber>
+          <div class="power">
+            <div class="subtitle">
+              Мощность
+            </div>
+            <div class="specification-input">
+              <p-inputNumber
+                      [useGrouping]="false"
+                      [min]="20" [max]="1000"
+                      [formControl]="carForm.controls.enginePower"
+                      suffix=" л.с."
+                      placeholder="Введите мощность автомобиля"
+              ></p-inputNumber>
+            </div>
           </div>
         </div>
+      
       </div>
-      <div class="rental-conditions">
-      <p-dropdown
-        [options]="workSchedule"
-        placeholder="Выберите график работы"
-      ></p-dropdown>
-      </div>
+      
       <div class="tariff">
         <div class="subtitle">
           Тариф
@@ -104,7 +93,7 @@
           Финансовая информация
         </div>
         <div class="label">
-          Отметьте информацию, которая будет отражена в карточке автомобиля
+          Отметьте информацию, которая будет отображаться в профиле автомобиля
         </div>
         <div class="options">
           <ng-container *ngFor="let option of financialOptions">
@@ -122,6 +111,16 @@
               </ng-container>
             </div>
           </ng-container>
+          <div class="price">
+            <span>Введите цену аренды</span>
+            <p-inputNumber class="option-input"></p-inputNumber>
+            <span>руб/сут</span>
+          </div>
+          <div class="payments">
+            <span>Выплаты каждые</span>
+            <p-inputNumber class="option-input"></p-inputNumber>
+            <span>дня</span>
+          </div>
         </div>
       </div>
       <div class="additional-info">
@@ -131,7 +130,32 @@
         <div class="label">
           Отметьте информацию, которая будет отражена в карточке автомобиля
         </div>
-        <p-multiSelect optionLabel="label" display="chip" [options]="additionalInfo"></p-multiSelect>
+        <p-multiSelect class="multiselect" optionLabel="label" display="chip"
+                       [options]="additionalInfo"></p-multiSelect>
+      </div>
+    </div>
+    
+    <div class="create-car__verification">
+      <div class="sts">
+        <div class="subtitle">
+          СТС
+        </div>
+        <input type="number" [formControl]="carForm.controls.brand" pInputText
+               placeholder="8756347856375625964"/>
+      </div>
+      <div class="vin">
+        <div class="subtitle">
+          VIN
+        </div>
+        <input type="text" [formControl]="carForm.controls.brand" pInputText
+               placeholder="Введите идентификационной номер"/>
+      </div>
+      <div class="gov-number">
+        <div class="subtitle">
+          Государственные номера
+        </div>
+        <input type="text" [formControl]="carForm.controls.brand" pInputText
+               placeholder="Введите государственный номер"/>
       </div>
     </div>
     
