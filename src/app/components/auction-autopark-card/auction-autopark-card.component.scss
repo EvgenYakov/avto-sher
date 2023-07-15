@@ -30,7 +30,7 @@
       margin-bottom: 0.75rem;
     }
 
-    .additional {
+    .dropdowns {
       @include flexMix(row, baseline, space-between);
 
       font-size: 1rem;

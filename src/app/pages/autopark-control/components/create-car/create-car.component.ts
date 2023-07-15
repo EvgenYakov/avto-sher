@@ -15,6 +15,7 @@ import {
 import { CreateCarForm } from '../../models';
 import { FULL_FINANCIAL_OPTIONS } from '../../constants';
 import { CREATE_CAR_DEPS } from './create-car.dependencies';
+import { Dropdown } from '@models';
 
 @Component( {
   selector: 'app-create-car',
@@ -25,12 +26,35 @@ import { CREATE_CAR_DEPS } from './create-car.dependencies';
 } )
 export class CreateCarComponent {
   public readonly financialOptions = FULL_FINANCIAL_OPTIONS;
-  public readonly transmission = TRANSMISSION_OPTIONS;
-  public readonly fuelTypes = FUEL_OPTIONS;
   public readonly tariffTypes = TARIFF_OPTIONS;
   public readonly additionalInfo = ADDITIONAL_OPTIONS;
-  public readonly workSchedule = WORK_SCHEDULE_OPTIONS;
-  public readonly rentalPeriod = MIN_RENTAL_PERIOD_OPTIONS;
+
+  public STATIC_DROPDOWNS: Dropdown[] = [
+    {
+      label: 'График работы',
+      formControlName: 'rentSchedule',
+      placeholder: 'График работы',
+      options: WORK_SCHEDULE_OPTIONS
+    },
+    {
+      label: 'КПП',
+      formControlName: 'transmission',
+      placeholder: 'Выберите из списка',
+      options: TRANSMISSION_OPTIONS
+    },
+    {
+      label: 'Тип топлива',
+      formControlName: 'fuelType',
+      placeholder: 'Выберите из списка',
+      options: FUEL_OPTIONS
+    },
+    {
+      label: 'Срок аренды',
+      formControlName: 'minRentPeriod',
+      placeholder: 'Выберите срок аренды',
+      options: MIN_RENTAL_PERIOD_OPTIONS
+    },
+  ];
 
   public carForm: FormGroup<CreateCarForm>;
 
@@ -51,6 +75,8 @@ export class CreateCarComponent {
       fuelType: new FormControl<string>( '', [Validators.required] ),
       enginePower: new FormControl<number | null>( null, [Validators.required] ),
       type: new FormControl<string>( '', [Validators.required] ),
+      rentSchedule: new FormControl<string>( '', [Validators.required] ),
+      minRentPeriod: new FormControl<number>( 0, [Validators.required] ),
     } );
   }
 

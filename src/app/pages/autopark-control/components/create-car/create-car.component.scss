@@ -21,6 +21,12 @@
   .cancel-btn .p-button {
     padding: 0.906rem 3.375rem;
   }
+
+  .additional-info {
+    .p-element .p-multiselect-label-container {
+      width: 450px;
+    }
+  }
 }
 
 .create-car {
@@ -40,6 +46,8 @@
 
 .create-car {
   @include flexMix(column, flex-start, flex-start, 3.125rem);
+  width: 100%;
+  height: 100%;
 
   &__specifications {
     @include flexMix(column, flex-start, flex-start, 1.875rem);
@@ -59,28 +67,33 @@
       }
     }
 
-    .additional {
-      @include media-l() {
-        flex-wrap: wrap;
-      }
-      @include media-s() {
-        flex-direction: column;
-      }
+    .dropdowns {
+      @include flexMix(row, flex-start, space-between, 0px, wrap);
 
+      .block {
+        width: 23%;
+      }
     }
+
+    .year-power {
+      @include flexMix(row, flex-start, flex-start, 36px, wrap);
+
+      width: 100%;
+      margin-top: 31px;
+
+      .year, .power {
+        width: 23%;
+      }
+    }
+
   }
 
   &__financial-additional-info {
-    @include flexMix(row, flex-start, flex-start, 1.25rem);
-
-    @include media-l() {
-      flex-direction: column;
-    }
+    @include flexMix(row, flex-start, flex-start, 10.3rem, wrap);
 
     width: 100%;
 
     .financial-info {
-      width: 100%;
 
       .options {
         @include flexMix(column, flex-start, flex-start, 1.25rem);
@@ -88,11 +101,27 @@
     }
 
     .additional-info {
-      width: 100%;
 
       .label {
         margin-bottom: 1.5rem;
       }
+
+    }
+
+    .price, .payments {
+      .option-input {
+        margin: 0 20px;
+      }
+    }
+  }
+
+  &__verification {
+    @include flexMix(row, flex-start, flex-start, 2rem, wrap);
+
+    width: 100%;
+
+    & > div {
+      width: 30%;
     }
   }
 
@@ -107,22 +136,12 @@
   }
 }
 
-.mark-model, .additional {
+.mark-model, .dropdowns {
   @include flexMix(row, flex-start, space-between, 1.25rem);
 
   width: 100%;
 }
 
-.year, .kpp, .fuel-type, .power {
-  @include media-l() {
-    width: 47%;
-  }
-  @include media-s() {
-    width: 100%;
-  }
-
-  width: 25%;
-}
 
 .tariff {
   @include media-l() {
