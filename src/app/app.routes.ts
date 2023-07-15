@@ -5,7 +5,6 @@ import { AppRoutes } from '@constants';
 import { OfferAgreementComponent, PrivacyComponent } from './components/docx';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/' + AppRoutes.MAIN, pathMatch: 'full' },
   {
     path: AppRoutes.MAIN,
     loadChildren: () => import('./pages/main/main.routes')

@@ -110,7 +110,7 @@ export class AuthEffects {
   public navigate$ = createEffect( () => this.actions$.pipe(
       ofType( loginRequestSuccess, registerRequestSuccess ),
       tap( ({ authResponse }) => {
-        this.localStorageService.addItemToStorage( 'role', authResponse.role );
+        this.localStorageService.addItemToStorage( LocalStorageKeys.ROLE, authResponse.role );
 
         switch (authResponse.role) {
           case UserRole.OWNER:
