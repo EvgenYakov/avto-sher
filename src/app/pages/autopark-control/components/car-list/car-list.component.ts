@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { TableModule } from 'primeng/table';
 
 import { CarCard } from '@models';
@@ -19,7 +19,16 @@ import { CarService } from '@services';
 } )
 export class CarListComponent implements OnInit {
 
-  public readonly columnNames = { 'status': 'статус', 'brand': 'марка', 'model': 'модель', 'yearOfRelease': 'год' }
+  public readonly columnNames = {
+    'status': 'статус',
+    'brand': 'марка',
+    'model': 'модель',
+    'yearOfRelease': 'год',
+    'price': 'цена',
+    'vin': 'VIN',
+    'number': 'гос номер',
+    'sts': 'СТС'
+  }
 
   public cars$: Observable<CarCard[]>;
 
@@ -29,7 +38,9 @@ export class CarListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cars$ = this.service.getAllCars( 'Москва', 1, 20 );
+    this.cars$ = this.service.getAllCars( 'Москва', 1, 20 ).pipe(
+      map( (response) => response.data )
+    );
     this.cars$.subscribe( console.log )
   }
 

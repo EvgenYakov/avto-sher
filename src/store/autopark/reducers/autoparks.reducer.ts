@@ -11,11 +11,12 @@ export const autoparkCardAdapter: EntityAdapter<AutoparkCard> = createEntityAdap
 
 
 const initialState: AutoparksState = autoparkCardAdapter.getInitialState( {
-    auctionAutoparksCard: {} as AuctionAutoparks,
-    filters: [],
-    page: 1,
-    limit: 10
-  } )
+  auctionAutoparksCard: {} as AuctionAutoparks,
+  filters: [],
+  page: 1,
+  limit: 10,
+  pagesLeft: 0
+} )
 
 export const autoparksReducer = createReducer(
   initialState,
@@ -23,8 +24,9 @@ export const autoparksReducer = createReducer(
     ...state,
     auctionAutoparksCard: auctionAutoparks
   }) ),
-  on( loadAutoparksSuccess, (state, { autoparks }) => ({
+  on( loadAutoparksSuccess, (state, { autoparks, pagesLeft }) => ({
     ...state,
     ...autoparkCardAdapter.setAll( autoparks, state ),
+    pagesLeft
   }) ),
 )

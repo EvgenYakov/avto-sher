@@ -27,12 +27,12 @@ export enum CarsListActions {
 
 export const loadMoreCars = createAction(
   CarsListActions.LOAD_MORE,
-  props<{regionName: string}>()
+  props<{ regionName: string }>()
 );
 
 export const loadMoreCarsSuccess = createAction(
   CarsListActions.LOAD_MORE_SUCCESS,
-  props<{ cars: CarCard[] }>()
+  props<{ cars: CarCard[], pagesLeft: number }>()
 );
 
 export const setCarsFiltersParams = createAction(
@@ -42,12 +42,12 @@ export const setCarsFiltersParams = createAction(
 
 export const loadCars = createAction(
   CarsListActions.LOAD_CARS,
-  props<{regionName: string}>()
+  props<{ regionName: string }>()
 );
 
 export const loadCarsSuccess = createAction(
   CarsListActions.LOAD_CARS_SUCCESS,
-  props<{ cars: CarCard[] }>()
+  props<{ cars: CarCard[], pagesLeft: number }>()
 );
 
 
@@ -84,7 +84,7 @@ export const loadCarsSuccess = createAction(
 
 export const loadUsedCarsBrands = createAction(
   CarsListActions.LOAD_USED_BRANDS,
-  props<{regionName: string}>()
+  props<{ regionName: string }>()
 );
 
 export const loadUsedCarsBrandsSuccess = createAction(

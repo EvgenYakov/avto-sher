@@ -48,7 +48,10 @@ export class AutoparkDetailedEffects {
       this.store.select( selectAutoparkCarsPage )
     ),
     switchMap( ([{ autoparkId }, page]) => this.carService.getAutoparkCars( autoparkId, page ) ),
-    map( (cars) => loadAutoparkCarsSuccess( { cars } ) ),
+    map( (paginationResponse) => loadAutoparkCarsSuccess( {
+      cars: paginationResponse.data,
+      pagesLeft: paginationResponse.metadata.pagesLeft
+    } ) ),
     catchError( (error: HttpErrorResponse) => of( loadAutoparkCarsFailure( { errors: error } ) ) )
   ) );
 

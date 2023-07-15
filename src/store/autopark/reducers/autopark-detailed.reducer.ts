@@ -11,6 +11,7 @@ const initialState: AutoparkDetailedState = {
   reviews: [],
   autoparkCarsPage: 1,
   autoparkCarsLimit: 5,
+  pagesLeft: 1,
   errors: ''
 }
 
@@ -20,9 +21,10 @@ export const autoparkDetailedReducer = createReducer(
     ...state,
     autoparkDetailed
   }) ),
-  on( loadAutoparkCarsSuccess, (state, { cars }) => ({
+  on( loadAutoparkCarsSuccess, (state, { cars,pagesLeft }) => ({
     ...state,
-    cars
+    cars,
+    pagesLeft
   }) ),
   on( loadMoreAutoparkCars, (state, {}) => ({
     ...state,

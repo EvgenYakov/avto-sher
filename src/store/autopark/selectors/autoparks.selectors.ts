@@ -17,4 +17,14 @@ export const {
 export const getAutoparksEntities = createSelector(
   autoparksFeatureSelector,
   selectAutoparks
-)
+);
+
+export const selectAutoparksPage = createSelector(
+  autoparksFeatureSelector,
+  (state) => state.page
+);
+
+export const selectAutoparksLimit = createSelector(
+  autoparksFeatureSelector,
+  (state) => state.limit
+);

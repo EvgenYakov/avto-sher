@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 
-import { map, switchMap } from 'rxjs';
+import { map, switchMap, withLatestFrom } from 'rxjs';
 
 import { AutoparkService } from '@services';
 import { LoadingTypes } from '@constants';
@@ -14,6 +15,8 @@ import {
   loadAutoparksSuccess,
 } from '../actions';
 import { addLoading, removeLoading } from '../../shared';
+import { selectCarsLimit, selectCarsPage } from '../../car';
+import { selectAutoparksLimit, selectAutoparksPage } from '../selectors';
 
 @Injectable()
 export class AutoparksEffects {
@@ -21,6 +24,7 @@ export class AutoparksEffects {
   constructor(
     private actions$: Actions,
     private autoparkService: AutoparkService,
+    private store: Store
   ) {}
 
 
@@ -32,8 +36,15 @@ export class AutoparksEffects {
 
   public loadAutoparks = createEffect( () => this.actions$.pipe(
     ofType( loadAutoparks ),
-    switchMap( ({ regionName }) => this.autoparkService.getAutoparksList( regionName ) ),
-    map( (autoparks) => loadAutoparksSuccess( { autoparks } ) ),
+    withLatestFrom(
+      this.store.select( selectAutoparksPage ),
+      this.store.select( selectAutoparksLimit ),
+    ),
+    switchMap( ([{ regionName }, page, limit]) => this.autoparkService.getAutoparksList( page, limit, regionName ) ),
+    map( (autoparkPagination) => loadAutoparksSuccess( {
+      autoparks: autoparkPagination.data,
+      pagesLeft: autoparkPagination.metadata.pagesLeft
+    } ) ),
   ) );
 
 
