@@ -6,7 +6,14 @@ import { MenuItem } from 'primeng/api';
 import { Store } from '@ngrx/store';
 
 import { CarCard } from '@models';
-import { getCarsEntities, loadCars, loadMoreCars, selectCurrentRegion, selectLoading } from '@store';
+import {
+  getCarsEntities,
+  loadCars,
+  loadMoreCars,
+  selectCarsPagesLeft,
+  selectCurrentRegion,
+  selectLoading
+} from '@store';
 import { BreadcrumbService } from '@services';
 import { AppRoutes, LoadingTypes } from '@constants';
 
@@ -57,7 +64,13 @@ export class CarsComponent implements OnInit, OnDestroy {
   private getDataFromStore(): void {
 
     this.cars$ = this.store.select( getCarsEntities );
-
+    this.store.select( selectCarsPagesLeft ).pipe(
+      takeUntil( this.destroy$ )
+    ).subscribe( (count) => {
+      if (count < 1) {
+        this.isLoadMore$.next( false );
+      }
+    } )
     this.isLoading$ = this.store.select( selectLoading, { type: LoadingTypes.CARS_LIST } );
 
     this.getCars();

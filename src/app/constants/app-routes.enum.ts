@@ -5,7 +5,7 @@ export enum AppRoutes {
   NOT_FOUND_PAGE = 'not_found',
   RULES = '/rules',
   CARS = 'cars',
-  AUTOPARKS = '',
+  AUTOPARKS = 'autoparks',
   PARTNERS = '/partners',
   FEEDBACK = '/feedback',
   FOR_AUTOPARKS = '/for-autoparks',

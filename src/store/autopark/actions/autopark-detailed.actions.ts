@@ -41,7 +41,7 @@ export const loadAutoparkCars = createAction(
 
 export const loadAutoparkCarsSuccess = createAction(
   AutoparkDetailedActions.LOAD_AUTOPARK_CARS_SUCCESS,
-  props<{ cars: CarCard[] }>()
+  props<{ cars: CarCard[], pagesLeft: number }>()
 );
 
 export const loadAutoparkCarsFailure = createAction(

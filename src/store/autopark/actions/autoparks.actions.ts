@@ -28,5 +28,5 @@ export const loadAutoparks = createAction(
 
 export const loadAutoparksSuccess = createAction(
   AutoparksActions.LOAD_AUTOPARKS_LIST_SUCCESS,
-  props<{ autoparks: AutoparkCard[] }>()
+  props<{ autoparks: AutoparkCard[]; pagesLeft: number }>()
 );

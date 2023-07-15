@@ -22,14 +22,16 @@ export const initialState: CarsListState = carCardAdapter.getInitialState( {
   usedModels: [],
   page: 1,
   limit: 7,
+  pagesLeft: 1,
   error: '',
 } );
 
 export const carsListReducer = createReducer(
   initialState,
-  on( loadCarsSuccess, (state, { cars }) => ({
+  on( loadCarsSuccess, (state, { cars, pagesLeft }) => ({
     ...state,
     ...carCardAdapter.setAll( cars, state ),
+    pagesLeft
   }) ),
   on( setCarsFiltersParams, (state, { params }) => ({
       ...state,
@@ -49,9 +51,10 @@ export const carsListReducer = createReducer(
       page: state.page + 1
     }
   ) ),
-  on( loadMoreCarsSuccess, (state, { cars }) => ({
+  on( loadMoreCarsSuccess, (state, { cars, pagesLeft }) => ({
       ...state,
-      ...carCardAdapter.setMany( cars, state )
+      ...carCardAdapter.setMany( cars, state ),
+      pagesLeft
     }
   ) ),
 )

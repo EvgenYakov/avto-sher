@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
-import { CarCard, CarProfile, OrderHistoryCarCard } from '@models';
+import { CarCard, CarProfile, OrderHistoryCarCard, PaginationResponse } from '@models';
 import { CarFilterParams } from '@components';
 
 import { BaseService } from '../helpers';
@@ -13,16 +13,14 @@ import { BaseService } from '../helpers';
 } )
 export class CarService extends BaseService {
 
-  public getAllCars(region: string, page: number, limit: number): Observable<CarCard[]> {
-    return this.httpService.get<any>( `${ environment.apiUrl }/cars`, {
+  public getAllCars(region: string, page: number, limit: number): Observable<PaginationResponse<CarCard[]>> {
+    return this.httpService.get<PaginationResponse<CarCard[]>>( `${ environment.apiUrl }/cars`, {
       params: {
         page,
         limit,
         region
       }
-    } ).pipe(
-      map((response) => response.data)
-    )
+    } )
   }
 
   public getOrderHistoryCars(page: number, limit: number = 5): Observable<OrderHistoryCarCard[]> {
@@ -34,8 +32,8 @@ export class CarService extends BaseService {
     } );
   }
 
-  public getCarsByFilter(filterParams: CarFilterParams, region: string, page: number, limit: number): Observable<CarCard[]> {
-    return this.httpService.post<CarCard[]>( `${ environment.apiUrl }/cars/filter`, filterParams, {
+  public getCarsByFilter(filterParams: CarFilterParams, region: string, page: number, limit: number): Observable<PaginationResponse<CarCard[]>> {
+    return this.httpService.post<PaginationResponse<CarCard[]>>( `${ environment.apiUrl }/cars/filter`, filterParams, {
       params: {
         page,
         limit,
@@ -44,8 +42,8 @@ export class CarService extends BaseService {
     } );
   }
 
-  public getAutoparkCars(autoparkId: number, page: number, limit: number = 5): Observable<CarCard[]> {
-    return this.httpService.get<CarCard[]>( `${ environment.apiUrl }/cars/autopark/${ autoparkId }`, {
+  public getAutoparkCars(autoparkId: number, page: number, limit: number = 5): Observable<PaginationResponse<CarCard[]>> {
+    return this.httpService.get<PaginationResponse<CarCard[]>>( `${ environment.apiUrl }/cars/autopark/${ autoparkId }`, {
       params: {
         page,
         limit
