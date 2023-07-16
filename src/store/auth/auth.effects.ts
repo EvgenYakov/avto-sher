@@ -114,13 +114,13 @@ export class AuthEffects {
 
         switch (authResponse.role) {
           case UserRole.OWNER:
-            this.router.navigate( [AppRoutes.AUTOPARK_PANEL] )
+            this.router.navigate( [AppRoutes.CONTROL_PANEL] )
             break;
           case UserRole.DRIVER:
             this.router.navigate( [AppRoutes.MAIN] )
             break;
           case UserRole.ADMIN:
-            this.router.navigate( [AppRoutes.AUTOPARK_PANEL] )
+            this.router.navigate( [AppRoutes.CONTROL_PANEL] )
             break;
         }
       } )

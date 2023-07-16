@@ -11,7 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {
   appReducers,
   AuthEffects,
-  AutoparkDetailedEffects,
+  AutoparkEffects,
   AutoparksEffects,
   CarDetailedEffects,
   CarListEffects,
@@ -38,7 +38,7 @@ bootstrapApplication( AppComponent, {
       AuthEffects,
       CarListEffects,
       CarDetailedEffects,
-      AutoparkDetailedEffects,
+      AutoparkEffects,
       AutoparksEffects,
       UserEffects,
       RegionEffects

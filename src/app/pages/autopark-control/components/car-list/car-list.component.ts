@@ -45,7 +45,7 @@ export class CarListComponent implements OnInit {
   }
 
   public navigateToCreateCar(): void {
-    this.router.navigate( ['/' + AppRoutes.AUTOPARK_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CREATE_CAR] )
+    this.router.navigate( ['/' + AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CREATE_CAR] )
   }
 
 }

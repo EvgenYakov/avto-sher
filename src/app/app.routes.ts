@@ -13,7 +13,7 @@ export const appRoutes: Routes = [
     loadChildren: () => import('./pages/main/main.routes')
   },
   {
-    path: AppRoutes.AUTOPARK_PANEL,
+    path: AppRoutes.CONTROL_PANEL,
     loadChildren: () => import('./pages/control-panel/control-panel.routes')
   },
   {

@@ -19,9 +19,6 @@ export class AutoparkWrapComponent {
     },
     {
       label: 'Верификация'
-    },
-    {
-      label: 'Кошелек'
     }
   ];
 }

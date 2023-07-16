@@ -1,7 +1,7 @@
 export enum AppRoutes {
   MAIN = 'main',
   AUTH = 'auth',
-  AUTOPARK_PANEL = 'autopark-panel',
+  CONTROL_PANEL = 'control-panel',
   NOT_FOUND_PAGE = 'not_found',
   RULES = '/rules',
   CARS = 'cars',
