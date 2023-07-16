@@ -16,6 +16,8 @@ import { CreateCarForm } from '../../models';
 import { FULL_FINANCIAL_OPTIONS } from '../../constants';
 import { CREATE_CAR_DEPS } from './create-car.dependencies';
 import { Dropdown } from '@models';
+import { Store } from '@ngrx/store';
+import { createAutopark } from '@store';
 
 @Component( {
   selector: 'app-create-car',
@@ -58,8 +60,16 @@ export class CreateCarComponent {
 
   public carForm: FormGroup<CreateCarForm>;
 
+  constructor(
+    private store: Store
+  ) {}
+
   ngOnInit(): void {
     this.carForm = this.initializeForm();
+  }
+
+  public onSubmit(): void {
+
   }
 
   public getCurrentYear(): number {
@@ -78,9 +88,5 @@ export class CreateCarComponent {
       rentSchedule: new FormControl<string>( '', [Validators.required] ),
       minRentPeriod: new FormControl<number>( 0, [Validators.required] ),
     } );
-  }
-
-  public onSubmit(): void {
-    console.log( this.carForm.value )
   }
 }

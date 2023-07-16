@@ -7,22 +7,27 @@ import {
   changeProfileAvatarFailure,
   changeProfileAvatarSuccess,
   changeProfileDescriptionFailure,
-  changeProfileDescriptionSuccess, deleteProfileAvatarFailure, deleteProfileAvatarSuccess, getMeSuccess
+  changeProfileDescriptionSuccess,
+  deleteProfileAvatarFailure,
+  deleteProfileAvatarSuccess,
+  getMeSuccess
 } from './user.actions';
+import { createAutoparkSuccess } from '../autopark';
 
 const initialState: UserState = {
   userProfile: {} as UserProfile,
+  autoparks: [],
   backendErrors: null
 }
 
 export const userReducer = createReducer(
   initialState,
-  on( getMeSuccess, (state, { user }) => ({
+  on(getMeSuccess, (state, {user}) => ({
       ...state,
       userProfile: user
     })
   ),
-  on( changeProfileDescriptionSuccess, (state, { info }) => ({
+  on(changeProfileDescriptionSuccess, (state, {info}) => ({
       ...state,
       userProfile: {
         ...state.userProfile,
@@ -30,7 +35,7 @@ export const userReducer = createReducer(
       }
     })
   ),
-  on( changeProfileAvatarSuccess, (state, { avatar }) => ({
+  on(changeProfileAvatarSuccess, (state, {avatar}) => ({
       ...state,
       userProfile: {
         ...state.userProfile,
@@ -38,7 +43,7 @@ export const userReducer = createReducer(
       }
     })
   ),
-  on( deleteProfileAvatarSuccess, (state) => ({
+  on(deleteProfileAvatarSuccess, (state) => ({
       ...state,
       userProfile: {
         ...state.userProfile,
@@ -46,9 +51,14 @@ export const userReducer = createReducer(
       }
     })
   ),
-  on( changeProfileDescriptionFailure, changeProfileAvatarFailure, deleteProfileAvatarFailure, (state, { errors }) => ({
+  on(changeProfileDescriptionFailure, changeProfileAvatarFailure, deleteProfileAvatarFailure, (state, {errors}) => ({
       ...state,
       backendErrors: errors
+    })
+  ),
+  on(createAutoparkSuccess, (state, {autopark}) => ({
+      ...state,
+      autoparks: [...state.autoparks, autopark]
     })
   ),
 );

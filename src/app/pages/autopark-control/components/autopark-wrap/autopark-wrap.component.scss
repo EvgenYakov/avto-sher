@@ -1,11 +1,13 @@
 @import "colors";
 
 :host ::ng-deep {
-  .steps .p-element {
-    width: 10rem;
+  .p-steps {
+    width: 30rem;
   }
 }
 
 .info-text {
+  margin-top: 25px;
+  margin-bottom: 50px;
   color: $label-text-color;
 }
