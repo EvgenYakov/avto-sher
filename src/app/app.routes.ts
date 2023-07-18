@@ -5,13 +5,15 @@ import { AppRoutes } from '@constants';
 import { OfferAgreementComponent, PrivacyComponent } from './components/docx';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/' + AppRoutes.MAIN, pathMatch: 'full' },
   {
-    path: AppRoutes.MAIN,
-    loadChildren: () => import('./pages/main/main.routes')
+    path: '', redirectTo: '/main', pathMatch: 'full'
   },
   {
-    path: AppRoutes.AUTOPARK_PANEL,
+    path: AppRoutes.MAIN,
+    loadChildren: () => import('./pages/main/main.routes'),
+  },
+  {
+    path: AppRoutes.CONTROL_PANEL,
     loadChildren: () => import('./pages/control-panel/control-panel.routes')
   },
   {
@@ -24,9 +26,9 @@ export const appRoutes: Routes = [
   {
     path: AppRoutes.OFFER_AGREEMENT, component: OfferAgreementComponent
   },
-  { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
-  {
-    path: AppRoutes.NOT_FOUND_PAGE,
-    loadChildren: () => import('./pages/not-found/not-found.routes')
-  },
+  // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
+  // {
+  //   path: AppRoutes.NOT_FOUND_PAGE,
+  //   loadChildren: () => import('./pages/not-found/not-found.routes')
+  // },
 ];

@@ -9,5 +9,6 @@ export interface CarsListState extends EntityState<CarCard> {
   usedModels: string[];
   page: number;
   limit: number;
+  pagesLeft: number;
   error: string;
 }

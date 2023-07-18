@@ -3,7 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CarsListState } from '../states';
 import { carCardAdapter } from '../reducers';
 
-const carsListFeatureSelector = createFeatureSelector<CarsListState>('cars');
+const carsListFeatureSelector = createFeatureSelector<CarsListState>( 'cars' );
 
 export const {
   selectEntities: selectCarsEntities,
@@ -33,6 +33,11 @@ export const selectCarsPage = createSelector(
 export const selectCarsLimit = createSelector(
   carsListFeatureSelector,
   (state) => state.limit
+);
+
+export const selectCarsPagesLeft = createSelector(
+  carsListFeatureSelector,
+  (state) => state.pagesLeft
 );
 
 export const selectCarsFilterParams = createSelector(

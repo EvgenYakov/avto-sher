@@ -6,5 +6,6 @@ export interface AutoparkDetailedState {
   reviews: ReviewUser[];
   autoparkCarsPage: number;
   autoparkCarsLimit: number;
+  pagesLeft: number;
   errors: string;
 }
