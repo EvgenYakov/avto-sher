@@ -5,5 +5,6 @@ export interface AutoparksState extends EntityState<AutoparkCard>{
   auctionAutoparksCard: AuctionAutoparks;
   filters: [],
   page: number,
-  limit: number
+  limit: number,
+  pagesLeft: number
 }

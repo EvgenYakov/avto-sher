@@ -8,9 +8,12 @@ import { catchError, map, of, switchMap, withLatestFrom } from 'rxjs';
 
 
 import { AutoparkService, CarService } from '@services';
-import { LoadingTypes } from '@constants';
+import { LoadingTypes, ToasterType } from '@constants';
 
 import {
+  createAutopark,
+  createAutoparkFailure,
+  createAutoparkSuccess,
   loadAutoparkCars,
   loadAutoparkCarsFailure,
   loadAutoparkCarsSuccess,
@@ -19,10 +22,10 @@ import {
   loadAutoparkDetailedSuccess
 } from '../actions';
 import { selectAutoparkCarsPage, selectAutoparkDetailed } from '../selectors';
-import { addLoading, removeLoading } from '../../shared';
+import { addBeErrorMessage, addLoading, removeLoading } from '../../shared';
 
 @Injectable()
-export class AutoparkDetailedEffects {
+export class AutoparkEffects {
 
   constructor(
     private actions$: Actions,
@@ -48,8 +51,22 @@ export class AutoparkDetailedEffects {
       this.store.select( selectAutoparkCarsPage )
     ),
     switchMap( ([{ autoparkId }, page]) => this.carService.getAutoparkCars( autoparkId, page ) ),
-    map( (cars) => loadAutoparkCarsSuccess( { cars } ) ),
+    map( (paginationResponse) => loadAutoparkCarsSuccess( {
+      cars: paginationResponse.data,
+      pagesLeft: paginationResponse.metadata.pagesLeft
+    } ) ),
     catchError( (error: HttpErrorResponse) => of( loadAutoparkCarsFailure( { errors: error } ) ) )
+  ) );
+
+  public createAutopark = createEffect( () => this.actions$.pipe(
+    ofType( createAutopark ),
+    switchMap( ({ autopark }) => this.autoparkService.createAutopark( autopark ).pipe(
+      map( (autopark) => createAutoparkSuccess( { autopark } ) ),
+      catchError( (error: HttpErrorResponse) => {
+        this.store.dispatch( addBeErrorMessage( { severity: ToasterType.ERROR, detail: error.error.message } ) );
+        return of( createAutoparkFailure() );
+      } ),
+    ) ),
   ) );
 
   addLoading$ = createEffect( () =>

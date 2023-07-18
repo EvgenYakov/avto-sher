@@ -12,7 +12,9 @@ import {
   loadCars,
   loadCarsSuccess,
   loadModelsByBrand,
-  loadModelsByBrandSuccess, loadMoreCars, loadMoreCarsSuccess,
+  loadModelsByBrandSuccess,
+  loadMoreCars,
+  loadMoreCarsSuccess,
   loadUsedCarsBrands,
   loadUsedCarsBrandsSuccess
 } from '../actions';
@@ -42,7 +44,10 @@ export class CarListEffects {
           return this.carService.getCarsByFilter( params, regionName, page, limit )
         }
       } ),
-      map( (cars) => loadCarsSuccess( { cars } ) )
+      map( (paginationResponse) => loadCarsSuccess( {
+        cars: paginationResponse.data,
+        pagesLeft: paginationResponse.metadata.pagesLeft
+      } ) )
     )
   );
 
@@ -61,7 +66,10 @@ export class CarListEffects {
           return this.carService.getCarsByFilter( params, regionName, page, limit )
         }
       } ),
-      map( (cars) => loadMoreCarsSuccess( { cars } ) )
+      map( (paginationResponse) => loadMoreCarsSuccess( {
+        cars: paginationResponse.data,
+        pagesLeft: paginationResponse.metadata.pagesLeft
+      } ) )
     )
   );
 

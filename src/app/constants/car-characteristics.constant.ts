@@ -6,7 +6,7 @@ export enum CarTariff {
   COMFORT_PLUS = 'Комфорт плюс',
   BUSINESS = 'Бизнес',
   MINIVAN = 'Минивен',
-  DELIVERY = 'Доставка'
+  PREMIUM = 'Премиум'
 }
 
 export enum Transmission {
@@ -26,7 +26,7 @@ export const TARIFF_OPTIONS: DropdownOption[] = [
   { label: CarTariff.COMFORT_PLUS, value: CarTariff.COMFORT_PLUS },
   { label: CarTariff.BUSINESS, value: CarTariff.BUSINESS },
   { label: CarTariff.MINIVAN, value: CarTariff.MINIVAN },
-  { label: CarTariff.DELIVERY, value: CarTariff.DELIVERY },
+  { label: CarTariff.PREMIUM, value: CarTariff.PREMIUM },
 ];
 
 export const FUEL_OPTIONS: DropdownOption[] = [

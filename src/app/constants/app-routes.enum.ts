@@ -1,11 +1,11 @@
 export enum AppRoutes {
   MAIN = 'main',
   AUTH = 'auth',
-  AUTOPARK_PANEL = 'autopark-panel',
+  CONTROL_PANEL = 'control-panel',
   NOT_FOUND_PAGE = 'not_found',
   RULES = '/rules',
   CARS = 'cars',
-  AUTOPARKS = '',
+  AUTOPARKS = 'autoparks',
   PARTNERS = '/partners',
   FEEDBACK = '/feedback',
   FOR_AUTOPARKS = '/for-autoparks',
@@ -35,5 +35,7 @@ export enum ControlPanel {
   AUTOPARK_CONTROL = 'autopark-control',
   CREATE_CAR = 'create-car',
   CARS_TABLE = 'cars',
-  CREATE_AUTOPARK = 'create-autopark'
+  AUTOPARK = 'autopark',
+  CREATE_AUTOPARK = 'create-autopark',
+  VERIFICATION = 'verification'
 }
