@@ -28,8 +28,12 @@
         Тайтл
       </div>
       <div class="right-side">
-        <div class="autoparks-select">
-          <p-dropdown [options]="[]"  optionLabel="name"></p-dropdown>
+        <div class="autoparks-select" *ngIf="autoparks$|async as autoparks">
+          <p-dropdown
+                  [options]="autoparks"
+                  optionLabel="title"
+                  [dropdownIcon]="(isAutoparksLoading$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+          ></p-dropdown>
         </div>
         <div class="icons">
           <ul>

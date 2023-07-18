@@ -12,7 +12,7 @@ import {
   deleteProfileAvatarSuccess,
   getMeSuccess
 } from './user.actions';
-import { createAutoparkSuccess } from '../autopark';
+import { createAutoparkSuccess, loadAutoparksByOwnerSuccess } from '../autopark';
 
 const initialState: UserState = {
   userProfile: {} as UserProfile,
@@ -59,6 +59,11 @@ export const userReducer = createReducer(
   on(createAutoparkSuccess, (state, {autopark}) => ({
       ...state,
       autoparks: [...state.autoparks, autopark]
+    })
+  ),
+  on(loadAutoparksByOwnerSuccess, (state, {autoparks}) => ({
+      ...state,
+      autoparks: [...state.autoparks, ...autoparks]
     })
   ),
 );
