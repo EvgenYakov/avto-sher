@@ -1,7 +1,7 @@
-import { AutoparkDetailed, UserProfile } from '@models';
+import { AutoparkCard, UserProfile } from '@models';
 
 export interface UserState {
   userProfile: UserProfile,
-  autoparks: AutoparkDetailed[]
+  autoparks: AutoparkCard[]
   backendErrors: any
 }

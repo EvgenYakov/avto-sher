@@ -47,8 +47,19 @@ export class AutoparkService extends BaseService {
     )
   }
 
+  public getAutoparksByOwner(ownerId: number): Observable<AutoparkDetailed[]> {
+    return this.httpService.get<any[]>(`${this.apiUrl}/owner/${ownerId}`);
+  }
+
   public createAutopark(autopark: CreateAutopark): Observable<AutoparkDetailed> {
-    return this.httpService.post<AutoparkDetailed>(`${this.apiUrl}`, autopark, {withCredentials: true});
+    const formData = new FormData();
+    formData.append('logo', autopark.logo);
+    formData.append('title', autopark.title);
+    formData.append('description', autopark.description);
+    formData.append('region', autopark.region);
+    formData.append('address', autopark.address);
+
+    return this.httpService.post<AutoparkDetailed>(`${this.apiUrl}`, formData, {withCredentials: true});
   }
 
   public getDefaultBonuses(): Observable<AutoparkBonus[]> {

@@ -10,7 +10,7 @@ export const appRoutes: Routes = [
   },
   {
     path: AppRoutes.MAIN,
-    loadChildren: () => import('./pages/main/main.routes')
+    loadChildren: () => import('./pages/main/main.routes'),
   },
   {
     path: AppRoutes.CONTROL_PANEL,
