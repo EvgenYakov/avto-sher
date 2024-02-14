@@ -1,6 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-
 import { AuctionAutoparks, AutoparkCard } from '@models';
+import { createAction, props } from '@ngrx/store';
 
 export enum AutoparksActions {
   LOAD_AUCTION_AUTOPARKS = '[AUCTION] Load auction autoparks',
@@ -25,25 +24,18 @@ export const loadAuctionAutoparksByRegionSuccess = createAction(
   props<{ auctionAutoparks: AuctionAutoparks }>()
 );
 
-export const loadAutoparks = createAction(
-  AutoparksActions.LOAD_AUTOPARKS_LIST,
-  props<{ regionName: string }>()
-);
+export const loadAutoparks = createAction(AutoparksActions.LOAD_AUTOPARKS_LIST, props<{ regionName: string }>());
 
 export const loadAutoparksSuccess = createAction(
   AutoparksActions.LOAD_AUTOPARKS_LIST_SUCCESS,
   props<{ autoparks: AutoparkCard[]; pagesLeft: number }>()
 );
 
-export const loadAutoparksByOwner = createAction(
-  AutoparksActions.LOAD_AUTOPARKS_BY_OWNER,
-);
+export const loadAutoparksByOwner = createAction(AutoparksActions.LOAD_AUTOPARKS_BY_OWNER);
 
 export const loadAutoparksByOwnerSuccess = createAction(
   AutoparksActions.LOAD_AUTOPARKS_BY_OWNER_SUCCESS,
   props<{ autoparks: AutoparkCard[] }>()
 );
 
-export const loadAutoparksByOwnerFailure = createAction(
-  AutoparksActions.LOAD_AUTOPARKS_BY_OWNER_FAILURE,
-);
+export const loadAutoparksByOwnerFailure = createAction(AutoparksActions.LOAD_AUTOPARKS_BY_OWNER_FAILURE);

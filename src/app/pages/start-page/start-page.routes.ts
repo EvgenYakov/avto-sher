@@ -5,6 +5,6 @@ import { StartPageComponent } from './start-page.component';
 export default [
   {
     path: '',
-    component: StartPageComponent
-  }
-] as Route[]
+    component: StartPageComponent,
+  },
+] as Route[];

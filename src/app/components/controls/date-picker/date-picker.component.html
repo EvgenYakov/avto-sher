@@ -1,16 +1,15 @@
 <app-control-wrapper
-        [control]="control"
-        [label]="label"
-        [error]="error"
-        [isRequired]="isRequired"
-        [isTouched]="control.touched"
+  [control]="control"
+  [label]="label"
+  [error]="error"
+  [isRequired]="isRequired"
+  [isTouched]="control.touched"
 >
   <p-calendar
-              [dateFormat]="dateFormat"
-              [formControl]="control"
-              [required]="isRequired"
-              [placeholder]="placeholder"
-              [ngClass]="{'ng-invalid ng-dirty':control.errors}"
-  >
-  </p-calendar>
+    [dateFormat]="dateFormat"
+    [formControl]="control"
+    [required]="isRequired"
+    [placeholder]="placeholder"
+    [ngClass]="{ 'ng-invalid ng-dirty': control.errors }"
+  ></p-calendar>
 </app-control-wrapper>

@@ -2,10 +2,10 @@ import { Route } from '@angular/router';
 
 import { ControlPanel } from '@constants';
 
-import { CarListComponent, CreateAutoparkComponent, CreateCarComponent } from './components';
-import { AutoparkControlComponent } from './autopark-control.component';
 import { AutoparkVerificationComponent } from './components/autopark-verification/autopark-verification.component';
 import { AutoparkWrapComponent } from './components/autopark-wrap/autopark-wrap.component';
+import { AutoparkControlComponent } from './autopark-control.component';
+import { CarListComponent, CreateAutoparkComponent, CreateCarComponent } from './components';
 
 export default [
   {
@@ -15,12 +15,12 @@ export default [
       {
         path: ControlPanel.CARS_TABLE,
         title: 'Машины',
-        component: CarListComponent
+        component: CarListComponent,
       },
       {
         path: ControlPanel.CREATE_CAR,
         title: 'Добавление авто',
-        component: CreateCarComponent
+        component: CreateCarComponent,
       },
       {
         path: ControlPanel.AUTOPARK,
@@ -30,16 +30,15 @@ export default [
           {
             path: ControlPanel.CREATE_AUTOPARK,
             title: 'Создание автопарка',
-            component: CreateAutoparkComponent
+            component: CreateAutoparkComponent,
           },
           {
             path: ControlPanel.VERIFICATION,
             title: 'Верификация автопарка',
-            component: AutoparkVerificationComponent
+            component: AutoparkVerificationComponent,
           },
-        ]
-      }
-
-    ]
-  }
+        ],
+      },
+    ],
+  },
 ] as Route[];

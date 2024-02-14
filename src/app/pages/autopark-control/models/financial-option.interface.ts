@@ -4,5 +4,5 @@ export interface FinancialOption {
     label: string;
     placeholder: string;
     unit: string;
-  }[]
+  }[];
 }

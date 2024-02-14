@@ -14,5 +14,5 @@ export interface CreateCarForm {
   rentSchedule: FormControl<string>;
   minRentPeriod: FormControl<number>;
   rentalConditions: FormControl<string[]>;
-  images: FormControl<string[]>
+  images: FormControl<string[]>;
 }

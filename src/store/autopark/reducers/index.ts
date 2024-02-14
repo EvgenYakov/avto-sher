@@ -1,2 +1,2 @@
-export * from './autoparks.reducer'
-export * from './autopark-detailed.reducer'
+export * from './autoparks.reducer';
+export * from './autopark-detailed.reducer';

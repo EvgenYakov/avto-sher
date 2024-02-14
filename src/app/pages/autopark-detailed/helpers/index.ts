@@ -1,1 +1,1 @@
-export * from './get-data-by-status.helper'
+export * from './get-data-by-status.helper';

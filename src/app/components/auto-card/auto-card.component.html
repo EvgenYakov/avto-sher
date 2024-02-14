@@ -1,11 +1,11 @@
 <div class="auto-card" (click)="navigateToCarProfile(car.id)">
-  
   <p-image [src]="car.photos[0]" alt="car image" [preview]="true" (click)="handleImageClick($event)"></p-image>
-  
+
   <div class="auto-card__content">
     <div class="autopark-block">
       <div class="subtitle">
-        {{ car.brand }} {{car.model}} <span class="autopark-block__year">{{ car.yearOfRelease }}</span>
+        {{ car.brand }} {{ car.model }}
+        <span class="autopark-block__year">{{ car.yearOfRelease }}</span>
       </div>
       <div class="autopark-block__title">Автопарк: {{ car.autopark.title }}</div>
       <div class="autopark-block__location small-text" *ngIf="car.autopark.region as region">
@@ -13,32 +13,22 @@
         {{ region }}
       </div>
     </div>
-    Тариф: {{car.type}}
+    Тариф: {{ car.type }}
     <div class="characteristics-block">
-      <div class="characteristics-block__label">
-        Характеристики
-      </div>
+      <div class="characteristics-block__label">Характеристики</div>
       <ng-container *ngIf="!anotherCharacteristicContent; else newContent">
         <div class="characteristics">
           <div class="block">
-            <div class="small-text">
-              Топливо:
-            </div>
-            <div class="small-text">
-              Мощность:
-            </div>
-            <div class="small-text">
-              Коробка:
-            </div>
+            <div class="small-text">Топливо:</div>
+            <div class="small-text">Мощность:</div>
+            <div class="small-text">Коробка:</div>
           </div>
-          
+
           <div class="block">
             <div class="small-text">
-              {{ car.fuel}}
+              {{ car.fuel }}
             </div>
-            <div class="small-text">
-              {{ car.enginePower }} л.с.
-            </div>
+            <div class="small-text">{{ car.enginePower }} л.с.</div>
             <div class="small-text">
               {{ car.transmission }}
             </div>
@@ -50,14 +40,13 @@
       </ng-template>
     </div>
   </div>
-  
+
   <div class="auto-card__rent">
     <app-rent-card
-            [financialInfo]="car.financialInfo"
-            [schedule]="car.autopark.rentSchedule"
-            [price]="car.price"
-            [btnTitle]="buttonLabel"
+      [financialInfo]="car.financialInfo"
+      [schedule]="car.autopark.rentSchedule"
+      [price]="car.price"
+      [btnTitle]="buttonLabel"
     ></app-rent-card>
   </div>
-
 </div>

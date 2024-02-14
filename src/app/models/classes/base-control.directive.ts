@@ -4,15 +4,16 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, NgControl, Valida
 import { startWith, Subject, takeUntil } from 'rxjs';
 
 @Directive({
-    selector: 'app-base-control',
-    providers: [{
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: BaseControl,
-            multi: true
-        }],
-    standalone: true
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: BaseControlDirective,
+      multi: true,
+    },
+  ],
+  standalone: true,
 })
-export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
+export class BaseControlDirective implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() public errorsMap: { [key: string]: string } | null = null;
   @Input() public label: string = '';
   @Input() public placeholder: string = '';
@@ -33,12 +34,11 @@ export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
       this.ngControl.valueAccessor = this;
     }
   }
+  //TODO: no-unused-vars
 
-  public onChange = (value: any) => {
-  };
+  public onChange(value: any): void {}
 
-  public onTouched = () => {
-  };
+  public onTouched(): void {}
 
   ngOnInit(): void {
     this.initValueChangeListener();
@@ -71,9 +71,7 @@ export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
   }
 
   public initValueChangeListener(): void {
-    this.control.valueChanges.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe((value) => this.onChange(value));
+    this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(value => this.onChange(value));
   }
 
   private getErrorMessage(formErrors: ValidationErrors | null | undefined, status: string): string {
@@ -86,9 +84,7 @@ export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
       return '';
     }
 
-    return status === 'INVALID'
-      ? this.errorsMap[errorKey]
-      : '';
+    return status === 'INVALID' ? this.errorsMap[errorKey] : '';
   }
 
   protected initStatusListener(): void {
@@ -97,10 +93,7 @@ export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
       return;
     }
 
-    control.statusChanges.pipe(
-      startWith(control.status),
-      takeUntil(this.destroy$)
-    ).subscribe((status: string) => {
+    control.statusChanges.pipe(startWith(control.status), takeUntil(this.destroy$)).subscribe((status: string) => {
       this.error = this.getErrorMessage(control.errors, status);
       this.checkIsRequired();
       this.synchronizeValidators();
@@ -122,5 +115,4 @@ export class BaseControl implements ControlValueAccessor, OnInit, OnDestroy {
     this.control.setValidators(this.ngControl.control!.validator);
     this.control.setErrors(this.ngControl.control!.errors);
   }
-
 }

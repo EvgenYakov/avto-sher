@@ -1,1 +1,1 @@
-export * from './responsive-options.constants'
+export * from './responsive-options.constants';

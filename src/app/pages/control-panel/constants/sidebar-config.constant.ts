@@ -1,5 +1,6 @@
-import { SidebarConfig } from '../models/sidebar-config.interface';
 import { AppRoutes, ControlPanel } from '@constants';
+
+import { SidebarConfig } from '../models/sidebar-config.interface';
 
 export const SIDEBAR_CONFIG: SidebarConfig[] = [
   {
@@ -9,13 +10,13 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Водители',
-        link: ''
+        link: '',
       },
       {
         title: 'Персонал',
-        link: ''
+        link: '',
       },
-    ]
+    ],
   },
   {
     icon: 'assets/icons/control-panel/autopark.svg',
@@ -24,13 +25,20 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Машины',
-        link: AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CARS_TABLE
+        link: AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CARS_TABLE,
       },
       {
         title: 'Автопарк',
-        link: AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.AUTOPARK + '/' + ControlPanel.CREATE_AUTOPARK
+        link:
+          AppRoutes.CONTROL_PANEL +
+          '/' +
+          ControlPanel.AUTOPARK_CONTROL +
+          '/' +
+          ControlPanel.AUTOPARK +
+          '/' +
+          ControlPanel.CREATE_AUTOPARK,
       },
-    ]
+    ],
   },
   {
     icon: 'assets/icons/control-panel/money.svg',
@@ -39,12 +47,12 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Водители',
-        link: ''
+        link: '',
       },
       {
         title: 'Персонал',
-        link: ''
+        link: '',
       },
-    ]
+    ],
   },
-]
+];

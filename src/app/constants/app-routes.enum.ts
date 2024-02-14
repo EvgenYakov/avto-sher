@@ -20,7 +20,7 @@ export enum AppRoutes {
   TEAM = '/team',
   JOB = '/job',
   PRIVACY = 'privacy',
-  OFFER_AGREEMENT = 'offer-agreement'
+  OFFER_AGREEMENT = 'offer-agreement',
 }
 
 export enum MainRoutes {
@@ -28,7 +28,7 @@ export enum MainRoutes {
   AUTOPARK_DETAILED = 'autopark',
   AUTO_DETAILED = 'auto',
   ORDER_HISTORY = 'history',
-  MY_REQUESTS = 'cars-requests'
+  MY_REQUESTS = 'cars-requests',
 }
 
 export enum ControlPanel {
@@ -37,5 +37,5 @@ export enum ControlPanel {
   CARS_TABLE = 'cars',
   AUTOPARK = 'autopark',
   CREATE_AUTOPARK = 'create-autopark',
-  VERIFICATION = 'verification'
+  VERIFICATION = 'verification',
 }

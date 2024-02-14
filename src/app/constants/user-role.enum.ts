@@ -5,5 +5,5 @@ export enum UserStatus {
 export enum UserRole {
   DRIVER = 'driver',
   OWNER = 'owner',
-  ADMIN = 'admin'
+  ADMIN = 'admin',
 }

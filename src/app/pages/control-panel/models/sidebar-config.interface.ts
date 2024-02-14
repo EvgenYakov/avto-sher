@@ -1,9 +1,9 @@
 export interface SidebarConfig {
-  icon:string;
+  icon: string;
   iconSelected: string;
   headerLabel: string;
   content: {
     title: string;
     link: string;
-  }[]
+  }[];
 }

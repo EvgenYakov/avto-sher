@@ -8,9 +8,7 @@ export interface CreateBaseAutoparkForm {
   logo: FormControl<File>;
 }
 
-export interface AutoparkCustomBonusesForm {
-
-}
+export interface AutoparkCustomBonusesForm {}
 
 export interface CreateAutopark {
   title: string;

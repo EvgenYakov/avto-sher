@@ -1,2 +1,2 @@
-export * from './car-detailed.actions'
-export * from './cars-list.actions'
+export * from './car-detailed.actions';
+export * from './cars-list.actions';

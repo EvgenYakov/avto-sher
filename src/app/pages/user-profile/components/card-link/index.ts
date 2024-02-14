@@ -1,1 +1,1 @@
-export { CardLinkComponent } from './card-link.component'
+export { CardLinkComponent } from './card-link.component';

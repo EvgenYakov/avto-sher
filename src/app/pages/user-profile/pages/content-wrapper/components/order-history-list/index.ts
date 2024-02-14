@@ -1,1 +1,1 @@
-export * from './order-history-list.component'
+export * from './order-history-list.component';

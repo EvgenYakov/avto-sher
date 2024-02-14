@@ -1,1 +1,1 @@
-export { RegistrationComponent as default } from './registration.component'
+export { RegistrationComponent as default } from './registration.component';

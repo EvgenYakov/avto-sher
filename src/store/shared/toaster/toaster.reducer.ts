@@ -1,19 +1,19 @@
-import { createReducer, on } from '@ngrx/store';
 import { ToasterType } from '@constants';
+import { createReducer, on } from '@ngrx/store';
 
-import { ToasterState } from './toaster.state';
 import { addBeErrorMessage } from './toaster.actions';
+import { ToasterState } from './toaster.state';
 
 const initialState: ToasterState = {
   detail: '',
-  severity: ToasterType.SUCCESS
-}
+  severity: ToasterType.SUCCESS,
+};
 
 export const toasterReducer = createReducer(
   initialState,
-  on( addBeErrorMessage, (state, action) => ({
+  on(addBeErrorMessage, (state, action) => ({
     ...state,
     detail: action.detail,
-    severity: action.severity
-  }) ),
+    severity: action.severity,
+  }))
 );

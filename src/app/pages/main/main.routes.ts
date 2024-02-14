@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { Route } from '@angular/router';
 
 import { AppRoutes, MainRoutes } from '@constants';
@@ -12,29 +13,29 @@ export default [
     children: [
       {
         path: '',
-        loadChildren: () => import('../start-page/start-page.routes')
+        loadChildren: () => import('../start-page/start-page.routes'),
       },
       {
         path: MainRoutes.USER_PROFILE,
         loadChildren: () => import('../user-profile/user-profile.routes'),
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
       },
       {
         path: MainRoutes.AUTOPARK_DETAILED + '/:id',
-        loadChildren: () => import('../autopark-detailed/autopark-detailed.routes')
+        loadChildren: () => import('../autopark-detailed/autopark-detailed.routes'),
       },
       {
         path: MainRoutes.AUTO_DETAILED + '/:id',
-        loadChildren: () => import('../car-detailed/car-detailed.routes')
+        loadChildren: () => import('../car-detailed/car-detailed.routes'),
       },
       {
         path: AppRoutes.CARS,
-        loadChildren: () => import('../cars/cars.routes')
+        loadChildren: () => import('../cars/cars.routes'),
       },
       {
         path: AppRoutes.AUTOPARKS,
-        loadChildren: () => import('../autoparks-list/autoparks.routes')
+        loadChildren: () => import('../autoparks-list/autoparks.routes'),
       },
-    ]
-  }
+    ],
+  },
 ] as Route[];

@@ -1,18 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { AppRoutes, ControlPanel } from '@constants';
+import { AutoparkBonus } from '@models';
 import { Store } from '@ngrx/store';
+import { UserAvatarComponent } from '@pages';
+import { AutoparkService } from '@services';
+import { createAutopark } from '@store';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { AutoparkBonus } from '@models';
-import { AutoparkService } from '@services';
-import { AppRoutes, ControlPanel } from '@constants';
-
-import { CREATE_AUTOPARK_DEPS } from './create-autopark.dependencies';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreateAutopark, CreateBaseAutoparkForm } from './models/create-autopark-form.interface';
-import { UserAvatarComponent } from '@pages';
-import { createAutopark } from '@store';
+import { CREATE_AUTOPARK_DEPS } from './create-autopark.dependencies';
 
 @Component({
   selector: 'app-create-autopark',
@@ -20,9 +19,9 @@ import { createAutopark } from '@store';
   templateUrl: './create-autopark.component.html',
   styleUrls: ['./create-autopark.component.scss'],
   imports: [CREATE_AUTOPARK_DEPS, UserAvatarComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAutoparkComponent implements OnInit {
-
   public bonuses$: Observable<AutoparkBonus[]>;
   public avatarPath$ = new BehaviorSubject<string>('');
 
@@ -53,11 +52,20 @@ export class CreateAutoparkComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    this.store.dispatch(createAutopark({autopark: this.autoparkForm.value as CreateAutopark}))
+    this.store.dispatch(createAutopark({ autopark: this.autoparkForm.value as CreateAutopark }));
   }
 
   public navigateToVerification(): void {
-    this.router.navigate(['/' + AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.AUTOPARK + '/' + ControlPanel.VERIFICATION])
+    this.router.navigate([
+      '/' +
+        AppRoutes.CONTROL_PANEL +
+        '/' +
+        ControlPanel.AUTOPARK_CONTROL +
+        '/' +
+        ControlPanel.AUTOPARK +
+        '/' +
+        ControlPanel.VERIFICATION,
+    ]);
   }
 
   private initializeForm(): FormGroup<CreateBaseAutoparkForm> {
@@ -67,7 +75,6 @@ export class CreateAutoparkComponent implements OnInit {
       address: new FormControl<string>('', [Validators.required]),
       region: new FormControl<string>('', [Validators.required]),
       logo: new FormControl(),
-    })
+    });
   }
-
 }

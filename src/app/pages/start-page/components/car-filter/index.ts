@@ -1,1 +1,1 @@
-export { AutoFilterComponent } from './auto-filter.component'
+export { AutoFilterComponent } from './auto-filter.component';

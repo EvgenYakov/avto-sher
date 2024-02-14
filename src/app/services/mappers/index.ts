@@ -1,1 +1,1 @@
-export * from './dropdown-options.service'
+export * from './dropdown-options.service';
