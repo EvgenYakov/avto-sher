@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,7 +16,7 @@ import { FilterComponent } from './components/car-filter/filter.component';
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.scss'],
   standalone: true,
-  imports: [NgFor, AuctionAutoparkCardComponent, FilterComponent, NgIf, AsyncPipe, SpinnerComponent, FilterComponent],
+  imports: [AuctionAutoparkCardComponent, FilterComponent, AsyncPipe, SpinnerComponent, FilterComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartPageComponent implements OnInit, OnDestroy {

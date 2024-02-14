@@ -1,5 +1,7 @@
 <div class="auth-wrapper">
-  <ng-template #authForm>
+  @if (isLoading$ | async) {
+    <app-spinner></app-spinner>
+  } @else {
     <div class="content">
       <div class="content__logo">
         <img src="/assets/icons/logo.png" alt="logo" />
@@ -8,7 +10,5 @@
         <router-outlet></router-outlet>
       </div>
     </div>
-  </ng-template>
-
-  <app-spinner *ngIf="isLoading$ | async; else authForm"></app-spinner>
+  }
 </div>

@@ -1,28 +1,30 @@
 <form [formGroup]="filterForm">
   <div class="filter">
     <div class="block">
-      <div class="dropdown" *ngFor="let dropdown of dropdowns; let i = index">
-        <ng-container *ngIf="i < 2">
-          <div class="label">
-            {{ dropdown.label }}
-          </div>
-          <p-multiSelect
-            [options]="dropdown.options"
-            [placeholder]="dropdown.placeholder"
-            [formControlName]="dropdown.formControlName"
-          ></p-multiSelect>
-        </ng-container>
-        <ng-container *ngIf="i >= 2">
-          <div class="label">
-            {{ dropdown.label }}
-          </div>
-          <p-dropdown
-            [options]="dropdown.options"
-            [placeholder]="dropdown.placeholder"
-            [formControlName]="dropdown.formControlName"
-          ></p-dropdown>
-        </ng-container>
-      </div>
+      @for (dropdown of dropdowns; track dropdown; let i = $index) {
+        <div class="dropdown">
+          @if (i < 2) {
+            <div class="label">
+              {{ dropdown.label }}
+            </div>
+            <p-multiSelect
+              [options]="dropdown.options"
+              [placeholder]="dropdown.placeholder"
+              [formControlName]="dropdown.formControlName"
+            ></p-multiSelect>
+          }
+          @if (i >= 2) {
+            <div class="label">
+              {{ dropdown.label }}
+            </div>
+            <p-dropdown
+              [options]="dropdown.options"
+              [placeholder]="dropdown.placeholder"
+              [formControlName]="dropdown.formControlName"
+            ></p-dropdown>
+          }
+        </div>
+      }
 
       <div class="price">
         <div class="label">Цена</div>
@@ -92,35 +94,40 @@
         ></p-selectButton>
       </div>
     </div>
-    <div class="block" *ngIf="isOpenAdditionalFilters">
-      <div class="block__additional">
-        <div class="label">Дополнительная</div>
-        <p-multiSelect
-          [options]="additional"
-          [filter]="false"
-          [formControl]="filterForm.controls.additionalInfo"
-          display="chip"
-          placeholder="Выберите"
-          class="more-additional-info"
-        ></p-multiSelect>
+    @if (isOpenAdditionalFilters) {
+      <div class="block">
+        <div class="block__additional">
+          <div class="label">Дополнительная</div>
+          <p-multiSelect
+            [options]="additional"
+            [filter]="false"
+            [formControl]="filterForm.controls.additionalInfo"
+            display="chip"
+            placeholder="Выберите"
+            class="more-additional-info"
+          ></p-multiSelect>
+        </div>
+        <div class="block__financial">
+          <div class="label">Финансовая</div>
+          <p-multiSelect
+            [options]="financial"
+            [filter]="false"
+            [formControl]="filterForm.controls.financialInfo"
+            display="chip"
+            placeholder="Выберите"
+            class="more-additional-info"
+          ></p-multiSelect>
+        </div>
       </div>
-
-      <div class="block__financial">
-        <div class="label">Финансовая</div>
-        <p-multiSelect
-          [options]="financial"
-          [filter]="false"
-          [formControl]="filterForm.controls.financialInfo"
-          display="chip"
-          placeholder="Выберите"
-          class="more-additional-info"
-        ></p-multiSelect>
-      </div>
-    </div>
+    }
   </div>
 </form>
 <div class="open-close-additional-filters" (click)="isOpenAdditionalFilters = !isOpenAdditionalFilters">
   Полный набор фильтров
-  <i class="pi pi-angle-down" *ngIf="!isOpenAdditionalFilters"></i>
-  <i class="pi pi-angle-up" *ngIf="isOpenAdditionalFilters"></i>
+  @if (!isOpenAdditionalFilters) {
+    <i class="pi pi-angle-down"></i>
+  }
+  @if (isOpenAdditionalFilters) {
+    <i class="pi pi-angle-up"></i>
+  }
 </div>

@@ -8,22 +8,23 @@
         <span class="autopark-block__year">{{ car.yearOfRelease }}</span>
       </div>
       <div class="autopark-block__title">Автопарк: {{ car.autopark.title }}</div>
-      <div class="autopark-block__location small-text" *ngIf="car.autopark.region as region">
-        <i class="autopark-block__location-icon pi pi-map-marker"></i>
-        {{ region }}
-      </div>
+      @if (car.autopark.region; as region) {
+        <div class="autopark-block__location small-text">
+          <i class="autopark-block__location-icon pi pi-map-marker"></i>
+          {{ region }}
+        </div>
+      }
     </div>
     Тариф: {{ car.type }}
     <div class="characteristics-block">
       <div class="characteristics-block__label">Характеристики</div>
-      <ng-container *ngIf="!anotherCharacteristicContent; else newContent">
+      @if (!anotherCharacteristicContent) {
         <div class="characteristics">
           <div class="block">
             <div class="small-text">Топливо:</div>
             <div class="small-text">Мощность:</div>
             <div class="small-text">Коробка:</div>
           </div>
-
           <div class="block">
             <div class="small-text">
               {{ car.fuel }}
@@ -34,10 +35,9 @@
             </div>
           </div>
         </div>
-      </ng-container>
-      <ng-template #newContent>
+      } @else {
         <ng-content></ng-content>
-      </ng-template>
+      }
     </div>
   </div>
 

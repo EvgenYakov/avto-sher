@@ -3,5 +3,7 @@
     <p-rating formControlName="defaultValue" [cancel]="false" [readonly]="true" [stars]="rating.value"></p-rating>
   </form>
 
-  <div class="date small-text" *ngIf="rating.date">{{ rating.date }}</div>
+  @if (rating.date) {
+    <div class="date small-text">{{ rating.date }}</div>
+  }
 </div>

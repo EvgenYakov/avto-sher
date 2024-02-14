@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { LoadMoreComponent, SpinnerComponent } from '@components';
@@ -17,15 +17,7 @@ import { AutoparkCardComponent, AutoparkFiltersComponent } from './components';
   standalone: true,
   templateUrl: './autoparks.component.html',
   styleUrls: ['./autoparks.component.scss'],
-  imports: [
-    AutoparkFiltersComponent,
-    LoadMoreComponent,
-    AutoparkCardComponent,
-    NgForOf,
-    AsyncPipe,
-    SpinnerComponent,
-    NgIf,
-  ],
+  imports: [AutoparkFiltersComponent, LoadMoreComponent, AutoparkCardComponent, AsyncPipe, SpinnerComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoparksComponent implements OnInit, OnDestroy {

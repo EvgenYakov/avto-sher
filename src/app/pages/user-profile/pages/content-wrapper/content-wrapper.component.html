@@ -6,12 +6,12 @@
   <div class="wrapper__content">
     <div class="sidenav"></div>
     <div class="cards-list">
-      <ng-container *ngIf="cardsType === CardsType.ORDER_HISTORY">
+      @if (cardsType === CardsType.ORDER_HISTORY) {
         <app-order-history-list></app-order-history-list>
-      </ng-container>
-      <ng-container *ngIf="cardsType === CardsType.MY_REQUESTS">
+      }
+      @if (cardsType === CardsType.MY_REQUESTS) {
         <app-cars-request-list></app-cars-request-list>
-      </ng-container>
+      }
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./control-wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, NgClass],
+  imports: [NgClass],
 })
 export class ControlWrapperComponent {
   @Input() isRequired: boolean;

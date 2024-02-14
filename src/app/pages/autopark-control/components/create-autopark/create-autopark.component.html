@@ -28,11 +28,11 @@
 
       <div class="setting-block">
         <div class="setting-block__logo">
-          <ng-template #defaultLogo>
+          @if (avatarPath$ | async; as avatar) {
+            <img [src]="avatar" alt="Лого автопарка" />
+          } @else {
             <div class="default-bck"></div>
-          </ng-template>
-
-          <img *ngIf="avatarPath$ | async as avatar; else defaultLogo" [src]="avatar" alt="Лого автопарка" />
+          }
           <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)" [accept]="'image/*'" />
         </div>
 
@@ -57,19 +57,21 @@
         <div class="label">Бонусная система</div>
         <div class="autopark__info-text">Выберите бонусы, которые получит водитель при аренде автомобиля</div>
         <div class="bonuses">
-          <div *ngFor="let bonus of bonuses$ | async" class="bonus">
-            <p-checkbox name="group" [value]="bonus.title" [inputId]="bonus.title"></p-checkbox>
-            <img [src]="bonus.icon" alt="" />
-            <label [for]="bonus.title">
-              <div class="bonus__title">
-                {{ bonus.title }}
-              </div>
-              <div class="bonus__description">
-                {{ bonus.description }}
-              </div>
-            </label>
-            <br />
-          </div>
+          @for (bonus of bonuses$ | async; track bonus) {
+            <div class="bonus">
+              <p-checkbox name="group" [value]="bonus.title" [inputId]="bonus.title"></p-checkbox>
+              <img [src]="bonus.icon" alt="" />
+              <label [for]="bonus.title">
+                <div class="bonus__title">
+                  {{ bonus.title }}
+                </div>
+                <div class="bonus__description">
+                  {{ bonus.description }}
+                </div>
+              </label>
+              <br />
+            </div>
+          }
         </div>
       </div>
 

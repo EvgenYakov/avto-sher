@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -10,7 +9,7 @@ import { StepsModule } from 'primeng/steps';
   standalone: true,
   templateUrl: './autopark-wrap.component.html',
   styleUrls: ['./autopark-wrap.component.scss'],
-  imports: [CommonModule, RouterOutlet, StepsModule],
+  imports: [RouterOutlet, StepsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoparkWrapComponent {
