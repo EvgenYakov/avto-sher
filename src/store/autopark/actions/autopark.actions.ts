@@ -1,10 +1,7 @@
+import { AutoparkDetailed, CarCard } from '@models';
 import { createAction, props } from '@ngrx/store';
 
-import { AutoparkDetailed, CarCard } from '@models';
-import {
-  CreateAutopark
-} from '../../../app/pages/autopark-control/components/create-autopark/models/create-autopark-form.interface';
-
+import { CreateAutopark } from '../../../app/pages/autopark-control/components/create-autopark/models/create-autopark-form.interface';
 
 export enum AutoparkActions {
   LOAD_AUTOPARK_DETAILED = '[AUTOPARK] Load profile of autopark',
@@ -37,18 +34,13 @@ export const loadAutoparkDetailedFailure = createAction(
   props<{ errors: string }>()
 );
 
-export const loadMoreAutoparkCars = createAction(
-  AutoparkActions.LOAD_MORE_AUTOPARK_CARS,
-);
+export const loadMoreAutoparkCars = createAction(AutoparkActions.LOAD_MORE_AUTOPARK_CARS);
 
-export const loadAutoparkCars = createAction(
-  AutoparkActions.LOAD_AUTOPARK_CARS,
-  props<{ autoparkId: number }>()
-);
+export const loadAutoparkCars = createAction(AutoparkActions.LOAD_AUTOPARK_CARS, props<{ autoparkId: number }>());
 
 export const loadAutoparkCarsSuccess = createAction(
   AutoparkActions.LOAD_AUTOPARK_CARS_SUCCESS,
-  props<{ cars: CarCard[], pagesLeft: number }>()
+  props<{ cars: CarCard[]; pagesLeft: number }>()
 );
 
 export const loadAutoparkCarsFailure = createAction(
@@ -56,16 +48,11 @@ export const loadAutoparkCarsFailure = createAction(
   props<{ errors: any }>()
 );
 
-export const createAutopark = createAction(
-  AutoparkActions.CREATE_AUTOPARK,
-  props<{ autopark: CreateAutopark }>()
-);
+export const createAutopark = createAction(AutoparkActions.CREATE_AUTOPARK, props<{ autopark: CreateAutopark }>());
 
 export const createAutoparkSuccess = createAction(
   AutoparkActions.CREATE_AUTOPARK_SUCCESS,
   props<{ autopark: AutoparkDetailed }>()
 );
 
-export const createAutoparkFailure = createAction(
-  AutoparkActions.CREATE_AUTOPARK_FAILURE,
-);
+export const createAutoparkFailure = createAction(AutoparkActions.CREATE_AUTOPARK_FAILURE);

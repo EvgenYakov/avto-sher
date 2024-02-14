@@ -1,1 +1,1 @@
-export * from './bytes.pipe'
+export * from './bytes.pipe';

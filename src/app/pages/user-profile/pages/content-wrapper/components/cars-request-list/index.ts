@@ -1,1 +1,1 @@
-export * from './cars-request.component'
+export * from './cars-request.component';

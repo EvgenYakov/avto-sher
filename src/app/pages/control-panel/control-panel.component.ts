@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
-import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
-import { SidebarConfig } from './models/sidebar-config.interface';
-import { DropdownModule } from 'primeng/dropdown';
+import { LoadingTypes } from '@constants';
+import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
 import { loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
+import { DropdownModule } from 'primeng/dropdown';
 import { Observable } from 'rxjs';
-import { AutoparkCard } from '@models';
-import { LoadingTypes } from '@constants';
+
+import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
+import { SidebarConfig } from './models/sidebar-config.interface';
+import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
 
 @Component({
   selector: 'app-control-panel',
@@ -16,6 +17,7 @@ import { LoadingTypes } from '@constants';
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
   imports: [CONTROL_PANEL_DEPS, DropdownModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlPanelComponent implements OnInit {
   public sidebarVisible = false;
@@ -25,11 +27,9 @@ export class ControlPanelComponent implements OnInit {
   public autoparks$: Observable<AutoparkCard[]>;
   public isAutoparksLoading$: Observable<boolean>;
 
-  constructor(
-    private store: Store
-  ) {}
+  constructor(private store: Store) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.dispatch(loadAutoparksByOwner());
     this.getDataFromStore();
   }
@@ -39,8 +39,8 @@ export class ControlPanelComponent implements OnInit {
     this.sidebarVisible = true;
   }
 
-  private getDataFromStore():void {
-    this.isAutoparksLoading$ = this.store.select( selectLoading, { type: LoadingTypes.AUTOPARKS } );
+  private getDataFromStore(): void {
+    this.isAutoparksLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
     this.autoparks$ = this.store.select(selectUserAutoparks);
   }
 }

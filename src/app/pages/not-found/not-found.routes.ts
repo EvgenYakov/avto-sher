@@ -6,5 +6,5 @@ export default [
   {
     path: '',
     component: NotFoundComponent,
-  }
+  },
 ] as Route[];

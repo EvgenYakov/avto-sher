@@ -1,6 +1,7 @@
 import { Route } from '@angular/router';
 
 import { ControlPanel } from '@constants';
+
 import { ControlPanelComponent } from './control-panel.component';
 
 export default [
@@ -10,8 +11,8 @@ export default [
     children: [
       {
         path: ControlPanel.AUTOPARK_CONTROL,
-        loadChildren: () => import('../autopark-control/autopark-control.routes')
+        loadChildren: () => import('../autopark-control/autopark-control.routes'),
       },
-    ]
-  }
+    ],
+  },
 ] as Route[];

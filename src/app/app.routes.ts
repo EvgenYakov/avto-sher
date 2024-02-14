@@ -6,7 +6,9 @@ import { OfferAgreementComponent, PrivacyComponent } from './components/docx';
 
 export const appRoutes: Routes = [
   {
-    path: '', redirectTo: '/main', pathMatch: 'full'
+    path: '',
+    redirectTo: '/main',
+    pathMatch: 'full',
   },
   {
     path: AppRoutes.MAIN,
@@ -14,17 +16,19 @@ export const appRoutes: Routes = [
   },
   {
     path: AppRoutes.CONTROL_PANEL,
-    loadChildren: () => import('./pages/control-panel/control-panel.routes')
+    loadChildren: () => import('./pages/control-panel/control-panel.routes'),
   },
   {
     path: AppRoutes.AUTH,
-    loadChildren: () => import('./pages/auth/auth.routes')
+    loadChildren: () => import('./pages/auth/auth.routes'),
   },
   {
-    path: AppRoutes.PRIVACY, component: PrivacyComponent
+    path: AppRoutes.PRIVACY,
+    component: PrivacyComponent,
   },
   {
-    path: AppRoutes.OFFER_AGREEMENT, component: OfferAgreementComponent
+    path: AppRoutes.OFFER_AGREEMENT,
+    component: OfferAgreementComponent,
   },
   // { path: '**', redirectTo: '/' + AppRoutes.NOT_FOUND_PAGE },
   // {

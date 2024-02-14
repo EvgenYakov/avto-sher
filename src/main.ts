@@ -1,13 +1,14 @@
-import { importProvidersFrom } from '@angular/core';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { importProvidersFrom } from '@angular/core';
+import { bootstrapApplication, BrowserModule } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withRouterConfig } from '@angular/router';
 
-import { StoreModule } from '@ngrx/store';
+import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { ApplyTokenInterceptor, AuthGuard } from '@services';
 import {
   appReducers,
   AuthEffects,
@@ -15,34 +16,37 @@ import {
   AutoparksEffects,
   CarDetailedEffects,
   CarListEffects,
-  UserEffects
+  UserEffects,
 } from '@store';
-import { environment } from '@environments/environment';
-import { ApplyTokenInterceptor, AuthGuard } from '@services';
 
 import { AppComponent } from './app/app.component';
-import { appRoutes } from './app/app.routes'
+import { appRoutes } from './app/app.routes';
 import { RegionEffects } from './store/region/region.effects';
 
-bootstrapApplication( AppComponent, {
+bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(
       appRoutes,
       // withDebugTracing(),
-      withRouterConfig( { paramsInheritanceStrategy: 'always' } )
+      withRouterConfig({ paramsInheritanceStrategy: 'always' })
     ),
-    importProvidersFrom( BrowserModule, StoreModule.forRoot( appReducers ), StoreDevtoolsModule.instrument( {
-      maxAge: 25,
-      logOnly: environment.production,
-    } ), EffectsModule.forRoot( [
-      AuthEffects,
-      CarListEffects,
-      CarDetailedEffects,
-      AutoparkEffects,
-      AutoparksEffects,
-      UserEffects,
-      RegionEffects
-    ] ) ),
+    importProvidersFrom(
+      BrowserModule,
+      StoreModule.forRoot(appReducers),
+      StoreDevtoolsModule.instrument({
+        maxAge: 25,
+        logOnly: environment.production,
+      }),
+      EffectsModule.forRoot([
+        AuthEffects,
+        CarListEffects,
+        CarDetailedEffects,
+        AutoparkEffects,
+        AutoparksEffects,
+        UserEffects,
+        RegionEffects,
+      ])
+    ),
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
@@ -55,7 +59,6 @@ bootstrapApplication( AppComponent, {
     //   multi: true,
     // },
     provideAnimations(),
-    provideHttpClient( withInterceptorsFromDi() )
-  ]
-} )
-.catch( err => console.error( err ) );
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+}).catch(err => console.error(err));

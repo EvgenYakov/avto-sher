@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
 import { CarCard, CarProfile } from '@models';
+import { createAction, props } from '@ngrx/store';
 
 export enum CarDetailedActions {
   LOAD_CAR = '[CAR] Load car profile',
@@ -19,50 +19,26 @@ export enum CarDetailedActions {
   CHANGE_STATUS_FAILURE = '[CAR] Change car failure',
 }
 
-export const loadCar = createAction(
-  CarDetailedActions.LOAD_CAR,
-  props<{ carId: number }>()
-);
+export const loadCar = createAction(CarDetailedActions.LOAD_CAR, props<{ carId: number }>());
 
-export const loadCarSuccess = createAction(
-  CarDetailedActions.LOAD_CAR_SUCCESS,
-  props<{ car: CarProfile }>()
-);
+export const loadCarSuccess = createAction(CarDetailedActions.LOAD_CAR_SUCCESS, props<{ car: CarProfile }>());
 
-export const loadCarFailure = createAction(
-  CarDetailedActions.LOAD_CAR_FAILURE,
-  props<{ error: string }>()
-);
+export const loadCarFailure = createAction(CarDetailedActions.LOAD_CAR_FAILURE, props<{ error: string }>());
 
-export const addPhoto = createAction(
-  CarDetailedActions.ADD_PHOTO,
-  props<{ newPhoto: string }>()
-);
+export const addPhoto = createAction(CarDetailedActions.ADD_PHOTO, props<{ newPhoto: string }>());
 
-export const addPhotoSuccess = createAction(
-  CarDetailedActions.ADD_PHOTO_SUCCESS,
-  props<{ photo: string }>()
-);
+export const addPhotoSuccess = createAction(CarDetailedActions.ADD_PHOTO_SUCCESS, props<{ photo: string }>());
 
-export const addPhotoFailure = createAction(
-  CarDetailedActions.ADD_PHOTO_FAILURE,
-  props<{ errors: any }>()
-);
+export const addPhotoFailure = createAction(CarDetailedActions.ADD_PHOTO_FAILURE, props<{ errors: any }>());
 
-export const deletePhotos = createAction(
-  CarDetailedActions.DELETE_PHOTOS,
-  props<{ deletedPhotos: string[] }>()
-);
+export const deletePhotos = createAction(CarDetailedActions.DELETE_PHOTOS, props<{ deletedPhotos: string[] }>());
 
 export const deletePhotosSuccess = createAction(
   CarDetailedActions.DELETE_PHOTOS_SUCCESS,
   props<{ photos: string[] }>()
 );
 
-export const deletePhotosFailure = createAction(
-  CarDetailedActions.DELETE_PHOTOS_FAILURE,
-  props<{ errors: any }>()
-);
+export const deletePhotosFailure = createAction(CarDetailedActions.DELETE_PHOTOS_FAILURE, props<{ errors: any }>());
 
 export const changeCarStatus = createAction(
   CarDetailedActions.CHANGE_STATUS_CAR,
@@ -74,7 +50,4 @@ export const changeCarStatusSuccess = createAction(
   props<{ newCar: CarCard }>()
 );
 
-export const changeCarStatusFailure = createAction(
-  CarDetailedActions.CHANGE_STATUS_FAILURE,
-  props<{ errors: any }>()
-);
+export const changeCarStatusFailure = createAction(CarDetailedActions.CHANGE_STATUS_FAILURE, props<{ errors: any }>());

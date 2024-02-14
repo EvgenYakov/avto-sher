@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
 
-import { AuthRoutes } from './enums';
 import AuthComponent from './components/auth';
 import LoginComponent from './components/login';
 import RegistrationComponent from './components/registration';
+import { AuthRoutes } from './enums';
 
 export default [
   {
@@ -12,12 +12,12 @@ export default [
     children: [
       {
         path: AuthRoutes.LOGIN,
-        component: LoginComponent
+        component: LoginComponent,
       },
       {
         path: AuthRoutes.REGISTRATION,
-        component: RegistrationComponent
+        component: RegistrationComponent,
       },
-    ]
-  }
+    ],
+  },
 ] as Route[];

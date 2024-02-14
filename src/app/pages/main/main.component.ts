@@ -1,32 +1,22 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { Store } from '@ngrx/store';
-
-import { MessageService } from 'primeng/api';
-
-import { getMe, loadRegions } from '@store';
-
-import { LocalStorageKeys } from '@constants';
-import { LocalStorageService } from '@services';
+import { loadRegions } from '@store';
 
 import { MAIN_DEPS } from './main.dependencies';
 
-@Component( {
+@Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
   standalone: true,
   imports: [MAIN_DEPS],
   changeDetection: ChangeDetectionStrategy.OnPush,
-} )
+})
 export class MainComponent implements OnInit {
-
-  constructor(
-    private store: Store,
-  ) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch( loadRegions() );
+    this.store.dispatch(loadRegions());
   }
-
 }

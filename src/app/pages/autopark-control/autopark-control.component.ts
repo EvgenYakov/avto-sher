@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,8 +7,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterOutlet],
   templateUrl: './autopark-control.component.html',
-  styleUrls: ['./autopark-control.component.scss']
+  styleUrls: ['./autopark-control.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutoparkControlComponent {
-
-}
+export class AutoparkControlComponent {}

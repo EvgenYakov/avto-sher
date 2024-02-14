@@ -1,6 +1,6 @@
-import { createAction, props } from '@ngrx/store';
-import { CarCard } from '@models';
 import { CarFilterParams } from '@components';
+import { CarCard } from '@models';
+import { createAction, props } from '@ngrx/store';
 
 export enum CarsListActions {
   LOAD_CARS = '[CAR] Get all cars',
@@ -25,31 +25,24 @@ export enum CarsListActions {
   LOAD_MORE_SUCCESS = '[CARS LIST] Load more cars success',
 }
 
-export const loadMoreCars = createAction(
-  CarsListActions.LOAD_MORE,
-  props<{ regionName: string }>()
-);
+export const loadMoreCars = createAction(CarsListActions.LOAD_MORE, props<{ regionName: string }>());
 
 export const loadMoreCarsSuccess = createAction(
   CarsListActions.LOAD_MORE_SUCCESS,
-  props<{ cars: CarCard[], pagesLeft: number }>()
+  props<{ cars: CarCard[]; pagesLeft: number }>()
 );
 
 export const setCarsFiltersParams = createAction(
   CarsListActions.SET_CARS_FILTERS,
   props<{ params: CarFilterParams }>()
-)
-
-export const loadCars = createAction(
-  CarsListActions.LOAD_CARS,
-  props<{ regionName: string }>()
 );
+
+export const loadCars = createAction(CarsListActions.LOAD_CARS, props<{ regionName: string }>());
 
 export const loadCarsSuccess = createAction(
   CarsListActions.LOAD_CARS_SUCCESS,
-  props<{ cars: CarCard[], pagesLeft: number }>()
+  props<{ cars: CarCard[]; pagesLeft: number }>()
 );
-
 
 // export const createCar = createAction(
 //   CarsListActions.CREATE_CAR,
@@ -82,10 +75,7 @@ export const loadCarsSuccess = createAction(
 // );
 //
 
-export const loadUsedCarsBrands = createAction(
-  CarsListActions.LOAD_USED_BRANDS,
-  props<{ regionName: string }>()
-);
+export const loadUsedCarsBrands = createAction(CarsListActions.LOAD_USED_BRANDS, props<{ regionName: string }>());
 
 export const loadUsedCarsBrandsSuccess = createAction(
   CarsListActions.LOAD_USED_BRANDS_SUCCESS,
@@ -94,7 +84,7 @@ export const loadUsedCarsBrandsSuccess = createAction(
 
 export const loadModelsByBrand = createAction(
   CarsListActions.LOAD_USED_MODELS,
-  props<{ regionName: string, brand: string }>()
+  props<{ regionName: string; brand: string }>()
 );
 
 export const loadModelsByBrandSuccess = createAction(

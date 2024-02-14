@@ -1,1 +1,1 @@
-export * from './bonus.component'
+export * from './bonus.component';

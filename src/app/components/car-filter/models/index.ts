@@ -1,1 +1,1 @@
-export * from './car-filter-form.interface'
+export * from './car-filter-form.interface';

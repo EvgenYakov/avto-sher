@@ -5,11 +5,14 @@
     </div>
     <div class="autoparks__list">
       <app-load-more>
-        <app-autopark-card *ngFor="let autopark of autoparks$ | async" [autoparkCard]="autopark" class="list-item"></app-autopark-card>
+        <app-autopark-card
+          *ngFor="let autopark of autoparks$ | async"
+          [autoparkCard]="autopark"
+          class="list-item"
+        ></app-autopark-card>
       </app-load-more>
     </div>
   </div>
 </ng-template>
-
 
 <app-spinner *ngIf="isLoading$ | async; else autoparks"></app-spinner>

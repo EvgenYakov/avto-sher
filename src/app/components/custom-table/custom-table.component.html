@@ -1,35 +1,31 @@
 <div class="table" *ngIf="tableData">
-  <p-table #table
-           [value]="tableData"
-           [globalFilterFields]="globalFilteredFields"
-           [scrollable]="true"
-  >
+  <p-table #table [value]="tableData" [globalFilterFields]="globalFilteredFields" [scrollable]="true">
     <ng-template pTemplate="caption">
       <div class="search">
         <div class="p-input-icon-left ml-auto">
           <i class="pi pi-search"></i>
-          <input pInputText type="text"
-                 (input)="table.filterGlobal($any($event.target).value, 'contains')"
-                 placeholder="Поиск"/>
+          <input
+            pInputText
+            type="text"
+            (input)="table.filterGlobal($any($event.target).value, 'contains')"
+            placeholder="Поиск"
+          />
         </div>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
       <tr>
         <th *ngFor="let col of columnNamesKey" [pSortableColumn]="col">
-          {{columnNames[col] | titlecase}}
+          {{ columnNames[col] | titlecase }}
           <p-columnFilter type="text" [field]="col" display="menu"></p-columnFilter>
           <p-sortIcon [field]="col"></p-sortIcon>
         </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
-      <tr
-              class="data_row"
-              (click)="emitIdRow(data.id)"
-      >
+      <tr class="data_row" (click)="emitIdRow(data.id)">
         <td *ngFor="let col of columnNamesKey">
-          {{data[col]}}
+          {{ data[col] }}
         </td>
       </tr>
     </ng-template>
@@ -39,5 +35,4 @@
       </tr>
     </ng-template>
   </p-table>
-
 </div>

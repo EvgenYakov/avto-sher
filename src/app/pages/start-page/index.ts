@@ -1,1 +1,1 @@
-export * from './start-page.routes'
+export * from './start-page.routes';

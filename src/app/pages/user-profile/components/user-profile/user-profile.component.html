@@ -1,17 +1,17 @@
 <div class="profile container">
   <ng-template #profileGrid>
-    <div class="profile__grid" *ngIf="(userProfile$|async) as userProfile">
+    <div class="profile__grid" *ngIf="userProfile$ | async as userProfile">
       <p-card class="user-card">
         <div class="card profile__user-card">
-            <app-user-avatar
-                    [avatarPath]="userProfile.avatar"
-                    (fileValidationErrors)="handleFileValidationErrors($event)"
-                    (avatarSelected)="handleAvatarSelected($event)"
-                    (avatarDeleted)="handleAvatarDeleted()"
-                    [isLoading]="isChangingAvatarLoading$"
-                    class="card__avatar"
-            ></app-user-avatar>
-      
+          <app-user-avatar
+            [avatarPath]="userProfile.avatar"
+            (fileValidationErrors)="handleFileValidationErrors($event)"
+            (avatarSelected)="handleAvatarSelected($event)"
+            (avatarDeleted)="handleAvatarDeleted()"
+            [isLoading]="isChangingAvatarLoading$"
+            class="card__avatar"
+          ></app-user-avatar>
+
           <div class="card__info">
             <div class="card__header">
               <div class="subtitle">
@@ -22,10 +22,9 @@
                   {{ userProfile.phoneNumber }}
                 </div>
                 <div class="small-text">{{ userProfile.email }}</div>
-
               </div>
             </div>
-            <div class="p-error">{{fileValidationsMsg}}</div>
+            <div class="p-error">{{ fileValidationsMsg }}</div>
             <a class="card__link link" (click)="logout()">Выйти</a>
           </div>
         </div>
@@ -37,36 +36,29 @@
             <div class="card__header">
               <div class="card__header-wrapper">
                 <div class="subtitle">Информация о себе</div>
-                <i
-                        *ngIf="!isEditMode"
-                        class="pi pi-user-edit card__icon-link link"
-                        (click)="isEditMode = true"
-                ></i>
+                <i *ngIf="!isEditMode" class="pi pi-user-edit card__icon-link link" (click)="isEditMode = true"></i>
               </div>
               <div *ngIf="!isEditMode" class="card__user-description small-text">
-                {{ userProfile.info || "Заполните информацию о себе" }}
+                {{ userProfile.info || 'Заполните информацию о себе' }}
               </div>
 
               <form
-                      *ngIf="isEditMode"
-                      [formGroup]="userProfileInfoForm"
-                      (ngSubmit)="saveDescriptionInfo()"
-                      class="card__user-description-form"
+                *ngIf="isEditMode"
+                [formGroup]="userProfileInfoForm"
+                (ngSubmit)="saveDescriptionInfo()"
+                class="card__user-description-form"
               >
-              <textarea
-                      [formControl]="userProfileInfoForm.controls.description"
-                      pInputTextarea
-              ></textarea>
+                <textarea [formControl]="userProfileInfoForm.controls.description" pInputTextarea></textarea>
                 <div class="p-error" *ngIf="userProfileInfoForm.controls.description.errors">
                   * Ваш текст слишком длинный, лимит сомволов составляет 500 символов
                 </div>
-                <p-button type="submit"
-                          label="Сохранить"
-                          class="card__link"
-                          styleClass="p-button-text"
-                          [disabled]="!userProfileInfoForm.controls.description.dirty || userProfileInfoForm.invalid "
+                <p-button
+                  type="submit"
+                  label="Сохранить"
+                  class="card__link"
+                  styleClass="p-button-text"
+                  [disabled]="!userProfileInfoForm.controls.description.dirty || userProfileInfoForm.invalid"
                 ></p-button>
-
               </form>
             </div>
             <a class="card__link link">Верификация</a>
@@ -75,20 +67,19 @@
       </p-card>
 
       <app-card-link
-              *ngFor="let cardLink of cardLinks"
-              [cardLink]="cardLink"
-              [cardLinkCounter]="+userProfile[cardLink.counterProperty]"
-              [ngClass]="cardLink.cssClass"
+        *ngFor="let cardLink of cardLinks"
+        [cardLink]="cardLink"
+        [cardLinkCounter]="+userProfile[cardLink.counterProperty]"
+        [ngClass]="cardLink.cssClass"
       ></app-card-link>
 
       <app-card-button
-              *ngFor="let cardButton of cardButtons"
-              [cardButton]="cardButton"
-              [ngClass]="cardButton.cssClass"
+        *ngFor="let cardButton of cardButtons"
+        [cardButton]="cardButton"
+        [ngClass]="cardButton.cssClass"
       ></app-card-button>
     </div>
   </ng-template>
 
   <app-spinner *ngIf="isLoading$ | async; else profileGrid"></app-spinner>
-
 </div>

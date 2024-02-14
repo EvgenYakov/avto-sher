@@ -1,19 +1,18 @@
+import { CarProfile } from '@models';
 import { createReducer, on } from '@ngrx/store';
 
-import { CarProfile } from '@models';
-
-import { CarDetailedState } from '../states';
 import { loadCarSuccess } from '../actions';
+import { CarDetailedState } from '../states';
 
 const initialState: CarDetailedState = {
   carProfile: {} as CarProfile,
-  errors: ''
-}
+  errors: '',
+};
 
 export const carDetailedReducer = createReducer(
   initialState,
-  on( loadCarSuccess, (state, { car }) => ({
+  on(loadCarSuccess, (state, { car }) => ({
     ...state,
-    carProfile: car
-  }) ),
-)
+    carProfile: car,
+  }))
+);

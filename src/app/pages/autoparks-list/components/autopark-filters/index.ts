@@ -1,1 +1,1 @@
-export * from './autopark-filters.component'
+export * from './autopark-filters.component';

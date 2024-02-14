@@ -1,12 +1,11 @@
 import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[rentSchedule]',
-  standalone: true
+  selector: '[appRentSchedule]',
+  standalone: true,
 })
-export class RentScheduleDirective implements OnChanges{
-
-  @Input('rentSchedule') rentSchedule: string;
+export class RentScheduleDirective implements OnChanges {
+  @Input() rentSchedule: string;
 
   constructor(
     private templateRef: TemplateRef<any>,

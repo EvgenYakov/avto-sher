@@ -1,4 +1,5 @@
-import { RequestStatus, CarTariff, Fuel, Transmission } from '@constants';
+import { CarTariff, Fuel, RequestStatus, Transmission } from '@constants';
+
 import { AutoparkBonus } from '../autopark';
 
 export interface CarCard {
@@ -25,12 +26,10 @@ export interface CarCard {
     minRentPeriod: string;
     rentalConditions: string[];
     bonuses: AutoparkBonus[];
-  }
+  };
 }
 
-export interface CarProfile extends CarCard {
-
-}
+export interface CarProfile extends CarCard {}
 
 export interface OrderHistoryCarCard extends CarCard {
   orderDate: string;

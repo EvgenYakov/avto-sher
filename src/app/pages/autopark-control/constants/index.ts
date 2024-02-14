@@ -1,1 +1,1 @@
-export * from './financial-options.constant'
+export * from './financial-options.constant';

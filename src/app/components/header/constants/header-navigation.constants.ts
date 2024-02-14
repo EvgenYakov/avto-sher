@@ -1,6 +1,5 @@
-import { MenuItem } from 'primeng/api';
-
 import { AppRoutes } from '@constants';
+import { MenuItem } from 'primeng/api';
 
 export const MAIN_NAV: MenuItem[] = [
   {
