@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { BonusComponent } from '@components';
@@ -10,7 +9,7 @@ import { AutoparkDetailed } from '@models';
   standalone: true,
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [CommonModule, BonusComponent, RentScheduleDirective],
+  imports: [BonusComponent, RentScheduleDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileComponent {

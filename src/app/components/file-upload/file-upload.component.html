@@ -12,22 +12,22 @@
   />
   <label for="fileDropRef">Выберите файл</label>
 </div>
-<div class="error-type" *ngIf="isErrorType">
-  <small class="p-error">Добавляйте файлы только формата {{ allowedFileTypes }}</small>
-</div>
-<div class="images-list">
-  <div *ngFor="let file of filesPreview$ | async; let i = index" class="item">
-    <p-image
-      *ngIf="file.url"
-      [src]="file.url"
-      [preview]="true"
-      class="image"
-      width="100"
-      height="100"
-      alt="Image"
-    ></p-image>
-    <p *ngIf="!file.url">{{ file.name }}</p>
-    <p>{{ file.size | bytes }}</p>
-    <span class="delete-icon" (click)="onDeleteFile(i)">X</span>
+@if (isErrorType) {
+  <div class="error-type">
+    <small class="p-error">Добавляйте файлы только формата {{ allowedFileTypes }}</small>
   </div>
+}
+<div class="images-list">
+  @for (file of filesPreview$ | async; track file; let i = $index) {
+    <div class="item">
+      @if (file.url) {
+        <p-image [src]="file.url" [preview]="true" class="image" width="100" height="100" alt="Image"></p-image>
+      }
+      @if (!file.url) {
+        <p>{{ file.name }}</p>
+      }
+      <p>{{ file.size | bytes }}</p>
+      <span class="delete-icon" (click)="onDeleteFile(i)">X</span>
+    </div>
+  }
 </div>

@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="dropdowns">
-        <ng-container *ngFor="let options of STATIC_DROPDOWNS">
+        @for (options of STATIC_DROPDOWNS; track options) {
           <div class="block">
             <div class="subtitle">
               {{ options.label }}
@@ -38,7 +38,7 @@
               class="dropdown"
             ></p-dropdown>
           </div>
-        </ng-container>
+        }
         <div class="year-power">
           <div class="year">
             <div class="subtitle">Год выпуска</div>
@@ -87,21 +87,21 @@
         <div class="subtitle">Финансовая информация</div>
         <div class="label">Отметьте информацию, которая будет отображаться в профиле автомобиля</div>
         <div class="options">
-          <ng-container *ngFor="let option of financialOptions">
+          @for (option of financialOptions; track option) {
             <div [class]="option.class">
-              <ng-container *ngFor="let item of option.items; let isLast = last">
+              @for (item of option.items; track item; let isLast = $last) {
                 <p-checkbox [binary]="true" class="checkbox"></p-checkbox>
                 <label>{{ item.label }}</label>
-                <ng-container *ngIf="!isLast">
+                @if (!isLast) {
                   <span class="vertical-line"></span>
-                </ng-container>
-                <ng-container *ngIf="item.placeholder">
+                }
+                @if (item.placeholder) {
                   <p-inputNumber [placeholder]="item.placeholder" class="option-input"></p-inputNumber>
                   <span>{{ item.unit }}</span>
-                </ng-container>
-              </ng-container>
+                }
+              }
             </div>
-          </ng-container>
+          }
           <div class="price">
             <span>Введите цену аренды</span>
             <p-inputNumber class="option-input"></p-inputNumber>

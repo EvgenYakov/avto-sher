@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -11,7 +10,7 @@ import { ImageModule } from 'primeng/image';
   standalone: true,
   templateUrl: './autopark-card.component.html',
   styleUrls: ['./autopark-card.component.scss'],
-  imports: [CommonModule, ImageModule],
+  imports: [ImageModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoparkCardComponent {

@@ -1,13 +1,17 @@
 <div class="control-wrapper">
-  <label [ngClass]="{ required: isRequired }" *ngIf="label">{{ label }}</label>
+  @if (label) {
+    <label [ngClass]="{ required: isRequired }">{{ label }}</label>
+  }
 
   <ng-content></ng-content>
 
-  <div *ngIf="control.errors && isTouched">
+  @if (control.errors && isTouched) {
     <div>
-      <small class="p-error">
-        {{ error }}
-      </small>
+      <div>
+        <small class="p-error">
+          {{ error }}
+        </small>
+      </div>
     </div>
-  </div>
+  }
 </div>

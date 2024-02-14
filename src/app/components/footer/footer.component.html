@@ -3,27 +3,35 @@
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Водителям</div>
       <ul class="footer__list">
-        <li *ngFor="let driverItem of driverNav">
-          <a class="footer__link link">{{ driverItem.label }}</a>
-        </li>
+        @for (driverItem of driverNav; track driverItem) {
+          <li>
+            <a class="footer__link link">{{ driverItem.label }}</a>
+          </li>
+        }
       </ul>
     </div>
 
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Автопаркам</div>
       <ul class="footer__list">
-        <li *ngFor="let autoparkItem of autoparkNav">
-          <a class="footer__link link">{{ autoparkItem.label }}</a>
-        </li>
+        @for (autoparkItem of autoparkNav; track autoparkItem) {
+          <li>
+            <a class="footer__link link">{{ autoparkItem.label }}</a>
+          </li>
+        }
       </ul>
     </div>
 
     <div class="footer__column">
       <div class="footer__subtitle subtitle">Информация</div>
       <ul class="footer__list">
-        <li *ngFor="let infoItem of infoNav">
-          <a class="footer__link link" [href]="infoItem.routerLink" [target]="infoItem.target">{{ infoItem.label }}</a>
-        </li>
+        @for (infoItem of infoNav; track infoItem) {
+          <li>
+            <a class="footer__link link" [href]="infoItem.routerLink" [target]="infoItem.target">
+              {{ infoItem.label }}
+            </a>
+          </li>
+        }
       </ul>
     </div>
 
@@ -46,16 +54,18 @@
         info&#64;яавто.рф
       </div>
       <ul class="footer__list-row">
-        <li *ngFor="let socialNetwork of socialNetworks">
-          <a [href]="socialNetwork.link">
-            <img
-              [src]="socialNetwork.icon"
-              appHoverImage="{{ socialNetwork.hoverIcon }}"
-              defaultImage="{{ socialNetwork.icon }}"
-              alt="social network icon"
-            />
-          </a>
-        </li>
+        @for (socialNetwork of socialNetworks; track socialNetwork) {
+          <li>
+            <a [href]="socialNetwork.link">
+              <img
+                [src]="socialNetwork.icon"
+                appHoverImage="{{ socialNetwork.hoverIcon }}"
+                defaultImage="{{ socialNetwork.icon }}"
+                alt="social network icon"
+              />
+            </a>
+          </li>
+        }
       </ul>
     </div>
   </nav>

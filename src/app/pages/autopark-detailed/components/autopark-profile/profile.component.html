@@ -2,15 +2,19 @@
   <div class="bonus-system">
     <div class="profile-title">Бонусная система</div>
     <div class="bonus-system__list">
-      <app-bonus *ngFor="let bonus of autopark.bonuses" [bonus]="bonus" class="bonus"></app-bonus>
+      @for (bonus of autopark.bonuses; track bonus) {
+        <app-bonus [bonus]="bonus" class="bonus"></app-bonus>
+      }
     </div>
   </div>
   <div class="rental-conditions">
     <div class="profile-title">Условия аренды</div>
     <div class="list">
-      <ul *ngFor="let item of autopark.rentalConditions" class="list__item">
-        <li>– {{ item }}</li>
-      </ul>
+      @for (item of autopark.rentalConditions; track item) {
+        <ul class="list__item">
+          <li>– {{ item }}</li>
+        </ul>
+      }
       <ul>
         <li class="list__item">– Аренда от {{ autopark.minRentPeriod }} дней</li>
         <li class="list__item" *appRentSchedule="autopark.rentSchedule; let scheduleText">

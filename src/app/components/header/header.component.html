@@ -10,18 +10,24 @@
   <p-sidebar [(visible)]="isOpen" position="right">
     <nav class="mobile-nav">
       <ul class="mobile-nav__list">
-        <li *ngFor="let link of MAIN_NAV" [routerLink]="link.routerLink">
-          <a class="mobile-nav__link">{{ link.label }}</a>
-        </li>
-        <li *ngFor="let link of SECONDARY_NAV" [routerLink]="link.routerLink">
-          <a class="mobile-nav__link">{{ link.label }}</a>
-        </li>
+        @for (link of MAIN_NAV; track link) {
+          <li>
+            <a class="mobile-nav__link" [routerLink]="link.routerLink">{{ link.label }}</a>
+          </li>
+        }
+        @for (link of SECONDARY_NAV; track link) {
+          <li >
+            <a class="mobile-nav__link" [routerLink]="link.routerLink">{{ link.label }}</a>
+          </li>
+        }
         <li>
           <a class="mobile-nav__location">
             <i class="pi pi-map-marker"></i>
-            <span *ngIf="regions$ | async as regions">
-              <p-dropdown [options]="regions" [filter]="true" filterBy="name" optionLabel="name"></p-dropdown>
-            </span>
+            @if (regions$ | async; as regions) {
+              <span>
+                <p-dropdown [options]="regions" [filter]="true" filterBy="name" optionLabel="name"></p-dropdown>
+              </span>
+            }
           </a>
         </li>
       </ul>
@@ -31,33 +37,39 @@
   <div class="header__nav-wrapper">
     <nav class="main-nav container">
       <ul class="main-nav__list">
-        <li *ngFor="let link of MAIN_NAV" class="main-nav__list-item" [routerLink]="link.routerLink">
-          <a class="main-nav__link link">{{ link.label }}</a>
-        </li>
+        @for (link of MAIN_NAV; track link) {
+          <li class="main-nav__list-item">
+            <a class="main-nav__link link" [routerLink]="link.routerLink">{{ link.label }}</a>
+          </li>
+        }
       </ul>
     </nav>
   </div>
 
   <nav class="secondary-nav container">
     <ul class="secondary-nav__list">
-      <li *ngFor="let link of SECONDARY_NAV" [routerLink]="link.routerLink">
-        <a class="secondary-nav__link link small-text">{{ link.label }}</a>
-      </li>
+      @for (link of SECONDARY_NAV; track link) {
+        <li>
+          <a class="secondary-nav__link link small-text" [routerLink]="link.routerLink">{{ link.label }}</a>
+        </li>
+      }
     </ul>
 
     <a class="secondary-nav__location link small-text">
       <i class="pi pi-map-marker"></i>
-      <span *ngIf="regions$ | async as regions">
-        <p-dropdown
-          [options]="regions"
-          [filter]="regions.length > 8"
-          filterPlaceholder="Название"
-          emptyFilterMessage="В других городах пока автопарков не найдено"
-          filterBy="name"
-          optionLabel="name"
-          [formControl]="selectedRegionControl"
-        ></p-dropdown>
-      </span>
+      @if (regions$ | async; as regions) {
+        <span>
+          <p-dropdown
+            [options]="regions"
+            [filter]="regions.length > 8"
+            filterPlaceholder="Название"
+            emptyFilterMessage="В других городах пока автопарков не найдено"
+            filterBy="name"
+            optionLabel="name"
+            [formControl]="selectedRegionControl"
+          ></p-dropdown>
+        </span>
+      }
     </a>
   </nav>
 </header>

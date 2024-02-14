@@ -1,38 +1,44 @@
 <div class="control-panel">
   <p-sidebar [(visible)]="sidebarVisible">
     <ng-template pTemplate="header">
-      <ng-container *ngIf="selectedIconIndex !== null">
+      @if (selectedIconIndex !== null) {
         {{ sidebarConfig[selectedIconIndex].headerLabel }}
-      </ng-container>
+      }
     </ng-template>
     <ng-template pTemplate="content">
-      <ng-container *ngIf="selectedIconIndex !== null">
+      @if (selectedIconIndex !== null) {
         <ul class="list">
-          <li *ngFor="let item of sidebarConfig[selectedIconIndex].content" class="item">
-            <a [href]="item.link">{{ item.title }}</a>
-          </li>
+          @for (item of sidebarConfig[selectedIconIndex].content; track item) {
+            <li class="item">
+              <a [href]="item.link">{{ item.title }}</a>
+            </li>
+          }
         </ul>
-      </ng-container>
+      }
     </ng-template>
   </p-sidebar>
   <div class="control-panel__side-navigation">
     <ul>
-      <li class="item" *ngFor="let config of sidebarConfig; let i = index" (click)="selectIcon(i)">
-        <img [src]="config.icon" alt="Иконка" />
-      </li>
+      @for (config of sidebarConfig; track config; let i = $index) {
+        <li class="item" (click)="selectIcon(i)">
+          <img [src]="config.icon" alt="Иконка" />
+        </li>
+      }
     </ul>
   </div>
   <div class="control-panel__layouts">
     <div class="control-panel__header header">
       <div class="title">Тайтл</div>
       <div class="right-side">
-        <div class="autoparks-select" *ngIf="autoparks$ | async as autoparks">
-          <p-dropdown
-            [options]="autoparks"
-            optionLabel="title"
-            [dropdownIcon]="(isAutoparksLoading$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
-          ></p-dropdown>
-        </div>
+        @if (autoparks$ | async; as autoparks) {
+          <div class="autoparks-select">
+            <p-dropdown
+              [options]="autoparks"
+              optionLabel="title"
+              [dropdownIcon]="(isAutoparksLoading$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+            ></p-dropdown>
+          </div>
+        }
         <div class="icons">
           <ul>
             <li>

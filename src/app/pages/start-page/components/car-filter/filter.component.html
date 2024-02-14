@@ -32,15 +32,16 @@
           [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
           placeholder="Выберите модель"
         ></p-dropdown>
-        <p-multiSelect
-          *ngFor="let dropdown of staticDropdowns"
-          [formControlName]="dropdown.formControlName"
-          [options]="dropdown.options"
-          [placeholder]="dropdown.placeholder"
-          [optionLabel]="'label'"
-          [optionValue]="'value'"
-          display="chip"
-        ></p-multiSelect>
+        @for (dropdown of staticDropdowns; track dropdown) {
+          <p-multiSelect
+            [formControlName]="dropdown.formControlName"
+            [options]="dropdown.options"
+            [placeholder]="dropdown.placeholder"
+            [optionLabel]="'label'"
+            [optionValue]="'value'"
+            display="chip"
+          ></p-multiSelect>
+        }
       </div>
 
       <div class="filter__row">
@@ -65,21 +66,23 @@
 
         <div class="options">
           <div class="filter__additional-options">
-            <p-checkbox
-              *ngFor="let option of additionalOptions"
-              [formControl]="filterForm.controls.additionalInfo"
-              [label]="option.label"
-              [value]="option.value"
-            ></p-checkbox>
+            @for (option of additionalOptions; track option) {
+              <p-checkbox
+                [formControl]="filterForm.controls.additionalInfo"
+                [label]="option.label"
+                [value]="option.value"
+              ></p-checkbox>
+            }
           </div>
 
           <div class="filter__financial-options">
-            <p-checkbox
-              *ngFor="let option of financialOptions"
-              [formControl]="filterForm.controls.financialInfo"
-              [label]="option.label"
-              [value]="option.value"
-            ></p-checkbox>
+            @for (option of financialOptions; track option) {
+              <p-checkbox
+                [formControl]="filterForm.controls.financialInfo"
+                [label]="option.label"
+                [value]="option.value"
+              ></p-checkbox>
+            }
           </div>
         </div>
       </div>

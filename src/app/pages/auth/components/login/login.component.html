@@ -1,11 +1,11 @@
 <div class="content">
   <div class="header">
     <span class="header__label">Вход в существующий аккаунт</span>
-    <ng-container *ngIf="backendError$ | async as errorMsg">
+    @if (backendError$ | async; as errorMsg) {
       <span class="p-error">
         {{ errorMsg }}
       </span>
-    </ng-container>
+    }
   </div>
 
   <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
