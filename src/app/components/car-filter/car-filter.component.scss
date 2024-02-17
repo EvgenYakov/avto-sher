@@ -12,10 +12,6 @@
   //  }
   //}
 
-  .p-buttonset .p-button {
-    padding: 1rem;
-  }
-
   .p-multiselect, .p-dropdown {
     width: 266px;
   }
@@ -56,7 +52,7 @@
 }
 
 .filter .block:nth-child(3) {
-  @include flexMix(column, stretch, center, 43px);
+  @include flexMix(column, stretch, end, 47px);
 }
 
 .filter .block:nth-child(4) {
