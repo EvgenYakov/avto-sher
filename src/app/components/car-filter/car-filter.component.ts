@@ -63,9 +63,9 @@ export class CarFilterComponent implements OnInit, OnDestroy {
 
     this.filterForm.valueChanges
       .pipe(
-        tap(() => {
+        tap((value) => {
           const params = this.filterForm.value as CarFilterParams;
-
+          console.log(value);
           const filteredParams: CarFilterParams = {
             startPrice: params.startPrice,
             endPrice: params.endPrice,

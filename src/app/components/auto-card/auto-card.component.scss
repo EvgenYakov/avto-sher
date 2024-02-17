@@ -28,6 +28,10 @@
     }
   }
 
+  .p-image-preview-container:hover > .p-image-preview-indicator {
+    border-radius: 14px;
+  }
+
   .auto-card__rent {
     @include media-xl() {
       .rent-card {
