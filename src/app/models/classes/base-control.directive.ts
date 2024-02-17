@@ -36,7 +36,9 @@ export class BaseControlDirective implements ControlValueAccessor, OnInit, OnDes
   }
   //TODO: no-unused-vars
 
-  public onChange(value: any): void {}
+  public onChange(value: any): void {
+    console.log(value);
+  }
 
   public onTouched(): void {}
 
