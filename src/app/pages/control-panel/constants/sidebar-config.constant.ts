@@ -25,18 +25,16 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
     content: [
       {
         title: 'Машины',
-        link: AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CARS_TABLE,
+        link:[ '/', AppRoutes.CONTROL_PANEL, ControlPanel.AUTOPARK_CONTROL,ControlPanel.CARS_TABLE],
       },
       {
         title: 'Автопарк',
-        link:
-          AppRoutes.CONTROL_PANEL +
-          '/' +
-          ControlPanel.AUTOPARK_CONTROL +
-          '/' +
-          ControlPanel.AUTOPARK +
-          '/' +
-          ControlPanel.CREATE_AUTOPARK,
+        link:[
+          '/',
+          AppRoutes.CONTROL_PANEL,
+          ControlPanel.AUTOPARK_CONTROL,
+          ControlPanel.AUTOPARK,
+          ControlPanel.CREATE_AUTOPARK,]
       },
     ],
   },

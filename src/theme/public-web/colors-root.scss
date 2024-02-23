@@ -1,0 +1,49 @@
+:root {
+  --web-primary-color: #f20519;
+  --web-primary-color-rgb: 227, 30, 36;
+  --web-primary-color-highlight: rgba(var(--web-primary-color-rgb), 0.1);
+
+  --web-success-color: #60a828;
+  --web-success-color-rgb: 96, 168, 40;
+  --web-success-color-highlight: rgba(var(--web-success-color-rgb), 0.1);
+
+  --web-warning-color: #ff9c09;
+  --web-warning-color-rgb: 255, 156, 9;
+  --web-warning-color-highlight: rgba(var(--web-warning-color-rgb), 0.1);
+
+  --web-danger-color: #a82828;
+  --web-danger-color-rgb: 168, 40, 40;
+  --web-danger-color-highlight: rgba(var(--web-danger-color-rgb), 0.1);
+
+  --web-gray-100-color: #f6f6f6;
+  --web-gray-200-color: #e6e6e6;
+  --web-gray-300-color: #e8e8e8;
+  --web-gray-400-color: #9c9c9c;
+
+  --web-gray-500-color: #adb5bd; // Doesn't used at the moment. Only to rewrite a bootstrap theme
+  --web-gray-600-color: #6c757d; // Doesn't used at the moment. Only to rewrite a bootstrap theme
+
+  --web-gray-700-color: #495057;
+  --web-gray-800-color: #343a40;
+
+  --web-gray-900-color: #15171f;
+
+  --web-active-shadow: 0 0 0 1000px rgb(0 0 0 / 0.2) inset;
+
+  --web-black-color: #000;
+  --web-white-color: #fff;
+  --web-gray-color: var(--web-gray-400-color);
+
+  --web-link-color-rgb: var(--web-primary-color-rgb);
+  --web-link-hover-color-rgb: var(--web-primary-color-rgb);
+  --web-link-color: rgb(var(--web-primary-color-rgb));
+  --web-link-hover-color: rgb(var(--web-primary-color-rgb));
+
+  --web-border-color: var(--web-gray-color);
+  --web-text-color: var(---web-gray-900-color);
+  ---web-text-reverse-color: var(--web-white-color);
+  --web-bg-color: var(--web-white-color);
+  --web-bg-reverse-color: var(--web-gray-900-color);
+  --web-blockquote-color: var(--web-primary-color-highlight);
+  --web-admin-sidebar-bg-color: var(--web-gray-100-color);
+}

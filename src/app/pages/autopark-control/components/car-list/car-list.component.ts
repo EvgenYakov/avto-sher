@@ -8,11 +8,12 @@ import { CarCard } from '@models';
 import { CarService } from '@services';
 import { TableModule } from 'primeng/table';
 import { map, Observable } from 'rxjs';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-car-list',
   standalone: true,
-  imports: [CommonModule, TableModule, CustomTableComponent],
+  imports: [CommonModule, TableModule, CustomTableComponent, ButtonModule],
   templateUrl: './car-list.component.html',
   styleUrls: ['./car-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

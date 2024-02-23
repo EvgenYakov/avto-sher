@@ -28,8 +28,12 @@ $nav-panel-width: 88px;
     margin-bottom: 11px;
 
     a {
-      color: #C0BFBE;
+      color: var(--web-gray-400-color);
       text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--web-black-color);
     }
   }
 
@@ -50,6 +54,7 @@ $nav-panel-width: 88px;
         cursor: pointer;
       }
     }
+
   }
 
   &__header {
