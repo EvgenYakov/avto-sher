@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { LoadingTypes } from '@constants';
 import { AutoparkCard } from '@models';
@@ -16,7 +17,7 @@ import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
   standalone: true,
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
-  imports: [CONTROL_PANEL_DEPS, DropdownModule],
+  imports: [CONTROL_PANEL_DEPS, DropdownModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlPanelComponent implements OnInit {

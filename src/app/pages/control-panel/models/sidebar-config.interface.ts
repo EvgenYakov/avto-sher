@@ -4,6 +4,6 @@ export interface SidebarConfig {
   headerLabel: string;
   content: {
     title: string;
-    link: string;
+    link: string | string[];
   }[];
 }

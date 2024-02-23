@@ -66,7 +66,8 @@ export class CreateCarComponent implements OnInit {
     this.carForm = this.initializeForm();
   }
 
-  public onSubmit(): void {}
+  public onSubmit(): void {
+  }
 
   public getCurrentYear(): number {
     return new Date().getFullYear();
