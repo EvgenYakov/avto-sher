@@ -5,8 +5,10 @@ import { LoadingTypes } from '@constants';
 import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
 import { loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
-import { DropdownModule } from 'primeng/dropdown';
+import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
 import { Observable } from 'rxjs';
+
+import { AutoparkFacade } from '../../../store/autopark/autopark.facade';
 
 import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
 import { SidebarConfig } from './models/sidebar-config.interface';
@@ -28,7 +30,10 @@ export class ControlPanelComponent implements OnInit {
   public autoparks$: Observable<AutoparkCard[]>;
   public isAutoparksLoading$: Observable<boolean>;
 
-  constructor(private store: Store) {}
+  constructor(
+    public autoparkFacade: AutoparkFacade,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(loadAutoparksByOwner());
@@ -38,6 +43,10 @@ export class ControlPanelComponent implements OnInit {
   public selectIcon(index: number): void {
     this.selectedIconIndex = index;
     this.sidebarVisible = true;
+  }
+
+  public selectAutoPark(event: DropdownChangeEvent): void{
+    this.autoparkFacade.selectAutoPark(event.value);
   }
 
   private getDataFromStore(): void {

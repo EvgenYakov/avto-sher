@@ -11,3 +11,5 @@ export const selectAutoparkCars = createSelector(autoparkDetailedFeatureSelector
 export const selectAutoparkReviews = createSelector(autoparkDetailedFeatureSelector, state => state.reviews);
 
 export const selectAutoparkCarsPage = createSelector(autoparkDetailedFeatureSelector, state => state.autoparkCarsPage);
+
+export const selectActiveAutopark = createSelector(autoparkDetailedFeatureSelector, state => state.autoparkCard);

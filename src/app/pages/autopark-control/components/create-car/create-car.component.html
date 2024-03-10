@@ -104,7 +104,7 @@
           }
           <div class="price">
             <span>Введите цену аренды</span>
-            <p-inputNumber class="option-input"></p-inputNumber>
+            <p-inputNumber class="option-input" [formControl]="carForm.controls.price"></p-inputNumber>
             <span>руб/сут</span>
           </div>
           <div class="payments">
@@ -121,6 +121,7 @@
           class="multiselect"
           optionLabel="label"
           display="chip"
+          [formControl]="carForm.controls.additionalInfo"
           [options]="additionalInfo"
         ></p-multiSelect>
       </div>
@@ -129,25 +130,15 @@
     <div class="create-car__verification">
       <div class="sts">
         <div class="subtitle">СТС</div>
-        <input type="number" [formControl]="carForm.controls.brand" pInputText placeholder="8756347856375625964" />
+        <input type="number" disabled pInputText placeholder="8756347856375625964" />
       </div>
       <div class="vin">
         <div class="subtitle">VIN</div>
-        <input
-          type="text"
-          [formControl]="carForm.controls.brand"
-          pInputText
-          placeholder="Введите идентификационной номер"
-        />
+        <input type="text" disabled pInputText placeholder="Введите идентификационной номер" />
       </div>
       <div class="gov-number">
         <div class="subtitle">Государственные номера</div>
-        <input
-          type="text"
-          [formControl]="carForm.controls.brand"
-          pInputText
-          placeholder="Введите государственный номер"
-        />
+        <input type="text" disabled pInputText placeholder="Введите государственный номер" />
       </div>
     </div>
 
@@ -156,18 +147,31 @@
       <div class="label">
         Загрузите фотографии автомобиля, которые будут отображаться на сайте (минимум 1, максимум 10)
       </div>
-      <app-file-upload></app-file-upload>
+      <app-file-upload #files></app-file-upload>
     </div>
 
     <div class="create-car__btns">
       <p-button
         type="submit"
         [disabled]="carForm.invalid || carForm.pending"
-        (submit)="onSubmit()"
         class="add-btn"
-        label="Добавить автомобиль"
+        [label]="editMode() ? 'Изменить автомобиль' : 'Добавить автомобиль'"
       ></p-button>
-      <p-button class="cancel-btn" label="Отменить" styleClass="p-button-outlined"></p-button>
+      @if (editMode()) {
+        <p-button
+          class="cancel-btn"
+          label="Удалить машину"
+          (click)="deleteCar()"
+          styleClass="p-button-outlined"
+          icon="pi pi-trash"
+        ></p-button>
+      }
+      <p-button
+        class="cancel-btn"
+        label="Отменить изменения"
+        [routerLink]="['/', AppRoutes.CONTROL_PANEL, ControlPanel.AUTOPARK_CONTROL, ControlPanel.CARS_TABLE]"
+        styleClass="p-button-outlined"
+      ></p-button>
     </div>
   </div>
 </form>

@@ -17,6 +17,8 @@ export interface CarCard {
   transmission: Transmission;
   model: string;
   brand: string;
+  rentSchedule: string;
+  minRentPeriod: string;
   autopark: {
     id: number;
     title: string;
@@ -33,4 +35,23 @@ export interface CarProfile extends CarCard {}
 
 export interface OrderHistoryCarCard extends CarCard {
   orderDate: string;
+}
+
+export interface CreateCar {
+  id?: number | string | null;
+  fuel: Fuel;
+  type: CarTariff;
+  enginePower: number;
+  additionalInfo: string[];
+  financialInfo: string[];
+  yearOfRelease: number;
+  images?: File[];
+  rentSchedule: string;
+  minRentPeriod: number;
+  rentalConditions: string[];
+  price: number;
+  transmission: Transmission;
+  model: string;
+  brand: string;
+  autoparkId: number;
 }

@@ -130,8 +130,9 @@
   }
 
   &__btns {
-    :first-child {
+    p-button {
       margin-right: 1.25rem;
+      margin-bottom: 0.5rem;
     }
   }
 }

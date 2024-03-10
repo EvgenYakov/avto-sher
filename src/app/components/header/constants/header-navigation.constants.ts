@@ -38,3 +38,8 @@ export const SECONDARY_NAV: MenuItem[] = [
     routerLink: AppRoutes.ABOUT_US,
   },
 ];
+
+export const OWNER_PANEL_LINK = {
+  label: 'Панель автопарка',
+  routerLink: ['/', AppRoutes.CONTROL_PANEL],
+};
