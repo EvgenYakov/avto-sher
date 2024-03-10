@@ -10,7 +10,7 @@
   <p-sidebar [(visible)]="isOpen" position="right">
     <nav class="mobile-nav">
       <ul class="mobile-nav__list">
-        @for (link of MAIN_NAV; track link) {
+        @for (link of mainNavList(); track link) {
           <li>
             <a class="mobile-nav__link" [routerLink]="link.routerLink">{{ link.label }}</a>
           </li>
@@ -37,7 +37,7 @@
   <div class="header__nav-wrapper">
     <nav class="main-nav container">
       <ul class="main-nav__list">
-        @for (link of MAIN_NAV; track link) {
+        @for (link of mainNavList(); track link) {
           <li class="main-nav__list-item">
             <a class="main-nav__link link" [routerLink]="link.routerLink">{{ link.label }}</a>
           </li>

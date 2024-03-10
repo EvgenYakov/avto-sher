@@ -34,6 +34,7 @@ export enum MainRoutes {
 export enum ControlPanel {
   AUTOPARK_CONTROL = 'autopark-control',
   CREATE_CAR = 'create-car',
+  CAR_EDITOR = 'car-editor',
   CARS_TABLE = 'cars',
   AUTOPARK = 'autopark',
   CREATE_AUTOPARK = 'create-autopark',

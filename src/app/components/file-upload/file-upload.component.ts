@@ -6,7 +6,7 @@ import { FILE_UPLOAD_DEPS } from './file-upload.dependencies';
 import { FileWithProgress } from './model';
 
 @Component({
-  selector: 'app-file-upload',
+  selector: 'Ыapp-file-upload',
   standalone: true,
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
@@ -18,6 +18,7 @@ export class FileUploadComponent {
   public allowedFileTypes: string[] = ['image/jpeg', 'image/jpg', 'image/png'];
 
   public filesPreview$ = new BehaviorSubject<FileWithProgress[]>([]);
+  public files$ = new BehaviorSubject<File[]>([]);
 
   public isErrorType = false;
 
@@ -49,6 +50,7 @@ export class FileUploadComponent {
     Array.from(files).forEach((file: File) => {
       if (this.isFileTypeAllowed(file)) {
         this.isErrorType = false;
+        this.files$.next([...this.files$.value, file]);
         this.readFile(file).subscribe((newFile: FileWithProgress) => {
           this.filesPreview$.next([...this.filesPreview$.value, newFile]);
         });

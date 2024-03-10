@@ -6,7 +6,7 @@ import { AppRoutes, LoadingTypes } from '@constants';
 import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
 import { BreadcrumbService } from '@services';
-import { getAutoparksEntities, loadAutoparks, selectCurrentRegion, selectLoading } from '@store';
+import { selectAutoparksEntities, loadAutoparks, selectCurrentRegion, selectLoading } from '@store';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
@@ -45,7 +45,7 @@ export class AutoparksComponent implements OnInit, OnDestroy {
   }
 
   private getDataFromStore(): void {
-    this.autoparks$ = this.store.select(getAutoparksEntities);
+    this.autoparks$ = this.store.select(selectAutoparksEntities);
 
     this.isLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
 

@@ -9,8 +9,9 @@ export const selectAuctionAutoparks = createSelector(autoparksFeatureSelector, s
 
 export const { selectAll: selectAutoparks } = autoparkCardAdapter.getSelectors();
 
-export const getAutoparksEntities = createSelector(autoparksFeatureSelector, selectAutoparks);
+export const selectAutoparksEntities = createSelector(autoparksFeatureSelector, selectAutoparks);
 
 export const selectAutoparksPage = createSelector(autoparksFeatureSelector, state => state.page);
 
 export const selectAutoparksLimit = createSelector(autoparksFeatureSelector, state => state.limit);
+

@@ -23,6 +23,11 @@ export default [
         component: CreateCarComponent,
       },
       {
+        path: ControlPanel.CAR_EDITOR + '/:id',
+        title: 'Измение авто',
+        component: CreateCarComponent,
+      },
+      {
         path: ControlPanel.AUTOPARK,
         title: 'Создание автопарка',
         component: AutoparkWrapComponent,

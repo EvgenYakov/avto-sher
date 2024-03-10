@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { CarFilterParams } from '@components';
 import { environment } from '@environments/environment';
-import { CarCard, CarProfile, OrderHistoryCarCard, PaginationResponse } from '@models';
+import { CarCard, CarProfile, CreateCar, OrderHistoryCarCard, PaginationResponse } from '@models';
 import { Observable } from 'rxjs';
 
 import { BaseService } from '../helpers';
@@ -68,5 +68,17 @@ export class CarService extends BaseService {
 
   public getModelsByBrand(region: string, brand: string): Observable<string[]> {
     return this.httpService.get<string[]>(`${environment.apiUrl}/cars/models/used`, { params: { brand, region } });
+  }
+
+  public createCar(car: any): Observable<CarCard> {
+    return this.httpService.post<CarCard>(`${environment.apiUrl}/cars`, car);
+  }
+
+  public updateCar(id: number | string,car: CreateCar): Observable<CarCard> {
+    return this.httpService.put<CarCard>(`${environment.apiUrl}/cars/${id}`, car);
+  }
+
+  public deleteCar(id: number | string): Observable<void> {
+    return this.httpService.delete<void>(`${environment.apiUrl}/cars/${id}`);
   }
 }
