@@ -1,0 +1,10 @@
+<div class="list">
+  <p-button (click)="navigateToCreateAutoPark()" class="mb-1">Добавить автопарк</p-button>
+  <div class="list__table">
+    <app-custom-table
+      [tableData]="parkList()"
+      [columnNames]="columnNames"
+      (rowClicked)="navigateToEditAutoPark($event)"
+    ></app-custom-table>
+  </div>
+</div>

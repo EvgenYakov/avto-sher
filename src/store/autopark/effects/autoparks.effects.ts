@@ -5,7 +5,7 @@ import { LoadingTypes, ToasterType } from '@constants';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AutoparkService } from '@services';
-import { catchError, combineLatestWith, filter, map, of, switchMap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, withLatestFrom } from 'rxjs';
 
 import { addBeErrorMessage, addLoading, removeLoading } from '../../shared';
 import { selectUserId } from '../../user';
@@ -17,6 +17,7 @@ import {
   loadAutoparksByOwnerFailure,
   loadAutoparksByOwnerSuccess,
   loadAutoparksSuccess,
+  setAutopark,
 } from '../actions';
 import { selectAutoparksLimit, selectAutoparksPage } from '../selectors';
 
@@ -57,7 +58,7 @@ export class AutoparksEffects {
       filter(([_, userId]) => userId !== undefined),
       switchMap(([_, userId]) =>
         this.autoparkService.getAutoparksByOwner(userId).pipe(
-          map(autoparks => loadAutoparksByOwnerSuccess({ autoparks })),
+          mergeMap(autoparks => [loadAutoparksByOwnerSuccess({ autoparks }), setAutopark({ autopark: autoparks[0] })]),
           catchError((error: HttpErrorResponse) => {
             this.store.dispatch(addBeErrorMessage({ severity: ToasterType.ERROR, detail: error.error.message }));
             return of(loadAutoparksByOwnerFailure());

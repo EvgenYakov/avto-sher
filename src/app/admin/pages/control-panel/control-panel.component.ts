@@ -1,34 +1,39 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { LoadingTypes } from '@constants';
 import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
-import { loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
+import { AutoparkFacade, loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
-import { Observable } from 'rxjs';
+import { Observable, takeUntil } from 'rxjs';
 
-import { AutoparkFacade } from '../../../store/autopark/autopark.facade';
 
 import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
 import { SidebarConfig } from './models/sidebar-config.interface';
 import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
+import { DestroyDirective } from '@directives';
 
 @Component({
   selector: 'app-control-panel',
-  standalone: true,
   templateUrl: './control-panel.component.html',
   styleUrls: ['./control-panel.component.scss'],
-  imports: [CONTROL_PANEL_DEPS, DropdownModule, RouterLink],
+  standalone: true,
+  hostDirectives: [DestroyDirective],
+  imports: [CONTROL_PANEL_DEPS, DropdownModule, RouterLink, FormsModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlPanelComponent implements OnInit {
   public sidebarVisible = false;
   public selectedIconIndex: number | null = null;
   public sidebarConfig: SidebarConfig[] = SIDEBAR_CONFIG;
+  public autoParkControl = new FormControl<AutoparkCard | null>(null);
 
   public autoparks$: Observable<AutoparkCard[]>;
   public isAutoparksLoading$: Observable<boolean>;
+
+  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     public autoparkFacade: AutoparkFacade,
@@ -38,6 +43,10 @@ export class ControlPanelComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(loadAutoparksByOwner());
     this.getDataFromStore();
+
+    this.autoparkFacade.activeAutopark$.pipe(takeUntil(this.destroy$)).subscribe(park => {
+      this.autoParkControl.setValue(park);
+    });
   }
 
   public selectIcon(index: number): void {
@@ -45,7 +54,7 @@ export class ControlPanelComponent implements OnInit {
     this.sidebarVisible = true;
   }
 
-  public selectAutoPark(event: DropdownChangeEvent): void{
+  public selectAutoPark(event: DropdownChangeEvent): void {
     this.autoparkFacade.selectAutoPark(event.value);
   }
 

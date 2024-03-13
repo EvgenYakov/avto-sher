@@ -27,3 +27,11 @@ export interface AutoparkBonus {
   description: string;
   icon: string;
 }
+
+export interface CreateAutopark {
+  title: string;
+  description: string;
+  address: string;
+  region: string;
+  logo: File;
+}
