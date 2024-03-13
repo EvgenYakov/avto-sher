@@ -57,6 +57,6 @@ export const userReducer = createReducer(
   })),
   on(loadAutoparksByOwnerSuccess, (state, { autoparks }) => ({
     ...state,
-    autoparks: [...state.autoparks, ...autoparks],
+    autoparks: [...autoparks],
   }))
 );

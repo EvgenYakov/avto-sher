@@ -5,8 +5,8 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-autopark-control',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './autopark-control.component.html',
-  styleUrls: ['./autopark-control.component.scss'],
+  templateUrl: './autopark.component.html',
+  styleUrls: ['./autopark.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AutoparkControlComponent {}
+export class AutoparkComponent {}

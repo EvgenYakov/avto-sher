@@ -10,8 +10,8 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { takeUntil, tap } from 'rxjs';
 
-import { AutoparkFacade } from '../../../../../store/autopark/autopark.facade';
-import { DestroyDirective } from '../../../../directives/destroy.directive';
+import { AutoparkFacade } from '@store';
+import { DestroyDirective } from '@directives';
 
 @Component({
   selector: 'app-car-list',
@@ -68,15 +68,11 @@ export class CarListComponent implements OnInit {
   }
 
   public navigateToCreateCar(): void {
-    this.router.navigate([
-      '/' + AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CREATE_CAR,
-    ]);
+    this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CREATE_CAR]);
   }
 
   public navigateToEditCar(carId: string): void {
     console.log(carId);
-    this.router.navigate([
-      '/' + AppRoutes.CONTROL_PANEL + '/' + ControlPanel.AUTOPARK_CONTROL + '/' + ControlPanel.CAR_EDITOR + '/' + carId,
-    ]);
+    this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CAR_EDITOR, carId]);
   }
 }

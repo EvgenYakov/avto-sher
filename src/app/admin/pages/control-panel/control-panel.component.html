@@ -37,6 +37,7 @@
               optionLabel="title"
               (onChange)="selectAutoPark($event)"
               [dropdownIcon]="(isAutoparksLoading$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+              [formControl]="autoParkControl"
             ></p-dropdown>
           </div>
         }

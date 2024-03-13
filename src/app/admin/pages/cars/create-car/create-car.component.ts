@@ -20,12 +20,12 @@ import { CarService } from '@services';
 import { InputTextModule } from 'primeng/inputtext';
 import { filter, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
-import { AutoparkFacade } from '../../../../../store/autopark/autopark.facade';
-import { DestroyDirective } from '../../../../directives/destroy.directive';
-import { FULL_FINANCIAL_OPTIONS } from '../../constants';
-import { CreateCarForm } from '../../models';
+import { AutoparkFacade } from '@store';
+import { DestroyDirective } from '@directives';
+import { FULL_FINANCIAL_OPTIONS } from '../../autopark';
 
 import { CREATE_CAR_DEPS } from './create-car.dependencies';
+import { CreateCarForm } from './create-car.model';
 
 @Component({
   selector: 'app-create-car',

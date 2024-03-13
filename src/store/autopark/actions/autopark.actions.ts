@@ -1,7 +1,5 @@
-import { AutoparkCard, AutoparkDetailed, CarCard } from '@models';
+import { AutoparkCard, AutoparkDetailed, CarCard, CreateAutopark } from '@models';
 import { createAction, props } from '@ngrx/store';
-
-import { CreateAutopark } from '../../../app/pages/autopark-control/components/create-autopark/models/create-autopark-form.interface';
 
 export enum AutoparkActions {
   LOAD_AUTOPARK_DETAILED = '[AUTOPARK] Load profile of autopark',

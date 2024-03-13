@@ -16,7 +16,7 @@ export const appRoutes: Routes = [
   },
   {
     path: AppRoutes.CONTROL_PANEL,
-    loadChildren: () => import('./pages/control-panel/control-panel.routes'),
+    loadChildren: () => import('./admin/pages/control-panel/control-panel.routes'),
   },
   {
     path: AppRoutes.AUTH,

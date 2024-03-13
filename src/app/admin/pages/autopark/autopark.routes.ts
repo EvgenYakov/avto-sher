@@ -2,30 +2,23 @@ import { Route } from '@angular/router';
 
 import { ControlPanel } from '@constants';
 
-import { AutoparkVerificationComponent } from './components/autopark-verification/autopark-verification.component';
-import { AutoparkWrapComponent } from './components/autopark-wrap/autopark-wrap.component';
-import { AutoparkControlComponent } from './autopark-control.component';
-import { CarListComponent, CreateAutoparkComponent, CreateCarComponent } from './components';
+import { AutoparkComponent } from './autopark.component';
+import {
+  AutoparkListComponent,
+  AutoparkVerificationComponent,
+  AutoparkWrapComponent,
+  CreateAutoparkComponent,
+} from './pages';
 
 export default [
   {
     path: '',
-    component: AutoparkControlComponent,
+    component: AutoparkComponent,
     children: [
       {
-        path: ControlPanel.CARS_TABLE,
-        title: 'Машины',
-        component: CarListComponent,
-      },
-      {
-        path: ControlPanel.CREATE_CAR,
-        title: 'Добавление авто',
-        component: CreateCarComponent,
-      },
-      {
-        path: ControlPanel.CAR_EDITOR + '/:id',
+        path: ControlPanel.AUTOPARK_TABLE,
         title: 'Измение авто',
-        component: CreateCarComponent,
+        component: AutoparkListComponent,
       },
       {
         path: ControlPanel.AUTOPARK,

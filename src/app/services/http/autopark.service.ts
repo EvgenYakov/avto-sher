@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
-import { AuctionAutoparks, AutoparkBonus, AutoparkCard, AutoparkDetailed, PaginationResponse, Region } from '@models';
+import {
+  AuctionAutoparks,
+  AutoparkBonus,
+  AutoparkCard,
+  AutoparkDetailed,
+  CreateAutopark,
+  PaginationResponse,
+  Region,
+} from '@models';
 import { map, Observable } from 'rxjs';
 
-import { CreateAutopark } from '../../pages/autopark-control/components/create-autopark/models/create-autopark-form.interface';
 import { BaseService } from '../helpers';
 
 @Injectable({
