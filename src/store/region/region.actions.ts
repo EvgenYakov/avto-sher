@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
 import { Region } from '@models';
+import { createAction, props } from '@ngrx/store';
 
 export enum RegionActions {
   LOAD_REGIONS = '[REGIONS] Load regions',
@@ -9,20 +9,10 @@ export enum RegionActions {
   SET_CURRENT_REGION_SUCCESS = '[REGION] Change region success',
 }
 
-export const setCurrentRegion = createAction(
-  RegionActions.SET_CURRENT_REGION,
-  props<{ region: Region }>()
-);
+export const setCurrentRegion = createAction(RegionActions.SET_CURRENT_REGION, props<{ region: Region }>());
 
-export const setCurrentRegionSuccess = createAction(
-  RegionActions.SET_CURRENT_REGION_SUCCESS,
-);
+export const setCurrentRegionSuccess = createAction(RegionActions.SET_CURRENT_REGION_SUCCESS);
 
-export const loadRegions = createAction(
-  RegionActions.LOAD_REGIONS,
-);
+export const loadRegions = createAction(RegionActions.LOAD_REGIONS);
 
-export const loadRegionsSuccess = createAction(
-  RegionActions.LOAD_REGIONS_SUCCESS,
-  props<{ regions: Region[] }>()
-);
+export const loadRegionsSuccess = createAction(RegionActions.LOAD_REGIONS_SUCCESS, props<{ regions: Region[] }>());

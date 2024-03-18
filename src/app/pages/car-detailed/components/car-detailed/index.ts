@@ -1,1 +1,1 @@
-export { CarDetailedComponent } from './car-detailed.component'
+export { CarDetailedComponent } from './car-detailed.component';

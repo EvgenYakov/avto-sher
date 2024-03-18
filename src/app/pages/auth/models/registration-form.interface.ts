@@ -15,4 +15,4 @@ export interface RegisterDto {
   role: string;
 }
 
-export interface RegisterOwner extends Omit<RegisterDto, 'phoneNumber'>{}
+export interface RegisterOwner extends Omit<RegisterDto, 'phoneNumber'> {}

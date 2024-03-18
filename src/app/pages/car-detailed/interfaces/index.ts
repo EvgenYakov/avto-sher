@@ -1,1 +1,1 @@
-export * from './responsive-option.interface'
+export * from './responsive-option.interface';

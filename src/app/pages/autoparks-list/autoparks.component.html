@@ -5,11 +5,27 @@
     </div>
     <div class="autoparks__list">
       <app-load-more>
-        <app-autopark-card *ngFor="let autopark of autoparks$ | async" [autoparkCard]="autopark" class="list-item"></app-autopark-card>
+        @for (autopark of autoparks$ | async; track autopark) {
+          <app-autopark-card [autoparkCard]="autopark" class="list-item"></app-autopark-card>
+        }
       </app-load-more>
     </div>
   </div>
 </ng-template>
 
-
-<app-spinner *ngIf="isLoading$ | async; else autoparks"></app-spinner>
+@if (isLoading$ | async) {
+  <app-spinner></app-spinner>
+} @else {
+  <div class="container autoparks">
+    <div class="autoparks__filter">
+      <app-autopark-filters></app-autopark-filters>
+    </div>
+    <div class="autoparks__list">
+      <app-load-more>
+        @for (autopark of autoparks$ | async; track autopark) {
+          <app-autopark-card [autoparkCard]="autopark" class="list-item"></app-autopark-card>
+        }
+      </app-load-more>
+    </div>
+  </div>
+}

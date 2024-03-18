@@ -1,14 +1,11 @@
-<ng-container *ngIf="!(isLoading | async)">
-  <ng-container *ngIf="!(isAuthorized | async); else authorized">
+@if ((isLoading | async) !== true) {
+  @if ((isAuthorized | async) !== true) {
     <div (click)="navigateToAuth()" class="link">Войти</div>
-  </ng-container>
-
-  <ng-template #authorized>
+  } @else {
     <div class="icons">
       <i class="pi pi-heart icons__icon link"></i>
       <i class="pi pi-comment icons__icon link"></i>
       <i class="pi pi-user icons__icon link" [routerLink]="[MainRoutes.USER_PROFILE]"></i>
     </div>
-  </ng-template>
-</ng-container>
-
+  }
+}

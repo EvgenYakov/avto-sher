@@ -6,7 +6,7 @@ export enum CarTariff {
   COMFORT_PLUS = 'Комфорт плюс',
   BUSINESS = 'Бизнес',
   MINIVAN = 'Минивен',
-  PREMIUM = 'Премиум'
+  PREMIUM = 'Премиум',
 }
 
 export enum Transmission {
@@ -17,7 +17,7 @@ export enum Transmission {
 export enum Fuel {
   DIESEL = 'Дизель',
   PETROL = 'Бензин',
-  GAS = 'Газ'
+  GAS = 'Газ',
 }
 
 export const TARIFF_OPTIONS: DropdownOption[] = [
@@ -54,7 +54,6 @@ export const FINANCIAL_OPTIONS: DropdownOption[] = [
   { label: 'С возможностью выкупа', value: 'С возможностью выкупа' },
 ];
 
-
 export enum RequestStatus {
   AVAILABLE = 'Доступна',
   UNAVAILABLE = 'Недоступна',
@@ -65,17 +64,17 @@ export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
   { label: RequestStatus.AVAILABLE, value: RequestStatus.AVAILABLE },
   { label: RequestStatus.UNAVAILABLE, value: RequestStatus.UNAVAILABLE },
   { label: RequestStatus.WAITING, value: RequestStatus.WAITING },
-]
+];
 
 export const MIN_RENTAL_PERIOD_OPTIONS: DropdownOption[] = [
-  { label: 'От 1 дня', value: 1},
-  { label: 'От 7 дня', value: 7},
-  { label: 'От 14 дня', value: 14},
-  { label: 'От 30 дня', value: 30},
-]
+  { label: 'От 1 дня', value: 1 },
+  { label: 'От 7 дня', value: 7 },
+  { label: 'От 14 дня', value: 14 },
+  { label: 'От 30 дня', value: 30 },
+];
 
 export const WORK_SCHEDULE_OPTIONS: DropdownOption[] = [
-  {label: '5/2', value:'5/2'},
-  {label: '6/1', value:'6/1'},
-  {label: '7/0', value:'7/0'},
-]
+  { label: '5/2', value: '5/2' },
+  { label: '6/1', value: '6/1' },
+  { label: '7/0', value: '7/0' },
+];

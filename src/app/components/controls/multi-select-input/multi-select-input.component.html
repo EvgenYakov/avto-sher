@@ -1,20 +1,20 @@
 <app-control-wrapper
-        [control]="control"
-        [label]="label"
-        [error]="error"
-        [isRequired]="isRequired"
-        [isTouched]="control.touched"
+  [control]="control"
+  [label]="label"
+  [error]="error"
+  [isRequired]="isRequired"
+  [isTouched]="control.touched"
 >
   <div>
     <p-multiSelect
-            [formControl]="control"
-            [required]="isRequired"
-            [placeholder]="placeholder"
-            [ngClass]="{'ng-invalid ng-dirty':control.errors && control.touched}"
-            [options]="options"
-            optionLabel="name"
-            [defaultLabel]="defaultLabel"
-            display="chip"
+      [formControl]="control"
+      [required]="isRequired"
+      [placeholder]="placeholder"
+      [ngClass]="{ 'ng-invalid ng-dirty': control.errors && control.touched }"
+      [options]="options"
+      optionLabel="name"
+      [defaultLabel]="defaultLabel"
+      display="chip"
     ></p-multiSelect>
   </div>
 </app-control-wrapper>

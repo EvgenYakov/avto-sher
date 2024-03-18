@@ -1,1 +1,1 @@
-export { ReviewAutoCardComponent } from './review-auto-card.component'
+export { ReviewAutoCardComponent } from './review-auto-card.component';

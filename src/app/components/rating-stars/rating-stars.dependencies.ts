@@ -1,5 +1,5 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RatingModule } from 'primeng/rating';
 

@@ -1,9 +1,7 @@
-import { createAction, props } from '@ngrx/store';
 import { UserProfile } from '@models';
-import { AuthActions } from '../auth';
+import { createAction, props } from '@ngrx/store';
 
 export enum UserActions {
-
   GET_ME = '[USER] Get user information',
   GET_ME_SUCCESS = '[USER] Get user information success',
   GET_ME_FAILURE = '[USER] Get user information failure',
@@ -21,23 +19,13 @@ export enum UserActions {
   DELETE_PROFILE_AVATAR_FAILURE = '[USER] Delete user profile avatar failure',
 }
 
-export const getMe = createAction(
-  UserActions.GET_ME,
-);
+export const getMe = createAction(UserActions.GET_ME);
 
-export const getMeSuccess = createAction(
-  UserActions.GET_ME_SUCCESS,
-  props<{ user: UserProfile }>()
-);
+export const getMeSuccess = createAction(UserActions.GET_ME_SUCCESS, props<{ user: UserProfile }>());
 
-export const getMeFailure = createAction(
-  UserActions.GET_ME_FAILURE,
-);
+export const getMeFailure = createAction(UserActions.GET_ME_FAILURE);
 
-export const changeProfileDescription = createAction(
-  UserActions.CHANGE_PROFILE_DESCRIPTION,
-  props<{ info: string }>()
-);
+export const changeProfileDescription = createAction(UserActions.CHANGE_PROFILE_DESCRIPTION, props<{ info: string }>());
 
 export const changeProfileDescriptionSuccess = createAction(
   UserActions.CHANGE_PROFILE_DESCRIPTION_SUCCESS,
@@ -49,10 +37,7 @@ export const changeProfileDescriptionFailure = createAction(
   props<{ errors: string }>()
 );
 
-export const changeProfileAvatar = createAction(
-  UserActions.CHANGE_PROFILE_AVATAR,
-  props<{ newAvatar: File }>()
-);
+export const changeProfileAvatar = createAction(UserActions.CHANGE_PROFILE_AVATAR, props<{ newAvatar: File }>());
 
 export const changeProfileAvatarSuccess = createAction(
   UserActions.CHANGE_PROFILE_AVATAR_SUCCESS,
@@ -64,13 +49,9 @@ export const changeProfileAvatarFailure = createAction(
   props<{ errors: string }>()
 );
 
-export const deleteProfileAvatar = createAction(
-  UserActions.DELETE_PROFILE_AVATAR,
-);
+export const deleteProfileAvatar = createAction(UserActions.DELETE_PROFILE_AVATAR);
 
-export const deleteProfileAvatarSuccess = createAction(
-  UserActions.DELETE_PROFILE_AVATAR_SUCCESS,
-);
+export const deleteProfileAvatarSuccess = createAction(UserActions.DELETE_PROFILE_AVATAR_SUCCESS);
 
 export const deleteProfileAvatarFailure = createAction(
   UserActions.DELETE_PROFILE_AVATAR_FAILURE,

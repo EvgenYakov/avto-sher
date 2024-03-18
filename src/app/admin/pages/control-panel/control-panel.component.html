@@ -1,0 +1,60 @@
+<div class="control-panel">
+  <p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">
+      @if (selectedIconIndex !== null) {
+        {{ sidebarConfig[selectedIconIndex].headerLabel }}
+      }
+    </ng-template>
+    <ng-template pTemplate="content">
+      @if (selectedIconIndex !== null) {
+        <ul class="list">
+          @for (item of sidebarConfig[selectedIconIndex].content; track item) {
+            <li class="item">
+              <a [routerLink]="item.link">{{ item.title }}</a>
+            </li>
+          }
+        </ul>
+      }
+    </ng-template>
+  </p-sidebar>
+  <div class="control-panel__side-navigation">
+    <ul>
+      @for (config of sidebarConfig; track config; let i = $index) {
+        <li class="item" (click)="selectIcon(i)">
+          <img [src]="config.icon" alt="Иконка" />
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="control-panel__layouts">
+    <div class="control-panel__header header">
+      <div class="title">Тайтл</div>
+      <div class="right-side">
+        @if (autoparks$ | async; as autoparks) {
+          <div class="autoparks-select">
+            <p-dropdown
+              [options]="autoparks"
+              optionLabel="title"
+              (onChange)="selectAutoPark($event)"
+              [dropdownIcon]="(isAutoparksLoading$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+              [formControl]="autoParkControl"
+            ></p-dropdown>
+          </div>
+        }
+        <div class="icons">
+          <ul>
+            <li>
+              <img src="assets/icons/control-panel/ring.svg" alt="exit" />
+            </li>
+            <li>
+              <img src="assets/icons/control-panel/exit.svg" alt="exit" />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="control-panel__content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

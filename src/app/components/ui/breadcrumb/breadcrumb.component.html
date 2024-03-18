@@ -1,11 +1,18 @@
 <div class="container breadcrumb">
-  <span *ngFor="let breadcrumb of breadcrumbs$ | async; let last = last">
-    <small>
-      <a (click)="navigateToBreadcrumb(breadcrumb)" [ngClass]="{'disabled': last}"
-         [attr.aria-disabled]="last ? 'true' : 'false'">{{ breadcrumb.label }}</a>
-    </small>
-    <span *ngIf="!last" class="deliminator">
-      /
+  @for (breadcrumb of breadcrumbs$ | async; track breadcrumb; let last = $last) {
+    <span>
+      <small>
+        <a
+          (click)="navigateToBreadcrumb(breadcrumb)"
+          [ngClass]="{ disabled: last }"
+          [attr.aria-disabled]="last ? 'true' : 'false'"
+        >
+          {{ breadcrumb.label }}
+        </a>
+      </small>
+      @if (!last) {
+        <span class="deliminator">/</span>
+      }
     </span>
-  </span>
+  }
 </div>

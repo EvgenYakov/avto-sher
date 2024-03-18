@@ -1,1 +1,1 @@
-export { CardButtonComponent } from './card-button.component'
+export { CardButtonComponent } from './card-button.component';

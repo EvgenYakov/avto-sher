@@ -1,0 +1,10 @@
+@import "mixins";
+@import "colors";
+
+.list {
+  @include flexMix(column, flex-start, flex-start, 0.5rem);
+
+  &__table {
+    width: 100%;
+  }
+}

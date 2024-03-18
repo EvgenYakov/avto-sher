@@ -1,0 +1,88 @@
+<form [formGroup]="autoparkForm" (ngSubmit)="onSubmit()">
+  <div class="autopark">
+    <div class="autopark__title">
+      <div class="label">Введите название автопарка</div>
+      <input type="text" pInputText [formControl]="autoparkForm.controls.title" placeholder="Быстрые ветра" />
+    </div>
+    <div class="autopark__address">
+      <div class="label">Введите адрес</div>
+      <div class="inputs">
+        <input type="text" pInputText [formControl]="autoparkForm.controls.region" placeholder="Регион" />
+        <input type="text" pInputText [formControl]="autoparkForm.controls.address" placeholder="Адрес" />
+      </div>
+    </div>
+    <div class="autopark__descr">
+      <div class="label">Введите описание автопарка</div>
+      <textarea
+        rows="5"
+        cols="90"
+        [formControl]="autoparkForm.controls.description"
+        pInputTextarea
+        [autoResize]="true"
+        placeholder="Описание"
+      ></textarea>
+    </div>
+    <div class="autopark__photos">
+      <div class="label">Фотографии автопарка</div>
+      <div class="autopark__info-text">Загрузите логотип автопарка который будут отображаться на сайте</div>
+
+      <div class="setting-block">
+        <div class="setting-block__logo">
+          @if (avatarPath$ | async; as avatar) {
+            <img [src]="avatar" alt="Лого автопарка" />
+          } @else {
+            <div class="default-bck"></div>
+          }
+          <input type="file" style="display: none" #fileInput (change)="onFileSelect($event)" [accept]="'image/*'" />
+        </div>
+
+        <div class="setting-block__info">
+          <div class="title">
+            {{ autoparkForm.controls.title.value }}
+          </div>
+          <div class="owner">
+            <i class="pi pi-map-marker"></i>
+            {{ autoparkForm.controls.region.value }}, {{ autoparkForm.controls.address.value }}
+          </div>
+        </div>
+
+        <div class="setting-block__load-btns">
+          <label class="link" (click)="fileInput.click()">Загрузить логотип</label>
+          <!--          <label class="link">Загрузить фон</label>-->
+        </div>
+      </div>
+    </div>
+    <div class="autopark__bonuses">
+      <div class="left">
+        <div class="label">Бонусная система</div>
+        <div class="autopark__info-text">Выберите бонусы, которые получит водитель при аренде автомобиля</div>
+        <div class="bonuses">
+          @for (bonus of bonuses$ | async; track bonus) {
+            <div class="bonus">
+              <p-checkbox name="group" [value]="bonus.title" [inputId]="bonus.title"></p-checkbox>
+              <img [src]="bonus.icon" alt="" />
+              <label [for]="bonus.title">
+                <div class="bonus__title">
+                  {{ bonus.title }}
+                </div>
+                <div class="bonus__description">
+                  {{ bonus.description }}
+                </div>
+              </label>
+              <br />
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="label">Добавить свой бонус</div>
+        <div class="autopark__info-text">Можете создать свой уникальный бонус</div>
+        <input type="text" pInputText placeholder="название" />
+        <textarea rows="3" cols="20" pInputTextarea [autoResize]="true" placeholder="Описание"></textarea>
+      </div>
+    </div>
+
+    <p-button type="submit" class="next" label="Далее" [disabled]="autoparkForm.invalid"></p-button>
+  </div>
+</form>

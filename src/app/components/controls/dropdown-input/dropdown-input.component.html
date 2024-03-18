@@ -1,18 +1,18 @@
 <app-control-wrapper
-        [control]="control"
-        [label]="label"
-        [error]="error"
-        [isRequired]="isRequired"
-        [isTouched]="control.touched"
+  [control]="control"
+  [label]="label"
+  [error]="error"
+  [isRequired]="isRequired"
+  [isTouched]="control.touched"
 >
   <div>
     <p-dropdown
-            [formControl]="control"
-            [required]="isRequired"
-            [placeholder]="placeholder"
-            [ngClass]="{'ng-invalid ng-dirty':control.errors && control.touched}"
-            [options]="options"
-            optionLabel="name"
+      [formControl]="control"
+      [required]="isRequired"
+      [placeholder]="placeholder"
+      [ngClass]="{ 'ng-invalid ng-dirty': control.errors && control.touched }"
+      [options]="options"
+      optionLabel="name"
     ></p-dropdown>
   </div>
 </app-control-wrapper>

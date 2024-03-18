@@ -1,1 +1,1 @@
-export * from './register-type.enum'
+export * from './register-type.enum';

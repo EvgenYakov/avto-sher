@@ -1,47 +1,45 @@
-<app-spinner *ngIf="isLoading$ | async; else auctionCards"></app-spinner>
-
-<ng-template #auctionCards>
-  <div class="auction-places" *ngIf="(auctionAutoparks$|async) as cards">
-    <div class="top container">
-      <div class="top__title title">
-        ТОП автопарки
+@if (isLoading$ | async) {
+  <app-spinner></app-spinner>
+} @else {
+  @if (auctionAutoparks$ | async; as cards) {
+    <div class="auction-places">
+      <div class="top container">
+        <div class="top__title title">ТОП автопарки</div>
+        <div class="top__grid-list grid">
+          @for (card of cards.top; track card) {
+            <app-auction-autopark-card
+              class="item"
+              [card]="card"
+              (click)="navigateToDetailed(card.id)"
+            ></app-auction-autopark-card>
+          }
+        </div>
       </div>
-      <div class="top__grid-list grid">
-        <app-auction-autopark-card
-                class="item"
-                *ngFor="let card of cards.top"
-                [card]="card"
-                (click)="navigateToDetailed(card.id)"
-        ></app-auction-autopark-card>
+      <app-car-filter></app-car-filter>
+      <div class="checked container">
+        <div class="checked__title title">Проверенные автопарки</div>
+        <div class="checked__grid-list grid">
+          @for (card of cards.checked; track card) {
+            <app-auction-autopark-card
+              class="item"
+              [card]="card"
+              (click)="navigateToDetailed(card.id)"
+            ></app-auction-autopark-card>
+          }
+        </div>
       </div>
-    </div>
-    <app-car-filter></app-car-filter>
-    <div class="checked container">
-      <div class="checked__title title">
-        Проверенные автопарки
-      </div>
-      <div class="checked__grid-list grid">
-        <app-auction-autopark-card
-                class="item"
-                *ngFor="let card of cards.checked"
-                [card]="card"
-                (click)="navigateToDetailed(card.id)"
-        ></app-auction-autopark-card>
-      </div>
-    </div>
-
-    <div class="new container">
-      <div class="new__title title">
-        Новые автопарки
-      </div>
-      <div class="new__grid-list grid">
-        <app-auction-autopark-card
-                class="item"
-                *ngFor="let card of cards.fresh"
-                [card]="card"
-                (click)="navigateToDetailed(card.id)"
-        ></app-auction-autopark-card>
+      <div class="new container">
+        <div class="new__title title">Новые автопарки</div>
+        <div class="new__grid-list grid">
+          @for (card of cards.fresh; track card) {
+            <app-auction-autopark-card
+              class="item"
+              [card]="card"
+              (click)="navigateToDetailed(card.id)"
+            ></app-auction-autopark-card>
+          }
+        </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  }
+}

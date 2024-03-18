@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-
 import { AuthResponse, LoginDto, RegisterDto } from '@pages';
-import { UserProfile } from '@models';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',
@@ -19,48 +17,25 @@ export enum AuthActions {
   logout = '[AUTH] Logout',
 }
 
-export const loginRequest = createAction(
-  AuthActions.LOGIN_REQUEST,
-  props<{ loginDto: LoginDto }>()
-);
+export const loginRequest = createAction(AuthActions.LOGIN_REQUEST, props<{ loginDto: LoginDto }>());
 
-export const loginRequestSuccess = createAction(
-  AuthActions.LOGIN_SUCCESS,
-  props<{ authResponse: AuthResponse }>()
-);
+export const loginRequestSuccess = createAction(AuthActions.LOGIN_SUCCESS, props<{ authResponse: AuthResponse }>());
 
-export const loginRequestFailure = createAction(
-  AuthActions.LOGIN_FAILURE,
-  props<{ backendErrors: string }>()
-);
+export const loginRequestFailure = createAction(AuthActions.LOGIN_FAILURE, props<{ backendErrors: string }>());
 
-export const registerRequest = createAction(
-  AuthActions.REGISTER_REQUEST,
-  props<{ registerDto: RegisterDto }>()
-);
+export const registerRequest = createAction(AuthActions.REGISTER_REQUEST, props<{ registerDto: RegisterDto }>());
 
 export const registerRequestSuccess = createAction(
   AuthActions.REGISTER_SUCCESS,
   props<{ authResponse: AuthResponse }>()
 );
 
-export const registerRequestFailure = createAction(
-  AuthActions.REGISTER_FAILURE,
-  props<{ backendErrors: string }>()
-);
+export const registerRequestFailure = createAction(AuthActions.REGISTER_FAILURE, props<{ backendErrors: string }>());
 
-export const refreshTokenRequest = createAction(
-  AuthActions.REFRESH_TOKEN_REQUEST
-);
+export const refreshTokenRequest = createAction(AuthActions.REFRESH_TOKEN_REQUEST);
 
-export const refreshTokenRequestSuccess = createAction(
-  AuthActions.REFRESH_TOKEN_REQUEST_SUCCESS,
-);
+export const refreshTokenRequestSuccess = createAction(AuthActions.REFRESH_TOKEN_REQUEST_SUCCESS);
 
-export const refreshTokenRequestFailure = createAction(
-  AuthActions.REFRESH_TOKEN_REQUEST_FAILURE,
-);
+export const refreshTokenRequestFailure = createAction(AuthActions.REFRESH_TOKEN_REQUEST_FAILURE);
 
-export const logout = createAction(
-  AuthActions.logout
-);
+export const logout = createAction(AuthActions.logout);

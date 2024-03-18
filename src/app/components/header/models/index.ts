@@ -1,1 +1,1 @@
-export * from './regions-form.interface'
+export * from './regions-form.interface';

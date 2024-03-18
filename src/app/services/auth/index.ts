@@ -1,2 +1,2 @@
-export * from './auth.guard'
-export * from './interceptors'
+export * from './auth.guard';
+export * from './interceptors';

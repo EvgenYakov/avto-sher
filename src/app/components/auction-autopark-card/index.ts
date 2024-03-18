@@ -1,1 +1,1 @@
-export { AuctionAutoparkCardComponent } from './auction-autopark-card.component'
+export { AuctionAutoparkCardComponent } from './auction-autopark-card.component';

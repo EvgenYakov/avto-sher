@@ -1,24 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { AppRoutes, MainRoutes } from '@constants';
+import { BreadcrumbService } from '@services';
 import { MenuItem } from 'primeng/api';
 
-import { BreadcrumbService } from '@services';
-import { AppRoutes, MainRoutes } from '@constants';
-
-import { FilterType } from '../../../../components/car-filter/constant/filter-type.enum';
 import { CardsType } from '../../../../components/car-filter/constant/cards-type.enum';
+import { FilterType } from '../../../../components/car-filter/constant/filter-type.enum';
+
 import { CONTENT_WRAPPER_DEPS } from './content-wrapper.dependencies';
 
-@Component( {
+@Component({
   selector: 'app-content-wrapper',
   standalone: true,
   templateUrl: './content-wrapper.component.html',
   styleUrls: ['./content-wrapper.component.scss'],
   imports: [CONTENT_WRAPPER_DEPS],
-} )
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
 export class ContentWrapperComponent implements OnInit {
-
   public title: string;
   public filterType: FilterType | null;
   public cardsType: CardsType;
@@ -27,7 +27,7 @@ export class ContentWrapperComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private breadcrumbService: BreadcrumbService,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit(): void {
@@ -41,9 +41,8 @@ export class ContentWrapperComponent implements OnInit {
   private setBreadcrumbs(): void {
     const breadcrumb: MenuItem = {
       label: this.title,
-      routerLink: `${ AppRoutes.MAIN }/${ MainRoutes.USER_PROFILE }/${ this.cardsType }`
+      routerLink: `${AppRoutes.MAIN}/${MainRoutes.USER_PROFILE}/${this.cardsType}`,
     };
-    this.breadcrumbService.addBreadcrumb( breadcrumb );
+    this.breadcrumbService.addBreadcrumb(breadcrumb);
   }
-
 }

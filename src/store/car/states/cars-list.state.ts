@@ -1,7 +1,6 @@
-import { EntityState } from '@ngrx/entity';
-
-import { CarCard } from '@models';
 import { CarFilterParams } from '@components';
+import { CarCard } from '@models';
+import { EntityState } from '@ngrx/entity';
 
 export interface CarsListState extends EntityState<CarCard> {
   filters: CarFilterParams;

@@ -1,1 +1,1 @@
-export { RatingStarsComponent } from './rating-stars.component'
+export { RatingStarsComponent } from './rating-stars.component';

@@ -1,5 +1,3 @@
 import { RatingStarsComponent } from '../rating-stars/rating-stars.component';
 
-export const AUTOPARK_CARD_DEPS = [
-  RatingStarsComponent
-];
+export const AUTOPARK_CARD_DEPS = [RatingStarsComponent];

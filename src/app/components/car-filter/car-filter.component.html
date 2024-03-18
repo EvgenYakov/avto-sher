@@ -1,139 +1,133 @@
 <form [formGroup]="filterForm">
   <div class="filter">
     <div class="block">
-      <div class="dropdown" *ngFor="let dropdown of dropdowns;  let i = index">
-        <ng-container *ngIf="i<2">
-          <div class="label">
-            {{dropdown.label}}
-          </div>
-          <p-multiSelect
-                  [options]="dropdown.options"
-                  [placeholder]="dropdown.placeholder"
-                  [formControlName]="dropdown.formControlName"
-          ></p-multiSelect>
-        </ng-container>
-       <ng-container *ngIf="i>=2">
-         <div class="label">
-           {{dropdown.label}}
-         </div>
-         <p-dropdown
-                 [options]="dropdown.options"
-                 [placeholder]="dropdown.placeholder"
-                 [formControlName]="dropdown.formControlName"
-         ></p-dropdown>
-       </ng-container>
-      </div>
-      
-      <div class="price">
-        <div class="label">
-          Цена
+      @for (dropdown of dropdowns; track dropdown; let i = $index) {
+        <div class="dropdown">
+          @if (i < 2) {
+            <div class="label">
+              {{ dropdown.label }}
+            </div>
+            <p-multiSelect
+              [options]="dropdown.options"
+              [placeholder]="dropdown.placeholder"
+              [formControlName]="dropdown.formControlName"
+            ></p-multiSelect>
+          }
+          @if (i >= 2) {
+            <div class="label">
+              {{ dropdown.label }}
+            </div>
+            <p-dropdown
+              [options]="dropdown.options"
+              [placeholder]="dropdown.placeholder"
+              [formControlName]="dropdown.formControlName"
+            ></p-dropdown>
+          }
         </div>
+      }
+
+      <div class="price">
+        <div class="label">Цена</div>
         <div class="price__range">
           <p-inputNumber
-                  [formControl]="filterForm.controls.startPrice"
-                  [mode]="'currency'"
-                  [currency]="'RUB'"
-                  [locale]="'ru-RU'"
-                  placeholder="От"
+            [formControl]="filterForm.controls.startPrice"
+            [mode]="'currency'"
+            [currency]="'RUB'"
+            [locale]="'ru-RU'"
+            placeholder="От"
           ></p-inputNumber>
           <div class="dash"></div>
           <p-inputNumber
-                  [formControl]="filterForm.controls.endPrice"
-                  [mode]="'currency'"
-                  [currency]="'RUB'"
-                  [locale]="'ru-RU'"
-                  placeholder="До"
+            [formControl]="filterForm.controls.endPrice"
+            [mode]="'currency'"
+            [currency]="'RUB'"
+            [locale]="'ru-RU'"
+            placeholder="До"
           ></p-inputNumber>
         </div>
       </div>
-    
     </div>
     <div class="block">
       <div class="brand">
-        <div class="label">
-          Марка
-        </div>
+        <div class="label">Марка</div>
         <p-dropdown
-                [formControl]="filterForm.controls.brand"
-                [options]="(brands$ | async)!"
-                [optionValue]="'value'"
-                [optionLabel]="'label'"
-                [filter]="true"
-                [showClear]="true"
-                optionLabel="label"
-                filterBy="label"
-                placeholder="Выберите марку"
+          [formControl]="filterForm.controls.brand"
+          [options]="(brands$ | async)!"
+          [optionValue]="'value'"
+          [optionLabel]="'label'"
+          [filter]="true"
+          [showClear]="true"
+          optionLabel="label"
+          filterBy="label"
+          placeholder="Выберите марку"
         ></p-dropdown>
       </div>
       <div class="model">
-        <div class="label">
-          Модель
-        </div>
+        <div class="label">Модель</div>
         <p-dropdown
-                [formControl]="filterForm.controls.model"
-                [options]="(models$ | async)!"
-                [optionValue]="'value'"
-                [optionLabel]="'label'"
-                [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
-                placeholder="Выберите модель"
-        >
-        </p-dropdown>
+          [formControl]="filterForm.controls.model"
+          [options]="(models$ | async)!"
+          [optionValue]="'value'"
+          [optionLabel]="'label'"
+          [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
+          placeholder="Выберите модель"
+        ></p-dropdown>
       </div>
     </div>
     <div class="block">
-      <div class="block__transmission">
+      <div class="card block__transmission">
         <p-selectButton
-                [formControl]="filterForm.controls.transmission"
-                [options]="transmission"
-                [multiple]="true"
-                [optionLabel]="'label'"
-                [optionValue]="'value'"
+          [formControl]="filterForm.controls.transmission"
+          [options]="transmission"
+          [multiple]="true"
+          [optionLabel]="'label'"
+          [optionValue]="'value'"
         ></p-selectButton>
       </div>
       <div class="block__fuel-type">
         <p-selectButton
-                [formControl]="filterForm.controls.fuel"
-                [options]="fuel"
-                [multiple]="true"
-                [optionLabel]="'label'"
-                [optionValue]="'value'"
+          [formControl]="filterForm.controls.fuel"
+          [options]="fuel"
+          [multiple]="true"
+          [optionLabel]="'label'"
+          [optionValue]="'value'"
         ></p-selectButton>
       </div>
     </div>
-    <div class="block" *ngIf="isOpenAdditionalFilters">
-      <div class="block__additional">
-        <div class="label">
-          Дополнительная
+    @if (isOpenAdditionalFilters) {
+      <div class="block">
+        <div class="block__additional">
+          <div class="label">Дополнительная</div>
+          <p-multiSelect
+            [options]="additional"
+            [filter]="false"
+            [formControl]="filterForm.controls.additionalInfo"
+            display="chip"
+            placeholder="Выберите"
+            class="more-additional-info"
+          ></p-multiSelect>
         </div>
-        <p-multiSelect
-                [options]="additional"
-                [filter]="false"
-                [formControl]="filterForm.controls.additionalInfo"
-                display="chip"
-                placeholder="Выберите"
-                class="more-additional-info"
-        ></p-multiSelect>
-      </div>
-      
-      <div class="block__financial">
-        <div class="label">
-          Финансовая
+        <div class="block__financial">
+          <div class="label">Финансовая</div>
+          <p-multiSelect
+            [options]="financial"
+            [filter]="false"
+            [formControl]="filterForm.controls.financialInfo"
+            display="chip"
+            placeholder="Выберите"
+            class="more-additional-info"
+          ></p-multiSelect>
         </div>
-        <p-multiSelect
-                [options]="financial"
-                [filter]="false"
-                [formControl]="filterForm.controls.financialInfo"
-                display="chip"
-                placeholder="Выберите"
-                class="more-additional-info"
-        ></p-multiSelect>
       </div>
-    
-    </div>
+    }
   </div>
 </form>
 <div class="open-close-additional-filters" (click)="isOpenAdditionalFilters = !isOpenAdditionalFilters">
   Полный набор фильтров
-  <i class="pi pi-angle-down" *ngIf="!isOpenAdditionalFilters"></i>
-  <i class="pi pi-angle-up" *ngIf="isOpenAdditionalFilters"></i>
+  @if (!isOpenAdditionalFilters) {
+    <i class="pi pi-angle-down"></i>
+  }
+  @if (isOpenAdditionalFilters) {
+    <i class="pi pi-angle-up"></i>
+  }
 </div>

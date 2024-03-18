@@ -1,3 +1,3 @@
-export * from './autopark-detailed'
-export * from './hat'
-export * from './sub-info-panel'
+export * from './autopark-detailed';
+export * from './hat';
+export * from './sub-info-panel';
