@@ -1,1 +1,1 @@
-export * from './file-with-progress.interface'
+export * from './file-with-progress.interface';

@@ -2,11 +2,7 @@
   <p-card class="review">
     <div class="review__header">
       <div class="review__user-info">
-        <img
-                [src]="review.avatarPath"
-                class="review__avatar"
-                alt="user avatar"
-        />
+        <img [src]="review.avatarPath" class="review__avatar" alt="user avatar" />
 
         <div class="review__header-wrapper">
           <div class="subtitle">
@@ -22,12 +18,12 @@
     </div>
 
     <div>
-      <span style="font-weight: bold">Автомобиль: </span>
-      <span class="review__text"> {{ review.autoMark }}</span>
+      <span style="font-weight: bold">Автомобиль:</span>
+      <span class="review__text">{{ review.autoMark }}</span>
     </div>
 
     <div>
-      <span style="font-weight: bold">Комментарий: </span>
+      <span style="font-weight: bold">Комментарий:</span>
       <span class="review__text">{{ review.comment }}</span>
     </div>
   </p-card>

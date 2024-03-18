@@ -1,0 +1,10 @@
+<div class="car-list">
+  <p-button (click)="navigateToCreateCar()" class="mb-1">Добавить машину</p-button>
+  <div class="car-list__table">
+    <app-custom-table
+      [tableData]="carList()"
+      [columnNames]="columnNames"
+      (rowClicked)="navigateToEditCar($event)"
+    ></app-custom-table>
+  </div>
+</div>

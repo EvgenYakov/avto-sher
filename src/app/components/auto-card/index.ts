@@ -1,1 +1,1 @@
-export { AutoCardComponent } from './auto-card.component'
+export { AutoCardComponent } from './auto-card.component';

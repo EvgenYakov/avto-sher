@@ -1,26 +1,26 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Store } from '@ngrx/store';
-
-import { AuthState, registerRequest, selectAuthErrors } from '@store';
 import { AppRoutes, EMAIL_FIELD, PASSWORD_FIELD, PHONE_FIELD, REQUIRED_FIELD } from '@constants';
-
-import { RegisterDto, RegistrationForm } from '../../models';
-import { RegisterType } from '../../constants';
-
-import { REGISTRATION_DEPS } from './registration.dependencies';
+import { Store } from '@ngrx/store';
+import { AuthState, registerRequest, selectAuthErrors } from '@store';
+import { TabViewChangeEvent } from 'primeng/tabview';
 import { Observable } from 'rxjs';
 
-@Component( {
+import { RegisterType } from '../../constants';
+import { RegisterDto, RegistrationForm } from '../../models';
+
+import { REGISTRATION_DEPS } from './registration.dependencies';
+
+@Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [REGISTRATION_DEPS]
-} )
+  imports: [REGISTRATION_DEPS],
+})
 export class RegistrationComponent implements OnInit {
   public readonly requiredField = REQUIRED_FIELD;
   public readonly emailField = EMAIL_FIELD;
@@ -32,7 +32,7 @@ export class RegistrationComponent implements OnInit {
   public checkbox = false;
   public activeIndex = 0;
 
-  public registerForm: FormGroup<RegistrationForm>
+  public registerForm: FormGroup<RegistrationForm>;
 
   private registerType = RegisterType.DRIVER;
 
@@ -40,35 +40,33 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private store: Store<AuthState>
-  ) {
-  }
+  ) {}
 
   public ngOnInit(): void {
     this.registerForm = this.initializeForm();
-    this.onTabChanged( { originalEvent: null, index: 0 } );
-    this.errors$ = this.store.select( selectAuthErrors );
+    // this.onTabChanged( { originalEvent: null, index: 0 } );
+    this.errors$ = this.store.select(selectAuthErrors);
   }
 
   public navigateBack(): void {
-    this.router.navigate( ['../'], { relativeTo: this.route } );
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
   public onSubmit(): void {
-
     const formValues = {
       ...this.registerForm.value,
-      role: this.registerType
+      role: this.registerType,
     } as RegisterDto;
 
-    this.store.dispatch( registerRequest( { registerDto: formValues } ) );
+    this.store.dispatch(registerRequest({ registerDto: formValues }));
   }
 
-  public onTabChanged({ index }: { originalEvent: PointerEvent | null, index: number }): void {
+  public onTabChanged({ index }: TabViewChangeEvent): void {
     this.checkbox = false;
     this.activeIndex = index;
 
     if (index === 0) {
-      this.registerForm.controls.phoneNumber.addValidators( [Validators.required] );
+      this.registerForm.controls.phoneNumber.addValidators([Validators.required]);
       this.registerType = RegisterType.DRIVER;
     } else if (index === 1) {
       this.registerForm.controls.phoneNumber.clearValidators();
@@ -78,19 +76,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   private initializeForm(): FormGroup<RegistrationForm> {
-    const registerFormGroup = new FormGroup<RegistrationForm>( <RegistrationForm>{
-      fullName: new FormControl<string>( '', [Validators.required] ),
-      phoneNumber: new FormControl<string>( '' ),
-      email: new FormControl<string>( '', [
-        Validators.required,
-        Validators.email,
-      ] ),
-      password: new FormControl<string>( '', [
-        Validators.required,
-        Validators.minLength( 6 )
-      ] ),
-
-    } );
+    const registerFormGroup = new FormGroup<RegistrationForm>(<RegistrationForm>{
+      fullName: new FormControl<string>('', [Validators.required]),
+      phoneNumber: new FormControl<string>(''),
+      email: new FormControl<string>('', [Validators.required, Validators.email]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
+    });
 
     return registerFormGroup;
   }

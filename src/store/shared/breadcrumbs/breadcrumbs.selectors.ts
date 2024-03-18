@@ -7,5 +7,5 @@ export const breadcrumbsFeatureSelector = createFeatureSelector<BreadcrumbsState
 
 export const selectBreadcrumbs = createSelector(
   breadcrumbsFeatureSelector,
-  (state: BreadcrumbsState) : MenuItem[] => state.breadcrumbs
+  (state: BreadcrumbsState): MenuItem[] => state.breadcrumbs
 );

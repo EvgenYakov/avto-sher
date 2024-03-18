@@ -72,12 +72,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "yaavto-fe:build:production"
+              "buildTarget": "yaavto-fe:build:production"
             },
             "development": {
-              "browserTarget": "yaavto-fe:build:development"
+              "buildTarget": "yaavto-fe:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "yaavto-fe:build"
+            "buildTarget": "yaavto-fe:build"
           }
         },
         "test": {

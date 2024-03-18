@@ -1,1 +1,1 @@
-export * from './user-profile.interface'
+export * from './user-profile.interface';

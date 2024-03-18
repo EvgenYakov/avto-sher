@@ -7,5 +7,5 @@ export enum LoadingTypes {
   REVIEWS_LIST = 'reviews',
   PROFILE = 'profile',
   USER_AVATAR = 'user-avatar',
-  CAR_MODELS = 'models'
+  CAR_MODELS = 'models',
 }

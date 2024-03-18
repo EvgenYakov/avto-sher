@@ -1,1 +1,1 @@
-export * from './content-wrapper.component'
+export * from './content-wrapper.component';

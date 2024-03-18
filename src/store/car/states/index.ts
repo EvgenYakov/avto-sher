@@ -1,2 +1,2 @@
-export * from './car-detailed.state'
-export * from './cars-list.state'
+export * from './car-detailed.state';
+export * from './cars-list.state';

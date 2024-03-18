@@ -3,6 +3,10 @@
 @import "mixins";
 @import "placeholders";
 @import "theme";
+@import "public-web";
+@import "variables";
+
+@import "components/index";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
 
@@ -12,6 +16,8 @@ body {
     font-size: 14px;
   }
 
+  margin: 0;
+  padding: 0;
   height: 100%;
   font-size: 16px;
   font-family: "Roboto", sans-serif;

@@ -1,23 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+import { LoadingTypes } from '@constants';
+import { CarProfile } from '@models';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-
+import { CarService } from '@services';
 import { catchError, map, of, switchMap } from 'rxjs';
 
-import { CarService } from '@services';
-import { CarProfile } from '@models';
-
-import { loadCar, loadCarFailure, loadCarSuccess } from '../actions';
-import {
-  loadAutoparkCars,
-  loadAutoparkDetailed,
-  loadAutoparkDetailedFailure,
-  loadAutoparkDetailedSuccess
-} from '../../autopark';
+import { loadAutoparkCars } from '../../autopark';
 import { addLoading, removeLoading } from '../../shared';
-import { LoadingTypes } from '@constants';
+import { loadCar, loadCarFailure, loadCarSuccess } from '../actions';
 
 @Injectable()
 export class CarDetailedEffects {
@@ -25,18 +18,19 @@ export class CarDetailedEffects {
     private actions$: Actions,
     private carService: CarService,
     private store: Store
-  ) {
-  }
+  ) {}
 
-  public loadCarProfile$ = createEffect( () => this.actions$.pipe(
-    ofType( loadCar ),
-    switchMap( ({ carId }) => this.carService.getCarProfile( carId ) ),
-    map( (car: CarProfile) => {
-      this.store.dispatch( loadAutoparkCars( { autoparkId: car.autopark.id } ) )
-      return loadCarSuccess( { car } )
-    } ),
-    catchError( (error: HttpErrorResponse) => of( loadCarFailure( { error: error.message } ) ) )
-  ) );
+  public loadCarProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadCar),
+      switchMap(({ carId }) => this.carService.getCarProfile(carId)),
+      map((car: CarProfile) => {
+        this.store.dispatch(loadAutoparkCars({ autoparkId: car.autopark.id }));
+        return loadCarSuccess({ car });
+      }),
+      catchError((error: HttpErrorResponse) => of(loadCarFailure({ error: error.message })))
+    )
+  );
 
   // public addCarPhoto$ = createEffect( () => this.actions$.pipe(
   //   ofType( addPhoto ),
@@ -56,19 +50,17 @@ export class CarDetailedEffects {
   //   )
   // ) );
 
-  addLoading$ = createEffect( () =>
+  addLoading$ = createEffect(() =>
     this.actions$.pipe(
-      ofType( loadCar ),
-      map( () => addLoading( { addLoading: LoadingTypes.CAR_DETAILED } ) )
+      ofType(loadCar),
+      map(() => addLoading({ addLoading: LoadingTypes.CAR_DETAILED }))
     )
   );
 
-  removeLoading$ = createEffect( () =>
+  removeLoading$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(
-        loadCarSuccess,
-      ),
-      map( () => removeLoading( { removeLoading: LoadingTypes.CAR_DETAILED } ) )
+      ofType(loadCarSuccess),
+      map(() => removeLoading({ removeLoading: LoadingTypes.CAR_DETAILED }))
     )
   );
 }

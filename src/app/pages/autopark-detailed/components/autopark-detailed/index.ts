@@ -1,1 +1,1 @@
-export { AutoparkDetailedComponent } from './autopark-detailed.component'
+export { AutoparkDetailedComponent } from './autopark-detailed.component';

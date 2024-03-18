@@ -1,2 +1,2 @@
-export * from './autoparks.selectors'
-export * from './autopark-detailed.selectors'
+export * from './autoparks.selectors';
+export * from './autopark-detailed.selectors';

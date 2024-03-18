@@ -1,1 +1,1 @@
-export * from './dropdown.interface'
+export * from './dropdown.interface';

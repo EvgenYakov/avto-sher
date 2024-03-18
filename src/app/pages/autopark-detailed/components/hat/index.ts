@@ -1,1 +1,1 @@
-export { AutoparkHatComponent } from './autopark-hat.component'
+export { AutoparkHatComponent } from './autopark-hat.component';

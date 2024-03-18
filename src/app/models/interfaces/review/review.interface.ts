@@ -1,4 +1,5 @@
 import { UserStatus } from '@constants';
+
 import { Rating } from '../rating/rating.interface';
 
 export interface Review {

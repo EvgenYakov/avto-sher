@@ -1,2 +1,2 @@
-export * from './car-detailed.reducer'
-export * from './cars-list.reducer'
+export * from './car-detailed.reducer';
+export * from './cars-list.reducer';

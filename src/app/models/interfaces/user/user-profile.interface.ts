@@ -5,6 +5,7 @@ export interface UserProfile {
   email: string;
   avatar: string;
   info: string;
+  role: string;
   requestsCounter: number;
   ordersCounter: number;
   reviewsAboutUserCounter: number;

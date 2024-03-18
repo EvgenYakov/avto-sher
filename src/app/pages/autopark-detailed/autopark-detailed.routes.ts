@@ -5,6 +5,6 @@ import { AutoparkDetailedComponent } from './components';
 export default [
   {
     path: '',
-    component: AutoparkDetailedComponent
-  }
-] as Route[]
+    component: AutoparkDetailedComponent,
+  },
+] as Route[];

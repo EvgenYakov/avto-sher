@@ -1,1 +1,1 @@
-export * from './header-navigation.constants'
+export * from './header-navigation.constants';

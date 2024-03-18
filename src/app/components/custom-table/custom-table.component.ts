@@ -1,21 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
-import { InputTextModule } from 'primeng/inputtext';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
-@Component( {
+import { InputTextModule } from 'primeng/inputtext';
+import { TableModule } from 'primeng/table';
+
+@Component({
   selector: 'app-custom-table',
   standalone: true,
   templateUrl: './custom-table.component.html',
   styleUrls: ['./custom-table.component.scss'],
   imports: [CommonModule, TableModule, InputTextModule],
-} )
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
 export class CustomTableComponent<T> implements OnInit {
   @Input() set tableData(dataList: T[] | null) {
     if (dataList) {
       this.dataList = dataList;
     }
-  };
+  }
 
   public get tableData(): T[] {
     return this.dataList;
@@ -33,14 +35,13 @@ export class CustomTableComponent<T> implements OnInit {
   public columnNamesKey: string[] = [];
   public globalFilteredFields: string[] = [];
 
-  ngOnInit() {
-    const keys = Object.keys( this.columnNames )
+  ngOnInit(): void {
+    const keys = Object.keys(this.columnNames);
     this.columnNamesKey = keys;
     this.globalFilteredFields = keys;
   }
 
   public emitIdRow(value: string): void {
-    this.rowClicked.emit( value );
+    this.rowClicked.emit(value);
   }
-
 }

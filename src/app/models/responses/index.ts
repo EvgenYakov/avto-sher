@@ -1,2 +1,2 @@
-export * from './backend-error.interface'
-export * from './pagination-response.interface'
+export * from './backend-error.interface';
+export * from './pagination-response.interface';

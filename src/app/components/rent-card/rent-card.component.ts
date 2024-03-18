@@ -1,16 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { CardModule } from 'primeng/card';
 
-@Component( {
+@Component({
   selector: 'app-rent-card',
   templateUrl: './rent-card.component.html',
   styleUrls: ['./rent-card.component.scss'],
   standalone: true,
-  imports: [CommonModule, CardModule, ButtonModule],
-} )
+  imports: [CardModule, ButtonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
 export class RentCardComponent {
   @Input() public financialInfo: string[];
   @Input() public btnTitle: string;

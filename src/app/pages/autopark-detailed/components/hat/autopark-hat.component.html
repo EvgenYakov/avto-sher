@@ -1,34 +1,39 @@
-<div class="hat-wrapper" *ngIf="hatData">
-  <div class="logo-wrapper">
-    <div class="absolute-wrap">
-      <div class="logo-wrapper-ispremium" *ngIf="hatData.isPremium">
-        <div class="icon">
-          <img src="assets/icons/autopark-status/premium.svg" alt="иконка премиум автопарка">
-        </div>
-        <div class="status-label">
-          <span>Премиум автопарк</span>
-        </div>
+@if (hatData) {
+  <div class="hat-wrapper">
+    <div class="logo-wrapper">
+      <div class="absolute-wrap">
+        @if (hatData.isPremium) {
+          <div class="logo-wrapper-ispremium">
+            <div class="icon">
+              <img src="assets/icons/autopark-status/premium.svg" alt="иконка премиум автопарка" />
+            </div>
+            <div class="status-label">
+              <span>Премиум автопарк</span>
+            </div>
+          </div>
+        }
+      </div>
+      <img [src]="hatData.logo" alt="автопарк logo" />
+    </div>
+    <div class="info">
+      <div class="info__name title">
+        {{ hatData.title }}
+      </div>
+      <div class="info__address">
+        <i class="pi pi-map-marker"></i>
+        {{ hatData.region }}, {{ hatData.address }}
+      </div>
+      <div class="info__description">
+        {{ hatData.description }}
+      </div>
+      <div class="info__sub-panel">
+        @for (item of hatDataItems; track item) {
+          <app-sub-info-panel class="panel" [hatDataItem]="item"></app-sub-info-panel>
+        }
       </div>
     </div>
- 
-    <img [src]="hatData.logo" alt="автопарк logo">
-  </div>
-  <div class="info">
-    <div class="info__name title">
-      {{hatData.title}}
-    </div>
-    <div class="info__address">
-      <i class="pi pi-map-marker"></i>
-      {{hatData.region}}, {{hatData.address}}
-    </div>
-    <div class="info__description">
-      {{hatData.description}}
-    </div>
-    <div class="info__sub-panel">
-      <app-sub-info-panel class="panel" *ngFor="let item of hatDataItems" [hatDataItem]="item"></app-sub-info-panel>
+    <div class="favorite">
+      <i class="pi" [ngClass]="{ 'pi-heart': !hatData.isFavorite, 'pi-heart-fill': hatData.isFavorite }"></i>
     </div>
   </div>
-  <div class="favorite">
-    <i class="pi" [ngClass]="{'pi-heart': !hatData.isFavorite, 'pi-heart-fill': hatData.isFavorite}"></i>
-  </div>
-</div>
+}

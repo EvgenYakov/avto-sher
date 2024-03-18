@@ -1,1 +1,1 @@
-export { RentCardComponent } from './rent-card.component'
+export { RentCardComponent } from './rent-card.component';
