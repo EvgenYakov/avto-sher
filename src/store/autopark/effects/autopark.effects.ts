@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { LoadingTypes, ToasterType } from '@constants';
+import { AppRoutes, ControlPanel, LoadingTypes, ToasterType } from '@constants';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AutoparkService, CarService } from '@services';
@@ -27,7 +28,8 @@ export class AutoparkEffects {
     private actions$: Actions,
     private store: Store,
     private autoparkService: AutoparkService,
-    private carService: CarService
+    private carService: CarService,
+    private router: Router
   ) {}
 
   public loadAutoparkDetailed$ = createEffect(() =>
@@ -61,7 +63,15 @@ export class AutoparkEffects {
       ofType(createAutopark),
       switchMap(({ autopark }) =>
         this.autoparkService.createAutopark(autopark).pipe(
-          map(autopark => createAutoparkSuccess({ autopark })),
+          map(autopark => {
+            this.router.navigate([
+              '/',
+              AppRoutes.CONTROL_PANEL,
+              ControlPanel.AUTOPARK_CONTROL,
+              ControlPanel.AUTOPARK_TABLE,
+            ]);
+            return createAutoparkSuccess({ autopark });
+          }),
           catchError((error: HttpErrorResponse) => {
             this.store.dispatch(addBeErrorMessage({ severity: ToasterType.ERROR, detail: error.error.message }));
             return of(createAutoparkFailure());
