@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { LocalStorageKeys, UserRole } from '@constants';
+import { AppRoutes, LocalStorageKeys, MainRoutes, UserRole } from '@constants';
 import { Region } from '@models';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from '@services';
@@ -10,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 import { Observable, takeUntil, tap } from 'rxjs';
 
 import { UserFacade } from '../../../store/user/user.facade';
-import { DestroyDirective } from '../../directives/destroy.directive';
+import { DestroyDirective } from '@directives';
 
 import { MAIN_NAV, OWNER_PANEL_LINK, SECONDARY_NAV } from './constants';
 import { HEADER_CARD_DEPS } from './header.dependencies';
@@ -38,7 +38,9 @@ export class HeaderComponent implements OnInit {
 
   public readonly mainNavList = signal<MenuItem[]>(MAIN_NAV);
 
-  protected readonly SECONDARY_NAV = SECONDARY_NAV;
+  public readonly SECONDARY_NAV = SECONDARY_NAV;
+  public readonly AppRoutes = AppRoutes;
+  public readonly MainRoutes = MainRoutes;
 
   private destroy$ = inject(DestroyDirective).destroy$;
 
