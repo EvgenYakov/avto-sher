@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 
 import { AuctionAutoparkCardComponent, SpinnerComponent } from '@components';
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
-import { AuctionAutoparks } from '@models';
+import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
-import { loadAuctionAutoparksByRegion, selectAuctionAutoparks, selectCurrentRegion, selectLoading } from '@store';
+import { loadAutoparks, selectAutoparksEntities, selectCurrentRegion, selectLoading } from '@store';
+import { GalleriaModule } from 'primeng/galleria';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { FilterComponent } from './components/car-filter/filter.component';
@@ -16,16 +17,29 @@ import { FilterComponent } from './components/car-filter/filter.component';
   templateUrl: './start-page.component.html',
   styleUrls: ['./start-page.component.scss'],
   standalone: true,
-  imports: [AuctionAutoparkCardComponent, FilterComponent, AsyncPipe, SpinnerComponent, FilterComponent],
+  imports: [
+    AuctionAutoparkCardComponent,
+    FilterComponent,
+    AsyncPipe,
+    SpinnerComponent,
+    FilterComponent,
+    GalleriaModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartPageComponent implements OnInit, OnDestroy {
+  IMAGES: string[] = [
+    'assets/cars/20.jpg',
+    'assets/cars/21.jpg',
+    'assets/cars/27)).webp',
+  ];
+
   constructor(
     private store: Store,
     private router: Router
   ) {}
 
-  public auctionAutoparks$: Observable<AuctionAutoparks>;
+  public auctionAutoparks$: Observable<AutoparkCard[]>;
   public isLoading$: Observable<boolean>;
 
   private destroy$ = new Subject<void>();
@@ -43,9 +57,9 @@ export class StartPageComponent implements OnInit, OnDestroy {
       .select(selectCurrentRegion)
       .pipe(takeUntil(this.destroy$))
       .subscribe(region => {
-        this.store.dispatch(loadAuctionAutoparksByRegion({ regionName: region.name }));
+        this.store.dispatch(loadAutoparks({ regionName: region.name }));
       });
-    this.auctionAutoparks$ = this.store.select(selectAuctionAutoparks);
+    this.auctionAutoparks$ = this.store.select(selectAutoparksEntities);
     this.isLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
   }
 

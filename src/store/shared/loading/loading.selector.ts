@@ -11,3 +11,5 @@ export const selectLoading = createSelector(
   selectLoadingTypes,
   (types: LoadingTypes[], props: { type: LoadingTypes }) => types.includes(props.type)
 );
+
+export const selectInRequest = createSelector(loadingFeatureSelector, state => Boolean(state.inRequestQueue));

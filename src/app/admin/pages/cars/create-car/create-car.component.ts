@@ -142,7 +142,7 @@ export class CreateCarComponent implements OnInit {
         });
       } else {
         // @ts-ignore
-        const value: string = car[key].toString();
+        // const value: string = car[key].toString();
         data.append(key, value);
       }
     });
