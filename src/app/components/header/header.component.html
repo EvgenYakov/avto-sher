@@ -1,6 +1,8 @@
 <header class="header">
   <div class="header__first-level container">
-    <img src="assets/icons/logo.svg" alt="logo" />
+    <a [routerLink]="['/', AppRoutes.MAIN]">
+      <img src="assets/icons/logo.svg" alt="logo" />
+    </a>
     <div class="header__user-panel">
       <app-user-panel></app-user-panel>
       <i class="header__hamburger pi pi-bars" (click)="isOpen = true"></i>

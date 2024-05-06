@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { AuctionAutoparkCard } from '@models';
+import { AuctionAutoparkCard, AutoparkCard } from '@models';
 
 import { AUTOPARK_CARD_DEPS } from './auction-autopark-card.dependencies';
 
@@ -13,5 +13,5 @@ import { AUTOPARK_CARD_DEPS } from './auction-autopark-card.dependencies';
   imports: [AUTOPARK_CARD_DEPS],
 })
 export class AuctionAutoparkCardComponent {
-  @Input() public card: AuctionAutoparkCard;
+  @Input() public card: AutoparkCard;
 }
