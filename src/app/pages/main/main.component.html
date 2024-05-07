@@ -2,7 +2,9 @@
   <app-header></app-header>
   <app-global-loader></app-global-loader>
   <main class="main">
-    <app-breadcrumb></app-breadcrumb>
+    @if (!breadcrumbsTitleList()?.includes('Главная')) {
+      <app-breadcrumb></app-breadcrumb>
+    }
     <router-outlet></router-outlet>
   </main>
 
