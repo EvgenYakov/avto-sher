@@ -13,7 +13,7 @@
 }
 
 .auction-places {
-  @include flexMix(column, unset, flex-start, 6.875rem);
+  @include flexMix(column, unset, flex-start, 3rem);
 
   width: 100%;
   height: 100%;

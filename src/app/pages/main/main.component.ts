@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, OnInit } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { GlobalLoaderComponent } from '@components';
 import { Store } from '@ngrx/store';
-import { loadRegions } from '@store';
+import { loadRegions, selectBreadcrumbs } from '@store';
 
 import { MAIN_DEPS } from './main.dependencies';
 
@@ -15,6 +16,11 @@ import { MAIN_DEPS } from './main.dependencies';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit {
+  public breadcrumbs = toSignal(this.store.select(selectBreadcrumbs));
+  public breadcrumbsTitleList = computed(() => {
+    return this.breadcrumbs()?.map(item => item.label);
+  });
+
   constructor(private store: Store) {}
 
   ngOnInit(): void {

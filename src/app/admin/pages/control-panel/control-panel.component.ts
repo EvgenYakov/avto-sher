@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { LoadingTypes } from '@constants';
+import { AppRoutes, LoadingTypes } from '@constants';
 import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
 import { AutoparkFacade, loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
@@ -14,6 +14,7 @@ import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
 import { SidebarConfig } from './models/sidebar-config.interface';
 import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
 import { DestroyDirective } from '@directives';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-control-panel',
@@ -21,7 +22,7 @@ import { DestroyDirective } from '@directives';
   styleUrls: ['./control-panel.component.scss'],
   standalone: true,
   hostDirectives: [DestroyDirective],
-  imports: [CONTROL_PANEL_DEPS, DropdownModule, RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [CONTROL_PANEL_DEPS, DropdownModule, RouterLink, FormsModule, ReactiveFormsModule, ButtonModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlPanelComponent implements OnInit {
@@ -62,4 +63,6 @@ export class ControlPanelComponent implements OnInit {
     this.isAutoparksLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
     this.autoparks$ = this.store.select(selectUserAutoparks);
   }
+
+  protected readonly AppRoutes = AppRoutes;
 }
