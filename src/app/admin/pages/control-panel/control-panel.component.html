@@ -28,7 +28,7 @@
   </div>
   <div class="control-panel__layouts">
     <div class="control-panel__header header">
-      <div class="title">Тайтл</div>
+      <div class="title">Панель управления автопарками</div>
       <div class="right-side">
         @if (autoparks$ | async; as autoparks) {
           <div class="autoparks-select">
@@ -43,11 +43,18 @@
         }
         <div class="icons">
           <ul>
+            <!--            TODO: ADD NOTIFCATION-->
+            <!--            <li>-->
+            <!--              <img src="assets/icons/control-panel/ring.svg" alt="exit" />-->
+            <!--            </li>-->
             <li>
-              <img src="assets/icons/control-panel/ring.svg" alt="exit" />
-            </li>
-            <li>
-              <img src="assets/icons/control-panel/exit.svg" alt="exit" />
+              <p-button
+                icon="pi pi-sign-out"
+                severity="secondary"
+                [outlined]="true"
+                [rounded]="true"
+                [routerLink]="['/', AppRoutes.MAIN]"
+              ></p-button>
             </li>
           </ul>
         </div>

@@ -11,6 +11,7 @@ import { GalleriaModule } from 'primeng/galleria';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { FilterComponent } from './components/car-filter/filter.component';
+import { PreviewComponentComponent } from './components';
 
 @Component({
   selector: 'app-start-page',
@@ -24,15 +25,12 @@ import { FilterComponent } from './components/car-filter/filter.component';
     SpinnerComponent,
     FilterComponent,
     GalleriaModule,
+    PreviewComponentComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartPageComponent implements OnInit, OnDestroy {
-  IMAGES: string[] = [
-    'assets/cars/20.jpg',
-    'assets/cars/21.jpg',
-    'assets/cars/27)).webp',
-  ];
+  IMAGES: string[] = ['assets/cars/20.jpg', 'assets/cars/21.jpg', 'assets/cars/27)).webp'];
 
   constructor(
     private store: Store,

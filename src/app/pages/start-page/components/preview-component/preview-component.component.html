@@ -1,0 +1,20 @@
+<div class="preview">
+  <div class="preview__body">
+    <h1>Автошер - площадка для аренды рабочего автов в такси</h1>
+    <p>Выберите из широкого ассортимента автомобилей и начните свое приключение прямо сейчас.</p>
+    <div class="preview__control">
+      <p-button (click)="navigate(['/', AppRoutes.MAIN, AppRoutes.AUTOPARKS])">Перейти к списку автопарков</p-button>
+      <p-button
+        class="link"
+        icon="pi pi-arrow-right"
+        label="Посмотреть все машины"
+        iconPos="right"
+        [link]="true"
+        (click)="navigate(['/', AppRoutes.MAIN, AppRoutes.CARS])"
+      ></p-button>
+    </div>
+  </div>
+  <div class="preview__image">
+    <img src="assets/cars/preview-car.png" alt="preview" />
+  </div>
+</div>
