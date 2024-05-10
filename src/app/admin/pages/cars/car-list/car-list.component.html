@@ -2,9 +2,13 @@
   <p-button (click)="navigateToCreateCar()" class="mb-1">Добавить машину</p-button>
   <div class="car-list__table">
     <app-custom-table
+      class="table"
       [tableData]="carList()"
       [columnNames]="columnNames"
       (rowClicked)="navigateToEditCar($event)"
     ></app-custom-table>
+    @if (showLoadMoreButton()) {
+      <p-button (click)="loadMoreCars()" icon="pi pi-plus" class="btn"></p-button>
+    }
   </div>
 </div>
