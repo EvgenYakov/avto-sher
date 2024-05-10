@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
 import { CustomTableComponent } from '@components';
 import { AppRoutes, ControlPanel } from '@constants';
+import { DestroyDirective } from '@directives';
 import { CarCard } from '@models';
-import { CarService } from '@services';
+import { AutoparkFacade } from '@store';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { takeUntil, tap } from 'rxjs';
-
-import { AutoparkFacade } from '@store';
-import { DestroyDirective } from '@directives';
 
 @Component({
   selector: 'app-car-list',
@@ -35,36 +34,51 @@ export class CarListComponent implements OnInit {
   };
 
   public carList = signal<CarCard[]>([]);
+  public activeAutoPark = toSignal(this.autoparkFacade.activeAutopark$);
 
+  public showLoadMoreButton = signal<boolean>(true);
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
-    private autoparkFacade: AutoparkFacade,
-    private carService: CarService
-  ) {}
+    private autoparkFacade: AutoparkFacade
+  ) {
+    effect(
+      () => {
+        const park = this.activeAutoPark();
+        if (park) {
+          this.autoparkFacade.loadAutoparkCars(park?.id);
+        }
+      },
+      {
+        allowSignalWrites: true,
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.autoparkFacade.autoParkCars$
       .pipe(
         tap(cars => {
-          this.carList.set(cars);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
-
-    this.autoparkFacade.activeAutopark$
-      .pipe(
-        tap(park => {
-          console.log(park);
-          if (park) {
-            this.autoparkFacade.loadAutoparkCars(park?.id);
+          console.log(cars);
+          this.carList.update(list => [...list, ...cars]);
+          if (cars.length < 5) {
+            this.showLoadMoreButton.set(false);
+            return;
           }
+          this.showLoadMoreButton.set(true);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe();
+  }
+
+  loadMoreCars(): void {
+    this.autoparkFacade.loadMoreAutoparkCars();
+    const park = this.activeAutoPark();
+    if (park) {
+      this.autoparkFacade.loadAutoparkCars(park?.id);
+    }
   }
 
   public navigateToCreateCar(): void {
