@@ -4,9 +4,10 @@ import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
 import {
   loadAutoparkCars,
-  loadAutoparks,
   loadAutoparksByOwner,
-  selectActiveAutopark, selectUserAutoparks,
+  loadMoreAutoparkCars,
+  selectActiveAutopark,
+  selectUserAutoparks,
   setAutopark,
 } from '@store';
 
@@ -25,6 +26,10 @@ export class AutoparkFacade {
 
   loadAutoparkCars(autoparkId: number): void {
     this.store.dispatch(loadAutoparkCars({ autoparkId }));
+  }
+
+  loadMoreAutoparkCars(): void {
+    this.store.dispatch(loadMoreAutoparkCars());
   }
 
   loadAutoparksByOwner(): void {

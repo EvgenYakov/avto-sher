@@ -5,6 +5,15 @@
   @include flexMix(column, flex-start, flex-start, 0.5rem);
 
   &__table {
+    @include flexMix(column, center);
     width: 100%;
+
+    .table {
+      width: 100%;
+    }
+
+    .btn {
+      margin-top: 1rem;
+    }
   }
 }
