@@ -25,7 +25,7 @@
         <li>
           <a class="mobile-nav__location">
             <i class="pi pi-map-marker"></i>
-            @if (regions$ | async; as regions) {
+            @if (regions(); as regions) {
               <span>
                 <p-dropdown [options]="regions" [filter]="true" filterBy="name" optionLabel="name"></p-dropdown>
               </span>
@@ -59,7 +59,7 @@
 
     <a class="secondary-nav__location link small-text">
       <i class="pi pi-map-marker"></i>
-      @if (regions$ | async; as regions) {
+      @if (regions(); as regions) {
         <span>
           <p-dropdown
             [options]="regions"

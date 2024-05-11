@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { AppRoutes, LocalStorageKeys, MainRoutes, UserRole } from '@constants';
+import { DestroyDirective } from '@directives';
 import { Region } from '@models';
 import { Store } from '@ngrx/store';
 import { LocalStorageService } from '@services';
 import { selectListOfRegion, setCurrentRegion } from '@store';
 import { MenuItem } from 'primeng/api';
-import { Observable, takeUntil, tap } from 'rxjs';
+import { takeUntil, tap } from 'rxjs';
 
 import { UserFacade } from '../../../store/user/user.facade';
-import { DestroyDirective } from '@directives';
 
 import { MAIN_NAV, OWNER_PANEL_LINK, SECONDARY_NAV } from './constants';
 import { HEADER_CARD_DEPS } from './header.dependencies';
@@ -25,28 +25,28 @@ import { HEADER_CARD_DEPS } from './header.dependencies';
   imports: [HEADER_CARD_DEPS],
 })
 export class HeaderComponent implements OnInit {
+  regions = signal<Region[]>([]);
+  readonly mainNavList = signal<MenuItem[]>(MAIN_NAV);
+
+  public selectedRegionControl: FormControl<Region | null> = new FormControl<Region | null>(null);
+  public isOpen: boolean = false;
+
+  readonly SECONDARY_NAV = SECONDARY_NAV;
+  readonly AppRoutes = AppRoutes;
+  readonly MainRoutes = MainRoutes;
+
+  private destroy$ = inject(DestroyDirective).destroy$;
+
   constructor(
     public userFacade: UserFacade,
     private store: Store,
     private localStorageService: LocalStorageService
   ) {}
 
-  public regions$: Observable<Region[]>;
-
-  public selectedRegionControl: FormControl<Region | null>;
-  public isOpen: boolean = false;
-
-  public readonly mainNavList = signal<MenuItem[]>(MAIN_NAV);
-
-  public readonly SECONDARY_NAV = SECONDARY_NAV;
-  public readonly AppRoutes = AppRoutes;
-  public readonly MainRoutes = MainRoutes;
-
-  private destroy$ = inject(DestroyDirective).destroy$;
-
   ngOnInit(): void {
     const region = this.localStorageService.getItemFromStorage(LocalStorageKeys.REGION);
-    this.selectedRegionControl = new FormControl<Region | null>(region);
+    console.log(region);
+    this.selectedRegionControl.setValue(region ?? null);
 
     this.userFacade.userProfile$
       .pipe(
@@ -73,6 +73,17 @@ export class HeaderComponent implements OnInit {
   }
 
   private getDataFromStore(): void {
-    this.regions$ = this.store.select(selectListOfRegion);
+    this.store
+      .select(selectListOfRegion)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(regions => {
+        if (regions) {
+          if (!this.localStorageService.getItemFromStorage(LocalStorageKeys.REGION)) {
+            this.selectedRegionControl.setValue(regions[0]);
+            this.store.dispatch(setCurrentRegion({ region: regions[0] }));
+          }
+          this.regions.set(regions);
+        }
+      });
   }
 }
