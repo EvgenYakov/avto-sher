@@ -87,21 +87,64 @@
         <div class="subtitle">Финансовая информация</div>
         <div class="label">Отметьте информацию, которая будет отображаться в профиле автомобиля</div>
         <div class="options">
-          @for (option of financialOptions; track option) {
-            <div [class]="option.class">
-              @for (item of option.items; track item; let isLast = $last) {
-                <p-checkbox [binary]="true" class="checkbox"></p-checkbox>
-                <label>{{ item.label }}</label>
-                @if (!isLast) {
-                  <span class="vertical-line"></span>
-                }
-                @if (item.placeholder) {
-                  <p-inputNumber [placeholder]="item.placeholder" class="option-input"></p-inputNumber>
-                  <span>{{ item.unit }}</span>
-                }
-              }
-            </div>
-          }
+          <!--          @for (option of financialOptions; track option) {-->
+          <!--            <div [class]="option.class">-->
+          <!--              @for (item of option.items; track item; let isLast = $last) {-->
+          <!--                <p-radioButton></p-radioButton>-->
+          <!--                <label>{{ item.label }}</label>-->
+          <!--                @if (!isLast) {-->
+          <!--                  <span class="vertical-line"></span>-->
+          <!--                }-->
+          <!--                @if (item.placeholder) {-->
+          <!--                  <p-inputNumber [placeholder]="item.placeholder" class="option-input"></p-inputNumber>-->
+          <!--                  <span>{{ item.unit }}</span>-->
+          <!--                }-->
+          <!--              }-->
+          <!--            </div>-->
+          <!--          }-->
+          <form [formGroup]="depositForm" class="deposit">
+            <p-radioButton
+              [formControl]="depositForm.controls.status"
+              [value]="EDepositStatus.NON_DEPOSIT"
+            ></p-radioButton>
+            <label>Без Залога</label>
+            <span class="vertical-line"></span>
+            <p-radioButton [formControl]="depositForm.controls.status" [value]="EDepositStatus.DEPOSIT"></p-radioButton>
+            <label>Залог</label>
+            <p-inputNumber
+              placeholder="1000"
+              class="option-input"
+              [formControl]="depositForm.controls.value"
+            ></p-inputNumber>
+            <span>₽</span>
+          </form>
+          <form [formGroup]="commissionForm" class="commission">
+            <p-radioButton
+              [formControl]="commissionForm.controls.status"
+              [value]="EComissionStatus.NON_COMMISSION"
+            ></p-radioButton>
+            <label>Без комиссии</label>
+            <span class="vertical-line"></span>
+            <p-radioButton
+              [formControl]="commissionForm.controls.status"
+              [value]="EComissionStatus.COMMISSION"
+            ></p-radioButton>
+            <label>Комиссия</label>
+            <p-inputNumber
+              placeholder="0.1 - 50"
+              class="option-input"
+              [max]="50"
+              [min]="0"
+              [formControl]="commissionForm.controls.value"
+            ></p-inputNumber>
+            <span>%</span>
+          </form>
+          <div class="redemption">
+            <p-checkbox [binary]="true" (onChange)="changeBuyCarStatus($event)" class="checkbox"></p-checkbox>
+            <label>С возможностью выкупа</label>
+            <p-inputNumber placeholder="10 000" class="option-input" [formControl]="buyPriceControl"></p-inputNumber>
+            <span>₽</span>
+          </div>
           <div class="price">
             <span>Введите цену аренды</span>
             <p-inputNumber class="option-input" [formControl]="carForm.controls.price"></p-inputNumber>
@@ -115,15 +158,24 @@
         </div>
       </div>
       <div class="additional-info">
-        <div class="subtitle">Дополнительная информация</div>
-        <div class="label">Отметьте информацию, которая будет отражена в карточке автомобиля</div>
-        <p-multiSelect
-          class="multiselect"
-          optionLabel="label"
-          display="chip"
-          [formControl]="carForm.controls.additionalInfo"
-          [options]="additionalInfo"
-        ></p-multiSelect>
+        <div class="mb-2">
+          <div class="subtitle">Дополнительная информация</div>
+          <div class="label">Отметьте информацию, которая будет отражена в карточке автомобиля</div>
+          <p-multiSelect
+            class="multiselect"
+            display="chip"
+            [formControl]="carForm.controls.additionalInfo"
+            [options]="additionalInfo"
+          ></p-multiSelect>
+        </div>
+        <div class="additional-info">
+          <div class="subtitle">Условия аренды</div>
+          <div class="label">
+            Отметьте условия для аренды данного авто (Возможно водителю потребуются паспорт или особая водительская
+            категория)
+          </div>
+          <p-chips class="chips" [formControl]="carForm.controls.rentalConditions" />
+        </div>
       </div>
     </div>
 
