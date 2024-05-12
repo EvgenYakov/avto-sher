@@ -15,5 +15,29 @@ export interface CreateCarForm {
   rentSchedule: FormControl<string>;
   minRentPeriod: FormControl<number>;
   rentalConditions: FormControl<string[]>;
-  images: FormControl<string[]>;
+}
+
+export interface IDepositForm {
+  status: FormControl<EDepositStatus | null>;
+  value: FormControl<number | null>;
+}
+
+export interface ICommissionForm {
+  status: FormControl<ECommissionStatus | null>;
+  value: FormControl<number | null>;
+}
+
+export enum EDepositStatus {
+  DEPOSIT = 'Залог',
+  NON_DEPOSIT = 'Без залога',
+}
+
+export enum ECommissionStatus {
+  COMMISSION = 'Коммисия',
+  NON_COMMISSION = 'Без комиссии',
+}
+
+export enum EOppotrunityBuyCar {
+  EXISTS = 'Есть возможность выкупа',
+  EXISTS_WITH_PRICE = 'Цена выкупа авто',
 }

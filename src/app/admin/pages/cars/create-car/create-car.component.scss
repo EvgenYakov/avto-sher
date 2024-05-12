@@ -89,11 +89,14 @@
   }
 
   &__financial-additional-info {
-    @include flexMix(row, flex-start, flex-start, 10.3rem, wrap);
+    @include flexMix(row, flex-start, flex-start, 2rem, wrap);
 
     width: 100%;
 
+
+
     .financial-info {
+      flex-grow: 1;
 
       .options {
         @include flexMix(column, flex-start, flex-start, 1.25rem);
@@ -101,7 +104,11 @@
     }
 
     .additional-info {
+      flex-grow: 1;
 
+      ::ng-deep.p-chips {
+        width: 100%;
+      }
       .label {
         margin-bottom: 1.5rem;
       }
