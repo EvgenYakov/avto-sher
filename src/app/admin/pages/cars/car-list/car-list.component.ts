@@ -60,13 +60,20 @@ export class CarListComponent implements OnInit {
     this.autoparkFacade.autoParkCars$
       .pipe(
         tap(cars => {
-          console.log(cars);
           this.carList.update(list => [...list, ...cars]);
           if (cars.length < 5) {
             this.showLoadMoreButton.set(false);
             return;
           }
           this.showLoadMoreButton.set(true);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+    this.autoparkFacade.activeAutopark$
+      .pipe(
+        tap(() => {
+          this.carList.set([]);
         }),
         takeUntil(this.destroy$)
       )

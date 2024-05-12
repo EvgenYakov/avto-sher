@@ -69,8 +69,8 @@
             @for (option of additionalOptions; track option) {
               <p-checkbox
                 [formControl]="filterForm.controls.additionalInfo"
-                [label]="option.label"
-                [value]="option.value"
+                [label]="option"
+                [value]="option"
               ></p-checkbox>
             }
           </div>

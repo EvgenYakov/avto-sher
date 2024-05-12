@@ -40,12 +40,20 @@ export const TRANSMISSION_OPTIONS: DropdownOption[] = [
   { label: Transmission.AUTOMATIC, value: 'Автоматическая' },
 ];
 
-export const ADDITIONAL_OPTIONS: DropdownOption[] = [
-  { label: 'Фирменная оклейка', value: 'Фирменная оклейка' },
-  { label: 'Желтые номера', value: 'Желтые номера' },
-  { label: 'Детское кресло', value: 'Детское кресло' },
-  { label: 'Разрешено работать инвалидам', value: 'Разрешено работать инвалидам' },
-  { label: 'Разрешено межгород', value: 'Разрешено межгород' },
+// export const ADDITIONAL_OPTIONS: DropdownOption[] = [
+//   { label: 'Фирменная оклейка', value: 'Фирменная оклейка' },
+//   { label: 'Желтые номера', value: 'Желтые номера' },
+//   { label: 'Детское кресло', value: 'Детское кресло' },
+//   { label: 'Разрешено работать инвалидам', value: 'Разрешено работать инвалидам' },
+//   { label: 'Разрешено межгород', value: 'Разрешено межгород' },
+// ];
+
+export const ADDITIONAL_OPTIONS: string[] = [
+  'Фирменная оклейка',
+  'Желтые номера',
+  'Детское кресло',
+  'Разрешено работать инвалидам',
+  'Разрешено межгород',
 ];
 
 export const FINANCIAL_OPTIONS: DropdownOption[] = [

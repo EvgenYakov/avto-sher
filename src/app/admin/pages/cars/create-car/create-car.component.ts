@@ -1,148 +1,196 @@
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { FileUploadComponent } from '@components';
-import {
-  ADDITIONAL_OPTIONS,
-  AppRoutes,
-  ControlPanel,
-  Fuel,
-  FUEL_OPTIONS,
-  MIN_RENTAL_PERIOD_OPTIONS,
-  TARIFF_OPTIONS,
-  TRANSMISSION_OPTIONS,
-  WORK_SCHEDULE_OPTIONS,
-} from '@constants';
-import { AutoparkCard, CarCard, CreateCar, Dropdown } from '@models';
-import { Store } from '@ngrx/store';
+import { ADDITIONAL_OPTIONS, AppRoutes, ControlPanel, Fuel, TARIFF_OPTIONS } from '@constants';
+import { DestroyDirective } from '@directives';
+import { AutoparkCard, CarCard, CreateCar } from '@models';
 import { CarService } from '@services';
+import { AutoparkFacade } from '@store';
+import { ChipsModule } from 'primeng/chips';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { filter, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
-import { AutoparkFacade } from '@store';
-import { DestroyDirective } from '@directives';
-import { FULL_FINANCIAL_OPTIONS } from '../../autopark';
-
+import { STATIC_DROPDOWNS } from './create-car.contants';
 import { CREATE_CAR_DEPS } from './create-car.dependencies';
-import { CreateCarForm } from './create-car.model';
+import {
+  CreateCarForm,
+  ECommissionStatus,
+  EDepositStatus,
+  EOppotrunityBuyCar,
+  ICommissionForm,
+  IDepositForm,
+} from './create-car.model';
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-create-car',
   standalone: true,
   templateUrl: './create-car.component.html',
   styleUrls: ['./create-car.component.scss'],
-  imports: [CREATE_CAR_DEPS, InputTextModule, RouterLink],
+  imports: [
+    CREATE_CAR_DEPS,
+    InputTextModule,
+    RouterLink,
+    InputSwitchModule,
+    RadioButtonModule,
+    FormsModule,
+    ChipsModule,
+  ],
   hostDirectives: [DestroyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateCarComponent implements OnInit {
   @ViewChild('files') filesComponent: FileUploadComponent;
 
-  public readonly editMode = signal<boolean>(false);
+  readonly editMode = signal<boolean>(false);
 
-  public readonly financialOptions = FULL_FINANCIAL_OPTIONS;
-  public readonly tariffTypes = TARIFF_OPTIONS;
-  public readonly additionalInfo = ADDITIONAL_OPTIONS;
+  readonly tariffTypes = TARIFF_OPTIONS;
+  readonly additionalInfo = ADDITIONAL_OPTIONS;
 
-  public readonly AppRoutes = AppRoutes;
-  public readonly ControlPanel = ControlPanel;
+  readonly depositForm = new FormGroup<IDepositForm>({
+    value: new FormControl<number | null>(null),
+    status: new FormControl<EDepositStatus | null>(EDepositStatus.NON_DEPOSIT),
+  });
+  readonly commissionForm = new FormGroup<ICommissionForm>({
+    value: new FormControl<number | null>(null),
+    status: new FormControl<ECommissionStatus | null>(ECommissionStatus.NON_COMMISSION),
+  });
+  readonly buyPriceControl = new FormControl<number | null>(null);
+  readonly enableBuyCar = signal<boolean>(false);
+  readonly images = signal<string[]>([]);
 
-  public readonly activeAutopark = signal<AutoparkCard | null>(null);
+  readonly AppRoutes = AppRoutes;
+  readonly ControlPanel = ControlPanel;
+
+  readonly activeAutopark = signal<AutoparkCard | null>(null);
+
+  readonly STATIC_DROPDOWNS = STATIC_DROPDOWNS;
+  carForm: FormGroup<CreateCarForm> = new FormGroup<CreateCarForm>({
+    id: new FormControl<number | null>(null),
+    brand: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    model: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
+    financialInfo: new FormControl<string[]>([], { nonNullable: true }),
+    rentalConditions: new FormControl<string[]>([], { nonNullable: true }),
+    additionalInfo: new FormControl<string[]>([], { nonNullable: true }),
+    yearOfRelease: new FormControl<number | null>(null, { validators: [Validators.required] }),
+    transmission: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    fuelType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    enginePower: new FormControl<number | null>(null, { validators: [Validators.required] }),
+    type: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    rentSchedule: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    minRentPeriod: new FormControl<number>(0, {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+  });
+
+  readonly EDepositStatus = EDepositStatus;
+  readonly EComissionStatus = ECommissionStatus;
 
   private destroy$ = inject(DestroyDirective).destroy$;
 
-  public STATIC_DROPDOWNS: Dropdown[] = [
-    {
-      label: 'График работы',
-      formControlName: 'rentSchedule',
-      placeholder: 'График работы',
-      options: WORK_SCHEDULE_OPTIONS,
-    },
-    {
-      label: 'КПП',
-      formControlName: 'transmission',
-      placeholder: 'Выберите из списка',
-      options: TRANSMISSION_OPTIONS,
-    },
-    {
-      label: 'Тип топлива',
-      formControlName: 'fuelType',
-      placeholder: 'Выберите из списка',
-      options: FUEL_OPTIONS,
-    },
-    {
-      label: 'Срок аренды',
-      formControlName: 'minRentPeriod',
-      placeholder: 'Выберите срок аренды',
-      options: MIN_RENTAL_PERIOD_OPTIONS,
-    },
-  ];
-
-  public carForm: FormGroup<CreateCarForm>;
-
   constructor(
-    private store: Store,
     private carService: CarService,
     private autoparkFacade: AutoparkFacade,
     private router: Router,
     private activeRoute: ActivatedRoute
-  ) {}
+  ) {
+    effect(() => {
+      if (this.enableBuyCar()) {
+        this.buyPriceControl.enable();
+      } else {
+        this.buyPriceControl.disable();
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.autoparkFacade.activeAutopark$.pipe(takeUntil(this.destroy$)).subscribe(autopark => {
       this.activeAutopark.set(autopark);
     });
+
+    this.commissionForm.controls.value.disable();
+    this.depositForm.controls.value.disable();
+    this.commissionForm.controls.status.valueChanges
+      .pipe(
+        tap(() => {
+          this.commissionForm.controls.value.enable();
+        }),
+        filter(status => status === ECommissionStatus.NON_COMMISSION),
+        tap(() => {
+          this.commissionForm.controls.value.disable();
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+
+    this.depositForm.controls.status.valueChanges
+      .pipe(
+        tap(() => {
+          this.depositForm.controls.value.enable();
+        }),
+        filter(status => status === EDepositStatus.NON_DEPOSIT),
+        tap(() => {
+          this.depositForm.controls.value.disable();
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+
     this.activeRoute.params
       .pipe(
         tap(() => {
-          this.carForm = this.initializeForm();
+          // this.carForm = this.initializeForm();
           this.editMode.set(false);
         }),
         filter(params => Boolean(params['id'])),
         switchMap(params => this.carService.getCarProfile(+params['id'])),
         tap(car => {
-          console.log(car);
           this.fillForm(car);
           this.editMode.set(true);
-          console.log(this.carForm.value);
         }),
         takeUntil(this.destroy$)
       )
       .subscribe();
   }
 
-  // TODO: REWORK THIS METHOD
-  public onSubmit(): void {
-    console.log(this.carForm.value);
-    console.log(this.filesComponent.files$.getValue());
-    console.log(this.filesComponent.filesPreview$.getValue());
+  changeBuyCarStatus(event: CheckboxChangeEvent): void {
+    console.log(event);
+    this.enableBuyCar.set(event.checked);
+  }
+
+  onSubmit(): void {
     const files = this.filesComponent.files$.getValue();
     const car = {
       ...this.carForm.value,
       fuel: this.carForm.controls.fuelType.value as Fuel,
       autoparkId: this.activeAutopark()?.id,
       images: files,
-      financialInfo: ['Без залога', 'Без коммисии'],
-      rentalConditions: ['Паспорт', 'Водителькое удостворение'],
+      financialInfo: this.getFinancialInfo(),
     } as CreateCar;
-    console.log(car);
 
     const data = new FormData();
-    Object.keys(car).forEach((key: string) => {
-      // @ts-ignore
-      console.log(car[key]);
-      console.log(key);
-      // @ts-ignore
-      if (Array.isArray(car[key])) {
-        // @ts-ignore
-        car[key].forEach(element => {
+    Object.keys(car).forEach((objkey: string) => {
+      const key = objkey as keyof CreateCar;
+      const field = car[key];
+      if (Array.isArray(field)) {
+        field.forEach(element => {
           const value: string = element.toString();
           data.append(key, value);
         });
       } else {
-        // @ts-ignore
-        // const value: string = car[key].toString();
+        const value: string = field?.toString() as string;
         data.append(key, value);
       }
     });
@@ -151,6 +199,7 @@ export class CreateCarComponent implements OnInit {
       data.append('images', file);
     });
 
+    /// service method
     let carObserver: Observable<CarCard>;
     if (!this.editMode()) {
       carObserver = this.carService.createCar(data);
@@ -159,40 +208,84 @@ export class CreateCarComponent implements OnInit {
     }
 
     carObserver.subscribe(res => {
-      this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.AUTOPARK_CONTROL, ControlPanel.CARS_TABLE]);
+      this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
     });
   }
 
-  public getCurrentYear(): number {
+  getCurrentYear(): number {
     return new Date().getFullYear();
   }
 
-  public deleteCar(): void {
+  deleteCar(): void {
     this.carService.deleteCar(this.carForm.value.id!).subscribe(() => {
       console.log('deleted');
+      this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
     });
   }
 
-  private initializeForm(): FormGroup<CreateCarForm> {
-    return new FormGroup<CreateCarForm>(<CreateCarForm>{
-      id: new FormControl<number | null>(null),
-      brand: new FormControl<string>('', [Validators.required]),
-      model: new FormControl<string>('', [Validators.required]),
-      price: new FormControl<number>(0, [Validators.required]),
-      financialInfo: new FormControl<string[]>([]),
-      rentalConditions: new FormControl<string[]>([]),
-      additionalInfo: new FormControl<string[]>([]),
-      yearOfRelease: new FormControl<number | null>(null, [Validators.required]),
-      transmission: new FormControl<string>('', [Validators.required]),
-      fuelType: new FormControl<string>('', [Validators.required]),
-      enginePower: new FormControl<number | null>(null, [Validators.required]),
-      type: new FormControl<string>('', [Validators.required]),
-      rentSchedule: new FormControl<string>('', [Validators.required]),
-      minRentPeriod: new FormControl<number>(0, [Validators.required]),
-    });
+  private getFinancialInfo(): string[] {
+    const financialInfo: string[] = [];
+    const commissionFormValue = this.commissionForm.value;
+    const depositFormValue = this.depositForm.value;
+
+    if (commissionFormValue.status === ECommissionStatus.COMMISSION) {
+      if (commissionFormValue.value) {
+        financialInfo.push(`${commissionFormValue.status} - ${commissionFormValue.value}`);
+      } else {
+        financialInfo.push(`${commissionFormValue.status}`);
+      }
+    } else {
+      financialInfo.push(ECommissionStatus.NON_COMMISSION);
+    }
+
+    if (depositFormValue.status === EDepositStatus.DEPOSIT) {
+      if (depositFormValue.value) {
+        financialInfo.push(`${depositFormValue.status} - ${depositFormValue.value}`);
+      } else {
+        financialInfo.push(`${depositFormValue.status}`);
+      }
+    } else {
+      financialInfo.push(EDepositStatus.NON_DEPOSIT);
+    }
+
+    if (this.enableBuyCar()) {
+      if (this.buyPriceControl.value) {
+        financialInfo.push(`${EOppotrunityBuyCar.EXISTS_WITH_PRICE} - ${this.buyPriceControl.value}`);
+      } else {
+        financialInfo.push(`${EOppotrunityBuyCar.EXISTS}`);
+      }
+    }
+
+    return financialInfo;
+  }
+
+  private parseFinancialInfo(financialInfo: string[]): void {
+    if (financialInfo[0]) {
+      const commissionValue = financialInfo[0].split(' - ');
+
+      this.commissionForm.patchValue({
+        status: (commissionValue[0] ?? ECommissionStatus.COMMISSION) as ECommissionStatus,
+        value: Number(commissionValue[1]) || null,
+      });
+    }
+    if (financialInfo[1]) {
+      const depositValue = financialInfo[1].split(' - ');
+      this.depositForm.patchValue({
+        status: (depositValue[0] ?? EDepositStatus.NON_DEPOSIT) as EDepositStatus,
+        value: Number(depositValue[1]) || null,
+      });
+    }
+
+    if (financialInfo[2]) {
+      this.enableBuyCar.set(true);
+      const buyPriceValue = financialInfo[2].split(' - ');
+      this.buyPriceControl.setValue(Number(buyPriceValue[1] ?? 0));
+    }
   }
 
   private fillForm(carCard: CarCard): void {
+    this.parseFinancialInfo(carCard.financialInfo);
+
     this.carForm.patchValue({
       id: carCard.id,
       brand: carCard.brand,
@@ -207,9 +300,9 @@ export class CreateCarComponent implements OnInit {
       price: carCard.price,
       rentSchedule: carCard.rentSchedule,
       minRentPeriod: parseInt(carCard.minRentPeriod, 10),
-      rentalConditions: carCard.autopark.rentalConditions,
-      images: carCard.photos,
+      rentalConditions: carCard.rentalConditions,
     });
+    this.images.set(carCard.photos);
 
     // return new FormGroup<CreateCarForm>(<CreateCarForm>{
     //   id: new FormControl(carCard.id),
