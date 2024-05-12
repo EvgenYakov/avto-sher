@@ -34,7 +34,7 @@ import { CAR_FILTER_DEPS } from './filter.dependencies';
 export class FilterComponent implements OnInit, OnDestroy {
   public readonly staticDropdowns: Dropdown[] = STATIC_DROPDOWNS;
   public readonly tariffOptions: DropdownOption[] = TARIFF_OPTIONS;
-  public readonly additionalOptions: DropdownOption[] = ADDITIONAL_OPTIONS.slice(0, 4);
+  public readonly additionalOptions: string[] = ADDITIONAL_OPTIONS.slice(0, 4);
   public readonly financialOptions: DropdownOption[] = FINANCIAL_OPTIONS;
 
   public areModelsLoaded$: Observable<boolean>;
