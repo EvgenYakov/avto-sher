@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class LocalStorageService {
   private getFromStorage(key: string): any {
     const value = localStorage.getItem(key);
-    if (value) {
+    if (value && value !== 'undefined') {
       return JSON.parse(value);
     }
     return null;
