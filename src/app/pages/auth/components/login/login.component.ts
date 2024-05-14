@@ -41,7 +41,9 @@ export class LoginComponent implements OnInit {
   }
 
   /*TODO: add logic for forget password*/
-  public forgetPassword(): void {}
+  public forgetPassword(event: Event): void {
+    event.preventDefault();
+  }
 
   public onSubmit(): void {
     const formValues = <LoginDto>this.loginForm.value;
