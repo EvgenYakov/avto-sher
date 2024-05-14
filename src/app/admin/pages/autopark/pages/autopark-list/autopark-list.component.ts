@@ -60,8 +60,10 @@ export class AutoparkListComponent implements OnInit {
   public navigateToEditAutoPark(carId: string): void {
     console.log(carId);
     this.router.navigate([
-      '/' + AppRoutes.CONTROL_PANEL,
+      '/',
+      AppRoutes.CONTROL_PANEL,
       ControlPanel.AUTOPARK_CONTROL,
+      ControlPanel.AUTOPARK,
       ControlPanel.AUTOPARK_EDITOR,
       carId,
     ]);

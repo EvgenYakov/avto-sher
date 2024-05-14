@@ -21,14 +21,12 @@
         [errorsMap]="passwordMsg"
         [formControl]="loginForm.controls.password"
       ></app-password-input>
-
-      <div class="main__forget-psw" (click)="forgetPassword()">Забыли пароль?</div>
+      <a class="main__forget-psw" (click)="forgetPassword($event)">Забыли пароль?</a>
     </div>
 
     <div class="footer">
       <div class="footer__register">
-        <span class="status-label">Нет учетной записи?</span>
-        <span class="redirect" [routerLink]="['registration']">Зарегистрироваться</span>
+        <p-button label="Зарегистрироваться" [routerLink]="['registration']" [outlined]="true" severity="success" />
       </div>
     </div>
 
