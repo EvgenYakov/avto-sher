@@ -28,9 +28,9 @@ import { CheckboxChangeEvent } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-create-car',
-  standalone: true,
   templateUrl: './create-car.component.html',
   styleUrls: ['./create-car.component.scss'],
+  standalone: true,
   imports: [
     CREATE_CAR_DEPS,
     InputTextModule,

@@ -9,6 +9,7 @@ import {
   AutoparkWrapComponent,
   CreateAutoparkComponent,
 } from './pages';
+import { CreateCarComponent } from '../cars';
 
 export default [
   {
@@ -34,6 +35,11 @@ export default [
             path: ControlPanel.VERIFICATION,
             title: 'Верификация автопарка',
             component: AutoparkVerificationComponent,
+          },
+          {
+            path: ControlPanel.AUTOPARK_EDITOR + '/:id',
+            title: 'Изменение автопарка',
+            component: CreateAutoparkComponent,
           },
         ],
       },

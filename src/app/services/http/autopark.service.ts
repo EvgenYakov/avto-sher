@@ -7,6 +7,7 @@ import {
   AutoparkCard,
   AutoparkDetailed,
   CreateAutopark,
+  IUpdateAutopark,
   PaginationResponse,
   Region,
 } from '@models';
@@ -68,6 +69,10 @@ export class AutoparkService extends BaseService {
     formData.append('address', autopark.address);
 
     return this.httpService.post<AutoparkDetailed>(`${this.apiUrl}`, formData, { withCredentials: true });
+  }
+
+  public updateAutopark(id: number, autopark: IUpdateAutopark): Observable<AutoparkDetailed> {
+    return this.httpService.put<AutoparkDetailed>(`${this.apiUrl}/${id}`, autopark, { withCredentials: true });
   }
 
   public getDefaultBonuses(): Observable<AutoparkBonus[]> {

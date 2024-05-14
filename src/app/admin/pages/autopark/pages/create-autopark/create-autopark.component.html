@@ -28,7 +28,7 @@
 
       <div class="setting-block">
         <div class="setting-block__logo">
-          @if (avatarPath$ | async; as avatar) {
+          @if (avatarPath(); as avatar) {
             <img [src]="avatar" alt="Лого автопарка" />
           } @else {
             <div class="default-bck"></div>
@@ -52,37 +52,79 @@
         </div>
       </div>
     </div>
-    <div class="autopark__bonuses">
-      <div class="left">
-        <div class="label">Бонусная система</div>
-        <div class="autopark__info-text">Выберите бонусы, которые получит водитель при аренде автомобиля</div>
-        <div class="bonuses">
-          @for (bonus of bonuses$ | async; track bonus) {
-            <div class="bonus">
-              <p-checkbox name="group" [value]="bonus.title" [inputId]="bonus.title"></p-checkbox>
-              <img [src]="bonus.icon" alt="" />
-              <label [for]="bonus.title">
-                <div class="bonus__title">
-                  {{ bonus.title }}
-                </div>
-                <div class="bonus__description">
-                  {{ bonus.description }}
-                </div>
-              </label>
-              <br />
-            </div>
-          }
-        </div>
-      </div>
-
-      <div class="right">
-        <div class="label">Добавить свой бонус</div>
-        <div class="autopark__info-text">Можете создать свой уникальный бонус</div>
-        <input type="text" pInputText placeholder="название" />
-        <textarea rows="3" cols="20" pInputTextarea [autoResize]="true" placeholder="Описание"></textarea>
-      </div>
-    </div>
-
-    <p-button type="submit" class="next" label="Далее" [disabled]="autoparkForm.invalid"></p-button>
+    <p-button
+      type="submit"
+      class="next"
+      [label]="activeAutoPark()?.id ? 'Изменить автопарк' : 'Создать автопарк'"
+      [disabled]="autoparkForm.invalid"
+    ></p-button>
   </div>
 </form>
+
+<!--TODO Bonus system-->
+<!--    <div class="autopark__bonuses">-->
+<!--      <div class="left">-->
+<!--        <div class="label">Бонусная система</div>-->
+<!--        <div class="autopark__info-text">Выберите бонусы, которые получит водитель при аренде автомобиля</div>-->
+<!--        <div class="bonuses">-->
+<!--          @for (bonus of bonuses(); track bonus) {-->
+<!--            <div class="bonus">-->
+<!--              <p-checkbox-->
+<!--                name="group"-->
+<!--                [formControl]="bonusArrayControl"-->
+<!--                [value]="bonus.id"-->
+<!--                [inputId]="bonus.title"-->
+<!--              ></p-checkbox>-->
+<!--              <img [src]="bonus.icon" alt="" />-->
+<!--              <label [for]="bonus.title">-->
+<!--                <div class="bonus__title">-->
+<!--                  {{ bonus.title }}-->
+<!--                </div>-->
+<!--                <div class="bonus__description">-->
+<!--                  {{ bonus.description }}-->
+<!--                </div>-->
+<!--              </label>-->
+<!--              <br />-->
+<!--            </div>-->
+<!--          }-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <form [formGroup]="customBonusForm" class="right" (ngSubmit)="addCustomBonus()">-->
+<!--        <div class="label">Добавить свой бонус</div>-->
+<!--        <div class="autopark__info-text">Можете создать свой уникальный бонус</div>-->
+<!--        <input type="text" pInputText placeholder="название" [formControl]="customBonusForm.controls.title" />-->
+<!--        <textarea-->
+<!--          rows="3"-->
+<!--          cols="20"-->
+<!--          pInputTextarea-->
+<!--          [autoResize]="true"-->
+<!--          placeholder="Описание"-->
+<!--          [formControl]="customBonusForm.controls.description"-->
+<!--        ></textarea>-->
+<!--        <p-button type="submit">Добавить бонус</p-button>-->
+<!--        <ul>-->
+<!--          @for (bonus of customBonuses(); track bonus) {-->
+<!--            <div class="bonus">-->
+<!--              <p-button-->
+<!--                icon="pi pi-times"-->
+<!--                [rounded]="true"-->
+<!--                [text]="true"-->
+<!--                severity="danger"-->
+<!--                (click)="deleteBonus(bonus.id!)"-->
+<!--              />-->
+<!--              <label [for]="bonus.title">-->
+<!--                <div class="bonus__title">-->
+<!--                  {{ bonus.title }}-->
+<!--                </div>-->
+<!--                <div class="bonus__description">-->
+<!--                  {{ bonus.description }}-->
+<!--                </div>-->
+<!--              </label>-->
+<!--              <br />-->
+<!--            </div>-->
+<!--          }-->
+<!--        </ul>-->
+<!--      </form>-->
+<!--    </div>-->
+

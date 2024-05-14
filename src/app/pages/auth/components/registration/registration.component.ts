@@ -80,7 +80,7 @@ export class RegistrationComponent implements OnInit {
       fullName: new FormControl<string>('', [Validators.required]),
       phoneNumber: new FormControl<string>(''),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
-      password: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
+      password: new FormControl<string>('', [Validators.required, Validators.minLength(6), Validators.maxLength(12)]),
     });
 
     return registerFormGroup;

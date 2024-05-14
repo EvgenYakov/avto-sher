@@ -29,7 +29,7 @@ export default [
           },
           {
             path: ControlPanel.CAR_EDITOR + '/:id',
-            title: 'Измение авто',
+            title: 'Изменение авто',
             component: CreateCarComponent,
           },
         ],
