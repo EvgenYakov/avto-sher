@@ -5,6 +5,7 @@
   width: 100%;
 }
 
+
 :host ::ng-deep {
   .control-wrapper {
     margin-bottom: 1.25rem;
@@ -35,10 +36,9 @@
       margin-bottom: 1.25rem;
     }
 
-    &__forget-psw {
-      width: fit-content;
-      color: $link-color;
+    ::ng-deep &__forget-psw {
       cursor: pointer;
+      width: auto !important;
     }
   }
 
@@ -50,7 +50,6 @@
       margin-bottom: 1.125rem;
 
       .redirect {
-        color: $link-color;
         cursor: pointer;
       }
     }
