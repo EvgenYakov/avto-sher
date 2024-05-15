@@ -15,6 +15,9 @@ export interface CreateCarForm {
   rentSchedule: FormControl<string>;
   minRentPeriod: FormControl<number>;
   rentalConditions: FormControl<string[]>;
+  STS: FormControl<string>;
+  VIN: FormControl<string>;
+  carStateNumber: FormControl<string>;
 }
 
 export interface IDepositForm {
