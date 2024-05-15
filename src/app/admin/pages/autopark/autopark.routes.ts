@@ -9,7 +9,6 @@ import {
   AutoparkWrapComponent,
   CreateAutoparkComponent,
 } from './pages';
-import { CreateCarComponent } from '../cars';
 
 export default [
   {
