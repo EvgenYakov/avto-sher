@@ -8,7 +8,7 @@ import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { ApplyTokenInterceptor, AuthGuard } from '@services';
+import { ApplyTokenInterceptor, AuthGuard, RefreshTokenInterceptor } from '@services';
 import {
   appReducers,
   AuthEffects,
@@ -53,11 +53,11 @@ bootstrapApplication(AppComponent, {
       useClass: ApplyTokenInterceptor,
       multi: true,
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: RefreshTokenInterceptor,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RefreshTokenInterceptor,
+      multi: true,
+    },
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
   ],
