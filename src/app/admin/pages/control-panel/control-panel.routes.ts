@@ -15,6 +15,10 @@ export default [
         loadChildren: () => import('../autopark/autopark.routes'),
       },
       {
+        path: ControlPanel.PERSONAL_CONTROL,
+        loadChildren: () => import('../personal/personal.routes'),
+      },
+      {
         path: ControlPanel.CAR_CONTROL,
         children: [
           {
