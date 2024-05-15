@@ -76,6 +76,9 @@ export class CreateCarComponent implements OnInit {
     price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
     financialInfo: new FormControl<string[]>([], { nonNullable: true }),
     rentalConditions: new FormControl<string[]>([], { nonNullable: true }),
+    STS: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    VIN: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    carStateNumber: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     additionalInfo: new FormControl<string[]>([], { nonNullable: true }),
     yearOfRelease: new FormControl<number | null>(null, { validators: [Validators.required] }),
     transmission: new FormControl<string>('', {
@@ -185,6 +188,7 @@ export class CreateCarComponent implements OnInit {
       const key = objkey as keyof CreateCar;
       const field = car[key];
       if (Array.isArray(field)) {
+        console.log(field);
         field.forEach(element => {
           const value: string = element.toString();
           data.append(key, value);
