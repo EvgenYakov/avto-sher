@@ -42,4 +42,9 @@ export enum ControlPanel {
   CREATE_AUTOPARK = 'create-autopark',
   AUTOPARK_EDITOR = 'edit-autopark',
   VERIFICATION = 'verification',
+
+  PERSONAL_CONTROL = 'personal-control',
+  PERSONAL_TABLE = 'personal-table',
+  CREATE_PERSONAL = 'create-personal',
+  PERSONAL_EDITOR = 'edit-personal',
 }

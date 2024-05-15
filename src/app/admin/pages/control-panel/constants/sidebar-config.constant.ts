@@ -44,7 +44,7 @@ export const SIDEBAR_CONFIG: SidebarConfig[] = [
       },
       {
         title: 'Персонал',
-        link: '',
+        link: ['/', AppRoutes.CONTROL_PANEL, ControlPanel.PERSONAL_CONTROL, ControlPanel.PERSONAL_TABLE],
       },
     ],
   },
