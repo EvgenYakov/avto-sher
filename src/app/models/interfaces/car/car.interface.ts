@@ -20,6 +20,9 @@ export interface CarCard {
   rentSchedule: string;
   minRentPeriod: string;
   rentalConditions: string[];
+  carStateNumber: string;
+  VIN: string;
+  STS: string;
   autopark: {
     id: number;
     title: string;
