@@ -182,15 +182,25 @@
     <div class="create-car__verification">
       <div class="sts">
         <div class="subtitle">СТС</div>
-        <input type="number" disabled pInputText placeholder="8756347856375625964" />
+        <input type="text" [formControl]="carForm.controls.STS" pInputText placeholder="8756347856375625964" />
       </div>
       <div class="vin">
         <div class="subtitle">VIN</div>
-        <input type="text" disabled pInputText placeholder="Введите идентификационной номер" />
+        <input
+          type="text"
+          [formControl]="carForm.controls.VIN"
+          pInputText
+          placeholder="Введите идентификационной номер"
+        />
       </div>
       <div class="gov-number">
         <div class="subtitle">Государственные номера</div>
-        <input type="text" disabled pInputText placeholder="Введите государственный номер" />
+        <input
+          type="text"
+          [formControl]="carForm.controls.carStateNumber"
+          pInputText
+          placeholder="Введите государственный номер"
+        />
       </div>
     </div>
 
