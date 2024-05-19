@@ -1,1 +1,58 @@
-<p>personal-editor works!</p>
+<div class="registration container">
+  <div class="header">
+    <span class="header__label">Создание персонала</span>
+  </div>
+
+  <div class="main">
+    <div class="tabs">
+      <p class="p-error">{{ errors$ | async }}</p>
+      <form [formGroup]="registerForm">
+        <app-text-input
+          class="field"
+          placeholder="Фамилия Имя Отчество"
+          [errorsMap]="requiredField"
+          [formControl]="registerForm.controls.fullName"
+        ></app-text-input>
+
+        <app-phone-input
+          class="field"
+          placeholder="Номер телефона"
+          [errorsMap]="phoneField"
+          [formControl]="registerForm.controls.phoneNumber"
+        ></app-phone-input>
+<!--        <p-inputMask-->
+<!--          placeholder="Номер телефона"-->
+<!--          [mask]="'+7 999 999-99-99'"-->
+<!--          [errorsMap]="phoneField"-->
+<!--          [formControl]="registerForm.controls.phoneNumber"-->
+<!--          placeholder="+7 999"-->
+<!--        />-->
+
+        <app-text-input
+          class="field"
+          placeholder="Email"
+          [errorsMap]="emailField"
+          [formControl]="registerForm.controls.email"
+        ></app-text-input>
+
+        <app-password-input
+          class="field"
+          placeholder="Пароль"
+          [errorsMap]="passwordField"
+          [formControl]="registerForm.controls.password"
+          [isFeedback]="true"
+        ></app-password-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="footer__btns">
+    <p-button label="Зарегистрировать" (click)="onSubmit()"></p-button>
+  </div>
+</div>
+<app-user-info-dialog
+  [userInfo]="userInfo()"
+  [password]="this.userInfo()?.password ?? ''"
+  [visible]="visibleUserInfoPopup()"
+  (closeModal)="visibleUserInfoPopup.set(false)"
+></app-user-info-dialog>

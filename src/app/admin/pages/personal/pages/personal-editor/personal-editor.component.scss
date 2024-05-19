@@ -1,0 +1,80 @@
+@import "colors";
+@import "mixins";
+
+:host ::ng-deep p-button .p-component {
+  @include media-s() {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+}
+
+:host ::ng-deep .field {
+  .control-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+.registration {
+  @include flexMix(column, none, none);
+  height: 100%;
+
+  .header {
+    &__label {
+      font-weight: 600;
+      font-size: 24px;
+    }
+  }
+
+  .main {
+    flex: 1 1 auto;
+    margin-top: 1.25rem;
+  }
+
+  .footer {
+    @include media-s() {
+      margin-top: 0;
+    }
+
+    //margin-top: 2.188rem;
+
+
+    &__privacy, &__offer {
+      @include flexMix(row, center, flex-start);
+
+      font-size: 14px;
+      line-height: 16px;
+
+      .confidentiality, .offer {
+        color: $link-color;
+        cursor: pointer;
+      }
+
+      .text-block {
+        margin-left: 1.563rem;
+      }
+    }
+
+    &__privacy {
+      margin-bottom: 0.5rem;
+    }
+
+    &__btns {
+      @include media-s() {
+        margin-top: 1.5rem;
+      }
+      @include flexMix(row, center, space-between);
+      margin-top: 2rem;
+
+      .back-link {
+        @include media-s() {
+          font-size: 12px;
+        }
+
+        color: $link-color;
+        cursor: pointer;
+        font-size: 14px;
+      }
+    }
+  }
+}

@@ -1,13 +1,13 @@
 import { FormControl } from '@angular/forms';
 
-export interface RegistrationForm {
+export interface IRegistrationForm {
   fullName: FormControl<string>;
   phoneNumber: FormControl<string>;
   email: FormControl<string>;
   password: FormControl<string>;
 }
 
-export interface RegisterDto {
+export interface IRegisterDto {
   fullName: string;
   email: string;
   phoneNumber: string;
@@ -15,4 +15,4 @@ export interface RegisterDto {
   role: string;
 }
 
-export interface RegisterOwner extends Omit<RegisterDto, 'phoneNumber'> {}
+export interface RegisterOwner extends Omit<IRegisterDto, 'phoneNumber'> {}

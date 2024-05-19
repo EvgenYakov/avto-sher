@@ -1,3 +1,5 @@
+import { AutoparkDetailed } from '../autopark';
+
 export interface UserProfile {
   id: number;
   fullName: string;
@@ -12,4 +14,5 @@ export interface UserProfile {
   reviewsByUserCounter: number;
   favoriteCarsCounter: number;
   favoriteAutoparksCounter: number;
+  autoPark?: AutoparkDetailed;
 }
