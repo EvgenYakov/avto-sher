@@ -9,7 +9,6 @@ import { UserProfile } from '@models';
 import { PersonalService } from '@services';
 import { AutoparkFacade } from '@store';
 import { ButtonModule } from 'primeng/button';
-import { takeUntil, tap } from 'rxjs';
 
 @Component({
   selector: 'app-personal-list',
@@ -28,8 +27,6 @@ export class PersonalListComponent {
 
   public personalList = signal<UserProfile[]>([]);
   public activeAutoPark = toSignal(this.autoparkFacade.activeAutopark$);
-
-  private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private router: Router,
@@ -52,11 +49,16 @@ export class PersonalListComponent {
   }
 
   public navigateToCreateOperator(): void {
-    this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CREATE_CAR]);
+    this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.PERSONAL_CONTROL, ControlPanel.CREATE_PERSONAL]);
   }
 
   public navigateToEditOperator(carId: string): void {
-    console.log(carId);
-    this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CAR_EDITOR, carId]);
+    this.router.navigate([
+      '/',
+      AppRoutes.CONTROL_PANEL,
+      ControlPanel.PERSONAL_CONTROL,
+      ControlPanel.PERSONAL_EDITOR,
+      carId,
+    ]);
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
-import { AuthResponse, LoginDto, RegisterDto, RegisterOwner } from '@pages';
+import { AuthResponse, LoginDto, IRegisterDto, RegisterOwner } from '@pages';
 import { Observable } from 'rxjs';
 
 import { BaseService } from '../helpers';
@@ -16,7 +16,7 @@ export class AuthService extends BaseService {
     });
   }
 
-  public registration(registerDto: RegisterDto): Observable<AuthResponse> {
+  public registration(registerDto: IRegisterDto): Observable<AuthResponse> {
     if (registerDto.role === 'owner') {
       const owner: RegisterOwner = {
         email: registerDto.email,
