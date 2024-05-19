@@ -13,3 +13,4 @@ export * from './rent-card';
 export * from './bonus';
 export * from './file-upload';
 export * from './custom-table';
+export * from './controls';

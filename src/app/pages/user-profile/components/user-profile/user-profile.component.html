@@ -73,7 +73,7 @@
         @for (cardLink of cardLinks; track cardLink) {
           <app-card-link
             [cardLink]="cardLink"
-            [cardLinkCounter]="+userProfile[cardLink.counterProperty]"
+            [cardLinkCounter]="+userProfile[cardLink.counterProperty]!"
             [ngClass]="cardLink.cssClass"
           ></app-card-link>
         }

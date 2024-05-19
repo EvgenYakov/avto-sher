@@ -2,7 +2,7 @@ import { Route } from '@angular/router';
 
 import { ControlPanel } from '@constants';
 
-import { PersonalListComponent } from './pages';
+import { PersonalEditorComponent, PersonalListComponent } from './pages';
 import { PersonalComponent } from './personal.component';
 
 export default [
@@ -15,16 +15,16 @@ export default [
         title: 'Список персонала',
         component: PersonalListComponent,
       },
-      // {
-      //   path: ControlPanel.CREATE_PERSONAL,
-      //   title: 'Создание персонала',
-      //   component: CreateAutoparkComponent,
-      // },
-      // {
-      //   path: ControlPanel.PERSONAL_EDITOR + '/:id',
-      //   title: 'Изменение персонала',
-      //   component: CreateAutoparkComponent,
-      // },
+      {
+        path: ControlPanel.CREATE_PERSONAL,
+        title: 'Создание персонала',
+        component: PersonalEditorComponent,
+      },
+      {
+        path: ControlPanel.PERSONAL_EDITOR + '/:id',
+        title: 'Изменение персонала',
+        component: PersonalEditorComponent,
+      },
     ],
   },
 ] as Route[];

@@ -9,7 +9,7 @@ import { TabViewChangeEvent } from 'primeng/tabview';
 import { Observable } from 'rxjs';
 
 import { RegisterType } from '../../constants';
-import { RegisterDto, RegistrationForm } from '../../models';
+import { IRegisterDto, IRegistrationForm } from '../../models';
 
 import { REGISTRATION_DEPS } from './registration.dependencies';
 
@@ -32,8 +32,9 @@ export class RegistrationComponent implements OnInit {
   public checkbox = false;
   public activeIndex = 0;
 
-  public registerForm: FormGroup<RegistrationForm>;
+  public registerForm: FormGroup<IRegistrationForm>;
 
+  protected readonly AppRoutes = AppRoutes;
   private registerType = RegisterType.DRIVER;
 
   constructor(
@@ -56,7 +57,7 @@ export class RegistrationComponent implements OnInit {
     const formValues = {
       ...this.registerForm.value,
       role: this.registerType,
-    } as RegisterDto;
+    } as IRegisterDto;
 
     this.store.dispatch(registerRequest({ registerDto: formValues }));
   }
@@ -75,8 +76,8 @@ export class RegistrationComponent implements OnInit {
     this.registerForm.controls.phoneNumber.updateValueAndValidity();
   }
 
-  private initializeForm(): FormGroup<RegistrationForm> {
-    const registerFormGroup = new FormGroup<RegistrationForm>(<RegistrationForm>{
+  private initializeForm(): FormGroup<IRegistrationForm> {
+    const registerFormGroup = new FormGroup<IRegistrationForm>(<IRegistrationForm>{
       fullName: new FormControl<string>('', [Validators.required]),
       phoneNumber: new FormControl<string>(''),
       email: new FormControl<string>('', [Validators.required, Validators.email]),
@@ -86,5 +87,4 @@ export class RegistrationComponent implements OnInit {
     return registerFormGroup;
   }
 
-  protected readonly AppRoutes = AppRoutes;
 }
