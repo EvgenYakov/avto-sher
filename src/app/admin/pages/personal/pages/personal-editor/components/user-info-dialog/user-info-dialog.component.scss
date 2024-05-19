@@ -1,0 +1,5 @@
+@import "mixins";
+
+.field {
+  @include flexMix(row, center, start, 0.5rem);
+}

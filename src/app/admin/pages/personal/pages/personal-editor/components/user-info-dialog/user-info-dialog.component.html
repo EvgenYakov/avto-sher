@@ -1,0 +1,74 @@
+<p-dialog
+  header="Header"
+  [visible]="visible()"
+  (visibleChange)="closeModal.emit()"
+  [modal]="true"
+  [style]="{ width: '25rem' }"
+>
+  @if (userInfo(); as userProfile) {
+    <ng-template pTemplate="header">
+      <div class="inline-flex align-items-center justify-content-center gap-2">
+        <span class="font-bold white-space-nowrap">Информация сотрудника</span>
+      </div>
+    </ng-template>
+    <span class="p-text-secondary block mb-1">Данное окно может содержать конфеденциальную информацию</span>
+    <div class="gap-3 mb-1 field">
+      <label class="font-semibold w-6rem">ФИО сотрудника:</label>
+      <span>{{ ' ' + userProfile.fullName }}</span>
+      <p-button
+        [text]="true"
+        severity="secondary"
+        [rounded]="true"
+        icon="pi pi-clone"
+        (click)="copyToClipboard(userProfile.fullName, 'ФИО')"
+      />
+    </div>
+    <div class="gap-3 mb-1 field">
+      <label class="font-semibold w-6rem">Номер телефона:</label>
+      <span>{{ ' ' + userProfile.phoneNumber }}</span>
+      <p-button
+        [text]="true"
+        severity="secondary"
+        icon="pi pi-clone"
+        [rounded]="true"
+        (click)="copyToClipboard(userProfile.phoneNumber, 'Номер телефона')"
+      />
+    </div>
+    <div class="gap-3 mb-1 field">
+      <label class="font-semibold w-6rem">Роль:</label>
+      <span>{{ ' ' + userProfile.role }}</span>
+      <p-button
+        [text]="true"
+        severity="secondary"
+        icon="pi pi-clone"
+        [rounded]="true"
+        (click)="copyToClipboard(userProfile.role, 'Роль')"
+      />
+    </div>
+    <div class="gap-3 mb-1 field">
+      <label class="font-semibold w-6rem">Email:</label>
+      <span>{{ ' ' + userProfile.fullName }}</span>
+      <p-button
+        [text]="true"
+        severity="secondary"
+        icon="pi pi-clone"
+        [rounded]="true"
+        (click)="copyToClipboard(userProfile.email, 'Email')"
+      />
+    </div>
+    @if (password(); as password) {
+      <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+      <div class="gap-3 mb-2 field">
+        <label class="font-semibold w-6rem">password</label>
+        <span>********</span>
+        <p-button
+          [text]="true"
+          severity="secondary"
+          icon="pi pi-clone"
+          [rounded]="true"
+          (click)="copyToClipboard(password, 'Пароль')"
+        />
+      </div>
+    }
+  }
+</p-dialog>

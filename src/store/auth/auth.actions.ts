@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { AuthResponse, LoginDto, RegisterDto } from '@pages';
+import { AuthResponse, LoginDto, IRegisterDto } from '@pages';
 
 export enum AuthActions {
   LOGIN_REQUEST = '[AUTH] Send login request',
@@ -23,7 +23,7 @@ export const loginRequestSuccess = createAction(AuthActions.LOGIN_SUCCESS, props
 
 export const loginRequestFailure = createAction(AuthActions.LOGIN_FAILURE, props<{ backendErrors: string }>());
 
-export const registerRequest = createAction(AuthActions.REGISTER_REQUEST, props<{ registerDto: RegisterDto }>());
+export const registerRequest = createAction(AuthActions.REGISTER_REQUEST, props<{ registerDto: IRegisterDto }>());
 
 export const registerRequestSuccess = createAction(
   AuthActions.REGISTER_SUCCESS,
