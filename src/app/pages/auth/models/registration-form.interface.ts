@@ -8,6 +8,7 @@ export interface IRegistrationForm {
 }
 
 export interface IRegisterDto {
+  id?: number;
   fullName: string;
   email: string;
   phoneNumber: string;
