@@ -63,7 +63,7 @@
       @include media-s() {
         margin-top: 1.5rem;
       }
-      @include flexMix(row, center, space-between);
+      @include flexMix(row, start, start, 1rem);
       margin-top: 2rem;
 
       .back-link {

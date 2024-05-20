@@ -20,13 +20,13 @@
           [errorsMap]="phoneField"
           [formControl]="registerForm.controls.phoneNumber"
         ></app-phone-input>
-<!--        <p-inputMask-->
-<!--          placeholder="Номер телефона"-->
-<!--          [mask]="'+7 999 999-99-99'"-->
-<!--          [errorsMap]="phoneField"-->
-<!--          [formControl]="registerForm.controls.phoneNumber"-->
-<!--          placeholder="+7 999"-->
-<!--        />-->
+        <!--        <p-inputMask-->
+        <!--          placeholder="Номер телефона"-->
+        <!--          [mask]="'+7 999 999-99-99'"-->
+        <!--          [errorsMap]="phoneField"-->
+        <!--          [formControl]="registerForm.controls.phoneNumber"-->
+        <!--          placeholder="+7 999"-->
+        <!--        />-->
 
         <app-text-input
           class="field"
@@ -48,6 +48,14 @@
 
   <div class="footer__btns">
     <p-button label="Зарегистрировать" (click)="onSubmit()"></p-button>
+    @if (editMode()) {
+      <p-button
+        label="Показать краткую информацию"
+        (click)="this.visibleUserInfoPopup.set(true)"
+        severity="secondary"
+      ></p-button>
+      <p-button label="Удалить" (click)="showConfirmDeletePopup($event)" severity="danger"></p-button>
+    }
   </div>
 </div>
 <app-user-info-dialog
@@ -56,3 +64,5 @@
   [visible]="visibleUserInfoPopup()"
   (closeModal)="visibleUserInfoPopup.set(false)"
 ></app-user-info-dialog>
+<p-confirmDialog />
+<p-toast />

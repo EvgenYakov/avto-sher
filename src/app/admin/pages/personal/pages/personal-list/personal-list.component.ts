@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
 import { CustomTableComponent } from '@components';
 import { AppRoutes, ControlPanel } from '@constants';
-import { DestroyDirective } from '@directives';
 import { UserProfile } from '@models';
 import { PersonalService } from '@services';
 import { AutoparkFacade } from '@store';
@@ -36,8 +35,10 @@ export class PersonalListComponent {
     effect(
       () => {
         const park = this.activeAutoPark();
-        if (park) {
+        console.log(park);
+        if (park?.id) {
           this.personalService.getAutoparkOperators(park?.id).subscribe(res => {
+            console.log(res);
             this.personalList.set(res);
           });
         }
