@@ -203,6 +203,12 @@ export class PersonalEditorComponent implements OnInit {
         })
       )
       .subscribe(() => {
+        this.router.navigate([
+          '/',
+          AppRoutes.CONTROL_PANEL,
+          ControlPanel.PERSONAL_CONTROL,
+          ControlPanel.PERSONAL_TABLE,
+        ]);
         this.messageService.add({ severity: EMessage.SUCCESS, summary: 'Успех', detail: 'Запись удалена' });
       });
   }
