@@ -23,13 +23,13 @@ import { AuthState, AutoparkFacade, selectAuthErrors } from '@store';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TabViewModule } from 'primeng/tabview';
-import { filter, map, Observable, takeUntil, tap } from 'rxjs';
+import { ToastModule } from 'primeng/toast';
+import { catchError, filter, map, Observable, takeUntil, tap } from 'rxjs';
 
 import { UserInfoDialogComponent } from './components';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-personal-editor',
@@ -194,8 +194,17 @@ export class PersonalEditorComponent implements OnInit {
   }
 
   private deletePersonal(id: number): void {
-    console.log(id);
-    this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' });
+    this.personalService
+      .deleteOperator(id)
+      .pipe(
+        catchError(err => {
+          this.messageService.add({ severity: EMessage.WARN, summary: 'Ошибка', detail: err.message });
+          throw new Error(err);
+        })
+      )
+      .subscribe(() => {
+        this.messageService.add({ severity: EMessage.SUCCESS, summary: 'Успех', detail: 'Запись удалена' });
+      });
   }
 
   private fillForm(data: UserProfile): void {

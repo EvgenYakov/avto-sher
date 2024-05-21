@@ -13,7 +13,7 @@ export class PersonalService extends BaseService {
 
   private readonly apiUrl = `${environment.apiUrl}/autoparks`;
 
-  public getAutoparkOperators(parkId: number): Observable<UserProfile[]> {
+  getAutoparkOperators(parkId: number): Observable<UserProfile[]> {
     // TODO: REWORK
     return this.httpService.get<UserProfile[]>(`${this.apiUrl}/operators/${parkId}`).pipe(
       tap(res => {
@@ -22,7 +22,7 @@ export class PersonalService extends BaseService {
     );
   }
 
-  public addOperator(registerDto: ICreatePersonalDto): Observable<UserProfile> {
+  addOperator(registerDto: ICreatePersonalDto): Observable<UserProfile> {
     return this.httpService.post<UserProfile>(
       `${this.apiUrl}/auto-park-operator/${registerDto.autoParkId}`,
       registerDto,
@@ -30,5 +30,9 @@ export class PersonalService extends BaseService {
         withCredentials: true,
       }
     );
+  }
+
+  deleteOperator(id: number): Observable<void> {
+    return this.httpService.delete<void>(`${this.apiUrl}/operator/${id}`);
   }
 }
