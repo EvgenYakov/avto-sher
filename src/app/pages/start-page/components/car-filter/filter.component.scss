@@ -13,6 +13,24 @@
     }
   }
 
+  .p-dropdown {
+    @include media-l() {
+      width: 100%;
+      flex-grow: 1;
+    }
+  }
+
+  .p-multiselect {
+    @include media-l() {
+      width: 100%;
+      flex-grow: 1;
+
+      .p-multiselect-label-container {
+        justify-content: center;
+      }
+    }
+  }
+
   .p-multiselect-header {
     display: none;
   }

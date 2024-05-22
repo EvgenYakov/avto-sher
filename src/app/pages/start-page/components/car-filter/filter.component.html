@@ -20,6 +20,7 @@
           [optionLabel]="'label'"
           [filter]="true"
           [showClear]="true"
+          [ngStyle]="{ width: '100%' }"
           optionLabel="label"
           filterBy="label"
           placeholder="Выберите марку"
@@ -29,6 +30,7 @@
           [options]="(models$ | async)!"
           [optionValue]="'value'"
           [optionLabel]="'label'"
+          [ngStyle]="{ width: '100%' }"
           [dropdownIcon]="(areModelsLoaded$ | async) ? 'pi pi-spinner pi-spin' : 'pi pi-chevron-down'"
           placeholder="Выберите модель"
         ></p-dropdown>
@@ -39,6 +41,7 @@
             [placeholder]="dropdown.placeholder"
             [optionLabel]="'label'"
             [optionValue]="'value'"
+            [ngStyle]="{ width: '100%' }"
             display="chip"
           ></p-multiSelect>
         }
