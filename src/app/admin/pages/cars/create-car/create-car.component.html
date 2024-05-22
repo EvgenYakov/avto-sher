@@ -3,6 +3,16 @@
     <div class="create-car__specifications">
       <div class="mark-model">
         <div class="mark">
+          <div class="subtitle">Статус аренды</div>
+          <div class="specification-input">
+            <p-dropdown
+              [options]="carStatus"
+              [formControl]="carForm.controls.status"
+              placeholder="Выберите тариф(ы)"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="mark">
           <div class="subtitle">Марка автомобиля</div>
           <div class="specification-input">
             <input

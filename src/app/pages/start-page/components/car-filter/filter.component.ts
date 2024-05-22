@@ -22,13 +22,14 @@ import { BehaviorSubject, map, Observable, Subject, switchMap, takeUntil } from 
 import { STATIC_DROPDOWNS } from '../../constants/dropdowns.constant';
 
 import { CAR_FILTER_DEPS } from './filter.dependencies';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-car-filter',
   standalone: true,
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
-  imports: [CAR_FILTER_DEPS, MultiSelectModule],
+  imports: [CAR_FILTER_DEPS, MultiSelectModule, NgStyle],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterComponent implements OnInit, OnDestroy {

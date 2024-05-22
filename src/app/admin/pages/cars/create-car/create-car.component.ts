@@ -3,11 +3,20 @@ import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { FileUploadComponent } from '@components';
-import { ADDITIONAL_OPTIONS, AppRoutes, ControlPanel, Fuel, TARIFF_OPTIONS } from '@constants';
+import {
+  ADDITIONAL_OPTIONS,
+  AppRoutes,
+  ControlPanel,
+  Fuel,
+  REQUEST_STATUS_OPTIONS,
+  RequestStatus,
+  TARIFF_OPTIONS,
+} from '@constants';
 import { DestroyDirective } from '@directives';
 import { AutoparkCard, CarCard, CreateCar } from '@models';
 import { CarService } from '@services';
 import { AutoparkFacade } from '@store';
+import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { ChipsModule } from 'primeng/chips';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,7 +33,6 @@ import {
   ICommissionForm,
   IDepositForm,
 } from './create-car.model';
-import { CheckboxChangeEvent } from 'primeng/checkbox';
 
 @Component({
   selector: 'app-create-car',
@@ -48,6 +56,7 @@ export class CreateCarComponent implements OnInit {
 
   readonly editMode = signal<boolean>(false);
 
+  readonly carStatus = REQUEST_STATUS_OPTIONS;
   readonly tariffTypes = TARIFF_OPTIONS;
   readonly additionalInfo = ADDITIONAL_OPTIONS;
 
@@ -88,6 +97,7 @@ export class CreateCarComponent implements OnInit {
     fuelType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     enginePower: new FormControl<number | null>(null, { validators: [Validators.required] }),
     type: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    status: new FormControl<RequestStatus | null>(null, { validators: [Validators.required] }),
     rentSchedule: new FormControl<string>('', {
       nonNullable: true,
       validators: [Validators.required],
@@ -175,6 +185,7 @@ export class CreateCarComponent implements OnInit {
 
   onSubmit(): void {
     const files = this.filesComponent.files$.getValue();
+    console.log(this.carForm.value);
     const car = {
       ...this.carForm.value,
       fuel: this.carForm.controls.fuelType.value as Fuel,
@@ -298,6 +309,7 @@ export class CreateCarComponent implements OnInit {
       transmission: carCard.transmission,
       fuelType: carCard.fuel,
       enginePower: carCard.enginePower,
+      status: carCard.status,
       type: carCard.type,
       additionalInfo: carCard.additionalInfo,
       financialInfo: carCard.financialInfo,

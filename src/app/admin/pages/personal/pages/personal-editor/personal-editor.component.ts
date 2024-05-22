@@ -183,13 +183,6 @@ export class PersonalEditorComponent implements OnInit {
       accept: () => {
         this.deletePersonal(this.userInfo()?.id ?? 0);
       },
-      reject: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Rejected',
-          detail: 'You have rejected',
-        });
-      },
     });
   }
 
