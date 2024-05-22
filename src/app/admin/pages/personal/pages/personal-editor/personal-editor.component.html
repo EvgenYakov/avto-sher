@@ -47,7 +47,7 @@
   </div>
 
   <div class="footer__btns">
-    <p-button label="Зарегистрировать" (click)="onSubmit()"></p-button>
+    <p-button [label]="userInfo()?.id ? 'Изменить' : 'Зарегистрировать'" (click)="onSubmit()"></p-button>
     @if (editMode()) {
       <p-button
         label="Показать краткую информацию"

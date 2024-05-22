@@ -6,6 +6,7 @@
   margin-left: 5em;
   transform: translateY(-1.875rem);
 
+
   &__body {
     width: 50%;
 
@@ -13,6 +14,8 @@
       font-size: 4rem;
     }
   }
+
+
 
   &__control {
     padding: 1rem;
@@ -31,6 +34,25 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.2) translateX(3em) translateY(-1.4em);
+    }
+  }
+
+  @media screen and (max-width: 960px) {
+    @include flexMix(column, center, space-around);
+    margin: 0 1rem;
+
+
+    &__body {
+      width: 100%;
+
+      h1 {
+        font-size: 3rem;
+      }
+    }
+
+    &__image {
+      width: 100%;
+      padding: 4rem;
     }
   }
 }

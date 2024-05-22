@@ -1,4 +1,5 @@
 import { FormControl } from '@angular/forms';
+import { RequestStatus } from '@constants';
 
 export interface CreateCarForm {
   id: FormControl<number | null>;
@@ -18,6 +19,7 @@ export interface CreateCarForm {
   STS: FormControl<string>;
   VIN: FormControl<string>;
   carStateNumber: FormControl<string>;
+  status: FormControl<RequestStatus | null>;
 }
 
 export interface IDepositForm {
