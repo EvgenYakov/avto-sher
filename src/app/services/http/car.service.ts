@@ -74,11 +74,21 @@ export class CarService extends BaseService {
     return this.httpService.post<CarCard>(`${environment.apiUrl}/cars`, car);
   }
 
-  public updateCar(id: number | string,car: CreateCar): Observable<CarCard> {
+  public updateCar(id: number | string, car: CreateCar): Observable<CarCard> {
     return this.httpService.put<CarCard>(`${environment.apiUrl}/cars/${id}`, car);
   }
 
   public deleteCar(id: number | string): Observable<void> {
     return this.httpService.delete<void>(`${environment.apiUrl}/cars/${id}`);
+  }
+
+  public deleteCarImage(id: number, url: string): Observable<void> {
+    return this.httpService.delete<void>(`${environment.apiUrl}/cars/images/${id}`, { body: { imageUrls: [url] } });
+  }
+
+  public addCarImages(id: number, files: FormData): Observable<{ urls: string[] }> {
+    return this.httpService.patch<{ urls: string[] }>(`${environment.apiUrl}/cars/images/${id}`, files, {
+      withCredentials: true,
+    });
   }
 }

@@ -216,10 +216,39 @@
 
     <div class="create-car__photos">
       <div class="subtitle">Фотографии автомобиля</div>
+      @if (editMode()) {
+        <div class="card">
+          <p-messages
+            [value]="[{ severity: EMessage.WARN, detail: 'Осторожно! Изменения, в данной секции, нельзя отменить' }]"
+            [enableService]="false"
+            [closable]="false"
+          />
+        </div>
+        <div class="subtitle">Отображаемые фотографии</div>
+        <div class="images-list mb-1">
+          @for (url of images(); track url; let i = $index) {
+            <div class="item">
+              <p-image [src]="url" [preview]="true" class="image" width="100" height="100" alt="Image"></p-image>
+              <p-button icon="pi pi-times" (click)="confirmDeleteCarImage($event, url)" [rounded]="true"></p-button>
+            </div>
+          }
+        </div>
+      }
       <div class="label">
         Загрузите фотографии автомобиля, которые будут отображаться на сайте (минимум 1, максимум 10)
       </div>
-      <app-file-upload #files></app-file-upload>
+      <div class="mb-1">
+        <app-file-upload #files></app-file-upload>
+      </div>
+      @if (editMode()) {
+        <p-button
+          icon="pi pi-check"
+          label="Добавить в отображаемые"
+          [disabled]="!(files.files$ | async)?.length"
+          (click)="addImagesToCar()"
+          [rounded]="true"
+        ></p-button>
+      }
     </div>
 
     <div class="create-car__btns">
@@ -233,7 +262,7 @@
         <p-button
           class="cancel-btn"
           label="Удалить машину"
-          (click)="deleteCar()"
+          (click)="confirmDeleteCar($event)"
           styleClass="p-button-outlined"
           icon="pi pi-trash"
         ></p-button>
@@ -247,3 +276,4 @@
     </div>
   </div>
 </form>
+<p-confirmDialog />

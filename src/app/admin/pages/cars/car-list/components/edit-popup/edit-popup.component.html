@@ -1,0 +1,11 @@
+<p-confirmPopup #confirmPopupRef>
+  <ng-template pTemplate="headless" let-message let-test>
+    <div class="border-round p-3">
+      <span>Выберите действие</span>
+      <div class="flex align-items-center gap-2 mt-3">
+        <p-button label="Изменить статус" size="small" />
+        <p-button label="Изменить машину" [outlined]="true" size="small" />
+      </div>
+    </div>
+  </ng-template>
+</p-confirmPopup>
