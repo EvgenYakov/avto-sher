@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal, Vie
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { FileUploadComponent } from '@components';
+import { BytesPipe, FileUploadComponent } from '@components';
 import {
   ADDITIONAL_OPTIONS,
   AppRoutes,
@@ -13,15 +13,19 @@ import {
   TARIFF_OPTIONS,
 } from '@constants';
 import { DestroyDirective } from '@directives';
-import { AutoparkCard, CarCard, CreateCar } from '@models';
+import { AutoparkCard, CarCard, CreateCar, EMessage } from '@models';
 import { CarService } from '@services';
 import { AutoparkFacade } from '@store';
+import { ConfirmationService } from 'primeng/api';
 import { CheckboxChangeEvent } from 'primeng/checkbox';
 import { ChipsModule } from 'primeng/chips';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ImageModule } from 'primeng/image';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
+import { MessagesModule } from 'primeng/messages';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { filter, Observable, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, filter, finalize, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
 import { STATIC_DROPDOWNS } from './create-car.contants';
 import { CREATE_CAR_DEPS } from './create-car.dependencies';
@@ -47,8 +51,13 @@ import {
     RadioButtonModule,
     FormsModule,
     ChipsModule,
+    BytesPipe,
+    ImageModule,
+    ConfirmDialogModule,
+    MessagesModule,
   ],
   hostDirectives: [DestroyDirective],
+  providers: [ConfirmationService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateCarComponent implements OnInit {
@@ -110,12 +119,13 @@ export class CreateCarComponent implements OnInit {
 
   readonly EDepositStatus = EDepositStatus;
   readonly EComissionStatus = ECommissionStatus;
-
+  readonly EMessage = EMessage;
   private destroy$ = inject(DestroyDirective).destroy$;
 
   constructor(
     private carService: CarService,
     private autoparkFacade: AutoparkFacade,
+    private confirmationService: ConfirmationService,
     private router: Router,
     private activeRoute: ActivatedRoute
   ) {
@@ -173,7 +183,11 @@ export class CreateCarComponent implements OnInit {
           this.fillForm(car);
           this.editMode.set(true);
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
+        catchError(err => {
+          this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
+          throw new Error(err);
+        })
       )
       .subscribe();
   }
@@ -185,7 +199,7 @@ export class CreateCarComponent implements OnInit {
 
   onSubmit(): void {
     const files = this.filesComponent.files$.getValue();
-    console.log(this.carForm.value);
+
     const car = {
       ...this.carForm.value,
       fuel: this.carForm.controls.fuelType.value as Fuel,
@@ -231,9 +245,73 @@ export class CreateCarComponent implements OnInit {
     return new Date().getFullYear();
   }
 
-  deleteCar(): void {
+  confirmDeleteCarImage(event: Event, url: string): void {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Осторожно! Изображение будет удалено!',
+      header: 'Удаление персонала',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        this.deleteCarImage(url);
+      },
+    });
+  }
+
+  confirmDeleteCar(event: Event): void {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Осторожно! Машина будет удалена!',
+      header: 'Удаление персонала',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      accept: () => {
+        this.deleteCar();
+      },
+    });
+  }
+
+  addImagesToCar(): void {
+    const files = this.filesComponent.files$.getValue();
+
+    console.log(files);
+    if (!files.length) {
+      return;
+    }
+
+    const data = new FormData();
+
+    files.forEach(file => {
+      data.append('images', file);
+    });
+
+    this.carService
+      .addCarImages(this.carForm.value.id!, data)
+      .pipe(
+        finalize(() => {
+          this.filesComponent.files$.next([]);
+          this.filesComponent.filesPreview$.next([]);
+        })
+      )
+      .subscribe(res => {
+        this.images.set(res.urls);
+      });
+  }
+
+  private deleteCarImage(url: string): void {
+    this.carService.deleteCarImage(this.carForm.value.id!, url).subscribe(() => {
+      this.images.update(images => images.filter(image => image !== url));
+    });
+  }
+
+  private deleteCar(): void {
     this.carService.deleteCar(this.carForm.value.id!).subscribe(() => {
-      console.log('deleted');
       this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
     });
   }

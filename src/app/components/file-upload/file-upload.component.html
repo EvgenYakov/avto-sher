@@ -27,7 +27,7 @@
         <p>{{ file.name }}</p>
       }
       <p>{{ file.size | bytes }}</p>
-      <span class="delete-icon" (click)="onDeleteFile(i)">X</span>
+      <p-button icon="pi pi-times" (click)="onDeleteFile(i)" [rounded]="true"></p-button>
     </div>
   }
 </div>
