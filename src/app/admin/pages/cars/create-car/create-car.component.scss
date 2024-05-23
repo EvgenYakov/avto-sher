@@ -42,9 +42,13 @@
     margin-bottom: 1.875rem;
     color: #495057;
   }
-}
 
-.create-car {
+  &__photos {
+    border-radius: 0.5rem;
+    padding: 0.8rem;
+    border: 1px solid #CED4DA;
+  }
+
   @include flexMix(column, flex-start, flex-start, 3.125rem);
   width: 100%;
   height: 100%;
@@ -187,4 +191,16 @@
   width: 1px;
   height: 30px;
   background: #6E757C;
+}
+
+
+.images-list {
+  @include flexMix(row, center, flex-start, 0.8rem);
+
+  margin-top: 1rem;
+  text-align: center;
+
+  .item {
+    @include flexMix(column, center, flex-start, 0.5rem);
+  }
 }

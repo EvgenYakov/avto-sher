@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Observer } from 'rxjs';
 
 import { FILE_UPLOAD_DEPS } from './file-upload.dependencies';
 import { FileWithProgress } from './model';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'Ыapp-file-upload',
@@ -11,7 +12,7 @@ import { FileWithProgress } from './model';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FILE_UPLOAD_DEPS],
+  imports: [FILE_UPLOAD_DEPS, ButtonModule],
 })
 export class FileUploadComponent {
   @Input()
