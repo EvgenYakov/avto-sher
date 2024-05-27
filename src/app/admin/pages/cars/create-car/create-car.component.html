@@ -162,7 +162,7 @@
           </div>
           <div class="payments">
             <span>Выплаты каждые</span>
-            <p-inputNumber class="option-input"></p-inputNumber>
+            <p-inputNumber class="option-input" [formControl]="carForm.controls.minRentPeriod"></p-inputNumber>
             <span>дня</span>
           </div>
         </div>
@@ -270,7 +270,7 @@
       <p-button
         class="cancel-btn"
         label="Отменить изменения"
-        [routerLink]="['/', AppRoutes.CONTROL_PANEL, ControlPanel.AUTOPARK_CONTROL, ControlPanel.CARS_TABLE]"
+        [routerLink]="['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]"
         styleClass="p-button-outlined"
       ></p-button>
     </div>
