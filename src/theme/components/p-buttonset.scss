@@ -3,7 +3,12 @@
 }
 
 .p-button.p-button-link {
-  color: #000000;
   background: transparent;
   border: transparent;
 }
+
+
+::ng-deep .text-primary {
+  color: $primary !important;
+}
+

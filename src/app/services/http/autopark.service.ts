@@ -75,6 +75,20 @@ export class AutoparkService extends BaseService {
     return this.httpService.put<AutoparkDetailed>(`${this.apiUrl}/${id}`, autopark, { withCredentials: true });
   }
 
+  public updateAutoparkLogo(
+    file: File,
+    autoparkId: number
+  ): Observable<{
+    url: string;
+  }> {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    return this.httpService.patch<{
+      url: string;
+    }>(`${this.apiUrl}/logo/${autoparkId}`, formData, { withCredentials: true });
+  }
+
   public getDefaultBonuses(): Observable<AutoparkBonus[]> {
     return this.httpService.get<AutoparkBonus[]>(`${environment.apiUrl}/autopark-bonuses/default`);
   }

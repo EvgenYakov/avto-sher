@@ -105,6 +105,9 @@ export class CreateAutoparkComponent implements OnInit {
         this.activeAutoPark()?.id!,
         this.autoparkForm.value as CreateAutopark
       );
+      if (this.autoparkForm.value.logo) {
+        this.autoParkService.updateAutoparkLogo(this.autoparkForm.value.logo, this.activeAutoPark()?.id!).subscribe();
+      }
     } else {
       autoparkRequest = this.autoParkService.createAutopark(this.autoparkForm.value as CreateAutopark);
     }
