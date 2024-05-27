@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
@@ -96,7 +104,10 @@ export class CreateCarComponent implements OnInit {
     rentalConditions: new FormControl<string[]>([], { nonNullable: true }),
     STS: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     VIN: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    carStateNumber: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    carStateNumber: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     additionalInfo: new FormControl<string[]>([], { nonNullable: true }),
     yearOfRelease: new FormControl<number | null>(null, { validators: [Validators.required] }),
     transmission: new FormControl<string>('', {
@@ -127,7 +138,7 @@ export class CreateCarComponent implements OnInit {
     private autoparkFacade: AutoparkFacade,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
   ) {
     effect(() => {
       if (this.enableBuyCar()) {
@@ -154,7 +165,7 @@ export class CreateCarComponent implements OnInit {
         tap(() => {
           this.commissionForm.controls.value.disable();
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe();
 
@@ -167,7 +178,7 @@ export class CreateCarComponent implements OnInit {
         tap(() => {
           this.depositForm.controls.value.disable();
         }),
-        takeUntil(this.destroy$)
+        takeUntil(this.destroy$),
       )
       .subscribe();
 
@@ -187,7 +198,7 @@ export class CreateCarComponent implements OnInit {
         catchError(err => {
           this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
           throw new Error(err);
-        })
+        }),
       )
       .subscribe();
   }
@@ -255,6 +266,8 @@ export class CreateCarComponent implements OnInit {
       rejectButtonStyleClass: 'p-button-text p-button-text',
       acceptIcon: 'none',
       rejectIcon: 'none',
+      rejectLabel: 'Нет',
+      acceptLabel: 'Да',
       accept: () => {
         this.deleteCarImage(url);
       },
@@ -271,6 +284,8 @@ export class CreateCarComponent implements OnInit {
       rejectButtonStyleClass: 'p-button-text p-button-text',
       acceptIcon: 'none',
       rejectIcon: 'none',
+      rejectLabel: 'Нет',
+      acceptLabel: 'Да',
       accept: () => {
         this.deleteCar();
       },
@@ -395,6 +410,9 @@ export class CreateCarComponent implements OnInit {
       rentSchedule: carCard.rentSchedule,
       minRentPeriod: parseInt(carCard.minRentPeriod, 10),
       rentalConditions: carCard.rentalConditions,
+      STS: carCard.STS,
+      VIN: carCard.VIN,
+      carStateNumber: carCard.carStateNumber,
     });
     this.images.set(carCard.photos);
 
