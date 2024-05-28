@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@ang
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AppRoutes, ControlPanel } from '@constants';
+import { AppRoutes, ControlPanel, PHONE_FIELD } from '@constants';
 import { DestroyDirective } from '@directives';
 import { AutoparkBonus, AutoparkDetailed, ICreateCustomBonus } from '@models';
 import { Store } from '@ngrx/store';
@@ -16,6 +16,7 @@ import { BonusesService } from '../../../../../services/http/bonuses.service';
 import { CreateAutopark, CreateBaseAutoparkForm } from './models/create-autopark-form.interface';
 import { CREATE_AUTOPARK_DEPS } from './create-autopark.dependencies';
 import { ICustomBonusForm } from './create-autopark.model';
+import { PhoneInputComponent } from '@components';
 
 @Component({
   selector: 'app-create-autopark',
@@ -23,7 +24,7 @@ import { ICustomBonusForm } from './create-autopark.model';
   styleUrls: ['./create-autopark.component.scss'],
   standalone: true,
   hostDirectives: [DestroyDirective],
-  imports: [CREATE_AUTOPARK_DEPS, UserAvatarComponent],
+  imports: [CREATE_AUTOPARK_DEPS, UserAvatarComponent, PhoneInputComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateAutoparkComponent implements OnInit {
@@ -35,6 +36,7 @@ export class CreateAutoparkComponent implements OnInit {
     title: new FormControl<string>('', [Validators.required]),
     description: new FormControl<string>('', [Validators.required]),
     address: new FormControl<string>('', [Validators.required]),
+    phoneNumber: new FormControl<string>('', [Validators.required]),
     region: new FormControl<string>('', [Validators.required]),
     logo: new FormControl(),
   });
@@ -100,6 +102,7 @@ export class CreateAutoparkComponent implements OnInit {
   onSubmit(): void {
     // this.store.dispatch(createAutopark({ autopark: this.autoparkForm.value as CreateAutopark }));
     let autoparkRequest: Observable<AutoparkDetailed>;
+    console.log(this.autoparkForm.value);
     if (this.activeAutoPark()?.id) {
       autoparkRequest = this.autoParkService.updateAutopark(
         this.activeAutoPark()?.id!,
@@ -194,6 +197,7 @@ export class CreateAutoparkComponent implements OnInit {
       title: park.title,
       description: park.description,
       address: park.address,
+      phoneNumber: park.phoneNumber ?? null,
       region: park.region,
     });
     // this.bonuses.set(park.bonuses.filter(item => item.icon));
@@ -201,4 +205,6 @@ export class CreateAutoparkComponent implements OnInit {
     this.customBonuses.set(park.bonuses.filter(item => !item.icon));
     this.avatarPath.set(park.logo);
   }
+
+  protected readonly phoneField = PHONE_FIELD;
 }

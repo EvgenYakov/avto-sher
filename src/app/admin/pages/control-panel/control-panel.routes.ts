@@ -11,6 +11,11 @@ export default [
     component: ControlPanelComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: ControlPanel.AUTOPARK_CONTROL,
+      },
+      {
         path: ControlPanel.AUTOPARK_CONTROL,
         loadChildren: () => import('../autopark/autopark.routes'),
       },

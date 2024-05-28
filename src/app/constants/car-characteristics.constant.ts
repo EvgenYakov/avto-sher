@@ -18,6 +18,7 @@ export enum Fuel {
   DIESEL = 'Дизель',
   PETROL = 'Бензин',
   GAS = 'Газ',
+  ELECTRO = 'Электро',
 }
 
 export const TARIFF_OPTIONS: DropdownOption[] = [
@@ -33,6 +34,7 @@ export const FUEL_OPTIONS: DropdownOption[] = [
   { label: Fuel.PETROL, value: Fuel.PETROL },
   { label: Fuel.DIESEL, value: Fuel.DIESEL },
   { label: Fuel.GAS, value: Fuel.GAS },
+  { label: Fuel.ELECTRO, value: Fuel.ELECTRO },
 ];
 
 export const TRANSMISSION_OPTIONS: DropdownOption[] = [

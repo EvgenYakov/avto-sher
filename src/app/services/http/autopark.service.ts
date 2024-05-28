@@ -67,6 +67,8 @@ export class AutoparkService extends BaseService {
     formData.append('description', autopark.description);
     formData.append('region', autopark.region);
     formData.append('address', autopark.address);
+    formData.append('phoneNumber', autopark.phoneNumber);
+
 
     return this.httpService.post<AutoparkDetailed>(`${this.apiUrl}`, formData, { withCredentials: true });
   }
