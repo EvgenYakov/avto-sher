@@ -15,6 +15,7 @@ export interface AutoparkDetailed extends AutoparkCard {
   backgroundImage: string;
   createdAt: Date;
   address: string;
+  phoneNumber: string;
   rentalConditions: string[];
   rentSchedule: string;
   minRentPeriod: string;
@@ -57,6 +58,7 @@ export interface CreateAutopark {
   title: string;
   description: string;
   address: string;
+  phoneNumber: string;
   region: string;
   logo: File;
 }
@@ -64,6 +66,7 @@ export interface CreateAutopark {
 export interface IUpdateAutopark {
   id?: number;
   title: string;
+  phoneNumber: string;
   description: string;
   address: string;
 }

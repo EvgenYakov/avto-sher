@@ -4,6 +4,7 @@ export interface CreateBaseAutoparkForm {
   title: FormControl<string>;
   description: FormControl<string>;
   address: FormControl<string>;
+  phoneNumber: FormControl<string>;
   region: FormControl<string>;
   logo: FormControl<File>;
 }
@@ -14,6 +15,7 @@ export interface CreateAutopark {
   title: string;
   description: string;
   address: string;
+  phoneNumber: string;
   region: string;
   logo: File;
 }
