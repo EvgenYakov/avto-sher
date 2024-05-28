@@ -8,26 +8,26 @@
           <div class="gallery">
             <p-galleria [value]="car.photos" [numVisible]="5" [responsiveOptions]="responsiveOptions">
               <ng-template pTemplate="item" let-item>
-                <img [src]="item" class="gallery__img" />
+                <img [src]="item" class="gallery__img"/>
               </ng-template>
               <ng-template pTemplate="thumbnail" let-item>
-                <img [src]="item" class="gallery__thumbnail" />
+                <img [src]="item" class="gallery__thumbnail"/>
               </ng-template>
             </p-galleria>
           </div>
           <div class="rent-conditions">
             <div class="title subtitle">Условия аренды</div>
             <div class="list">
-              @for (item of car.autopark.rentalConditions; track item) {
+              @for (item of car.rentalConditions; track item) {
                 <ul class="list__item">
                   <li>– {{ item }}</li>
                 </ul>
               }
               <ul>
-                <li class="list__item">– Аренда от {{ car.autopark.minRentPeriod }} дней</li>
-                <li class="list__item" *appRentSchedule="car.autopark.rentSchedule; let scheduleText">
-                  – График аренды {{ car.autopark.rentSchedule }} ({{ scheduleText }})
-                </li>
+                <li class="list__item">– Аренда от {{ car.minRentPeriod }} дней</li>
+                <ng-container *appRentSchedule="car.rentSchedule; let scheduleText">
+                  <li class="list__item">– График аренды {{ car.rentSchedule }} ({{ scheduleText }})</li>
+                </ng-container>
               </ul>
             </div>
           </div>
@@ -38,10 +38,6 @@
               <div>
                 {{ car.model }} {{ car.brand }}
                 <span class="year">{{ car.yearOfRelease }}</span>
-              </div>
-              <div class="count">
-                <i class="pi pi-eye"></i>
-                <span>1200</span>
               </div>
             </div>
             <div class="main-content">
@@ -81,10 +77,10 @@
           </div>
           <div class="rent-card-profile">
             <app-rent-card
-              [price]="car.price"
-              [financialInfo]="car.financialInfo"
-              [btnTitle]="'Арендовать'"
-              [schedule]="car.autopark.rentSchedule"
+                [price]="car.price"
+                [financialInfo]="car.financialInfo"
+                [btnTitle]="'Арендовать'"
+                [schedule]="car.autopark.rentSchedule"
             >
               <p-button label="Оставить отзыв" styleClass="p-button-outlined"></p-button>
             </app-rent-card>

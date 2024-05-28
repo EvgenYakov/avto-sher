@@ -28,6 +28,11 @@
         font-size: 30px;
       }
     }
+
+    @media (max-width: 500px) {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
   }
 
   .car-card {
@@ -54,6 +59,13 @@
       width: 47%;
     }
 
+    @media (max-width: 500px) {
+      flex-direction: column;
+
+      .left {
+        width: 100%;
+      }
+    }
   }
 
   .gallery {
@@ -138,6 +150,12 @@
 
   .right {
     @include flexMix(column, unset, unset, 5.875rem);
+
+    @media (max-width: 500px) {
+      order: -1;
+      width: 100%;
+      gap: 2rem;
+    }
   }
 
   .rent-conditions {
@@ -175,6 +193,12 @@
       font-size: 36px;
       font-weight: 600;
       margin-bottom: 3.75rem;
+    }
+  }
+
+  .address {
+    @media (max-width: 500px) {
+      margin-top: 2rem;
     }
   }
 }
