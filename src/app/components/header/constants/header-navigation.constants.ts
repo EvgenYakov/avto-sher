@@ -1,4 +1,4 @@
-import { AppRoutes } from '@constants';
+import { AppRoutes, ControlPanel } from '@constants';
 import { MenuItem } from 'primeng/api';
 
 export const MAIN_NAV: MenuItem[] = [
@@ -41,5 +41,5 @@ export const SECONDARY_NAV: MenuItem[] = [
 
 export const OWNER_PANEL_LINK = {
   label: 'Панель автопарка',
-  routerLink: ['/', AppRoutes.CONTROL_PANEL],
+  routerLink: ['/', AppRoutes.CONTROL_PANEL, ControlPanel.AUTOPARK_CONTROL],
 };

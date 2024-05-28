@@ -16,6 +16,11 @@ export default [
     component: AutoparkComponent,
     children: [
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: ControlPanel.AUTOPARK_TABLE,
+      },
+      {
         path: ControlPanel.AUTOPARK_TABLE,
         title: 'Измение авто',
         component: AutoparkListComponent,
