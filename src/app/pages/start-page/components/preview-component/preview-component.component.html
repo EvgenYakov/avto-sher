@@ -2,6 +2,16 @@
   <div class="preview__body">
     <h1>Автошер - площадка для аренды рабочего авто в такси</h1>
     <p>Выберите из широкого ассортимента автомобилей и начните свое приключение прямо сейчас.</p>
+    <p-messages [(value)]="messages" [enableService]="false" [closable]="false" />
+    <ul class="preview__list-row">
+      @for (socialNetwork of socialNetworks; track socialNetwork) {
+        <li>
+          <a [href]="socialNetwork.link">
+            <img [src]="socialNetwork.hoverIcon" alt="social network icon" />
+          </a>
+        </li>
+      }
+    </ul>
     <div class="preview__control">
       <p-button (click)="navigate(['/', AppRoutes.MAIN, AppRoutes.AUTOPARKS])">Перейти к списку автопарков</p-button>
       <p-button
@@ -15,6 +25,6 @@
     </div>
   </div>
   <div class="preview__image">
-    <img src="assets/cars/preview-car.png" alt="preview" />
+    <img src="assets/cars/preview-car.webp" alt="preview" />
   </div>
 </div>
