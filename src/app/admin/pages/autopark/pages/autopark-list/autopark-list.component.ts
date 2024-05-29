@@ -38,7 +38,6 @@ export class AutoparkListComponent implements OnInit {
     this.autoparkFacade.userAutoParks$
       .pipe(
         tap(parks => {
-          console.log(parks);
           this.parkList.set(parks);
         }),
         takeUntil(this.destroy$)

@@ -1,6 +1,6 @@
 <div class="registration container">
   <div class="header">
-    <span class="header__label">Создание персонала</span>
+    <span class="header__label">{{ editMode() ? 'Изменение персонала' : 'Создание персонала' }}</span>
   </div>
 
   <div class="main">
@@ -47,7 +47,7 @@
   </div>
 
   <div class="footer__btns">
-    <p-button [label]="userInfo()?.id ? 'Изменить' : 'Зарегистрировать'" (click)="onSubmit()"></p-button>
+    <p-button [label]="editMode() ? 'Изменить' : 'Зарегистрировать'" (click)="onSubmit()"></p-button>
     @if (editMode()) {
       <p-button
         label="Показать краткую информацию"

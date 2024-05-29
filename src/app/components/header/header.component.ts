@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     this.userFacade.userProfile$
       .pipe(
         tap(user => {
-          if (user.role === UserRole.OWNER) {
+          if (user.role === UserRole.OWNER || user.role == UserRole.OPERATOR) {
             this.mainNavList.update(navList => [...navList, OWNER_PANEL_LINK]);
           }
         }),
