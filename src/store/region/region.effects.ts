@@ -18,7 +18,6 @@ export class RegionEffects {
     this.actions$.pipe(
       ofType(setCurrentRegion),
       map(({ region }) => {
-        console.log(region);
         this.localStorageService.addItemToStorage(LocalStorageKeys.REGION, region);
         return setCurrentRegionSuccess();
       })
