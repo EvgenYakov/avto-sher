@@ -14,5 +14,5 @@ export interface UserProfile {
   reviewsByUserCounter: number;
   favoriteCarsCounter: number;
   favoriteAutoparksCounter: number;
-  autoPark?: AutoparkDetailed;
+  autopark?: AutoparkDetailed;
 }

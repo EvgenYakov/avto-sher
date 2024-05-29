@@ -55,9 +55,11 @@ export class ControlPanelComponent implements OnInit {
     this.userFacade.userProfile$
       .pipe(
         tap(profile => {
-          if (profile.role === UserRole.OPERATOR && profile.autoPark) {
-            this.autoparkFacade.selectAutoPark(profile.autoPark);
-            this.store.dispatch(loadAutoparksByOwnerSuccess({ autoparks: [profile.autoPark] }));
+          console.log(profile);
+          if (profile.role === UserRole.OPERATOR && profile.autopark) {
+            console.log('hello');
+            this.autoparkFacade.selectAutoPark(profile.autopark);
+            this.store.dispatch(loadAutoparksByOwnerSuccess({ autoparks: [profile.autopark] }));
             this.autoParkControl.disable();
           }
           if (profile.role === UserRole.OWNER) {
