@@ -202,3 +202,9 @@
     }
   }
 }
+
+.modal-content {
+  .row {
+    @include flexMix(row, center, space-between);
+  }
+}

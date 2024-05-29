@@ -20,6 +20,10 @@
     }
   </ul>
 
-  <p-button class="rent-card__btn" [label]="btnTitle"></p-button>
+  @if (status === RequestStatus.UNAVAILABLE) {
+    <p-button class="rent-card__btn" label="Арендована" [disabled]="true"></p-button>
+  } @else {
+    <p-button class="rent-card__btn" (click)="rent()" [label]="btnTitle"></p-button>
+  }
   <ng-content></ng-content>
 </div>

@@ -32,6 +32,8 @@ export interface CarCard {
     minRentPeriod: string;
     rentalConditions: string[];
     bonuses: AutoparkBonus[];
+    phoneNumber: string;
+    fioOwner: string;
   };
 }
 
