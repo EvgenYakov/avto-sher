@@ -204,6 +204,8 @@
 }
 
 .modal-content {
+  padding: 1.5rem 0;
+
   .row {
     @include flexMix(row, center, space-between);
   }
