@@ -2,19 +2,26 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { AppRoutes, LoadingTypes } from '@constants';
+import { AppRoutes, LoadingTypes, UserRole } from '@constants';
+import { DestroyDirective } from '@directives';
 import { AutoparkCard } from '@models';
 import { Store } from '@ngrx/store';
-import { AutoparkFacade, loadAutoparksByOwner, selectLoading, selectUserAutoparks } from '@store';
+import {
+  AutoparkFacade,
+  loadAutoparksByOwner,
+  loadAutoparksByOwnerSuccess,
+  selectLoading,
+  selectUserAutoparks,
+} from '@store';
+import { ButtonModule } from 'primeng/button';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable, takeUntil, tap } from 'rxjs';
 
+import { UserFacade } from '../../../../store/user/user.facade';
 
 import { SIDEBAR_CONFIG } from './constants/sidebar-config.constant';
 import { SidebarConfig } from './models/sidebar-config.interface';
 import { CONTROL_PANEL_DEPS } from './control-panel.dependencies';
-import { DestroyDirective } from '@directives';
-import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-control-panel',
@@ -38,12 +45,27 @@ export class ControlPanelComponent implements OnInit {
 
   constructor(
     public autoparkFacade: AutoparkFacade,
+    public userFacade: UserFacade,
     private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(loadAutoparksByOwner());
     this.getDataFromStore();
+
+    this.userFacade.userProfile$
+      .pipe(
+        tap(profile => {
+          if (profile.role === UserRole.OPERATOR && profile.autoPark) {
+            this.autoparkFacade.selectAutoPark(profile.autoPark);
+            this.store.dispatch(loadAutoparksByOwnerSuccess({ autoparks: [profile.autoPark] }));
+            this.autoParkControl.disable();
+          }
+          if (profile.role === UserRole.OWNER) {
+            this.store.dispatch(loadAutoparksByOwner());
+          }
+        })
+      )
+      .subscribe();
 
     this.autoparkFacade.activeAutopark$.pipe(takeUntil(this.destroy$)).subscribe(park => {
       this.autoParkControl.setValue(park);
