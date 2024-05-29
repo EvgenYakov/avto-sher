@@ -63,17 +63,12 @@ export const SOCIAL_NETWORK: { icon: string; hoverIcon: string; link: string }[]
   {
     icon: 'assets/icons/social-network/TG.svg',
     hoverIcon: 'assets/icons/social-network/TGH.svg',
-    link: 't.me/avtosherrf',
+    link: 'https://t.me/avtosherrf',
   },
   {
     icon: 'assets/icons/social-network/VK.svg',
     hoverIcon: 'assets/icons/social-network/VKH.svg',
     link: 'https://vk.com/avtosherrf',
-  },
-  {
-    icon: 'assets/icons/social-network/OK.svg',
-    hoverIcon: 'assets/icons/social-network/OKH.svg',
-    link: 't.me/avtosherrf',
   },
   {
     icon: 'assets/icons/social-network/discord.svg',

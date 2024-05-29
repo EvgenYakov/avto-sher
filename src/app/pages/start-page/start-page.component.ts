@@ -30,8 +30,6 @@ import { PreviewComponentComponent } from './components';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartPageComponent implements OnInit, OnDestroy {
-  IMAGES: string[] = ['assets/cars/20.jpg', 'assets/cars/21.jpg', 'assets/cars/27)).webp'];
-
   constructor(
     private store: Store,
     private router: Router
