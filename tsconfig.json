@@ -28,6 +28,7 @@
       "@pages": ["./src/app/pages/index"],
       "@models": ["./src/app/models/index"],
       "@services": ["./src/app/services/index"],
+      "@core": ["./src/app/core/index"],
       "@store": ["./src/store/index"],
       "@environments/*": ["./src/environments/*"]
     }

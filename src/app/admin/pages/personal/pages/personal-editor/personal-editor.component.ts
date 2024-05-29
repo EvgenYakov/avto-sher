@@ -1,4 +1,5 @@
 import { AsyncPipe } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -27,7 +28,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputMaskModule } from 'primeng/inputmask';
 import { TabViewModule } from 'primeng/tabview';
 import { ToastModule } from 'primeng/toast';
-import { catchError, filter, map, Observable, takeUntil, tap } from 'rxjs';
+import { catchError, filter, map, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
 import { UserInfoDialogComponent } from './components';
 
@@ -144,13 +145,57 @@ export class PersonalEditorComponent implements OnInit {
       role: this.registerType,
     } as IRegisterDto;
     const autoPark = this.activeAutoPark();
+    const editMode = this.editMode();
+    const userInfo = this.userInfo();
 
     if (autoPark) {
+      if (editMode && userInfo && Number(userInfo?.id)) {
+        this.personalService
+          .deleteOperator(userInfo.id!)
+          .pipe(
+            switchMap(() =>
+              this.personalService.addOperator({
+                ...formValues,
+                autoParkId: autoPark.id,
+              })
+            ),
+            catchError((error: HttpErrorResponse) => {
+              this.messageService.add({
+                severity: EMessage.ERROR,
+                summary: 'Ошибка',
+                detail: error.error.message,
+              });
+              throw new Error(error.error.message);
+            })
+          )
+          .subscribe(res => {
+            this.messageService.add({
+              severity: EMessage.SUCCESS,
+              summary: 'Успех',
+              detail: 'Сотрудник успешно изменен',
+            });
+            this.userInfo.update(info => ({ ...info, ...formValues }));
+            this.visibleUserInfoPopup.set(true);
+          });
+
+        return;
+      }
       this.personalService
         .addOperator({
           ...formValues,
           autoParkId: autoPark.id,
         })
+        .pipe(
+          catchError((error: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: EMessage.ERROR,
+              summary: 'Ошибка',
+              detail: error.error.message,
+            });
+
+            throw new Error(error.message);
+          })
+        )
         .subscribe(res => {
           this.messageService.add({
             severity: EMessage.SUCCESS,
@@ -190,9 +235,13 @@ export class PersonalEditorComponent implements OnInit {
     this.personalService
       .deleteOperator(id)
       .pipe(
-        catchError(err => {
-          this.messageService.add({ severity: EMessage.WARN, summary: 'Ошибка', detail: err.message });
-          throw new Error(err);
+        catchError(error => {
+          this.messageService.add({
+            severity: EMessage.WARN,
+            summary: 'Ошибка',
+            detail: error.error.message,
+          });
+          throw new Error(error);
         })
       )
       .subscribe(() => {
@@ -202,7 +251,11 @@ export class PersonalEditorComponent implements OnInit {
           ControlPanel.PERSONAL_CONTROL,
           ControlPanel.PERSONAL_TABLE,
         ]);
-        this.messageService.add({ severity: EMessage.SUCCESS, summary: 'Успех', detail: 'Запись удалена' });
+        this.messageService.add({
+          severity: EMessage.SUCCESS,
+          summary: 'Успех',
+          detail: 'Запись удалена',
+        });
       });
   }
 

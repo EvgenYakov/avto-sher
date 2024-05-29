@@ -70,9 +70,11 @@ export class CarListComponent implements OnInit {
         takeUntil(this.destroy$)
       )
       .subscribe();
+    // TODO: fix for operator
     this.autoparkFacade.activeAutopark$
       .pipe(
-        tap(() => {
+        tap(park => {
+          console.log(park);
           this.carList.set([]);
         }),
         takeUntil(this.destroy$)

@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppRoutes, LoadingTypes, LocalStorageKeys, UserRole } from '@constants';
+import { AppRoutes, ControlPanel, LoadingTypes, LocalStorageKeys, UserRole } from '@constants';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { AuthService, LocalStorageService, UserService } from '@services';
@@ -132,6 +132,9 @@ export class AuthEffects {
               break;
             case UserRole.ADMIN:
               this.router.navigate([AppRoutes.CONTROL_PANEL]);
+              break;
+            case UserRole.OPERATOR:
+              this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
               break;
           }
         })

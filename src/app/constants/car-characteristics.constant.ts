@@ -67,13 +67,13 @@ export const FINANCIAL_OPTIONS: DropdownOption[] = [
 export enum RequestStatus {
   AVAILABLE = 'Доступна',
   UNAVAILABLE = 'Недоступна',
-  WAITING = 'Ожидание',
+  // WAITING = 'Ожидание',
 }
 
 export const REQUEST_STATUS_OPTIONS: DropdownOption[] = [
   { label: RequestStatus.AVAILABLE, value: RequestStatus.AVAILABLE },
   { label: RequestStatus.UNAVAILABLE, value: RequestStatus.UNAVAILABLE },
-  { label: RequestStatus.WAITING, value: RequestStatus.WAITING },
+  // { label: RequestStatus.WAITING, value: RequestStatus.WAITING },
 ];
 
 export const MIN_RENTAL_PERIOD_OPTIONS: DropdownOption[] = [

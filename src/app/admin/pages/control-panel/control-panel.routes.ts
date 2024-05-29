@@ -1,9 +1,11 @@
 import { Route } from '@angular/router';
 
 import { ControlPanel } from '@constants';
+import { operatorGuard, ownerGuard } from '@core';
+
+import { CarListComponent, CreateCarComponent } from '../cars';
 
 import { ControlPanelComponent } from './control-panel.component';
-import { CarListComponent, CreateCarComponent } from '../cars';
 
 export default [
   {
@@ -18,13 +20,16 @@ export default [
       {
         path: ControlPanel.AUTOPARK_CONTROL,
         loadChildren: () => import('../autopark/autopark.routes'),
+        canActivate: [ownerGuard],
       },
       {
         path: ControlPanel.PERSONAL_CONTROL,
         loadChildren: () => import('../personal/personal.routes'),
+        canActivate: [ownerGuard],
       },
       {
         path: ControlPanel.CAR_CONTROL,
+        canActivate: [operatorGuard],
         children: [
           {
             path: ControlPanel.CARS_TABLE,
