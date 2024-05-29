@@ -1,4 +1,5 @@
 @import "mixins";
+@import "colors";
 
 .preview {
   @include flexMix(row, center, space-around);
@@ -55,4 +56,21 @@
       padding: 4rem;
     }
   }
+
+  &__list-row {
+    @include flexMix(row, flex-start, flex-start, 0.8rem);
+  }
+
+  &__link {
+    @include media-xl() {
+      font-size: 1.2rem;
+    }
+
+    color: $light-text-color;
+
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+
 }
