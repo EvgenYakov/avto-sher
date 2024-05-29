@@ -11,7 +11,6 @@ export const operatorGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
   return user.pipe(
     map(user => {
-      console.log(user);
       if (user.role !== UserRole.OPERATOR && user.role !== UserRole.OWNER && user.role !== UserRole.ADMIN) {
         router.navigate(['/']);
         return false;

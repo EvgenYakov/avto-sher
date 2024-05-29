@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     const region = this.localStorageService.getItemFromStorage(LocalStorageKeys.REGION);
-    console.log(region);
+
     this.selectedRegionControl.setValue(region ?? null);
 
     this.userFacade.userProfile$

@@ -30,7 +30,6 @@ export class AutoparkService extends BaseService {
     limit: number,
     regionName: string
   ): Observable<PaginationResponse<AutoparkCard[]>> {
-    console.log(this.apiUrl);
     return this.httpService.get<PaginationResponse<AutoparkCard[]>>(this.apiUrl, {
       params: {
         page,

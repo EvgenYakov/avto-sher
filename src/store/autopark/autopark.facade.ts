@@ -33,6 +33,7 @@ export class AutoparkFacade {
   }
 
   loadAutoparksByOwner(): void {
+    console.log('hello');
     this.store.dispatch(loadAutoparksByOwner());
   }
 
