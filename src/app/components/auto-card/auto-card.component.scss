@@ -99,6 +99,14 @@
       &__location-icon {
         font-size: 0.9rem;
       }
+
+      &__title {
+        @include flexMix(row, center, flex-start, 1rem);
+
+        .btn {
+          display: inline-block;
+        }
+      }
     }
 
     .characteristics-block {
