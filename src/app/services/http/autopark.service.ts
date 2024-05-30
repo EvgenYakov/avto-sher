@@ -14,12 +14,20 @@ import {
 import { map, Observable } from 'rxjs';
 
 import { BaseService } from '../helpers';
+import { MockBonusesService } from "../helpers/mock-bonuses.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AutoparkService extends BaseService {
   private readonly apiUrl = `${environment.apiUrl}/autoparks`;
+
+  constructor(
+    private mockBonusesService: MockBonusesService
+  ) {
+    super();
+  }
+
 
   public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
     return this.httpService.get<AuctionAutoparks>(`${this.apiUrl}/auction`, { params: { region: regionName } });
@@ -50,7 +58,9 @@ export class AutoparkService extends BaseService {
         return {
           ...response,
           isFavorite: false,
-          ordersCount: 0,
+          ordersCount: Math.floor(Math.random() * (500 - 10 + 1)) + 10,
+          rating: 4.2,
+          bonuses: this.mockBonusesService.getRandomBonuses()
         };
       })
     );

@@ -28,12 +28,12 @@ export interface CarCard {
     title: string;
     region: string;
     address: string;
-    rentSchedule: string;
-    minRentPeriod: string;
-    rentalConditions: string[];
     bonuses: AutoparkBonus[];
     phoneNumber: string;
-    fioOwner: string;
+    autoparkOwner: {
+      avatar: string;
+      fullName: string;
+    };
   };
 }
 
