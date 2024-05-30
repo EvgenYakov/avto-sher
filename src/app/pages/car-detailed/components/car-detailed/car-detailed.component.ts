@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, model, OnDestroy, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { BonusComponent, SpinnerComponent } from '@components';
@@ -14,6 +14,8 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { RESPONSIVE_OPTIONS } from '../../constants';
 
 import { AUTO_DETAILED_DEPS } from './car-detailed.dependencies';
+import { DialogModule } from "primeng/dialog";
+import { InputTextModule } from "primeng/inputtext";
 
 @Component({
   selector: 'app-car-detailed',
@@ -21,12 +23,14 @@ import { AUTO_DETAILED_DEPS } from './car-detailed.dependencies';
   styleUrls: ['./car-detailed.component.scss'],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AUTO_DETAILED_DEPS, BonusComponent, SpinnerComponent, RentScheduleDirective],
+  imports: [AUTO_DETAILED_DEPS, BonusComponent, SpinnerComponent, RentScheduleDirective, DialogModule, InputTextModule],
 })
 export class CarDetailedComponent implements OnInit, OnDestroy {
   public carProfile$: Observable<CarProfile>;
   public autoparkCars$: Observable<CarCard[]>;
   public isLoading$: Observable<boolean>;
+
+  contactModalVisible = false;
 
   public readonly responsiveOptions = RESPONSIVE_OPTIONS;
 
@@ -41,6 +45,10 @@ export class CarDetailedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getQueryParams();
     this.getDataFromStore();
+  }
+
+  openRentModal(): void {
+    this.contactModalVisible = true;
   }
 
   private getQueryParams(): void {

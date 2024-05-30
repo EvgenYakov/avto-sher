@@ -28,4 +28,10 @@ export class AutoCardComponent {
   public navigateToCarProfile(carId: number): void {
     this.router.navigate([AppRoutes.MAIN + '/' + MainRoutes.AUTO_DETAILED, carId]);
   }
+
+  navigateToAutopark($event: Event): void {
+    $event.stopPropagation();
+    this.router.navigate([AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, this.car.id]);
+  }
+
 }
