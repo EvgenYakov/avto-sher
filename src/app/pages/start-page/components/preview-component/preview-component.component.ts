@@ -28,7 +28,7 @@ export class PreviewComponentComponent {
   messages: Message[] = [
     {
       severity: EMessage.WARN,
-      detail: 'Сайт находиться в разработке, ждем ваших вопросов и предложений в соц. сетях',
+      detail: 'Сайт находится в разработке, ждем ваших вопросов и предложений в соц. сетях',
     },
   ];
 
