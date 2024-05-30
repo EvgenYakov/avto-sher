@@ -80,7 +80,7 @@
                 [price]="car.price"
                 [financialInfo]="car.financialInfo"
                 btnTitle="Арендовать"
-                [schedule]="car.autopark.rentSchedule"
+                [schedule]="car.rentSchedule"
                 [status]="car.status"
                 (rentEmit)="openRentModal()"
             >
@@ -125,7 +125,7 @@
     <div class="modal-content">
       <div class="row">
         <label for="username" class="font-semibold w-6rem">ФИО владельца</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" disabled [value]="car.autopark.fioOwner" />
+        <input pInputText id="username" class="flex-auto" autocomplete="off" disabled [value]="car.autopark.autoparkOwner.fullName" />
       </div>
       <div class="row">
         <label for="phone" class="font-semibold w-6rem">Номер телефона</label>
