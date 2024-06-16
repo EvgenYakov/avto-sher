@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { AppRoutes, LoadingTypes, MainRoutes } from '@constants';
 import { Store } from '@ngrx/store';
-import { selectIsLoggedIn, selectLoading } from '@store';
+import { logout, selectIsLoggedIn, selectLoading } from '@store';
 
 import { USER_PANEL_DEPS } from './user-panel.dependencies';
 
@@ -24,7 +24,11 @@ export class UserPanelComponent {
 
   protected readonly MainRoutes = MainRoutes;
 
-  public navigateToAuth(): void {
+  navigateToAuth(): void {
     this.router.navigate(['/' + AppRoutes.AUTH]);
+  }
+
+  logout(): void {
+    this.store.dispatch(logout());
   }
 }

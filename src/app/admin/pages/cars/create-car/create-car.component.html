@@ -263,7 +263,7 @@
           class="cancel-btn"
           label="Удалить машину"
           (click)="confirmDeleteCar($event)"
-          styleClass="p-button-outlined"
+          [outlined]="true" severity="success"
           icon="pi pi-trash"
         ></p-button>
       }
@@ -271,7 +271,7 @@
         class="cancel-btn"
         label="Отменить изменения"
         [routerLink]="['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]"
-        styleClass="p-button-outlined"
+        [outlined]="true" severity="success"
       ></p-button>
     </div>
   </div>

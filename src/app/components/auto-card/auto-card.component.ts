@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppRoutes, MainRoutes } from '@constants';
@@ -15,9 +15,9 @@ import { AUTO_CARD_DEPS } from './auto-card.dependencies';
   imports: [AUTO_CARD_DEPS],
 })
 export class AutoCardComponent {
-  @Input() public car: CarCard | OrderHistoryCarCard;
-  @Input() public buttonLabel: string = 'Арендовать';
-  @Input() public anotherCharacteristicContent: boolean = false;
+  readonly car = input.required<CarCard | OrderHistoryCarCard>();
+  readonly buttonLabel = input<string>('Арендовать');
+  readonly anotherCharacteristicContent = input<boolean>(false);
 
   constructor(private router: Router) {}
 
@@ -31,7 +31,6 @@ export class AutoCardComponent {
 
   navigateToAutopark($event: Event): void {
     $event.stopPropagation();
-    this.router.navigate([AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, this.car.id]);
+    this.router.navigate([AppRoutes.MAIN + '/' + MainRoutes.AUTOPARK_DETAILED, this.car().id]);
   }
-
 }
