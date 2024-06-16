@@ -1,8 +1,16 @@
-<div class="autopark-card" (click)="navigateToAutoparkProfile(autoparkCard.id)">
-  <div class="autopark-card__logo">
-    <p-image [src]="autoparkCard.logo" alt="car image" [preview]="true" (click)="handleImageClick($event)"></p-image>
+@if (autoparkCard(); as autoparkCard) {
+  <div class="autopark-card" (click)="navigateToAutoparkProfile(autoparkCard.id)">
+    <div class="autopark-card__logo">
+      <p-image [src]="autoparkCard.logo" alt="car image" [preview]="true" (click)="handleImageClick($event)"></p-image>
+    </div>
+    <div class="autopark-card__info">
+      <div class="autopark-card__info--name">
+        {{ autoparkCard.title }}
+      </div>
+      <div class="autopark-card__info--rating card flex justify-content-center">
+        <p-rating [ngModel]="rating()" (ngModelChange)="rating.set($event)" [readonly]="true" [cancel]="false" />
+      </div>
+      <div class="autopark-card__info--desc">Регион: {{ autoparkCard.region }}</div>
+    </div>
   </div>
-  <div class="autopark-card__name">
-    {{ autoparkCard.title }}
-  </div>
-</div>
+}

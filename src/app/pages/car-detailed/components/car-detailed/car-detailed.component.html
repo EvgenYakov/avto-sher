@@ -8,10 +8,10 @@
           <div class="gallery">
             <p-galleria [value]="car.photos" [numVisible]="5" [responsiveOptions]="responsiveOptions">
               <ng-template pTemplate="item" let-item>
-                <img [src]="item" class="gallery__img"/>
+                <img [src]="item" class="gallery__img" />
               </ng-template>
               <ng-template pTemplate="thumbnail" let-item>
-                <img [src]="item" class="gallery__thumbnail"/>
+                <img [src]="item" class="gallery__thumbnail" />
               </ng-template>
             </p-galleria>
           </div>
@@ -36,7 +36,7 @@
           <div class="content">
             <div class="content__hat">
               <div>
-                {{ car.model }} {{ car.brand }}
+                {{ car.brand }} {{ car.model }}
                 <span class="year">{{ car.yearOfRelease }}</span>
               </div>
             </div>
@@ -77,14 +77,14 @@
           </div>
           <div class="rent-card-profile">
             <app-rent-card
-                [price]="car.price"
-                [financialInfo]="car.financialInfo"
-                btnTitle="Арендовать"
-                [schedule]="car.rentSchedule"
-                [status]="car.status"
-                (rentEmit)="openRentModal()"
+              [price]="car.price"
+              [financialInfo]="car.financialInfo"
+              btnTitle="Арендовать"
+              [schedule]="car.rentSchedule"
+              [status]="car.status"
+              (rentEmit)="openRentModal()"
             >
-              <p-button label="Оставить отзыв" [disabled]="true" styleClass="p-button-outlined"></p-button>
+              <p-button label="Оставить отзыв" [disabled]="true" [outlined]="true" severity="success" [outlined]="true" severity="success"></p-button>
             </app-rent-card>
           </div>
         </div>
@@ -114,18 +114,26 @@
 }
 
 <p-dialog
-    header="Контактные данные Автопарка"
-    [(visible)]="contactModalVisible"
-    [modal]="true"
-    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
-    [style]="{ width: '25vw' }"
-    [draggable]="false"
-    [resizable]="false">
+  header="Контактные данные Автопарка"
+  [(visible)]="contactModalVisible"
+  [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '25vw' }"
+  [draggable]="false"
+  [resizable]="false"
+>
   <ng-container *ngIf="carProfile$ | async as car">
     <div class="modal-content">
       <div class="row">
         <label for="username" class="font-semibold w-6rem">ФИО владельца</label>
-        <input pInputText id="username" class="flex-auto" autocomplete="off" disabled [value]="car.autopark.autoparkOwner.fullName" />
+        <input
+          pInputText
+          id="username"
+          class="flex-auto"
+          autocomplete="off"
+          disabled
+          [value]="car.autopark.autoparkOwner.fullName"
+        />
       </div>
       <div class="row">
         <label for="phone" class="font-semibold w-6rem">Номер телефона</label>

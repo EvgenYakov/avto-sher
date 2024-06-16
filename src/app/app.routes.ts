@@ -7,7 +7,7 @@ import { OfferAgreementComponent, PrivacyComponent } from './components/docx';
 export const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/main',
+    redirectTo: AppRoutes.MAIN,
     pathMatch: 'full',
   },
   {
