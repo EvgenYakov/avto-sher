@@ -5,7 +5,9 @@
   } @else {
     <div class="content">
       <div class="content__logo">
-        <img src="/assets/icons/logo.svg" alt="logo" />
+        <a [routerLink]="['/', AppRoutes.MAIN]">
+          <img src="/assets/icons/logo.svg" alt="logo" />
+        </a>
       </div>
       <div class="form">
         <router-outlet></router-outlet>

@@ -4,7 +4,7 @@
   </div>
   @if (isShowBtn | async) {
     <div class="card-list__btn">
-      <p-button [label]="btnLabel" (click)="loadMore()" styleClass="p-button-outlined"></p-button>
+      <p-button [label]="btnLabel" (click)="loadMore()" [outlined]="true" severity="success"></p-button>
     </div>
   }
 </div>
