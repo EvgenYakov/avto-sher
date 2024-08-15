@@ -3,9 +3,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { InputMaskModule } from 'primeng/inputmask';
+import { BaseControlDirective } from 'src/app/models/classes/base-control.directive';
 
 import { ControlWrapperComponent } from '../control-wrapper/control-wrapper.component';
-import { BaseControlDirective } from 'src/app/models/classes/base-control.directive';
 
 @Component({
   selector: 'app-phone-input',

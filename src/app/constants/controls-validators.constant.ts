@@ -1,4 +1,8 @@
 export const EMAIL_FIELD = { required: 'Это поле обязательно', email: 'Введите корректный формат' };
 export const PHONE_FIELD = { required: 'Это поле обязательно', phone: 'Введите корректный формат' };
-export const PASSWORD_FIELD = { required: 'Это поле обязательно', minlength: 'Длина должна быть >= 6', maxlenght: 'Длина пароля должна быть <=12 ' };
+export const PASSWORD_FIELD = {
+  required: 'Это поле обязательно',
+  minlength: 'Длина должна быть >= 6',
+  maxlenght: 'Длина пароля должна быть <=12 ',
+};
 export const REQUIRED_FIELD = { required: 'Это поле обязательно' };
