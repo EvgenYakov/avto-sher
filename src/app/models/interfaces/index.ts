@@ -6,3 +6,4 @@ export * from './rating';
 export * from './review';
 export * from './user';
 export * from './ui';
+export * from './http.model';

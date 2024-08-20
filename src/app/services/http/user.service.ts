@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
@@ -5,12 +6,12 @@ import { UserProfile } from '@models';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { BaseService } from '../helpers';
-
 @Injectable({
   providedIn: 'root',
 })
-export class UserService extends BaseService {
+export class UserService {
+  constructor(private httpService: HttpClient) {}
+
   public getMe(): Observable<UserProfile> {
     return this.httpService.get<any>(`${environment.apiUrl}/users/me`).pipe(
       map((response: UserProfile) => {

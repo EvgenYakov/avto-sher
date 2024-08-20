@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
@@ -14,23 +15,23 @@ import {
 import { map, Observable } from 'rxjs';
 
 import { BaseService } from '../helpers';
-import { MockBonusesService } from "../helpers/mock-bonuses.service";
+import { MockBonusesService } from '../helpers/mock-bonuses.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AutoparkService extends BaseService {
-  private readonly apiUrl = `${environment.apiUrl}/autoparks`;
+export class AutoparkService extends BaseService<AutoparkCard> {
+  readonly apiPrefix = 'autoparks';
 
   constructor(
-    private mockBonusesService: MockBonusesService
+    private mockBonusesService: MockBonusesService,
+    private httpService: HttpClient
   ) {
-    super();
+    super(httpService);
   }
 
-
   public getAuctionAutoparksByRegion(regionName: string): Observable<AuctionAutoparks> {
-    return this.httpService.get<AuctionAutoparks>(`${this.apiUrl}/auction`, { params: { region: regionName } });
+    return this.httpService.get<AuctionAutoparks>(`${this.url}/auction`, { params: { region: regionName } });
   }
 
   public getAutoparksList(
@@ -38,35 +39,33 @@ export class AutoparkService extends BaseService {
     limit: number,
     regionName: string
   ): Observable<PaginationResponse<AutoparkCard[]>> {
-    return this.httpService.get<PaginationResponse<AutoparkCard[]>>(this.apiUrl, {
-      params: {
-        page,
-        limit,
-        region: regionName,
-      },
+    return this.getList({
+      page,
+      limit,
+      regionName,
     });
   }
 
   public getRegions(): Observable<Region[]> {
-    return this.httpService.get<Region[]>(`${this.apiUrl}/regions`);
+    return this.httpService.get<Region[]>(`${this.url}/regions`);
   }
 
   public getAutoparkById(autoparkId: number): Observable<AutoparkDetailed> {
-    return this.httpService.get<any>(`${this.apiUrl}/${autoparkId}`).pipe(
+    return this.httpService.get<any>(`${this.url}/${autoparkId}`).pipe(
       map(response => {
         return {
           ...response,
           isFavorite: false,
           ordersCount: Math.floor(Math.random() * (500 - 10 + 1)) + 10,
           rating: 4.2,
-          bonuses: this.mockBonusesService.getRandomBonuses()
+          bonuses: this.mockBonusesService.getRandomBonuses(),
         };
       })
     );
   }
 
   public getAutoparksByOwner(ownerId: number): Observable<AutoparkDetailed[]> {
-    return this.httpService.get<any[]>(`${this.apiUrl}/owner/${ownerId}`);
+    return this.httpService.get<any[]>(`${this.url}/owner/${ownerId}`);
   }
 
   public createAutopark(autopark: CreateAutopark): Observable<AutoparkDetailed> {
@@ -78,12 +77,11 @@ export class AutoparkService extends BaseService {
     formData.append('address', autopark.address);
     formData.append('phoneNumber', autopark.phoneNumber);
 
-
-    return this.httpService.post<AutoparkDetailed>(`${this.apiUrl}`, formData, { withCredentials: true });
+    return this.httpService.post<AutoparkDetailed>(`${this.url}`, formData, { withCredentials: true });
   }
 
   public updateAutopark(id: number, autopark: IUpdateAutopark): Observable<AutoparkDetailed> {
-    return this.httpService.put<AutoparkDetailed>(`${this.apiUrl}/${id}`, autopark, { withCredentials: true });
+    return this.httpService.put<AutoparkDetailed>(`${this.url}/${id}`, autopark, { withCredentials: true });
   }
 
   public updateAutoparkLogo(
@@ -97,7 +95,7 @@ export class AutoparkService extends BaseService {
 
     return this.httpService.patch<{
       url: string;
-    }>(`${this.apiUrl}/logo/${autoparkId}`, formData, { withCredentials: true });
+    }>(`${this.url}/logo/${autoparkId}`, formData, { withCredentials: true });
   }
 
   public getDefaultBonuses(): Observable<AutoparkBonus[]> {

@@ -1,14 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 
 import { environment } from '@environments/environment';
 import { ICreatePersonalDto, UserProfile } from '@models';
-import { BaseService } from '@services';
 import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PersonalService extends BaseService {
+export class PersonalService {
+  constructor(private httpService: HttpClient) {}
+
   readonly personalList = signal<UserProfile[]>([]);
 
   private readonly apiUrl = `${environment.apiUrl}/autoparks`;

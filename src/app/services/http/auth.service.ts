@@ -1,15 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
-import { AuthResponse, LoginDto, IRegisterDto, RegisterOwner } from '@pages';
+import { AuthResponse, IRegisterDto, LoginDto, RegisterOwner } from '@pages';
 import { Observable } from 'rxjs';
-
-import { BaseService } from '../helpers';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService extends BaseService {
+export class AuthService {
+  constructor(private httpService: HttpClient) {}
+
   public login(loginDto: LoginDto): Observable<AuthResponse> {
     return this.httpService.post<AuthResponse>(`${environment.apiUrl}/auth/sign-in`, loginDto, {
       withCredentials: true,
