@@ -81,9 +81,7 @@ export class CarFilterComponent implements OnInit, OnDestroy {
 
           this.store.dispatch(setCarsFiltersParams({ params: filteredParams }));
         }),
-        switchMap(() => {
-          return this.store.select(selectCurrentRegion).pipe(takeUntil(this.destroy$));
-        }),
+        switchMap(() => this.store.select(selectCurrentRegion)),
         takeUntil(this.destroy$)
       )
       .subscribe(region => {
@@ -95,10 +93,7 @@ export class CarFilterComponent implements OnInit, OnDestroy {
     this.filterForm.controls.brand.valueChanges
       .pipe(
         switchMap(brand =>
-          this.store.select(selectCurrentRegion).pipe(
-            takeUntil(this.destroy$),
-            map(region => ({ regionName: region.name, brand }))
-          )
+          this.store.select(selectCurrentRegion).pipe(map(region => ({ regionName: region.name, brand })))
         ),
         takeUntil(this.destroy$)
       )

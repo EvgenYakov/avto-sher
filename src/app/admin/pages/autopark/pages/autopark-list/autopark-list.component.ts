@@ -15,6 +15,7 @@ import { takeUntil, tap } from 'rxjs';
   styleUrl: './autopark-list.component.scss',
   standalone: true,
   imports: [ButtonModule, CustomTableComponent],
+  hostDirectives: [DestroyDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AutoparkListComponent implements OnInit {

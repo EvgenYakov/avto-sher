@@ -19,7 +19,7 @@ import { Subject, takeUntil } from 'rxjs';
   providers: [MessageService],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
+  destroy$ = new Subject<void>();
 
   constructor(
     private store: Store,
@@ -41,7 +41,7 @@ export class AppComponent implements OnInit, OnDestroy {
     };
   }
 
-  private getDataFromStore(): void {
+  getDataFromStore(): void {
     this.store
       .select(selectBeError)
       .pipe(takeUntil(this.destroy$))

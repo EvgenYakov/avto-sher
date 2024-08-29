@@ -15,7 +15,7 @@ import {
 } from '@store';
 import { ButtonModule } from 'primeng/button';
 import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown';
-import { Observable, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, takeUntil, tap } from 'rxjs';
 
 import { UserFacade } from '../../../../store/user/user.facade';
 
@@ -38,8 +38,8 @@ export class ControlPanelComponent implements OnInit {
   public sidebarConfig: SidebarConfig[] = SIDEBAR_CONFIG;
   public autoParkControl = new FormControl<AutoparkCard | null>(null);
 
-  public autoparks$: Observable<AutoparkCard[]>;
-  public isAutoparksLoading$: Observable<boolean>;
+  public autoparks$ = new BehaviorSubject<AutoparkCard[]>([]);
+  public isAutoparksLoading$ = new BehaviorSubject<boolean>(false);
 
   private destroy$ = inject(DestroyDirective).destroy$;
 
@@ -55,9 +55,8 @@ export class ControlPanelComponent implements OnInit {
     this.userFacade.userProfile$
       .pipe(
         tap(profile => {
-          console.log(profile);
+          this.autoParkControl.enable();
           if (profile.role === UserRole.OPERATOR && profile.autopark) {
-            console.log('hello');
             this.autoparkFacade.selectAutoPark(profile.autopark);
             this.store.dispatch(loadAutoparksByOwnerSuccess({ autoparks: [profile.autopark] }));
             this.autoParkControl.disable();
@@ -83,9 +82,21 @@ export class ControlPanelComponent implements OnInit {
     this.autoparkFacade.selectAutoPark(event.value);
   }
 
-  private getDataFromStore(): void {
-    this.isAutoparksLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
-    this.autoparks$ = this.store.select(selectUserAutoparks);
+  public getDataFromStore(): void {
+    this.store
+      .select(selectLoading, { type: LoadingTypes.AUTOPARKS })
+      .pipe(
+        tap(loading => {
+          this.isAutoparksLoading$.next(loading);
+        }),
+        takeUntil(this.destroy$)
+      )
+      .subscribe();
+
+    this.store
+      .select(selectUserAutoparks)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => this.autoparks$.next(res));
   }
 
   protected readonly AppRoutes = AppRoutes;

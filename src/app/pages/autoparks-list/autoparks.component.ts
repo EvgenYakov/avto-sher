@@ -36,7 +36,7 @@ export class AutoparksComponent implements OnInit, OnDestroy {
     this.getDataFromStore();
   }
 
-  private setBreadcrumbs(): void {
+  protected setBreadcrumbs(): void {
     const breadcrumb: MenuItem = {
       label: 'Автопарки',
       routerLink: `${AppRoutes.MAIN}/${AppRoutes.AUTOPARKS}`,
@@ -44,7 +44,7 @@ export class AutoparksComponent implements OnInit, OnDestroy {
     this.breadcrumbService.addBreadcrumb(breadcrumb);
   }
 
-  private getDataFromStore(): void {
+  protected getDataFromStore(): void {
     this.autoparks$ = this.store.select(selectAutoparksEntities);
 
     this.isLoading$ = this.store.select(selectLoading, { type: LoadingTypes.AUTOPARKS });
@@ -52,7 +52,7 @@ export class AutoparksComponent implements OnInit, OnDestroy {
     this.getAutoparks();
   }
 
-  private getAutoparks(): void {
+  protected getAutoparks(): void {
     this.store
       .select(selectCurrentRegion)
       .pipe(takeUntil(this.destroy$))

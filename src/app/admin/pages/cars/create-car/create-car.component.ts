@@ -1,13 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  OnInit,
-  signal,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { BytesPipe, FileUploadComponent } from '@components';
@@ -25,18 +18,21 @@ import { AutoparkCard, CarCard, CreateCar, EMessage } from '@models';
 import { CarService } from '@services';
 import { AutoparkFacade } from '@store';
 import { ConfirmationService } from 'primeng/api';
-import { CheckboxChangeEvent } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxChangeEvent, CheckboxModule } from 'primeng/checkbox';
 import { ChipsModule } from 'primeng/chips';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DropdownModule } from 'primeng/dropdown';
 import { ImageModule } from 'primeng/image';
+import { InputNumberModule } from 'primeng/inputnumber';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
+import { MultiSelectModule } from 'primeng/multiselect';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { catchError, filter, finalize, Observable, switchMap, takeUntil, tap } from 'rxjs';
 
 import { STATIC_DROPDOWNS } from './create-car.contants';
-import { CREATE_CAR_DEPS } from './create-car.dependencies';
 import {
   CreateCarForm,
   ECommissionStatus,
@@ -52,7 +48,14 @@ import {
   styleUrls: ['./create-car.component.scss'],
   standalone: true,
   imports: [
-    CREATE_CAR_DEPS,
+    CommonModule,
+    FileUploadComponent,
+    ButtonModule,
+    DropdownModule,
+    InputNumberModule,
+    ReactiveFormsModule,
+    CheckboxModule,
+    MultiSelectModule,
     InputTextModule,
     RouterLink,
     InputSwitchModule,
@@ -138,7 +141,7 @@ export class CreateCarComponent implements OnInit {
     private autoparkFacade: AutoparkFacade,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private activeRoute: ActivatedRoute,
+    private activeRoute: ActivatedRoute
   ) {
     effect(() => {
       if (this.enableBuyCar()) {
@@ -165,7 +168,7 @@ export class CreateCarComponent implements OnInit {
         tap(() => {
           this.commissionForm.controls.value.disable();
         }),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -178,7 +181,7 @@ export class CreateCarComponent implements OnInit {
         tap(() => {
           this.depositForm.controls.value.disable();
         }),
-        takeUntil(this.destroy$),
+        takeUntil(this.destroy$)
       )
       .subscribe();
 
@@ -198,13 +201,12 @@ export class CreateCarComponent implements OnInit {
         catchError(err => {
           this.router.navigate(['/', AppRoutes.CONTROL_PANEL, ControlPanel.CAR_CONTROL, ControlPanel.CARS_TABLE]);
           throw new Error(err);
-        }),
+        })
       )
       .subscribe();
   }
 
   changeBuyCarStatus(event: CheckboxChangeEvent): void {
-    console.log(event);
     this.enableBuyCar.set(event.checked);
   }
 

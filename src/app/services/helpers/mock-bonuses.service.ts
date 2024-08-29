@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MockBonusesService {
-
   public getRandomBonuses(): any[] {
     const allBonuses = this.getBonuses();
     const randomIndices = this.getRandomIndices(allBonuses.length, 3); // Выбираем 3 случайных индекса
@@ -23,32 +22,32 @@ export class MockBonusesService {
         id: 1,
         title: 'Ремонт автомобиля',
         description: 'Ремонт кузова автомобиля осуществляется автопарком в случае повреждения не по вине водителя',
-        icon: 'assets/icons/bonuses/1.svg'
+        icon: 'assets/icons/bonuses/1.svg',
       },
       {
         id: 2,
         title: 'Сезонная замена шин',
         description: 'Замена шин осуществляется парком 2 раза в год',
-        icon: 'assets/icons/bonuses/2.svg'
+        icon: 'assets/icons/bonuses/2.svg',
       },
       {
         id: 3,
         title: 'Служба поддержки',
         description: 'Служба поддержки автопарка работает 24/7',
-        icon: 'assets/icons/bonuses/3.svg'
+        icon: 'assets/icons/bonuses/3.svg',
       },
       {
         id: 4,
         title: 'Служба поддержки автопарка работает 24/7',
         description: 'Автопарк организовывает сервисное обслуживание или возмещает расходы на него',
-        icon: 'assets/icons/bonuses/4.svg'
+        icon: 'assets/icons/bonuses/4.svg',
       },
       {
         id: 5,
         title: 'Автопарк организовывает сервисное обслуживание или возмещает расходы на него',
         description: 'Автопарк предоставляет Android-устройство на время аренды',
-        icon: 'assets/icons/bonuses/5.svg'
+        icon: 'assets/icons/bonuses/5.svg',
       },
-    ]
+    ];
   }
 }
