@@ -35,7 +35,6 @@ describe('CarService', () => {
   let httpMock: HttpTestingController;
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let httpClient: jasmine.SpyObj<HttpClient>;
-  let baseService: BaseService<CarCard>;
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['delete', 'get', 'post']);
